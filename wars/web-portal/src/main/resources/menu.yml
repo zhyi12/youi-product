@@ -1,0 +1,7 @@
+id: MENU_ROOT
+text: 系统菜单
+children:
+  -
+    id: metadata
+    text: 制度&标准
+    icon: sitemap
