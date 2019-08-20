@@ -5,3 +5,8 @@
 #web-api 网关应用
 
 #web-portal 门户应用
+
+
+
+# 使用maven spring-boot:run 启动应用
+spring-boot:run
