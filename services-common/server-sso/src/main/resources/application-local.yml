@@ -60,4 +60,5 @@ youi:
       web:
         - ROLE_ADMIN
       webPortal:
+        - ROLE_ADMIN
         - ROLE_USER
