@@ -1,0 +1,2 @@
+{"_id":"web","password":"$2a$10$hRRRm2JI9Uri/ygUD5jNauVzANeDHzJcfZy5Ew3vBkX6Wgsr0QdlG","authorizedGrantTypes":[],"loginUrl":"http://localhost:8080/login","_class":"org.youi.framework.services.auth.entity.AuthClient"}
+{"_id":"web-portal","password":"$2a$10$3Hd8mEFV.k5Su/K87ny9He8jioXW1bd9hHzG1hL69.Nko7n6YUjEC","authorizedGrantTypes":[],"loginUrl":"http://localhost:8083/login","_class":"org.youi.framework.services.auth.entity.AuthClient"}
