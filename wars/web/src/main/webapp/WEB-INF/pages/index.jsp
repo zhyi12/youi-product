@@ -5,3 +5,7 @@
 <form action="/uaa/oauth/client" method="get" target="_blank">
     <input type="submit" value="测试获取登录数据"/>
 </form>
+
+<form action="/logout" method="post">
+    <input type="submit" value="测试退出"/>
+</form>
