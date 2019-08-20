@@ -3,3 +3,7 @@
 
 
 门户首页
+
+<form action="/uaa/oauth/client" method="get" target="_blank">
+    <input type="submit" value="测试获取登录数据"/>
+</form>
