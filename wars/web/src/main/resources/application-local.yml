@@ -1,0 +1,136 @@
+#
+server:
+  port: 8080
+  tomcat:
+    max-threads: 1000
+    max-connections: 20000
+  session:
+      cookie:
+        name: USESSIONID
+  servlet:
+    jsp:
+      init-parameters:
+        development: true #生产环境设置为false
+  compression:
+    enabled: true
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+
+# hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000
+hystrix:
+  threadpool:
+    default:
+      coreSize: 500
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          semaphore:
+            maxConcurrentRequests: 1000
+          thread:
+            timeoutInMilliseconds: 30000
+    file-services:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    metadata-services:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    working-services:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    gather-services:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    gathering-services:
+          execution:
+            isolation:
+              strategy: SEMAPHORE
+              semaphore:
+                maxConcurrentRequests: 1000
+              thread:
+                timeoutInMilliseconds: 30000
+    workflow-services:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+#
+#working-services:
+#  ribbon:
+#    ReadTimeout: 30000
+#    ConnectTimeout: 30000
+
+youi:
+  page:
+    rolePageAuths:
+      ROLE_GATHER_ADMIN:
+        - addGatherTask
+        - addCubeTemplate
+    codeMapPath: /metadataServices/services/codeitemManager/getConvert.json?convert={name}
+
+zuul:
+#  host:
+#    connectTimeoutMillis: 15000
+#    socketTimeoutMillis: 15000
+  routes:
+    uaa:
+      path: /uaa/**
+      sensitiveHeaders: Set-Cookie
+      serviceId: server-sso
+  add-proxy-headers: true
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:8080/uaa/oauth/token
+      user-authorization-uri: http://localhost:8868/oauth/authorize
+      client-id: ${spring.application.name}
+      client-secret: 123456
+      registered-redirect-uri: /oauth/code
+    resource:
+      user-info-uri: http://localhost:8080/uaa/oauth/client
+    sso:
+      app-login-uri: http://localhost:8080/login
+      logout-uri: http://localhost:8868/logout
+      role-menu-uri: http://localhost:8080/uaa/services/roleManager/getRoleMenus.json
+spring:
+  session:
+    store-type: redis
+  redis:
+    maxIdle: 10
+    maxTotal: 100
+    maxWaitMillis: 6000
+    testOnBorrow: true
+    host: 192.168.173.130
+    port: 6379
+    password: filing
+  cloud:
+    inetutils:
+      preferredNetworks:
+        - 192.168.173
+  zipkin:
+    baseUrl: http://192.168.173.130:9411/
+  sleuth:
+    enabled: true
+    sampler:
+      probability: 1.0
+    zuul:
+      enabled: true
