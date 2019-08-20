@@ -1,0 +1,63 @@
+server:
+  port: 8868
+  session:
+    cookie:
+      name: USESSIONID
+spring:
+  thymeleaf:
+    cache: false
+    prefix: file:services-common/server-sso/src/main/resources/templates/
+  resources:
+    static-locations: file:services-common/server-sso/src/main/resources/static/
+  mvc:
+    favicon:
+      enabled: false
+  application:
+    name: server-sso
+  data:
+    mongodb:
+      host: 192.168.173.130:27515
+      database: youi3-common
+      username: query
+      password: query123
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.173.130:3307/youi3-common?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: youi
+    password: youi123
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    inetutils:
+      preferredNetworks:
+        - 192.168.173
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+security:
+  oauth2:
+    client:
+      client-id: sso
+      authorized-grant-types: authorization_code,refresh_token,password
+      scope: auth_client
+youi:
+  sso:
+    enableValidateCode: false
+    tokenExpire: 30
+    loginErrorMessages:
+      InternalAuthenticationServiceException: 未找到用户
+      BadCredentialsException: 密码错误
+    loginPages:
+      web: http://localhost:8080/login
+      webPortal: http://localhost:8083/login
+    loginTitles:
+      web: 平台
+      webPortal: 门户
+    accessRoles:
+      web:
+        - ROLE_ADMIN
+      webPortal:
+        - ROLE_USER

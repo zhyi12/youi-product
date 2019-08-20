@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link th:href="@{/asserts/css/web.login.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="worldmap_bg"></div>
+
+<div class="content">
+    <div class="logo-info">
+        <span th:text="${#request.getAttribute('loginTitle')}"></span>
+    </div>
+    <div class="login-content">
+        <div class="form-title">用户登录</div>
+
+        <form class="login-form" action="#" method="post">
+            <div class="form-input username-input">
+                <input type="text" name="username"  value=""  placeholder="请输入用户名">
+            </div>
+
+            <div class="form-input password-input">
+
+                <input type="password" name="password" class="paswd_int" value="" placeholder="请输入密码">
+            </div>
+
+            <div class="form-input vcode-input">
+                <input type="text" name="vcode"  value="" placeholder="请输入验证码">
+            </div>
+            <img width="124" height="48" src="/vcode" >
+            <div class="login-error pull-right">
+                <span th:if="${param.error}" th:text="${param.error}"></span>
+            </div>
+            <div>
+                <input class="login-btn" type="submit" name="submit" value="登 录" ></input>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="fooder">
+    <div class="bottombg"></div>
+</div>
+</body>
+</html>
