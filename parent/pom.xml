@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.youi.product</groupId>
+    <artifactId>youi-product-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>youi-product-parent</name>
+    <description>youi-product-parent</description>
+
+    <repositories>
+
+        <repository>
+            <id>thirdparty</id>
+            <url>${nexus.root}/repository/thirdparty</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>maven.central</id>
+            <url>${nexus.root}/repository/central</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>local-snapshot</id>
+            <url>${nexus.root}/repository/maven-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>spring-milestone</id>
+            <name>Spring Milestone</name>
+            <url>http://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>local-releases</id>
+            <url>${nexus.root}/repository/maven-releases</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>local-snapshot</id>
+            <url>${nexus.root}/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <main.basedir>${basedir}</main.basedir>
+        <nexus.root>http://49.4.13.100:8081</nexus.root>
+
+        <poi.version>3.15</poi.version>
+        <commons-io.version>2.5</commons-io.version>
+        <lucene.version>6.5.1</lucene.version>
+
+        <rabbitmq.client.version>5.4.3</rabbitmq.client.version>
+
+        <youi.version>3.0.1-SNAPSHOT</youi.version>
+        <springboot.version>2.0.0.M7</springboot.version>
+        <tomcat.version>8.5.23</tomcat.version>
+    </properties>
+
+    <dependencyManagement>
+        <!-- compile-->
+        <dependencies>
+            <dependency>
+                <groupId>com.rabbitmq</groupId>
+                <artifactId>amqp-client</artifactId>
+                <version>${rabbitmq.client.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-common</artifactId>
+                <version>${youi.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-context</artifactId>
+                <version>${youi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-services</artifactId>
+                <version>${youi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-dao-mongo</artifactId>
+                <version>${youi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-dao-jpa</artifactId>
+                <version>${youi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-web</artifactId>
+                <version>${youi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-web-security</artifactId>
+                <version>${youi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-mongo-fileClient</artifactId>
+                <version>${youi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-filestore</artifactId>
+                <version>${youi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml-schemas</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-scratchpad</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-core</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <!-- 分析器 -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-analyzers-common</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-queryparser</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+            <!-- 中文分词查询器smartcn -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-analyzers-smartcn</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+
+
+            <!-- servlet provider -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>javax.servlet.jsp-api</artifactId>
+                <version>2.3.1</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+                <version>${springboot.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-jasper</artifactId>
+                <version>${tomcat.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- test -->
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-codegen</artifactId>
+                <version>${youi.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-test</artifactId>
+                <version>${youi.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <parameters>true</parameters>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20.1</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**.mongo.*Test.class</exclude>
+                        <exclude>**.dao.*Test.class</exclude>
+                        <exclude>**.codegen.*Test.class</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>8.5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.20.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7</version>
+            </plugin>
+            <plugin>
+                <groupId>org.basepom.maven</groupId>
+                <artifactId>duplicate-finder-maven-plugin</artifactId>
+                <version>1.2.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.6.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>1.5</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <modules>
+        <module>../modules/dataquery/engine</module>
+    </modules>
+
+</project>
