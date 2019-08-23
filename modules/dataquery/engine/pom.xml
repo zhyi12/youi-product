@@ -19,8 +19,8 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.gwssi.stats</groupId>
-				<artifactId>gwssi-stats-parent</artifactId>
+				<groupId>org.youi.product</groupId>
+				<artifactId>youi-product-parent</artifactId>
 				<version>${project.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
@@ -34,17 +34,17 @@
 			<groupId>org.youi.framework</groupId>
 			<artifactId>youi-framework-services</artifactId>
 		</dependency>
-		
-		<!-- web 容器包 -->
+
 		<dependency>
-		    <groupId>javax.servlet.jsp</groupId>
-		    <artifactId>javax.servlet.jsp-api</artifactId>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
 		</dependency>
-		<!-- 需要支持servlet 3.0以上的web容器 -->
+
+		<!-- test -->
 		<dependency>
-			 <groupId>javax.servlet</groupId>
-    		<artifactId>javax.servlet-api</artifactId>
+			<groupId>org.youi.framework</groupId>
+			<artifactId>youi-framework-test</artifactId>
 		</dependency>
-		
-	</dependencies>
+
+    </dependencies>
 </project>
