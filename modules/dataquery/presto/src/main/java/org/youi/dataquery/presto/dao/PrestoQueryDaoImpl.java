@@ -24,6 +24,7 @@ import org.youi.dataquery.engine.core.RowDataMapper;
 import org.youi.dataquery.engine.entity.QueryOrder;
 import org.youi.dataquery.engine.entity.RowData;
 import org.youi.dataquery.engine.entity.RowItem;
+import org.youi.dataquery.presto.util.PrestoSqlUtils;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
 
@@ -61,8 +62,8 @@ public class PrestoQueryDaoImpl implements PrestoQueryDao{
                                             @NonNull String querySql,
                                             String[] params){
         //使用分页查询包装查询语句
-        String countSql = buildCountSql(querySql);
-        String pagerSql = buildPagerSql(querySql,pager,queryOrders);
+        String countSql = PrestoSqlUtils.buildCountSql(querySql);
+        String pagerSql = PrestoSqlUtils.buildPagerSql(querySql,pager,queryOrders);
         //查询记录总数
         int totalCount = jdbcTemplate.queryForObject(countSql,params,Integer.TYPE);
         //查询数据
@@ -72,40 +73,5 @@ public class PrestoQueryDaoImpl implements PrestoQueryDao{
         return pagerRecords;
     }
 
-    /**
-     *
-     * @param querySql
-     * @param pager
-     * @param queryOrders
-     * @return
-     */
-    private String buildPagerSql(String querySql,Pager pager,List<QueryOrder> queryOrders) {
-        int startIndex = pager.getStartIndex();
-        return MessageFormat.format("SELECT * FROM (SELECT ROW_NUMBER() over({0}) as Row,PT_.* FROM ({1}) as PT_) PTT_ WHERE PTT_.Row BETWEEN {2} AND {3}",
-                buildOrderSql(queryOrders),querySql,startIndex,startIndex+pager.getPageSize());
-    }
 
-    /**
-     * 构建排序串
-     * @param queryOrders
-     * @return
-     */
-    private String buildOrderSql(List<QueryOrder> queryOrders) {
-        List<String> orderSqls = new ArrayList<>();
-        for(QueryOrder queryOrder:queryOrders){
-            orderSqls.add(queryOrder.getProperty()+(queryOrder.isAscending()? " asc":" desc"));
-        }
-        return "ORDER BY "+StringUtils.arrayToDelimitedString(orderSqls.toArray(),",");
-    }
-
-    /**
-     * 总记录条数语句
-     * @param querySql
-     * @return
-     */
-    private String buildCountSql(String querySql) {
-        StringBuilder sqlBuilder = new StringBuilder();
-        sqlBuilder.append("SELECT count(1) as count FROM ( ").append(querySql).append(")");
-        return sqlBuilder.toString();
-    }
 }
