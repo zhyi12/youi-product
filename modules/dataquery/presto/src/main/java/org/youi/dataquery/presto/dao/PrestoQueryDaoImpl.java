@@ -81,12 +81,12 @@ public class PrestoQueryDaoImpl implements PrestoQueryDao{
      */
     private String buildPagerSql(String querySql,Pager pager,List<QueryOrder> queryOrders) {
         int startIndex = pager.getStartIndex();
-        return MessageFormat.format("SELECT * FROM (SELECT ROW_NUMBER() over(ORDER BY {0}) as Row,PT_.* FROM ({1}) as PT_) PTT_ WHERE PTT_.Row BETWEEN {2} AND {3}",
+        return MessageFormat.format("SELECT * FROM (SELECT ROW_NUMBER() over({0}) as Row,PT_.* FROM ({1}) as PT_) PTT_ WHERE PTT_.Row BETWEEN {2} AND {3}",
                 buildOrderSql(queryOrders),querySql,startIndex,startIndex+pager.getPageSize());
     }
 
     /**
-     * 构建排序
+     * 构建排序串
      * @param queryOrders
      * @return
      */
@@ -95,11 +95,11 @@ public class PrestoQueryDaoImpl implements PrestoQueryDao{
         for(QueryOrder queryOrder:queryOrders){
             orderSqls.add(queryOrder.getProperty()+(queryOrder.isAscending()? " asc":" desc"));
         }
-        return StringUtils.arrayToDelimitedString(orderSqls.toArray(),",");
+        return "ORDER BY "+StringUtils.arrayToDelimitedString(orderSqls.toArray(),",");
     }
 
     /**
-     *
+     * 总记录条数语句
      * @param querySql
      * @return
      */
