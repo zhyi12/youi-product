@@ -87,16 +87,26 @@
         <commons-io.version>2.5</commons-io.version>
         <lucene.version>6.5.1</lucene.version>
 
+        <presto.version>0.224</presto.version>
+        <alibaba.druid.version>1.1.10</alibaba.druid.version>
+
         <rabbitmq.client.version>5.4.3</rabbitmq.client.version>
 
         <youi.version>3.0.1-SNAPSHOT</youi.version>
         <springboot.version>2.0.0.M7</springboot.version>
+        <springframework.version>5.1.3.RELEASE</springframework.version>
         <tomcat.version>8.5.23</tomcat.version>
     </properties>
 
     <dependencyManagement>
         <!-- compile-->
         <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${springframework.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.rabbitmq</groupId>
                 <artifactId>amqp-client</artifactId>
@@ -108,7 +118,6 @@
                 <artifactId>youi-framework-common</artifactId>
                 <version>${youi.version}</version>
             </dependency>
-
 
             <dependency>
                 <groupId>org.youi.framework</groupId>
@@ -188,6 +197,23 @@
                 <version>${poi.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.facebook.presto</groupId>
+                <artifactId>presto-spi</artifactId>
+                <version>${presto.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.facebook.presto</groupId>
+                <artifactId>presto-jdbc</artifactId>
+                <version>${presto.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${alibaba.druid.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.apache.lucene</groupId>
@@ -353,6 +379,7 @@
 
     <modules>
         <module>../modules/dataquery/engine</module>
+        <module>../modules/dataquery/presto</module>
     </modules>
 
 </project>
