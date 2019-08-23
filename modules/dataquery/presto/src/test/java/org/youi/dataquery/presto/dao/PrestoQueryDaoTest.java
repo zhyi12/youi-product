@@ -28,7 +28,7 @@ public class PrestoQueryDaoTest {
     @Test
     public void queryRowDataByPagerTest(){
         Pager pager = new Pager(10,1,Pager.QUERY_TYPE_ALL);
-
+        //排序条件，分页查询时需要排序条件，保证分页后数据的正确性
         List<QueryOrder> queryOrders = new ArrayList<>();
         QueryOrder queryOrder = new QueryOrder();
         queryOrder.setProperty("catalogItemId");
