@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 import org.youi.dataquery.engine.core.RowDataMapper;
 import org.youi.dataquery.engine.entity.QueryOrder;
 import org.youi.dataquery.engine.entity.RowData;
@@ -28,8 +27,6 @@ import org.youi.dataquery.presto.util.PrestoSqlUtils;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
