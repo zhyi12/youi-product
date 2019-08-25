@@ -15,6 +15,7 @@
  */
 package org.youi.dataquery.presto.service;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -78,7 +79,7 @@ public class PrestoQueryServiceTest {
      * @Description
      */
     @Test
-    public void queryDataCubeTest(){
+    public void testQueryDataCube(){
         String mainTableName = "stats_working_task_row_st001";
         List<MeasureItem> measureItems = mockMeasureItems();//计量项
         List<Group> groups = mockGroups();//分组维度
@@ -96,6 +97,7 @@ public class PrestoQueryServiceTest {
 
         DataCube dataCube = prestoQueryService.queryDataCube(mainTableName,groups,null,measureItems,cubeColumns,null);
         //判断dataCube
+        Assert.assertTrue(dataCube.getDatas().containsKey("I.S203_20180_A0|group001.1|group002.01"));
     }
 
     /**
@@ -104,7 +106,7 @@ public class PrestoQueryServiceTest {
      * @Description
      */
     @Test
-    public void queryDataCubeWithConditionsTest(){
+    public void testQueryDataCubeWithConditions(){
 
     }
 
@@ -114,7 +116,7 @@ public class PrestoQueryServiceTest {
      * @Description
      */
     @Test
-    public void queryDataCubeWithCatalogTest(){
+    public void testQueryDataCubeWithCatalog(){
 
     }
 
