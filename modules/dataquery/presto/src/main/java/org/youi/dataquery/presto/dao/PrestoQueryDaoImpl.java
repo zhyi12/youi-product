@@ -19,10 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
+import org.youi.dataquery.engine.core.CubeRowDataMapper;
 import org.youi.dataquery.engine.core.RowDataMapper;
+import org.youi.dataquery.engine.entity.CubeColumns;
+import org.youi.dataquery.engine.entity.CubeRowData;
 import org.youi.dataquery.engine.entity.QueryOrder;
 import org.youi.dataquery.engine.entity.RowData;
-import org.youi.dataquery.engine.entity.RowItem;
 import org.youi.dataquery.presto.util.PrestoSqlUtils;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
@@ -40,11 +42,28 @@ public class PrestoQueryDaoImpl implements PrestoQueryDao{
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<RowData> queryRowData(List<RowItem> columnItems){
-        //测试用sql语句
-        String sql = "select sum(S203_2018020170000_D1) S203_2018020170000_D1,DATA_101_COL007,tc.catalogItemId from stats_working_task_row_st001 t left join stats_working_task_row_st001_catalog tc on t._id=tc.rowId group by DATA_101_COL007,tc.catalogItemId";
-        String[] params = {};
-        return jdbcTemplate.query(sql, params, new RowDataMapper(null));
+    /**
+     *
+     * @param querySql
+     * @param params
+     * @param queryOrders
+     * @return
+     */
+    public List<RowData> queryRowDatas(String querySql,
+                                       Object[] params,
+                                      List<QueryOrder> queryOrders){
+        return jdbcTemplate.query(querySql, params, new RowDataMapper(null));
+    }
+
+    /**
+     *
+     * @param cubeQuerySql 立方体查询语句
+     * @param params sql参数
+     * @return
+     */
+    @Override
+    public List<CubeRowData> queryCubeRowDatas(CubeColumns cubeColumns,String cubeQuerySql, Object[] params) {
+        return jdbcTemplate.query(cubeQuerySql, params, new CubeRowDataMapper(cubeColumns));
     }
 
     /**
@@ -57,7 +76,7 @@ public class PrestoQueryDaoImpl implements PrestoQueryDao{
     public PagerRecords queryRowDataByPager(@NonNull Pager pager,
                                             @NonNull List<QueryOrder> queryOrders,
                                             @NonNull String querySql,
-                                            String[] params){
+                                            Object[] params){
         //使用分页查询包装查询语句
         String countSql = PrestoSqlUtils.buildCountSql(querySql);
         String pagerSql = PrestoSqlUtils.buildPagerSql(querySql,pager,queryOrders);
@@ -69,6 +88,5 @@ public class PrestoQueryDaoImpl implements PrestoQueryDao{
         pagerRecords.setPager(pager);
         return pagerRecords;
     }
-
 
 }

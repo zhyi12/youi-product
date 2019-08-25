@@ -24,6 +24,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.youi.dataquery.engine.core.CubeQuerySqlBuilder;
+import org.youi.dataquery.presto.service.impl.PrestoCubeSqlBuilder;
 
 import javax.sql.DataSource;
 
@@ -54,5 +56,10 @@ public class ModuleConfig {
     @Bean
     public JdbcTemplate queryJdbcTemplate(){
         return  new JdbcTemplate(queryDataSource());
+    }
+
+    @Bean
+    public PrestoCubeSqlBuilder prestoCubeSqlBuilder(){
+        return new PrestoCubeSqlBuilder();
     }
 }

@@ -16,9 +16,7 @@
 package org.youi.dataquery.presto.dao;
 
 import org.springframework.lang.NonNull;
-import org.youi.dataquery.engine.entity.QueryOrder;
-import org.youi.dataquery.engine.entity.RowData;
-import org.youi.dataquery.engine.entity.RowItem;
+import org.youi.dataquery.engine.entity.*;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
 
@@ -32,12 +30,21 @@ import java.util.List;
 public interface PrestoQueryDao{
 
     /**
-     *
-     * 查询条件  List
-     * 查询的输出字段
+     * 查询行数据
+     * @param querySql
+     * @param params
+     * @param queryOrders
      * @return
      */
-    List<RowData> queryRowData(List<RowItem> columnItems);
+    List<RowData> queryRowDatas(String querySql,
+                                Object[] params,
+                               List<QueryOrder> queryOrders);
+
+    /**
+     * 支持主表 + 分类项从表 的立方体数据
+     * @return
+     */
+    List<CubeRowData> queryCubeRowDatas(CubeColumns cubeColumns,String cubeQuerySql, Object[] params);
 
     /**
      * 分页查询数据
@@ -50,6 +57,6 @@ public interface PrestoQueryDao{
     PagerRecords queryRowDataByPager(@NonNull Pager pager,
                                             @NonNull List<QueryOrder> queryOrders,
                                             @NonNull String querySql,
-                                            String[] params);
+                                     Object[] params);
 
 }
