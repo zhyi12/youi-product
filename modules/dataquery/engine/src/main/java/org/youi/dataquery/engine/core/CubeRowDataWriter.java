@@ -17,7 +17,7 @@ package org.youi.dataquery.engine.core;
 
 import org.springframework.util.CollectionUtils;
 import org.youi.dataquery.engine.DataQueryConstants;
-import org.youi.dataquery.engine.entity.CubeRowData;
+import org.youi.dataquery.engine.model.CubeRowData;
 import org.youi.dataquery.engine.utils.DimensionUtils;
 import org.youi.framework.core.dataobj.cube.DataCube;
 import org.youi.framework.core.dataobj.cube.DataItem;

@@ -21,14 +21,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.youi.dataquery.engine.DataQueryConstants;
-import org.youi.dataquery.engine.entity.Catalog;
-import org.youi.dataquery.engine.entity.CubeColumns;
-import org.youi.dataquery.engine.entity.CubeRowData;
+import org.youi.dataquery.engine.model.CubeColumns;
+import org.youi.dataquery.engine.model.CubeRowData;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.Set;
 
 /**
  * @author zhouyi
@@ -54,7 +52,6 @@ public class CubeRowDataMapper implements RowMapper<CubeRowData> {
         for(int i=1;i<=nrOfColumns;i++){
             Object value = rs.getObject(i);
             String columnName = rsmd.getColumnName(i).toUpperCase();//大写的列名称
-            System.out.println(columnName);
             //目录项
             if(cubeColumns.isCatalog()&&columnName.equalsIgnoreCase(DataQueryConstants.DIM_CATALOG_ITEM_NAME)){
                 cubeRowData.setCatalogItemId(parseStrValue(value));

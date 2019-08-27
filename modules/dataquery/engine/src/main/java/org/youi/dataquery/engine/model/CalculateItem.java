@@ -13,13 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.dataquery.engine.entity;
+package org.youi.dataquery.engine.model;
+
+import org.youi.framework.core.dataobj.cube.Item;
+
+import java.util.List;
 
 /**
+ * 计算项
  * @author zhouyi
  * @see
  * @since 2.0.0
  */
-public class Catalog extends Group{
+public class CalculateItem extends Item{
 
+    private static final long serialVersionUID = -3511344342210744950L;
+
+    private List<Item> expressionItems;
+
+    public List<Item> getExpressionItems() {
+        return expressionItems;
+    }
+
+    public void setExpressionItems(List<Item> expressionItems) {
+        this.expressionItems = expressionItems;
+    }
 }

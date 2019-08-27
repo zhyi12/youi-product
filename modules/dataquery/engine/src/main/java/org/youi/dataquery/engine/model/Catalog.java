@@ -13,18 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.dataquery.engine.entity;
-
-import org.youi.framework.core.dataobj.Domain;
-
-import java.util.LinkedHashMap;
+package org.youi.dataquery.engine.model;
 
 /**
- * 行数据
  * @author zhouyi
  * @see
  * @since 2.0.0
  */
-public class RowData extends LinkedHashMap implements Domain{
+public class Catalog extends Group{
 
 }

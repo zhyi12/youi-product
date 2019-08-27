@@ -15,17 +15,16 @@
  */
 package org.youi.dataquery.engine.core;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.youi.dataquery.engine.DataQueryConstants;
-import org.youi.dataquery.engine.entity.Catalog;
-import org.youi.dataquery.engine.entity.Group;
-import org.youi.dataquery.engine.entity.MeasureItem;
-import org.youi.dataquery.engine.entity.QueryCondition;
+import org.youi.dataquery.engine.model.*;
 import org.youi.dataquery.engine.utils.DimensionUtils;
+import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.core.orm.Condition;
 
 import java.text.MessageFormat;
@@ -92,7 +91,7 @@ public abstract class CubeQuerySqlBuilder {
 
         if(!CollectionUtils.isEmpty(groups)){
             groups.forEach(group -> {
-                if(!DimensionUtils.isTreeGroupItems(group)){//非树形结构的分组项，加入查询条件
+                if(isUseGroupCondition(group)){
                     conditions.add(buildGroupCondition(group,catalog));
                 }
             });
@@ -105,6 +104,15 @@ public abstract class CubeQuerySqlBuilder {
             conditions.addAll(queryConditions);
         }
         return conditions;
+    }
+
+    /**
+     * 非树形结构的分组项，非模版类型的分组，使用items生成查询条件
+     * @param group
+     * @return
+     */
+    private boolean isUseGroupCondition(Group group){
+        return !DimensionUtils.isTreeGroupItems(group) && !GroupTemplate.class.isAssignableFrom(group.getClass());
     }
 
     /**
@@ -179,7 +187,13 @@ public abstract class CubeQuerySqlBuilder {
         //维度列
         groups.forEach(group -> {
             //输出的查询字段
-            columnExpressions.add(parseColumnPrefix(group.getTableName(),catalog)+"."+group.getColumnName());
+            String columnExpression = parseColumnPrefix(group.getTableName(),catalog)+"."+group.getColumnName();
+            if(isSectionGroup(group)){
+                //分段分组
+                columnExpressions.add(buildGroupSectionSql((GroupTemplate)group,columnExpression));
+            }else{
+                columnExpressions.add(columnExpression);
+            }
         });
         //计量列
         measureColumns.forEach(measureItem ->
@@ -191,6 +205,47 @@ public abstract class CubeQuerySqlBuilder {
         }
 
         return StringUtils.arrayToDelimitedString(columnExpressions.toArray(),",");
+    }
+
+    /**
+     * 按数据分段的分组
+     * @param group
+     * @param columnExpression
+     * @return
+     */
+    protected String buildGroupSectionSql(GroupTemplate group, String columnExpression){
+        StringBuilder sqlBuilder = new StringBuilder();
+
+        sqlBuilder.append(" CASE ");
+        double[] sections = group.getSections();//分段
+        //小于
+        sqlBuilder.append(" WHEN ").append(columnExpression).append("<").append(sections[0]).append(" THEN ").append(group.getItems().get(0).getId());
+
+        if(sections.length>1){
+            //之间
+            for(int i=1;i<sections.length;i++){
+                sqlBuilder.append(" WHEN ")
+                        .append(columnExpression).append(">=").append(sections[i-1])
+                        .append(" AND ").append(columnExpression).append("<").append(sections[i])
+                        .append(" THEN ").append(group.getItems().get(i).getId());
+            }
+        }
+        //大于大于等于
+        sqlBuilder.append(" WHEN ").append(columnExpression).append(">=").append(sections[sections.length-1])
+                .append(" THEN ").append(group.getItems().get(sections.length-2).getId());
+        sqlBuilder.append(" END ").append(" as ").append(group.getId());
+
+        return sqlBuilder.toString();
+    }
+
+    /**
+     *  分段分组
+     * @param group
+     * @return
+     */
+    protected boolean isSectionGroup(Group group){
+        return GroupTemplate.class.isAssignableFrom(group.getClass()) &&
+                ArrayUtils.isNotEmpty(((GroupTemplate)group).getSections());
     }
 
     /**

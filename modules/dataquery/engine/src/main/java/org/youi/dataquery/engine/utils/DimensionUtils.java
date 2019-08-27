@@ -16,13 +16,18 @@
 package org.youi.dataquery.engine.utils;
 
 import org.springframework.util.CollectionUtils;
-import org.youi.dataquery.engine.entity.Group;
+import org.youi.dataquery.engine.model.Group;
+import org.youi.dataquery.engine.model.ItemTreeNode;
+import org.youi.framework.core.dataobj.cube.Dimension;
 import org.youi.framework.core.dataobj.cube.Item;
+import org.youi.framework.core.dataobj.tree.TreeNode;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhouyi
@@ -77,10 +82,41 @@ public final class DimensionUtils {
 
     /**
      *
+     * 构建维度项的树结构
+     * @param treeItems 有序的维度项集合
+     * @param maxLevel
+     * @return
+     */
+    public static Map<String,ItemTreeNode> buildItemTreeNodes(List<Item> treeItems, int maxLevel){
+        Map<String,ItemTreeNode> treeNodes = new LinkedHashMap();
+        ItemTreeNode[] levelParentTreeNodes =  new ItemTreeNode[maxLevel];
+        int index = 0;
+        for(Item treeItem:treeItems){
+            int level = treeItem.getLevel();
+            ItemTreeNode treeNode = new ItemTreeNode(treeItem.getId(),treeItem.getText(),index++);
+
+            if(treeItem.getExpression()!=null){
+                treeNode.setGroup("expression-item");
+            }
+            if(level<=1){
+                level = 1;
+            }else{
+                TreeNode parentTreeNode = levelParentTreeNodes[level-2];
+                parentTreeNode.addChild(treeNode);
+            }
+            treeNode.setLevel(level);
+            levelParentTreeNodes[level-1] = treeNode;
+            treeNodes.put(treeItem.getId(),treeNode);
+        }
+        return treeNodes;
+    }
+
+    /**
+     *
      * @param groups
      * @return
      */
-    public static List<Item>[] expendedCrossColItems(List<Group> groups){
+    public static List<Item>[] expendedCrossColItems(List<Dimension> groups){
         int dimensionCount = groups.size();
         int itemCount = 1;
         int spans = 1;
@@ -88,7 +124,7 @@ public final class DimensionUtils {
 
         //计算占位
         for (int i = dimensionCount; i > 0; i--) {
-            Group dimension = groups.get(i-1);
+            Dimension dimension = groups.get(i-1);
             if (i < dimensionCount) {
                 spans = spans * (groups.get(i).getItems().size());
             }
@@ -99,7 +135,7 @@ public final class DimensionUtils {
         List<Item> crossColItems[] = new List[itemCount];
         int index =0;
         double itemBlocks = 1;
-        for(Group dimension:groups){
+        for(Dimension dimension:groups){
             //对维度进行笛卡尔组合
             for(int i=0;i<itemCount;i++){
                 double itemIndex = (Math.floor(new Integer(i).doubleValue() / spansList.get(dimensionCount - index - 1))) % dimension.getItems().size();

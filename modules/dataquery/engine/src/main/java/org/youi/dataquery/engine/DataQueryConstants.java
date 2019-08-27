@@ -32,4 +32,8 @@ public final class DataQueryConstants {
 
     public final static String TABLE_QUERY_PREFIX = "t_";//
     public final static String CATALOG_TABLE_QUERY_PREFIX = "tc_";//
+
+    public final static String PARAM_GROUP_SUM = "groupSum";//
+    public final static String PARAM_SUM = "sum";//
+    public final static String PARAM_ITEM_COUNT = "itemCount";//
 }

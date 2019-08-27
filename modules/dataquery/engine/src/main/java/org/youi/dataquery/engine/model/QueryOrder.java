@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.dataquery.engine.entity;
+package org.youi.dataquery.engine.model;
 
 import org.youi.framework.core.dataobj.Domain;
 import org.youi.framework.core.orm.Order;

@@ -20,8 +20,8 @@ import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
-import org.youi.dataquery.engine.entity.RowData;
-import org.youi.dataquery.engine.entity.RowItem;
+import org.youi.dataquery.engine.model.RowData;
+import org.youi.dataquery.engine.model.RowItem;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
