@@ -15,14 +15,12 @@
  */
 package org.youi.dataquery.presto.service.impl;
 
-import org.apache.commons.collections.ArrayStack;
-import org.apache.commons.lang.ArrayUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.youi.dataquery.engine.core.CubeQuerySqlBuilder;
-import org.youi.dataquery.engine.entity.Catalog;
-import org.youi.dataquery.engine.entity.Group;
-import org.youi.dataquery.engine.entity.QueryCondition;
+import org.youi.dataquery.engine.model.Catalog;
+import org.youi.dataquery.engine.model.Group;
+import org.youi.dataquery.engine.model.QueryCondition;
 import org.youi.framework.core.orm.Condition;
 import org.youi.framework.util.StringUtils;
 

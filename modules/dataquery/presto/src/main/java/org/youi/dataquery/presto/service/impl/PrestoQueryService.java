@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.youi.dataquery.engine.DataQueryConstants;
-import org.youi.dataquery.engine.entity.*;
+import org.youi.dataquery.engine.model.*;
 import org.youi.dataquery.engine.service.IQueryService;
 import org.youi.dataquery.presto.dao.PrestoQueryDao;
 import org.youi.framework.core.dataobj.cube.DataCube;

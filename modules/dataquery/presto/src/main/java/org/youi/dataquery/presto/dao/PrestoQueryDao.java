@@ -16,7 +16,7 @@
 package org.youi.dataquery.presto.dao;
 
 import org.springframework.lang.NonNull;
-import org.youi.dataquery.engine.entity.*;
+import org.youi.dataquery.engine.model.*;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
 

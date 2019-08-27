@@ -16,7 +16,7 @@
 package org.youi.dataquery.presto.util;
 
 import org.springframework.util.StringUtils;
-import org.youi.dataquery.engine.entity.QueryOrder;
+import org.youi.dataquery.engine.model.QueryOrder;
 import org.youi.framework.core.orm.Pager;
 
 import java.text.MessageFormat;

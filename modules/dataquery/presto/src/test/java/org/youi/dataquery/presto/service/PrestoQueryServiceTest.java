@@ -27,11 +27,12 @@ import org.mockito.junit.MockitoRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.youi.dataquery.engine.entity.*;
+import org.youi.dataquery.engine.model.*;
 import org.youi.dataquery.engine.utils.DimensionUtils;
 import org.youi.dataquery.presto.dao.PrestoQueryDao;
 import org.youi.dataquery.presto.service.impl.PrestoQueryService;
 import org.youi.framework.core.dataobj.cube.DataCube;
+import org.youi.framework.core.dataobj.cube.Dimension;
 import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.util.PropertyUtils;
 
@@ -40,6 +41,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -64,6 +67,8 @@ public class PrestoQueryServiceTest {
     @Mock
     private PrestoQueryDao prestoQueryDao;//mock对象
 
+    private String mainTableName = "stats_working_task_row_st001";
+
     /**
      * 初始化服务的mock属性对象
      */
@@ -80,7 +85,6 @@ public class PrestoQueryServiceTest {
      */
     @Test
     public void testQueryDataCube(){
-        String mainTableName = "stats_working_task_row_st001";
         List<MeasureItem> measureItems = mockMeasureItems();//计量项
         List<Group> groups = mockGroups();//分组维度
         //模拟数据持久类
@@ -108,6 +112,42 @@ public class PrestoQueryServiceTest {
     @Test
     public void testQueryDataCubeWithConditions(){
 
+    }
+
+    /**
+     * @Story            立方体数据查询 - prestoQueryService.queryDataCube
+     * @Case             包含分段计算的分组 - queryDataCube_story_01003
+     * @Description
+     */
+    @Test
+    public void testQueryDataCubeWithSectionGroup(){
+
+        List<MeasureItem> measureItems = mockMeasureItems();//计量项
+        List<Group> groups = mockGroups();//分组维度
+
+        GroupTemplate group = new GroupTemplate();
+        group.setGroupId("sg1");
+        group.setId("sg1");
+        group.setColumnName("S203_20180_A1");
+        group.setText("按值分段");
+        group.setSections(new double[]{1,5,20});
+        groups.add(group);
+        //模拟数据持久类
+        List<CubeRowData> cubeRowDatas = mockCubeRowDatas(groups,measureItems);
+
+        //预期生成的sql语句
+        String cubeQuerySql = "SELECT t_.DATA_101_COL044,t_.DATA_101_COL007, CASE  WHEN t_.S203_20180_A1<1.0 THEN 0 WHEN t_.S203_20180_A1>=1.0 AND t_.S203_20180_A1<5.0 THEN 1 WHEN t_.S203_20180_A1>=5.0 AND t_.S203_20180_A1<20.0 THEN 2 WHEN t_.S203_20180_A1>=20.0 THEN 1 END  as sg1,sum(t_.S203_20180_A0) as S203_20180_A0 FROM stats_working_task_row_st001 as t_ WHERE t_.DATA_101_COL044  IN  (?,?) AND t_.DATA_101_COL007  IN  (?,?,?,?) GROUP by cube(t_.DATA_101_COL044,t_.DATA_101_COL007,t_.S203_20180_A1)";
+        String[] params = {"1","2","01","02","03","07"};//预期的生成的参数
+        CubeColumns cubeColumns = new CubeColumns();
+        cubeColumns.addGroupColumn("DATA_101_COL007").addGroupColumn("DATA_101_COL044")
+                .addMeasureColumn("S203_20180_A0");
+        //模拟查询sql和预期sql参数返回的数据
+        when(prestoQueryDao.queryCubeRowDatas(cubeColumns,cubeQuerySql,params)).thenReturn(cubeRowDatas);
+
+        prestoQueryService.queryDataCube(mainTableName,groups,null,measureItems,cubeColumns,null);
+
+        //验证规则：生成的sql和预期的cubeQuerySql一致时，调用一次queryCubeRowDatas查询
+        verify(prestoQueryDao,times(1)).queryCubeRowDatas(cubeColumns,cubeQuerySql,params);
     }
 
     /**
@@ -150,6 +190,34 @@ public class PrestoQueryServiceTest {
         return groups;
     }
 
+    /**
+     *
+     * @return
+     */
+    private Group mockAreaGroup(){
+        Group group = new Group();
+        group.setId("D");
+
+        List<Item> items = new ArrayList<>();
+
+        Item item01 = new Item("000000","全国");
+        Item item0101 = new Item("110000","北京");
+        Item item0102 = new Item("420000","湖北");
+        Item item0103 = new Item("500000","重庆");
+
+        item0101.setLevel(2);
+        item0102.setLevel(2);
+        item0103.setLevel(2);
+
+        items.add(item01);
+        items.add(item0101);
+        items.add(item0102);
+        items.add(item0103);
+
+        group.setItems(items);
+        return group;
+    }
+
     private List<Item> mockItems(String groupId,String[] itemIds) {
         List<Item> items = new ArrayList<>();
         for(String itemId:itemIds){
@@ -169,7 +237,7 @@ public class PrestoQueryServiceTest {
     private List<CubeRowData> mockCubeRowDatas(List<Group> groups, List<MeasureItem> measureItems) {
         List<CubeRowData> cubeRowDatas = new ArrayList<>();
 
-        List<Group> allGroups = new ArrayList<>(groups);
+        List<Dimension> allGroups = new ArrayList<>(groups);
         List<Item> measureGroupItems = new ArrayList<>();
 
         Group measureGroup = new Group();
