@@ -44,6 +44,10 @@ children:
             text: 元数据设计
             pageUrl: page/youi.metadata.design/index.html
           -
+            id: metadata-respondent
+            text: 调查对象管理
+            pageUrl: page/youi.metadata.respondent/index.html
+          -
             id: metadata-group-mng
             text: 分组字典管理
             pageUrl: page/youi.metadata.design/index.html
