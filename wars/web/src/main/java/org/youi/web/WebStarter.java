@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.ModelAndView;
+import org.youi.decorator.modern.ModuleConfig;
 import org.youi.framework.web.WebConfig;
 import org.youi.framework.web.security.WebSecurityConfig;
 
@@ -93,7 +94,7 @@ public class WebStarter extends SpringBootServletInitializer {
     public static void main(String[] args) throws Exception {
 
         SpringApplication.run(new Class<?>[]{WebConfig.class,
-                WebSecurityConfig.class,
+                WebSecurityConfig.class, ModuleConfig.class,
                 WebStarter.class}, args);
     }
 
@@ -105,7 +106,7 @@ public class WebStarter extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(WebConfig.class,
-                WebSecurityConfig.class,
+                WebSecurityConfig.class,ModuleConfig.class,
                 WebStarter.class);
     }
 }

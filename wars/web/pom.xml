@@ -62,6 +62,7 @@
         <main.basedir>${basedir}/../..</main.basedir>
         <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
         <youi.version>3.0.1-SNAPSHOT</youi.version>
+        <youi.product.version>1.0.0-SNAPSHOT</youi.product.version>
     </properties>
     <dependencies>
 
@@ -75,6 +76,12 @@
             <groupId>org.youi.framework</groupId>
             <artifactId>youi-framework-web-security</artifactId>
             <version>${youi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-decorator-modern</artifactId>
+            <version>${youi.product.version}</version>
         </dependency>
 
         <!-- 使用zipkin做交易追踪 -->

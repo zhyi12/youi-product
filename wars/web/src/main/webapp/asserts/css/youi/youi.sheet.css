@@ -1,0 +1,95 @@
+@CHARSET "UTF-8";
+.youi-sheet{
+	position:relative;
+	overflow: auto;
+}
+
+.youi-sheet .select-helper{
+	position:absolute;
+	background:blue;
+	z-index:2;
+	border:1px dotted #ddd;
+	opacity: 0.2;
+}
+
+.youi-sheet .col-resize-handler{
+	display: block;
+	font-size:1px;
+	width:6px;
+	cursor: col-resize;
+	margin-right:-8px;
+	height:24px;
+}
+
+.youi-sheet .col-resize-helper{
+	font-size:1px;
+	position: absolute;
+	top:0px;
+	border-right:1px dotted silver;
+	z-index:2;
+	height:100px;
+}
+
+.youi-sheet .table {
+	background-color: white;
+	border-collapse: collapse;
+	vertical-align: bottom;
+	table-layout: fixed;
+}
+
+.youi-sheet .table.tableNoBorder{
+	border: none;
+}
+
+.youi-sheet .table td {
+	padding: 1px 5px;
+	border: 1px solid silver;
+	height:24px;
+	vertical-align: middle;
+}
+
+.youi-sheet .table td.cell.readonly{
+	background:#F9F9F9!important;
+	color:silver!important;
+}
+
+.youi-sheet .excelDefaults td.cell.selected,
+.youi-sheet .table td.cell.selected{
+	background:#eeddff!important;
+}
+
+.youi-sheet .table .pubHeader,
+.youi-sheet .table .colHeader {
+	background-color: #f0ecec;
+	font-weight: bold;
+	border: 1px solid black;
+	text-align: center;
+	vertical-align: middle;
+	padding: 1px 5px;
+}
+
+.youi-sheet .table .blankHead{
+	border: none !important;
+	background: white;
+}
+
+.youi-sheet .table .rowHeader {
+	background-color: #f0ecec;
+	font-weight: bold;
+	border: 1px solid black;
+	text-align: center;
+	padding: 1px 1px;
+	width:25px;
+}
+
+.youi-sheet .table .cell.fieldSelect{
+	overflow: inherit;
+}
+
+.youi-sheet .cell.corner{
+	border-right:1px solid silver!important;
+}
+
+.youi-sheet .table .cell.readonly.cell-span{
+	border-left:1px solid black;
+}

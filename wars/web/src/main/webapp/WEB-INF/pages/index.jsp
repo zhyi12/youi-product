@@ -1,11 +1,14 @@
 <%@ taglib prefix="youi" uri="http://www.cjyoui.xyz/youi" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-首页
-<form action="/uaa/oauth/client" method="get" target="_blank">
-    <input type="submit" value="测试获取登录数据"/>
-</form>
+<youi:html title="${sysCaption}">
+    <%@ include file="/WEB-INF/pages/common/commonScriptAndCss.jsp"%>
+    <youi:body decorator="modern">
+        <youi:func name="init">
+            if(!window.location.hash){
+                window.location.hash = '#p:welcome.html';
+            }
+        </youi:func>
+    </youi:body>
 
-<form action="/logout" method="post">
-    <input type="submit" value="测试退出"/>
-</form>
+</youi:html>

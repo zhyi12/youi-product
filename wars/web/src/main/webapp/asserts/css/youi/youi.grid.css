@@ -1,0 +1,359 @@
+@CHARSET "UTF-8";
+
+.youi-grid{
+	overflow-x: initial;
+}
+
+.youi-grid .table{
+	margin-bottom:0px;
+}
+
+.youi-grid .grid-content{
+	float:left;
+	width:100%;
+	border: 1px solid #E1E6EB;
+    border-bottom:none;
+}
+
+.panel-content>.youi-grid .table{
+ 	border:none;
+ }
+
+.youi-grid .youi-grid-singleQuery{
+	padding:5px 0px;
+	display:table;
+}
+
+.youi-grid .youi-fieldLayout{
+	margin-bottom:5px;
+}
+
+.youi-grid .query-value{
+	border-radius: 0px;
+}
+
+.youi-grid .query-buttons{
+	text-align:center;
+}
+
+.youi-grid .btn-group{
+	padding-bottom: 5px;
+}
+
+.youi-grid .youi-grid-singleQuery .query-button{
+	cursor:pointer;
+}
+
+
+.youi-grid .table .grow{
+	min-height:30px;
+}
+
+.youi-grid .table th{
+	vertical-align: middle;
+}
+
+.youi-grid .table th .col-title,
+.youi-grid .table th .selected-item{
+	white-space: nowrap;
+	text-align: center;
+}
+
+.youi-grid .table th.cell-header-chekcbox{
+	width:25px;
+}
+
+.youi-grid .table .grow td.cell{
+	vertical-align: middle;
+	cursor:pointer;
+	white-space: nowrap;
+}
+
+.youi-grid .table .grow td.cell.wrap{
+    white-space: normal;
+}
+
+.youi-grid .table .grow td.cell.center{
+	text-align: center;
+}
+
+.youi-grid .table .grow td.cell.right{
+	text-align: right;
+}
+
+.youi-grid .table .grow .editor{
+	border:none;
+	width:100%;
+}
+
+.youi-grid .table .cell.button .youi-icon:hover{
+	cursor:pointer;
+	color:blue;
+}
+
+.youi-grid .table .cell.button .youi-icon:before{
+	padding-right: 2px;
+	font-size: 14px;
+}
+
+.youi-grid .table .cell.checkbox{
+	margin-top:0px;
+	display: table-cell;
+}
+
+.youi-grid .grid-hcell .option-item.selected{
+	padding-left:2px;
+}
+
+.youi-grid .grid-hcell .option-item.selected:before{
+	font-family: 'FontAwesome';
+	content: "\f00c";
+}
+
+.youi-grid  .grid-footer{
+	margin-top:-1px;
+	border: 1px solid #E1E6EB;
+	padding:5px;
+}
+
+.youi-grid  .pagination{
+	margin:2px 0px;
+	float:right;
+}
+
+.youi-grid .pagination > li > a{
+	padding:5px 12px;
+	cursor:pointer;
+}
+
+.youi-grid .pagination > li > a.pIcon{
+	padding:8px 12px;
+}
+
+
+.youi-grid  .pPageStat{
+	line-height:36px;
+}
+
+.youi-grid .table  thead th{
+	background:#F5F6FA;
+	border-bottom:0;
+	color:#999;
+}
+
+.youi-grid .dropdown-property{
+	position:relative;
+}
+
+.youi-grid .no-records{
+	height:80px;
+	vertical-align: middle;
+}
+
+ .youi-grid .cell.button .youi-icon:active,
+ .youi-grid .cell.button .youi-icon:hover,
+ .youi-grid .cell.button .youi-icon{
+ 	padding-right:3px;
+ 	color:black;
+ 	text-decoration: none;
+ }
+ 
+.youi-grid .grow.selected{
+ 	background: #ecedf9;
+}
+
+.youi-grid .editor-tools{
+	clear:both;
+	background:#F5F6FA;
+	border: 1px solid #E1E6EB;
+	border-bottom: none;
+	padding:5px;
+}
+
+.youi-grid .editor-tools .youi-icon{
+	font-size:20px;
+	padding:2px;
+	cursor:pointer;
+}
+
+.youi-grid .editor-tools .youi-icon:hover{
+	color:blue;
+}
+
+
+.youi-tree li.treeNode{
+	white-space: nowrap;
+}
+
+.ui-autocomplete {
+	z-index:9999;
+}
+
+.panel-content>.youi-grid .table,
+.panel-content>.youi-grid .grid-footer{
+	border:none;
+	border-bottom:1px solid #E1E6EB;
+}
+
+.youi-grid .youi-fieldLayout .form-group{
+	margin-bottom:5px;
+}
+
+
+.youi-grid .icon-checkbox:before {
+    content: "\f096";
+    padding-right:2px;
+}
+
+.youi-grid .icon-checkbox.checked:before,
+.youi-grid .selected .icon-checkbox:before {
+    content: "\f046";
+    padding-right:0px;
+}
+
+.youi-grid .cell.button .youi-icon.split{
+	background:#E1E6EB;
+	margin:0px 3px;
+	padding-right:2px;
+}
+
+
+.youi-grid .col-sort{
+    cursor:pointer;
+}
+
+.youi-grid.footer-fixed .grid-footer{
+    width:auto;
+    position: fixed;
+    bottom: 0px;
+    background: #f9f9f9;
+	padding:0px;
+	border: none;
+	z-index:10;
+}
+
+.youi-grid.footer-fixed .grid-content{
+    margin-bottom:40px;
+}
+
+
+
+.youi-grid .table td,
+.youi-grid .table th{
+    border-left:1px solid rgb(221, 221, 221);
+    border-bottom:1px solid rgb(221, 221, 221);
+}
+
+.youi-grid .table td:first-child,
+.youi-grid .table th:first-child{
+    border-left:none;
+}
+
+.youi-grid .table{
+     border-bottom:none;
+
+}
+
+.youi-grid button[data-name=refresh]{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.youi-grid.footer-fixed .grid-footer nav{
+    margin-left: 100px;
+}
+
+.youi-grid .old{
+    background-color: #fafaff;
+}
+
+.youi-grid .grid-content{
+    overflow-x:initial;
+    min-height:initial;
+    border-bottom:none;
+
+}
+
+.youi-grid .querying .selected-item{
+    color:#A94242;
+}
+
+.youi-grid .table .cell-header-chekcbox,
+.youi-grid .table .grow td.cell.checkbox{
+    text-align:center;
+}
+
+.youi-grid .table .grow td.cell.num{
+    text-align:center;
+    background:#F5F6FA;
+}
+
+/**
+	按钮和条件框同行样式
+*/
+.youi-grid.grid-query-inline .query-buttons{
+	background: #f9f9f9;
+	width: 16.667%;
+	float: left;
+	padding: 8px 5px 2px 0px;
+	border: 1px solid #e3e3e3;
+	border-left: none;
+	border-radius:0px 0px 5px 0px;
+}
+
+.youi-grid.grid-query-inline .youi-fieldLayout {
+	background: #f9f9f9;
+	padding-bottom: 0px;
+	padding-top:6px;
+	border-radius: 0px 0px 0px 5px;
+	border: 1px solid #e3e3e3;
+	border-right: none;
+	width:83.333%;
+}
+
+.youi-grid.grid-query-inline{
+	border-top: 5px solid #367bb4;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.youi-grid.toolbar-buttons .query-buttons{
+	float: left;
+	width: 100%;
+	border-top: 1px solid #ddd;
+	padding: 0px;
+	height: 32px;
+	background: #f9f9f9;
+}
+
+.youi-grid.in-container .youi-fieldLayout,
+.youi-grid.grid-query-inline.in-container .youi-fieldLayout{
+	border-top: none;
+	border-radius: 0px;
+	border-left:none;
+	border-right: none;
+}
+
+.youi-grid.in-container .grid-content,
+.youi-grid.in-container .grid-footer{
+	border-left:none;
+	border-right: none;
+}
+
+.youi-grid.in-container .grid-content.auto-height{
+	overflow-y: initial;
+}
+
+.youi-grid.in-container,
+.youi-grid.grid-query-inline.in-container{
+	border-top: 1px solid #ddd;
+	border-radius: 0px;
+}
+
+.youi-grid .gridCol.button .dropdown-menu{
+	margin-left:-120px;
+}
+
+.youi-grid.page-size-hide  .page-size-handler{
+	display: none;
+}

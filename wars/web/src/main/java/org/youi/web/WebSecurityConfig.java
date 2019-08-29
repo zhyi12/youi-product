@@ -53,8 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated().and().httpBasic().disable()
                 .logout().logoutSuccessUrl(logoutUri+"?appUrl="+appLoginUri).and()
-                .csrf().ignoringAntMatchers("/uaa/**","/logout","/workflowServices/services/**",
-                    "/gatheringServices/services/gatherDataCheckManager/*")
+                .csrf().ignoringAntMatchers("/uaa/**","/logout")
                 .and().cors().disable()
                 .addFilterAfter(apiSecurityFilter(), SessionManagementFilter.class);
     }

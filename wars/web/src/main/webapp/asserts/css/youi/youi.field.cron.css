@@ -1,0 +1,70 @@
+@CHARSET "UTF-8";
+
+.youi-form .youi-fieldLayout .youi-field.youi-fieldCron{
+  border-radius: 10px;
+  border: 1px solid silver;
+  padding: 5px;
+}
+
+.youi-field.youi-fieldCron table.cronTable {
+	background: silver;
+	width:100%;
+	margin: 2px 0;
+	border-left:1px solid silver;
+	border-right:1px solid silver;
+}
+
+.youi-field.youi-fieldCron table.cronTable tr{
+	border-top:1px solid silver;
+}
+
+.youi-field.youi-fieldCron table.cronTable td {
+	background: white;
+	padding:1px;
+	height:32px;
+}
+
+.youi-field.youi-fieldCron table.cronTable td.label {
+	text-align: right;
+	font-weight: bold;
+	display: table-cell;
+	color:black;
+	vertical-align: middle;
+  	border-radius: 0em;
+  	border-right:1px solid silver;
+}
+
+.youi-field.youi-fieldCron table.cronTable td.modePanel {
+	display: none;
+	width: 300px
+}
+
+.youi-field.youi-fieldCron table.cronTable td.modePanel.show {
+	display: table-cell!important;
+}
+
+.youi-field.youi-fieldCron .cronLabel {
+	padding: 0 2px;
+	height: 28px;
+	width: 30px;
+	background: #eeffe9;
+	text-align: center
+}
+
+.youi-field.youi-fieldCron .cron-expression {
+	border: 1px solid silver
+}
+
+.youi-field.youi-fieldCron input.mode-value{
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}

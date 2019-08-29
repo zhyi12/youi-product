@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+.youi-form{
+	padding:10px;
+}
+
+.youi-form.youi-dialog{
+	display:none;
+}
+
+.modal-footer .form-buttons{
+	text-align:right;
+}
+
+.youi-form .form-buttons .btn-group{
+	float:left;
+}
+
+.youi-form.form-inline .youi-fieldLayout .form-group{
+	border: 1px solid silver;
+    padding-left: 5px;
+    border-radius: 5px 0px 0px 5px;
+    margin-bottom: 0px;
+}
+
+.youi-form.form-inline .form-buttons{
+	float: left !important;
+}
