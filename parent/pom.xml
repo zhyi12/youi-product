@@ -151,6 +151,12 @@
 
             <dependency>
                 <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-ui</artifactId>
+                <version>${youi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
                 <artifactId>youi-framework-web-security</artifactId>
                 <version>${youi.version}</version>
             </dependency>
@@ -380,6 +386,8 @@
     <modules>
         <module>../modules/dataquery/engine</module>
         <module>../modules/dataquery/presto</module>
+
+        <module>../modules/decorators/modern</module>
     </modules>
 
 </project>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+	<panel position="north" jsp="header.jsp"/>
+	<panel position="center"/>
+	<panel position="south" jsp="../../WEB-INF/pages/common/footer.jsp"/>
+</layout>
