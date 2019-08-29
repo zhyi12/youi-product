@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.youi.product</groupId>
+		<artifactId>youi-product-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../../parent/</relativePath>
+	</parent>
+
+	<name>youi-exchange-engine</name>
+	<artifactId>youi-exchange-engine</artifactId>
+	<packaging>jar</packaging>
+
+	<url>http://maven.apache.org</url>
+	<!-- 导入项目公共包 -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.youi.product</groupId>
+				<artifactId>youi-product-parent</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.youi.framework</groupId>
+			<artifactId>youi-framework-common</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-ip</artifactId>
+		</dependency>
+
+		<!-- test -->
+		<dependency>
+			<groupId>org.youi.framework</groupId>
+			<artifactId>youi-framework-test</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-test</artifactId>
+		</dependency>
+
+    </dependencies>
+</project>
