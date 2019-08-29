@@ -48,6 +48,18 @@ children:
             text: 分组字典管理
             pageUrl: page/youi.metadata.design/index.html
       -
+        id: metadata-standard
+        text: 数据标准
+        children:
+          -
+            id: metadata-area
+            text: 行政区划
+            pageUrl: page/youi.metadata.design/index.html
+          -
+            id: metadata-economic-industrie
+            text: 国民经济行业分类
+            pageUrl: page/youi.metadata.design/index.html
+      -
         id: metadata-auth
         text: 元数据授权
         children:
@@ -60,8 +72,12 @@ children:
             text: 机构方案组
             pageUrl: page/youi.metadata.taskgroup/agencyTaskGroup.html
   -
-    id: dataStore
-    text: 数据存储
+    id: dataGather
+    text: 数据采集
+    icon: list
+  -
+    id: dataCheck
+    text: 数据质量
     icon: list
   -
     id: dataService
