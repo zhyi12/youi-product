@@ -6,7 +6,7 @@ server:
     max-connections: 20000
   session:
       cookie:
-        name: USESSIONID
+        name: WSESSIONID
   servlet:
     jsp:
       init-parameters:
@@ -37,34 +37,12 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 30000
-    metadata-services:
+    exchange-services:
       execution:
         isolation:
           thread:
             timeoutInMilliseconds: 30000
-    working-services:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 30000
-    gather-services:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 30000
-    gathering-services:
-          execution:
-            isolation:
-              strategy: SEMAPHORE
-              semaphore:
-                maxConcurrentRequests: 1000
-              thread:
-                timeoutInMilliseconds: 30000
-    workflow-services:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 30000
+
 #
 #working-services:
 #  ribbon:
@@ -88,6 +66,10 @@ zuul:
       path: /uaa/**
       sensitiveHeaders: Set-Cookie
       serviceId: server-sso
+    exchange-services:
+      path: /exchange/**
+      sensitiveHeaders: Set-Cookie
+      serviceId: exchange-services
   add-proxy-headers: true
 eureka:
   instance:
