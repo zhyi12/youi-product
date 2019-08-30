@@ -1,0 +1,51 @@
+server:
+  port: 8255
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    max-connections: 20000
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      basePath: /
+      expose: [metrics,info,health]
+info:
+  app:
+    name: ${spring.application.name}
+    description: stats gather task
+    version: 1.0.0
+
+spring:
+  rabbitmq:
+    host: 192.168.173.130
+    port: 5672
+    username: filing
+    password: filing
+    virtual-host: filing
+  cloud:
+    inetutils:
+      preferredNetworks:
+        - 192.168.173
+  data:
+    mongodb:
+      host: 192.168.173.130:27515
+      database: stats2-filing
+      username: query
+      password: query123
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:8868/oauth/token
+      userAuthorizationUri: http://localhost:8868/oauth/authorize
+    resource:
+      id: ${spring.application.name}
+      user-info-uri: http://localhost:8868/oauth/client
+      prefer-token-info: false
