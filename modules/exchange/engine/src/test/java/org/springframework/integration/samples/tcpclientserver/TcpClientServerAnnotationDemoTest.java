@@ -91,9 +91,7 @@ public class TcpClientServerAnnotationDemoTest {
 
 		@MessagingGateway(defaultRequestChannel = "toTcp")
 		public interface Gateway {
-
 			String viaTcp(String in);
-
 		}
 
 		@Bean
@@ -117,7 +115,6 @@ public class TcpClientServerAnnotationDemoTest {
 			public String convertResult(byte[] bytes) {
 				return new String(bytes);
 			}
-
 		}
 
 		@Bean

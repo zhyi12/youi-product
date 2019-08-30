@@ -13,19 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.integration.samples.tcpclientserver;
+package org.youi.product.exchange.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.integration.annotation.IntegrationComponentScan;
-import org.springframework.integration.annotation.ServiceActivator;
+import org.springframework.integration.annotation.*;
+import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.handler.ServiceActivatingHandler;
 import org.springframework.integration.ip.tcp.TcpInboundGateway;
+import org.springframework.integration.ip.tcp.TcpOutboundGateway;
+import org.springframework.integration.ip.tcp.connection.AbstractClientConnectionFactory;
 import org.springframework.integration.ip.tcp.connection.AbstractServerConnectionFactory;
+import org.springframework.integration.ip.tcp.connection.TcpNetClientConnectionFactory;
 import org.springframework.integration.ip.tcp.connection.TcpNetServerConnectionFactory;
-import org.springframework.messaging.MessageHandler;
+import org.springframework.messaging.MessageChannel;
 import org.youi.product.exchange.engine.TcpServiceFactory;
+import org.springframework.messaging.MessageHandler;
 
 /**
  * @author zhouyi
@@ -33,9 +37,9 @@ import org.youi.product.exchange.engine.TcpServiceFactory;
  * @since 2.0.0
  */
 @EnableIntegration
-@IntegrationComponentScan
+@IntegrationComponentScan("org.youi.product.exchange.engine")
 @Configuration
-public class Config {
+public class TcpExchangeConfig {
 
     /**
      * 接收tcp协议请求
@@ -45,7 +49,6 @@ public class Config {
         TcpInboundGateway tcpInboundGateway = new TcpInboundGateway();
         tcpInboundGateway.setConnectionFactory(connectionFactory);
         tcpInboundGateway.setRequestChannelName("tcp");
-
         return  tcpInboundGateway;
     }
 
@@ -71,5 +74,32 @@ public class Config {
         return new TcpNetServerConnectionFactory(50337);
     }
 
+    @Bean
+    public AbstractClientConnectionFactory clientCF() {
+        return new TcpNetClientConnectionFactory("localhost", 50337);
+    }
+
+    @Bean
+    @ServiceActivator(inputChannel = "toTcp")
+    public MessageHandler tcpOutGate(AbstractClientConnectionFactory connectionFactory) {
+        TcpOutboundGateway gate = new TcpOutboundGateway();
+        gate.setConnectionFactory(connectionFactory);
+        gate.setOutputChannelName("resultToString");
+        return gate;
+    }
+
+    @Bean
+    public MessageChannel fromTcp() {
+        return new DirectChannel();
+    }
+
+    @MessageEndpoint
+    public static class UnPack {
+        //解包比特流
+        @Transformer(inputChannel = "resultToString")
+        public String convertResult(byte[] bytes) {
+            return new String(bytes);
+        }
+    }
 
 }

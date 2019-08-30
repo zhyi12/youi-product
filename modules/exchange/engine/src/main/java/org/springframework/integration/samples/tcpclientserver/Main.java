@@ -18,14 +18,12 @@ package org.springframework.integration.samples.tcpclientserver;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.integration.ip.tcp.connection.AbstractServerConnectionFactory;
 import org.springframework.integration.ip.util.TestingUtilities;
-import org.springframework.util.SocketUtils;
+import org.youi.product.exchange.config.AmqpConfig;
 
 /**
  * Demonstrates the use of a gateway as an entry point into the integration flow.
@@ -65,8 +63,6 @@ public final class Main {
 	 */
 	public static void main(final String... args) {
 
-		final Scanner scanner = new Scanner(System.in);
-
 		System.out.println("\n========================================================="
 				+ "\n                                                         "
 				+ "\n    Welcome to the Spring Integration                    "
@@ -105,7 +101,7 @@ public final class Main {
 
 //		context.load("classpath:META-INF/spring/integration/tcpClientServerDemo-context.xml");
 
-		context.register(Config.class);
+		context.register(Config.class,AmqpConfig.class);
 		context.registerShutdownHook();
 		context.refresh();
 
