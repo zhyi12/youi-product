@@ -417,6 +417,18 @@
     </build>
 
     <modules>
+
+        <module>../modules/metadata/common</module>
+
+        <module>../modules/metadata/datadictionary</module>
+        <module>../modules/metadata/datadictionaryImpl</module>
+
+        <module>../modules/metadata/metaobject</module>
+        <module>../modules/metadata/metaobjectImpl</module>
+
+        <module>../modules/metadata/metaproject</module>
+        <module>../modules/metadata/metaprojectImpl</module>
+
         <module>../modules/dataquery/engine</module>
         <module>../modules/dataquery/presto</module>
 
