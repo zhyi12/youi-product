@@ -66,10 +66,14 @@ zuul:
       path: /uaa/**
       sensitiveHeaders: Set-Cookie
       serviceId: server-sso
-    exchange-services:
-      path: /exchange/**
+    exchangeServices:
+      path: /exchangeServices/**
       sensitiveHeaders: Set-Cookie
       serviceId: exchange-services
+    metadataServices:
+      path: /metadataServices/**
+      sensitiveHeaders: Set-Cookie
+      serviceId: metadata-services
   add-proxy-headers: true
 eureka:
   instance:
