@@ -13,16 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.metadata.project.mongo;
-
-import org.youi.framework.mongo.DaoMongo;
-import org.youi.metadata.project.entity.MetaProject;
+package org.youi.metadata.common;
 
 /**
  * @author zhouyi
  * @see
  * @since 2.0.0
  */
-public interface MetaProjectDao extends DaoMongo<MetaProject,String>{
+public interface IMetaParentFinderAdapter {
+
+    boolean supports(String metaObjectName);
+
+    /**
+     * 查找父元数据对象名
+     * @return
+     */
+    String findParentMetaObjectName();
 
 }

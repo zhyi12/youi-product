@@ -1,4 +1,4 @@
-package org.youi.metadata.project.service.impl;
+package org.youi.metadata.project.service;
 
 import static org.junit.Assert.*;
 

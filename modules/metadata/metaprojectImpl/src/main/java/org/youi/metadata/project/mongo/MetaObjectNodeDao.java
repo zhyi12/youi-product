@@ -18,10 +18,23 @@ package org.youi.metadata.project.mongo;
 import org.youi.framework.mongo.DaoMongo;
 import org.youi.metadata.project.entity.MetaObjectNode;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * @author zhouyi
  * @see
  * @since 2.0.0
  */
 public interface MetaObjectNodeDao extends DaoMongo<MetaObjectNode,String>{
+
+    /**
+     *
+     * @param projectId
+     * @param metaObjectNames
+     * @return
+     */
+    List<MetaObjectNode> findByProjectIdAndMetaObjectNameIn(String projectId, Collection<String> metaObjectNames);
+
+
 }

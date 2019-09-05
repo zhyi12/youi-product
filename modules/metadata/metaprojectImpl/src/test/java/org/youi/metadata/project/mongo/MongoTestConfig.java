@@ -15,14 +15,20 @@
  */
 package org.youi.metadata.project.mongo;
 
-import org.youi.framework.mongo.DaoMongo;
-import org.youi.metadata.project.entity.MetaProject;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.youi.framework.mongo.BaseDaoMongo;
 
 /**
  * @author zhouyi
  * @see
  * @since 2.0.0
  */
-public interface MetaProjectDao extends DaoMongo<MetaProject,String>{
+@Configuration
+@EnableMongoRepositories(basePackages = "org.youi.metadata.project.mongo",repositoryBaseClass = BaseDaoMongo.class)
+@PropertySource("classpath:application-test.properties")
+public class MongoTestConfig {
+
 
 }

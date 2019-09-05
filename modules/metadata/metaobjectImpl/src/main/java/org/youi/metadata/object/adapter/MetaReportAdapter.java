@@ -13,16 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.metadata.project.mongo;
+package org.youi.metadata.object.adapter;
 
-import org.youi.framework.mongo.DaoMongo;
-import org.youi.metadata.project.entity.MetaProject;
+import org.springframework.stereotype.Component;
+import org.youi.metadata.common.IMetaObjectCreateAdapter;
+import org.youi.metadata.common.IMetaParentFinderAdapter;
+import org.youi.metadata.object.MetaObjectConstants;
 
 /**
  * @author zhouyi
  * @see
  * @since 2.0.0
  */
-public interface MetaProjectDao extends DaoMongo<MetaProject,String>{
+@Component
+public class MetaReportAdapter implements IMetaParentFinderAdapter,IMetaObjectCreateAdapter {
 
+    @Override
+    public boolean supports(String metaObjectName) {
+        return MetaObjectConstants.META_OBJECT_NAME_TASK.equals(metaObjectName);
+    }
+
+    public String findParentMetaObjectName(){
+        return MetaObjectConstants.META_OBJECT_NAME_PLAN;
+    }
 }

@@ -16,7 +16,11 @@
 package org.youi.metadata.project.service.impl;
 
 import org.springframework.stereotype.Component;
+import org.youi.framework.core.dataobj.tree.TreeNode;
 import org.youi.metadata.object.entity.MetaObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 元数据树构建组件
@@ -33,5 +37,17 @@ public class MetaProjectTreeDispatcher {
     public void addMetaNode(String parentId, MetaObject metaObject){
 
         //存储数据
+    }
+
+    /**
+     *
+     * @param parentId  父节点ID
+     * @param parentMetaObjectName 父节点类型
+     * @return
+     */
+    public List<TreeNode> getMetaChildNodes(String parentId,String parentMetaObjectName){
+        //
+
+        return new ArrayList<>();
     }
 }

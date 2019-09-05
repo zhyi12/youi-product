@@ -39,7 +39,7 @@ import java.util.Collection;
 @Service("metaProjectManager")
 public class MetaProjectManagerImpl implements MetaProjectManager {
 
-    @Autowired
+    @Autowired(required = false)
     private MetaProjectDao metaProjectDao;
 
     @Override
@@ -66,6 +66,10 @@ public class MetaProjectManagerImpl implements MetaProjectManager {
     @Override
     @EsbServiceMapping
     public MetaProject saveMetaProject(MetaProject metaProject) {
+
+        //
+
+        //
         return metaProjectDao.save(metaProject);
     }
 

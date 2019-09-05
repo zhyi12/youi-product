@@ -16,6 +16,8 @@
 package org.youi.metadata.project.service;
 
 import org.youi.framework.core.dataobj.tree.TreeNode;
+import org.youi.framework.esb.annotation.EsbServiceMapping;
+import org.youi.framework.esb.annotation.ServiceParam;
 import org.youi.metadata.common.model.PropertyItem;
 import org.youi.metadata.object.entity.MetaObject;
 import org.youi.metadata.project.entity.MetaObjectNode;
@@ -40,19 +42,17 @@ public interface MetaObjectNodeManager {
     /**
      * 创建元数据节点
      * @param parentId 父节点id
-     * @param parentMetaObjectName 父节点元数据类型
      * @param metaObjectName 元数据对象名
      * @param refMetaObjectId 关联的元数据ID
      * @param text 节点文本
      * @return
      */
+    @EsbServiceMapping
     MetaObjectNode createMetaObjectNode(
-            String parentId,
-            String parentMetaObjectName,
-            String metaObjectName,
-            String refMetaObjectId,
-            String text
-    );
+            @ServiceParam(name="parentId") String parentId,
+            @ServiceParam(name="metaObjectName") String metaObjectName,
+            @ServiceParam(name="refMetaObjectId") String refMetaObjectId,
+            @ServiceParam(name="text") String text);
 
     /**
      * 更新元数据属性值
@@ -74,5 +74,15 @@ public interface MetaObjectNodeManager {
      * 删除元数据节点
      */
     void removeMetaObjectNode(String id);
+
+    /**
+     * 获取制度、方案、报表树
+     * @param projectId
+     * @param urlPrefix
+     * @return
+     */
+    @EsbServiceMapping
+    List<TreeNode> getTopProjectMetaObjectTreeNodes(@ServiceParam(name="projectId")String projectId,
+                                                    @ServiceParam(name="urlPrefix")String urlPrefix);
 
 }

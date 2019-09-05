@@ -29,10 +29,10 @@ public final class MetaObjectConstants {
         //ignore
     }
 
-    private static final String META_OBJECT_NAME_PLAN = "metaPlan";//制度
-    private static final String META_OBJECT_NAME_TASK = "metaTask";//方案
-    private static final String META_OBJECT_NAME_REPORT = "metaReport";//报表
-    private static final String META_OBJECT_NAME_INDICATOR = "metaIndicator";//指标
-    private static final String META_OBJECT_NAME_GROUP = "metaGroup";//分组
-    private static final String META_OBJECT_NAME_CATALOG = "metaCatalog";//目录
+    public static final String META_OBJECT_NAME_PLAN = "metaPlan";//制度
+    public static final String META_OBJECT_NAME_TASK = "metaTask";//方案
+    public static final String META_OBJECT_NAME_REPORT = "metaReport";//报表
+    public static final String META_OBJECT_NAME_INDICATOR = "metaIndicator";//指标
+    public static final String META_OBJECT_NAME_GROUP = "metaGroup";//分组
+    public static final String META_OBJECT_NAME_CATALOG = "metaCatalog";//目录
 }
