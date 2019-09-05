@@ -37,7 +37,7 @@ children:
             pageUrl: page/youi.metadata.catalog/index.html
       -
         id: metadata-mng
-        text: 元数据管理
+        text: 统计元数据
         children:
           -
             id: metadata-design

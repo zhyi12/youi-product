@@ -43,6 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+
         http
                 .antMatcher("/**")
                 .authorizeRequests()
@@ -52,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/page/**/*.html").access("@webAccessFactory.pageAccess(authentication,request)")
                 .anyRequest()
                 .authenticated().and().httpBasic().disable()
-                .logout().logoutSuccessUrl(logoutUri+"?appUrl="+appLoginUri).and()
+                .logout().logoutSuccessUrl(logoutUri+"?appUrl="+appLoginUri+"&businessKey=software").and()
                 .csrf().ignoringAntMatchers("/uaa/**","/logout")
                 .and().cors().disable()
                 .addFilterAfter(apiSecurityFilter(), SessionManagementFilter.class);

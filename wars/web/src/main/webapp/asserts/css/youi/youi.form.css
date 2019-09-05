@@ -7,6 +7,10 @@
 	display:none;
 }
 
+.modal.in .youi-form.youi-dialog{
+	display:block;
+}
+
 .modal-footer .form-buttons{
 	text-align:right;
 }
