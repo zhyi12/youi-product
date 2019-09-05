@@ -96,16 +96,11 @@ public class TcpClientServerAnnotationDemoTest {
 
 		@Bean
 		@ServiceActivator(inputChannel = "toTcp")
-		public MessageHandler tcpOutGate(AbstractClientConnectionFactory connectionFactory) {
+		public MessageHandler tcpOutGate(AbstractClientConnectionFactory connectionFactory) throws Exception {
 			TcpOutboundGateway gate = new TcpOutboundGateway();
 			gate.setConnectionFactory(connectionFactory);
 			gate.setOutputChannelName("resultToString");
 			return gate;
-		}
-
-		@Bean
-		public MessageChannel fromTcp() {
-			return new DirectChannel();
 		}
 
 		@MessageEndpoint
@@ -119,7 +114,9 @@ public class TcpClientServerAnnotationDemoTest {
 
 		@Bean
 		public AbstractClientConnectionFactory clientCF() {
-			return new TcpNetClientConnectionFactory("localhost", 50337);
+			TcpNetClientConnectionFactory tcpNetClientConnectionFactory =
+					new TcpNetClientConnectionFactory("192.168.173.243", 60000);
+			return tcpNetClientConnectionFactory;
 		}
 
 	}
