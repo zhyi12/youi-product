@@ -9,7 +9,7 @@
                   subpageId="editMetaProject" caption="修改项目" type="dialog"/>
 
     <youi:subpage src="page/${_pagePath}/designer.html?projectId={projectId}&title={projectCaption}" height="240"
-                  subpageId="designer" caption="元数据设计器" type="secondPage"/>
+                  subpageId="designer" caption="元数据设计器" type="page"/>
 
     <youi:grid id="grid_meta_project" src="/metadataServices/services/metaProjectManager/getPagerMetaProject.json"
                idKeys="projectId" removeSrc="/metadataServices/services/metaProjectManager/removeMetaProject.json"
