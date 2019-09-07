@@ -64,6 +64,23 @@ children:
             text: 国民经济行业分类
             pageUrl: page/youi.metadata.design/index.html
       -
+        id: metadata-resource
+        text: 数据资源
+        children:
+          -
+            id: list
+            text: 数据资源目录
+            pageUrl: page/youi.metadata.dataresource/index.html
+          -
+            id: dir
+            text: 数据字典
+            pageUrl: page/youi.metadata.dataresource/index.html
+          -
+            id: sync
+            text: 数据资源加载
+            pageUrl: page/youi.metadata.dataresource/index.html
+
+      -
         id: metadata-auth
         text: 元数据授权
         children:
@@ -75,6 +92,17 @@ children:
             id: agencyTaskGroup
             text: 机构方案组
             pageUrl: page/youi.metadata.taskgroup/agencyTaskGroup.html
+
+          -
+            id: dataResourceGroup
+            text: 资源组
+            pageUrl: page/youi.metadata.taskgroup/index.html
+          -
+            id: agencyDataResourceGroup
+            text: 机构资源组
+            pageUrl: page/youi.metadata.taskgroup/agencyTaskGroup.html
+
+
   -
     id: dataGather
     text: 数据采集
@@ -124,5 +152,14 @@ children:
           id: analysis-design
           text: 分析报告管理
           pageUrl: page/youi.analysis.design/index.html
+
+  -
+    id: system
+    text: 系统管理
+    icon: gear
+    children:
+      -
+        id: user
+        text: 用户管理
 
 
