@@ -13,21 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.metadata.common;
+package org.youi.metadata.object.mongo;
+
+import org.youi.framework.mongo.DaoMongo;
+import org.youi.metadata.object.entity.MetaTask;
 
 /**
+ * 数据持久化类： 元数据对象 - 方案
  * @author zhouyi
  * @see
  * @since 2.0.0
  */
-public interface IMetaObjectCreateAdapter {
-
-    /**
-     *
-     * @param metaObjectName
-     * @return
-     */
-    boolean supports(String metaObjectName);
-
+public interface MetaTaskDao extends DaoMongo<MetaTask,String> {
 
 }

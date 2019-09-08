@@ -17,13 +17,14 @@ package org.youi.metadata.object.entity;
 
 import org.springframework.data.annotation.Id;
 import org.youi.framework.core.dataobj.Record;
+import org.youi.metadata.common.model.IMetaObject;
 
 /**
  * @author zhouyi
  * @see
  * @since 2.0.0
  */
-public abstract class MetaObject {
+public abstract class MetaObject implements IMetaObject{
 
     @Id
     private String id;//主键
@@ -39,6 +40,10 @@ public abstract class MetaObject {
     private String code;//编码
 
     private Record properties;//属性
+
+    private String agencyId;
+
+    private String areaId;
 
     public String getId() {
         return id;
@@ -94,6 +99,32 @@ public abstract class MetaObject {
 
     public void setProperties(Record properties) {
         this.properties = properties;
+    }
+
+    public String getAgencyId() {
+        return agencyId;
+    }
+
+    public void setAgencyId(String agencyId) {
+        this.agencyId = agencyId;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public MetaObject agencyId(String agencyId){
+        this.setAgencyId(agencyId);
+        return this;
+    }
+
+    public MetaObject areaId(String areaId){
+        this.setAreaId(areaId);
+        return this;
     }
 
     @Override

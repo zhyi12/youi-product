@@ -15,10 +15,18 @@
  */
 package org.youi.metadata.object.adapter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.youi.metadata.common.IMetaObjectCreateAdapter;
+import org.youi.metadata.common.IMetaObjectGetAdapter;
+import org.youi.metadata.common.IMetaObjectRemoveAdapter;
+import org.youi.metadata.common.IMetaObjectSaveAdapter;
 import org.youi.metadata.common.IMetaParentFinderAdapter;
+import org.youi.metadata.common.model.IMetaObject;
 import org.youi.metadata.object.MetaObjectConstants;
+import org.youi.metadata.object.entity.MetaTask;
+import org.youi.metadata.object.mongo.MetaTaskDao;
+
+import java.util.Collection;
 
 /**
  * @author zhouyi
@@ -26,11 +34,45 @@ import org.youi.metadata.object.MetaObjectConstants;
  * @since 2.0.0
  */
 @Component
-public class MetaTaskAdapter implements IMetaParentFinderAdapter,IMetaObjectCreateAdapter {
+public class MetaTaskAdapter implements IMetaParentFinderAdapter,
+        IMetaObjectSaveAdapter<MetaTask>,IMetaObjectGetAdapter,IMetaObjectRemoveAdapter {
+
+    @Autowired
+    private MetaTaskDao metaTaskDao;
 
     @Override
     public boolean supports(String metaObjectName) {
         return MetaObjectConstants.META_OBJECT_NAME_REPORT.equals(metaObjectName);
+    }
+
+    @Override
+    public MetaTask createMetaObject(MetaTask metaObject) {
+        return metaTaskDao.save(metaObject);
+    }
+
+    @Override
+    public MetaTask buildMetaObject() {
+        return new MetaTask();
+    }
+
+    @Override
+    public MetaTask updateMetaObject(String id, Collection collection) {
+        return null;
+    }
+
+    @Override
+    public boolean exist(String id) {
+        return metaTaskDao.exists(id);
+    }
+
+    @Override
+    public IMetaObject getMetaObject(String id) {
+        return metaTaskDao.get(id);
+    }
+
+    @Override
+    public void removeMetaObject(String id) {
+        metaTaskDao.remove(id);
     }
 
     public String findParentMetaObjectName(){

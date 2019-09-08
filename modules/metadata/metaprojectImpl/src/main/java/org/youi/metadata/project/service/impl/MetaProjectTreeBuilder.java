@@ -204,14 +204,15 @@ public class MetaProjectTreeBuilder implements ApplicationContextAware{
      */
     private TreeNode buildTreeNode(MetaObjectNode metaObjectNode) {
         HtmlTreeNode htmlTreeNode = new HtmlTreeNode("M_"+metaObjectNode.getId(),metaObjectNode.getText());
-//        htmlTreeNode.setIcon(metaObjectNode.getMetaObjectName());
-        htmlTreeNode.setGroup(metaObjectNode.getMetaObjectName());
+        htmlTreeNode.setGroup("metaObject "+metaObjectNode.getMetaObjectName());
         htmlTreeNode.setCode(metaObjectNode.getRefMetaObjectId());
         htmlTreeNode.setDomain(metaObjectNode);
 
         Record datas = new Record();
         datas.put("id",metaObjectNode.getId());//设置data-属性
         datas.put("project-id",metaObjectNode.getProjectId());//设置data-属性
+        datas.put("ref-meta-object-id",metaObjectNode.getRefMetaObjectId());//设置data-属性
+        datas.put("meta-object-name",metaObjectNode.getMetaObjectName());//设置data-属性
         htmlTreeNode.setDatas(datas);
         return htmlTreeNode;
     }

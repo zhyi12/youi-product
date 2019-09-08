@@ -25,9 +25,11 @@ import org.youi.framework.core.dataobj.tree.TreeUtils;
 import org.youi.framework.esb.annotation.EsbServiceMapping;
 import org.youi.framework.esb.annotation.ServiceParam;
 import org.youi.framework.util.StringUtils;
+import org.youi.metadata.common.model.IMetaObject;
 import org.youi.metadata.common.model.PropertyItem;
 import org.youi.metadata.object.MetaObjectConstants;
 import org.youi.metadata.object.entity.MetaObject;
+import org.youi.metadata.object.service.MetaObjectService;
 import org.youi.metadata.project.entity.MetaObjectNode;
 import org.youi.metadata.project.mongo.MetaObjectNodeDao;
 import org.youi.metadata.project.service.MetaObjectNodeManager;
@@ -48,6 +50,9 @@ public class MetaObjectNodeManagerImpl implements MetaObjectNodeManager {
 
     @Autowired(required = false)
     private MetaObjectNodeDao metaObjectNodeDao;
+
+    @Autowired
+    private MetaObjectService metaObjectService;
 
     @Autowired
     private MetaProjectTreeBuilder metaProjectTreeBuilder;
@@ -82,6 +87,12 @@ public class MetaObjectNodeManagerImpl implements MetaObjectNodeManager {
             metaObjectNode.setMetaObjectParents(metaObjectParents);
         }
 
+        //查找并创建元数据对象
+        IMetaObject metaObject = metaObjectService.getMetaObject("","",refMetaObjectId,metaObjectName);
+        //重新设置关联的元数据
+        if(metaObject!=null){
+            metaObjectNode.setRefMetaObjectId(metaObject.getId());
+        }
         return metaObjectNodeDao.save(metaObjectNode);
     }
 

@@ -26,9 +26,8 @@ public class MetaObjectConfigDaoTest {
 
         MetaObjectConfig metaObjectConfig = new MetaObjectConfig();
         metaObjectConfig.setMetaObjectName("metaPlan");
-        metaObjectConfig.setId("metaPlan");
 
-        metaObjectConfig.addProperty("agencyId",new Item("agencyId","机构ID"));
+//        metaObjectConfig.addProperty("agencyId",new Item("agencyId","机构ID"));
 
         metaObjectConfigDao.save(metaObjectConfig);
     }

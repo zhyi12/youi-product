@@ -17,15 +17,14 @@ package org.youi.metadata.object.adapter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.youi.metadata.common.IMetaObjectSaveAdapter;
 import org.youi.metadata.common.IMetaObjectGetAdapter;
 import org.youi.metadata.common.IMetaObjectRemoveAdapter;
-import org.youi.metadata.common.IMetaObjectSaveAdapter;
-import org.youi.metadata.common.IMetaParentFinderAdapter;
 import org.youi.metadata.common.model.IMetaObject;
 import org.youi.metadata.common.model.PropertyItem;
 import org.youi.metadata.object.MetaObjectConstants;
-import org.youi.metadata.object.entity.MetaReport;
-import org.youi.metadata.object.mongo.MetaReportDao;
+import org.youi.metadata.object.entity.MetaPlan;
+import org.youi.metadata.object.mongo.MetaPlanDao;
 
 import java.util.Collection;
 
@@ -35,47 +34,54 @@ import java.util.Collection;
  * @since 2.0.0
  */
 @Component
-public class MetaReportAdapter implements IMetaParentFinderAdapter,IMetaObjectSaveAdapter<MetaReport>,IMetaObjectGetAdapter,IMetaObjectRemoveAdapter {
+public class MetaPlanTaskAdapter implements
+        IMetaObjectGetAdapter,IMetaObjectSaveAdapter<MetaPlan>,IMetaObjectRemoveAdapter {
 
-    @Autowired
-    private MetaReportDao metaReportDao;
+    @Autowired(required = false)
+    private MetaPlanDao metaPlanDao;
+
+    /**
+     * @setter
+     * @param metaPlanDao
+     */
+    public void setMetaPlanDao(MetaPlanDao metaPlanDao) {
+        this.metaPlanDao = metaPlanDao;
+    }
 
     @Override
     public boolean supports(String metaObjectName) {
-        return MetaObjectConstants.META_OBJECT_NAME_TASK.equals(metaObjectName);
+        return MetaObjectConstants.META_OBJECT_NAME_PLAN.equals(metaObjectName);
     }
 
     @Override
-    public MetaReport createMetaObject(MetaReport metaObject) {
-        return metaReportDao.save(metaObject);
+    public MetaPlan createMetaObject(MetaPlan metaPlan) {
+        return metaPlanDao.save(metaPlan);
     }
 
     @Override
-    public MetaReport updateMetaObject(String id, Collection<PropertyItem> propertyItems) {
-        return null;
+    public MetaPlan updateMetaObject(String id, Collection<PropertyItem> propertyItems) {
+        MetaPlan metaPlan = metaPlanDao.get(id);
+
+        return metaPlan;
     }
 
     @Override
-    public MetaReport buildMetaObject() {
-        return new MetaReport();
+    public MetaPlan buildMetaObject() {
+        return new MetaPlan();
     }
 
     @Override
     public boolean exist(String id) {
-        return metaReportDao.exists(id);
+        return metaPlanDao.exists(id);
     }
 
     @Override
     public IMetaObject getMetaObject(String id) {
-        return metaReportDao.get(id);
+        return metaPlanDao.get(id);
     }
 
     @Override
     public void removeMetaObject(String id) {
-        metaReportDao.remove(id);
-    }
-
-    public String findParentMetaObjectName(){
-        return MetaObjectConstants.META_OBJECT_NAME_PLAN;
+        metaPlanDao.remove(id);
     }
 }

@@ -20,8 +20,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.youi.framework.core.dataobj.Domain;
 import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.util.StringUtils;
+import org.youi.metadata.common.model.FieldItem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,20 +35,12 @@ import java.util.Map;
 @Document("youi_metadata_object_config")
 public class MetaObjectConfig implements Domain{
 
-    @Id
-    private String id;
+    private static final long serialVersionUID = 4847947787135016707L;
 
+    @Id
     private String metaObjectName;//元数据对象
 
-    private Map<String,Item> properties;//元数据对象属性集合配置
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private List<FieldItem> properties;//元数据对象属性集合配置
 
     public String getMetaObjectName() {
         return metaObjectName;
@@ -55,27 +50,32 @@ public class MetaObjectConfig implements Domain{
         this.metaObjectName = metaObjectName;
     }
 
-    public Map<String, Item> getProperties() {
+    public List<FieldItem> getProperties() {
         return properties;
     }
 
-    public void setProperties(Map<String, Item> properties) {
+    public void setProperties(List<FieldItem> properties) {
         this.properties = properties;
     }
 
     /**
      * 添加属性
-     * @param property
      * @param item
      * @return
      */
-    public MetaObjectConfig addProperty(String property,Item item){
-        if(StringUtils.isNotEmpty(property) && item !=null){
+    public MetaObjectConfig addProperty(FieldItem item){
+        if(item !=null){
             if(this.properties == null){
-                this.properties = new HashMap<>();
+                this.properties = new ArrayList<>();
             }
-            this.properties.put(property,item);
+            this.properties.add(item);
         }
         return this;
     }
+
+    public MetaObjectConfig metaObjectName(String metaObjectName){
+        this.setMetaObjectName(metaObjectName);
+        return this;
+    }
+
 }
