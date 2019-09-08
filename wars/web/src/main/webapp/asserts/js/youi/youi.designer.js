@@ -242,7 +242,9 @@
                         this.modelTreeElem = null;
                     }else{
                         this._bindTreeMenuAction();
-                        window[this.options.refs[0]+'_select'] = this._proxy('_treeNodeSelect');
+                        if(!this.element.parents('.youi-treePage').length){
+                            window[this.options.refs[0]+'_select'] = this._proxy('_treeNodeSelect');
+                        }
                     }
                 }
             },
