@@ -10,7 +10,7 @@
 
 <div class="content">
     <div class="logo-info">
-        <span th:text="${#request.getAttribute('loginTitle')}"></span>
+        <span th:text="${#request.getParameter('loginTitle')}"></span>
     </div>
     <div class="login-content">
         <div class="form-title">用户登录</div>
