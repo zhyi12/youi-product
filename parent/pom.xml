@@ -85,7 +85,7 @@
 
         <poi.version>3.15</poi.version>
         <commons-io.version>2.5</commons-io.version>
-        <lucene.version>6.5.1</lucene.version>
+        <lucene.version>8.2.0</lucene.version>
 
         <presto.version>0.224</presto.version>
         <alibaba.druid.version>1.1.10</alibaba.druid.version>
