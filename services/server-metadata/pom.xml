@@ -35,6 +35,7 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!-- metadata dictionary impl-->
         <dependency>
             <groupId>org.youi.product</groupId>
             <artifactId>youi-metadata-dictionaryImpl</artifactId>
