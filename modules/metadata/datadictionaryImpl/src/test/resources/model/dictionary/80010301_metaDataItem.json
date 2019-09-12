@@ -1,0 +1,12 @@
+{
+  "id":"80010301",
+  "idAttrName":"id",
+  "table":"youi_metadata_item",
+  "name":"metaDataItem",
+  "caption":"数据项",
+  "attributes":[{
+    "isId":true,
+    "name":"id",
+    "caption":"数据项ID"
+  }]
+}
