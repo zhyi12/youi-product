@@ -42,5 +42,10 @@
 			<artifactId>youi-framework-test</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.youi.framework</groupId>
+			<artifactId>youi-framework-codegen</artifactId>
+		</dependency>
+
     </dependencies>
 </project>
