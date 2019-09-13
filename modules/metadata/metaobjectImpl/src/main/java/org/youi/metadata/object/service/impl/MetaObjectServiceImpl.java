@@ -32,6 +32,7 @@ import org.youi.metadata.object.service.MetaObjectService;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhouyi
@@ -62,13 +63,13 @@ public class MetaObjectServiceImpl implements MetaObjectService{
 
         IMetaObject metaObject = this.getMetaObject(areaId,agencyId,id,metaObjectName);
         //属性
-        Record properties = metaObject.getProperties();
+        Map<String,String[]> datas = metaObject.getDatas();
 
         MetaObjectConfig metaObjectConfig = metaObjectConfigManager.getMetaObjectConfig(metaObjectName);
 
         metaObjectConfig.getProperties().forEach(fieldItem -> {
-            if(properties!=null && properties.containsKey(fieldItem.getProperty()) && ArrayUtils.isNotEmpty(fieldItem.getValues())){
-                fieldItem.setDefaultValue(StringUtils.arrayToDelimitedString(fieldItem.getValues(),","));
+            if(datas!=null && datas.containsKey(fieldItem.getProperty()) && ArrayUtils.isNotEmpty( datas.get(fieldItem.getProperty()) )  ){
+                fieldItem.setDefaultValue(StringUtils.arrayToDelimitedString(datas.get(fieldItem.getProperty()),","));
             }
         });
         return metaObjectConfig.getProperties();
@@ -82,7 +83,7 @@ public class MetaObjectServiceImpl implements MetaObjectService{
             @ServiceParam(name = "id") String id,
             @ServiceParam(name = "metaObjectName") String metaObjectName) {
 
-        if(!metaObjectGetDispatcher.exist(id,metaObjectName)){
+        if(StringUtils.isEmpty(id) || !metaObjectGetDispatcher.exist(id,metaObjectName)){
             //如果不存在，则构建新的元数据对象
             return metaObjectCreateDispatcher.createMetaObject(metaObjectName,areaId,agencyId);
         }

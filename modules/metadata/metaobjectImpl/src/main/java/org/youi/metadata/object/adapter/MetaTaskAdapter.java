@@ -42,7 +42,7 @@ public class MetaTaskAdapter implements IMetaParentFinderAdapter,
 
     @Override
     public boolean supports(String metaObjectName) {
-        return MetaObjectConstants.META_OBJECT_NAME_REPORT.equals(metaObjectName);
+        return MetaObjectConstants.META_OBJECT_NAME_TASK.equals(metaObjectName);
     }
 
     @Override
@@ -76,6 +76,6 @@ public class MetaTaskAdapter implements IMetaParentFinderAdapter,
     }
 
     public String findParentMetaObjectName(){
-        return MetaObjectConstants.META_OBJECT_NAME_TASK;
+        return MetaObjectConstants.META_OBJECT_NAME_PLAN;
     }
 }
