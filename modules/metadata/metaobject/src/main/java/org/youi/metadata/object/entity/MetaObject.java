@@ -16,8 +16,10 @@
 package org.youi.metadata.object.entity;
 
 import org.springframework.data.annotation.Id;
-import org.youi.framework.core.dataobj.Record;
 import org.youi.metadata.common.model.IMetaObject;
+
+import javax.persistence.Column;
+import java.util.Map;
 
 /**
  * @author zhouyi
@@ -31,6 +33,7 @@ public abstract class MetaObject implements IMetaObject{
 
     private String projectId;//项目ID
 
+    @Column(name="NAME_CN")
     private String text;//中文名称
 
     private String name;//英文名称
@@ -39,7 +42,7 @@ public abstract class MetaObject implements IMetaObject{
 
     private String code;//编码
 
-    private Record properties;//属性
+    private Map<String,String[]> datas;//属性
 
     private String agencyId;
 
@@ -93,12 +96,12 @@ public abstract class MetaObject implements IMetaObject{
         this.projectId = projectId;
     }
 
-    public Record getProperties() {
-        return properties;
+    public Map<String, String[]> getDatas() {
+        return datas;
     }
 
-    public void setProperties(Record properties) {
-        this.properties = properties;
+    public void setDatas(Map<String, String[]> datas) {
+        this.datas = datas;
     }
 
     public String getAgencyId() {
