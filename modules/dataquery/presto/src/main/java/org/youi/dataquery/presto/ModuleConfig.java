@@ -25,7 +25,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.youi.dataquery.engine.core.CubeQuerySqlBuilder;
+import org.youi.dataquery.presto.config.PrestoSourceProperties;
 import org.youi.dataquery.presto.service.impl.PrestoCubeSqlBuilder;
+import org.youi.dataquery.presto.service.impl.PrestoDataSource;
+import org.youi.framework.context.annotation.Module;
 
 import javax.sql.DataSource;
 
@@ -36,16 +39,17 @@ import javax.sql.DataSource;
  */
 
 @Configuration("dataquery.presto.config")
-@ComponentScan("org.youi.dataquery.presto.dao")
-@EnableConfigurationProperties({DataSourceProperties.class,JpaProperties.class})
+@Module(name = "dataquery.presto",caption = "dataquery.presto")
+@ComponentScan({"org.youi.dataquery.presto.dao","org.youi.dataquery.presto.service.impl"})
+@EnableConfigurationProperties({PrestoSourceProperties.class})
 public class ModuleConfig {
 
     @Autowired(required = false)
-    private DataSourceProperties dataSourceProperties;
+    private PrestoSourceProperties dataSourceProperties;
 
     @Bean
-    public DataSource queryDataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
+    public PrestoDataSource queryDataSource() {
+        PrestoDataSource dataSource = new PrestoDataSource();
         dataSource.setUrl(dataSourceProperties.getUrl());
         dataSource.setUsername(dataSourceProperties.getUsername());// 用户名
         dataSource.setPassword(dataSourceProperties.getPassword());// 密码

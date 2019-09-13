@@ -55,6 +55,23 @@ public class PrestoQueryService implements IQueryService {
         this.prestoQueryDao = prestoQueryDao;
     }
 
+
+    public List<String> queryCatalogs(){
+        return prestoQueryDao.queryCatalogs("");
+    }
+
+    public List<String> querySchemas(String catalog){
+        return prestoQueryDao.querySchemas(catalog);
+    }
+
+    public List<String> queryTables(String catalog,String schema){
+        return prestoQueryDao.queryTables(catalog,schema);
+    }
+
+    public List<String> queryTableColumns(String catalog,String schema,String tableName){
+        return prestoQueryDao.queryTableColumns(catalog,schema,tableName);
+    }
+
     //执行查询，返回行数据
     public PagerRecords queryRowDatas(Pager pager){
         return null;

@@ -16,7 +16,9 @@
 package org.youi.dataquery.presto.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import org.youi.dataquery.engine.core.CubeRowDataMapper;
@@ -29,6 +31,11 @@ import org.youi.dataquery.presto.util.PrestoSqlUtils;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -89,4 +96,38 @@ public class PrestoQueryDaoImpl implements PrestoQueryDao{
         return pagerRecords;
     }
 
+    @Override
+    public List<String> queryCatalogs(String prefix) {
+        return jdbcTemplate.execute("show CATALOGS",new ShowStatementCallback());
+    }
+
+    @Override
+    public List<String> querySchemas(String catalog){
+        return jdbcTemplate.execute("show SCHEMAS from \""+catalog+"\"",new ShowStatementCallback());
+    }
+
+    public List<String> queryTables(String catalog,String schema){
+        return jdbcTemplate.execute("show TABLES from \""+catalog+"\".\""+schema+"\"",new ShowStatementCallback());
+    }
+
+    @Override
+    public List<String> queryTableColumns(String catalog, String schema, String tableName){
+        return jdbcTemplate.execute("show COLUMNS from \""+catalog+"\".\""+schema+"\".\""+tableName+"\"",new ShowStatementCallback());
+    }
+
+    /**
+     * presto show 返回的结果
+     */
+    private static class ShowStatementCallback implements PreparedStatementCallback<List<String>>{
+        @Override
+        public List<String> doInPreparedStatement(PreparedStatement preparedStatement) throws SQLException, DataAccessException {
+            List<String> shows = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                shows.add(resultSet.getString(1));
+            }
+            Collections.sort(shows);
+            return shows;
+        }
+    }
 }

@@ -22,6 +22,11 @@ package org.youi.dataquery.engine;
  */
 public final class DataQueryConstants {
 
+    public final static String DATA_RESOURCE_CATALOG = "catalog";//
+    public final static String DATA_RESOURCE_SCHEMA = "schema";//
+    public final static String DATA_RESOURCE_TABLE = "table";//
+    public final static String DATA_RESOURCE_TABLE_COLUMN = "table-column";//
+
     public final static String DIM_CATALOG_ID = "L";//目录维度
 
     public final static String DIM_CATALOG_COLUMN_NAME = "catalog";//目录维度列名称

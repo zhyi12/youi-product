@@ -28,6 +28,29 @@ public class PrestoQueryDaoTest {
     private PrestoQueryDao prestoQueryDao;
 
     @Test
+    public void testQueryCatalogs(){
+        List<String> catalogs =  prestoQueryDao.queryCatalogs("");
+        System.out.println(catalogs);
+    }
+
+    @Test
+    public void testQuerySchemas(){
+        List<String> schemas =  prestoQueryDao.querySchemas("mongodb");
+        System.out.println(schemas);
+    }
+
+    @Test
+    public void testQueryTables(){
+        List<String> tables =  prestoQueryDao.queryTables("mongodb","stats2-filing");
+        System.out.println(tables);
+    }
+    @Test
+    public void testQueryTableColumns(){
+        List<String> columns =  prestoQueryDao.queryTableColumns("mongodb","stats2-filing","standard_classification");
+        System.out.println(columns);
+    }
+
+    @Test
     public void testQueryRowDataByPager(){
         Pager pager = new Pager(10,1,Pager.QUERY_TYPE_ALL);
         //排序条件，分页查询时需要排序条件，保证分页后数据的正确性

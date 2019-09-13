@@ -58,5 +58,33 @@ public interface PrestoQueryDao{
                                             @NonNull List<QueryOrder> queryOrders,
                                             @NonNull String querySql,
                                      Object[] params);
+    /**
+     * 查询catalog数组
+     * @return
+     */
+    List<String> queryCatalogs(String prefix);
 
+    /**
+     * 查询catalog下的SCHEMA集合
+     * @param catalog
+     * @return
+     */
+    List<String> querySchemas(String catalog);
+
+    /**
+     * 查询catalog，schema下的table集合
+     * @param catalog
+     * @param schema
+     * @return
+     */
+    List<String> queryTables(String catalog,String schema);
+
+    /**
+     * 查询数据表的列集合
+     * @param catalog
+     * @param schema
+     * @param tableName
+     * @return
+     */
+    List<String> queryTableColumns(String catalog, String schema, String tableName);
 }
