@@ -40,6 +40,12 @@
 			<artifactId>youi-framework-dao-mongo</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.youi.product</groupId>
+			<artifactId>youi-dataquery-engine</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 		<!-- test -->
 		<dependency>
 			<groupId>org.youi.framework</groupId>
