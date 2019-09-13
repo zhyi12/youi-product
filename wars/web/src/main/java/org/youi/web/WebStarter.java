@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.ModelAndView;
 import org.youi.decorator.modern.ModuleConfig;
+import org.youi.framework.web.ServerUrlTransformer;
 import org.youi.framework.web.WebConfig;
 import org.youi.framework.web.security.WebSecurityConfig;
 
@@ -89,6 +90,15 @@ public class WebStarter extends SpringBootServletInitializer {
     @Bean
     public RequestContextListener requestContextListener() {
         return new RequestContextListener();
+    }
+
+    /**
+     * 配置服务url转换规则，在jsp页面中可以支持{serverName}.{serversName}.{serviceName} 格式的简写路径
+     * @return
+     */
+    @Bean
+    public ServerUrlTransformer serverUrlTransformer(){
+        return new ServerUrlTransformer();
     }
 
     public static void main(String[] args) throws Exception {
