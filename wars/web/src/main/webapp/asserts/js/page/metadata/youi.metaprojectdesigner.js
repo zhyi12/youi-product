@@ -48,6 +48,16 @@
         },
 
         /**
+         * 填充表单数据
+         * @param record
+         * @returns {{parentId: *}}
+         * @private
+         */
+        _addMetaTaskFormRecord:function (record) {
+            return {parentId:record.id,projectId:record.projectId};
+        },
+
+        /**
          *
          * @param treeNode
          * @private
@@ -55,8 +65,8 @@
         _treeNodeSelect:function (treeNode) {
             if(treeNode.hasClass(_META_OBJECT_CLASS)){
                 //打开对象编辑页面
-                var metaObject = $.extend({},treeNode.data());
-                var pageUrl = this.options.editMetaObjectUrl+'?projectId={projectId}&metaObjectName={metaObjectName}&refMetaObjectId={refMetaObjectId}';
+                var metaObject = $.extend({parentId:treeNode.parents('.metaObject.treeNode:first').data('id')},treeNode.data());
+                var pageUrl = this.options.editMetaObjectUrl+'?projectId={projectId}&metaObjectName={metaObjectName}&id={id}';
                 this.treePageElem.treePage('loadPage',$.youi.recordUtils.replaceByRecord(pageUrl,metaObject));
                 this.element.trigger('activeTools',{groups:['metaObject']});
             }else if(treeNode.hasClass(_FOLDER_CLASS)){

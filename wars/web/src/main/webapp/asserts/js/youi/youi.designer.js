@@ -510,7 +510,7 @@
                         formRecord = this[formRecordFuncName](result.record);
                     }
 
-                    formRecord = formRecord||result.record;
+                    formRecord = $.extend({},ui.record,formRecord||result.record);
 
                     var formId = 'P_'+this.subPages[subPageId].subPageId+ '_form';//约定的表单ID
 
