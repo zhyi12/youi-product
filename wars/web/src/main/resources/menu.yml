@@ -69,16 +69,16 @@ children:
         children:
           -
             id: list
-            text: 数据资源目录
-            pageUrl: page/youi.metadata.dataresource/index.html
+            text: 数据项
+            pageUrl: page/youi.metadata.dataresource.dataitem/index.html
           -
             id: dir
-            text: 数据字典
+            text: 数据资源
             pageUrl: page/youi.metadata.dataresource/index.html
           -
             id: sync
-            text: 数据资源加载
-            pageUrl: page/youi.metadata.dataresource/index.html
+            text: 数据表
+            pageUrl: page/youi.metadata.dataresource.datatable/index.html
 
       -
         id: metadata-auth
