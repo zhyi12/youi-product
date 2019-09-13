@@ -18,9 +18,11 @@ package org.youi.metadata.project.service;
 import org.youi.framework.core.dataobj.tree.TreeNode;
 import org.youi.framework.esb.annotation.EsbServiceMapping;
 import org.youi.framework.esb.annotation.ServiceParam;
+import org.youi.metadata.common.model.FieldItem;
 import org.youi.metadata.common.model.PropertyItem;
 import org.youi.metadata.object.entity.MetaObject;
 import org.youi.metadata.project.entity.MetaObjectNode;
+import org.youi.metadata.project.vo.MetaObjectVO;
 
 import java.util.List;
 
@@ -33,27 +35,46 @@ public interface MetaObjectNodeManager {
 
 
     /**
+     * 获取元数据节点
+     * @return
+     */
+    @EsbServiceMapping
+    MetaObjectNode getMetaObjectNode(@ServiceParam(name = "id") String id);
+    /**
      * 获取关联的元数据
      */
-    MetaObject getRefMetaObject(String id);
-
-    //List<TreeNode> get
+    @EsbServiceMapping
+    MetaObjectVO getRefMetaObject(@ServiceParam(name = "id")String id);
 
     /**
-     * 创建元数据节点
-     * @param parentId 父节点id
-     * @param metaObjectName 元数据对象名
-     * @param refMetaObjectId 关联的元数据ID
-     * @param text 节点文本
+     *  创建元数据节点
+     * @param loginAreaId
+     * @param loginAgencyId
+     * @param parentId
+     * @param metaObjectNode
      * @return
      */
     @EsbServiceMapping
     MetaObjectNode createMetaObjectNode(
+            @ServiceParam(name = "loginAreaId",pubProperty = "areaId") String loginAreaId,
+            @ServiceParam(name = "loginAgencyId",pubProperty = "agencyId") String loginAgencyId,
             @ServiceParam(name="parentId") String parentId,
-            @ServiceParam(name="metaObjectName") String metaObjectName,
-            @ServiceParam(name="refMetaObjectId") String refMetaObjectId,
-            @ServiceParam(name="text") String text);
+            MetaObjectNode metaObjectNode);
 
+    /**
+     * 获取树节点对应的元数据对象的属性集合
+     * @param loginAreaId
+     * @param loginAgencyId
+     * @param id
+     * @param metaObjectName
+     * @return
+     */
+    @EsbServiceMapping
+    List<FieldItem> getMetaObjectFieldItems(
+            @ServiceParam(name = "loginAreaId",pubProperty = "areaId") String loginAreaId,
+            @ServiceParam(name = "loginAgencyId",pubProperty = "agencyId") String loginAgencyId,
+            @ServiceParam(name = "id") String id,
+            @ServiceParam(name = "metaObjectName") String metaObjectName);
     /**
      * 更新元数据属性值
      * @param id
