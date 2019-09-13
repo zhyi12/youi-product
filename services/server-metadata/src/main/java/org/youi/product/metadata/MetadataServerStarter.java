@@ -15,6 +15,7 @@
  */
 package org.youi.product.metadata;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -30,9 +31,12 @@ import org.youi.service.boot.ResourceServerConfig;
 @RestController
 @EnableEurekaClient
 @EnableOAuth2Sso
+@EnableAutoConfiguration(exclude = org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration.class)
 public class MetadataServerStarter {
 
     public static void main(String[] args) {
+
+
         new ModulesRunnerBuilder(ServiceConfig.class,
                 ResourceServerConfig.class,
                 MetadataServerStarter.class).run(args);
