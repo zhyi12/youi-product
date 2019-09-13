@@ -17,6 +17,7 @@ package org.youi.metadata.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.youi.framework.core.dataobj.Record;
 import org.youi.framework.core.dataobj.tree.HtmlTreeNode;
 import org.youi.framework.core.dataobj.tree.TreeNode;
@@ -25,6 +26,7 @@ import org.youi.framework.core.dataobj.tree.TreeUtils;
 import org.youi.framework.esb.annotation.EsbServiceMapping;
 import org.youi.framework.esb.annotation.ServiceParam;
 import org.youi.framework.util.StringUtils;
+import org.youi.metadata.common.model.FieldItem;
 import org.youi.metadata.common.model.IMetaObject;
 import org.youi.metadata.common.model.PropertyItem;
 import org.youi.metadata.object.MetaObjectConstants;
@@ -33,6 +35,7 @@ import org.youi.metadata.object.service.MetaObjectService;
 import org.youi.metadata.project.entity.MetaObjectNode;
 import org.youi.metadata.project.mongo.MetaObjectNodeDao;
 import org.youi.metadata.project.service.MetaObjectNodeManager;
+import org.youi.metadata.project.vo.MetaObjectVO;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -58,42 +61,73 @@ public class MetaObjectNodeManagerImpl implements MetaObjectNodeManager {
     private MetaProjectTreeBuilder metaProjectTreeBuilder;
 
     /**
+     *
+     * @return
+     */
+    @EsbServiceMapping
+    public MetaObjectNode getMetaObjectNode(
+            @ServiceParam(name = "id") String id){
+        return metaObjectNodeDao.get(id);
+    }
+
+    /**
      * 创建元数据对象节点
      * @param parentId 父节点id
-     * @param metaObjectName 元数据对象名
-     * @param refMetaObjectId 关联的元数据ID
-     * @param text 节点文本
      * @return
      */
     @Override
     @EsbServiceMapping
     public MetaObjectNode createMetaObjectNode(
+            @ServiceParam(name = "loginAreaId",pubProperty = "areaId") String loginAreaId,
+            @ServiceParam(name = "loginAgencyId",pubProperty = "agencyId") String loginAgencyId,
             @ServiceParam(name="parentId") String parentId,
-            @ServiceParam(name="metaObjectName") String metaObjectName,
-            @ServiceParam(name="refMetaObjectId") String refMetaObjectId,
-            @ServiceParam(name="text") String text) {
-        MetaObjectNode metaObjectNode = new MetaObjectNode();
-        metaObjectNode.setText(text);
-        metaObjectNode.setMetaObjectName(metaObjectName);
-        metaObjectNode.setRefMetaObjectId(refMetaObjectId);
+            MetaObjectNode metaObjectNode) {
 
         if(StringUtils.isNotEmpty(parentId) && metaObjectNodeDao.exists(parentId)){
             MetaObjectNode parentMetaObjectNode = metaObjectNodeDao.get(parentId);
 
             Record metaObjectParents = new Record();
-            metaObjectParents.putAll(new HashMap<>(parentMetaObjectNode.getMetaObjectParents()));
+            if(!CollectionUtils.isEmpty(parentMetaObjectNode.getMetaObjectParents())){
+                metaObjectParents.putAll(new HashMap<>(parentMetaObjectNode.getMetaObjectParents()));
+            }
             metaObjectParents.put(parentMetaObjectNode.getMetaObjectName(),parentId);
-
+            metaObjectNode.setProjectId(parentMetaObjectNode.getProjectId());
             metaObjectNode.setMetaObjectParents(metaObjectParents);
         }
 
         //查找并创建元数据对象
-        IMetaObject metaObject = metaObjectService.getMetaObject("","",refMetaObjectId,metaObjectName);
+        IMetaObject metaObject = metaObjectService.getMetaObject(loginAreaId,loginAgencyId,
+                metaObjectNode.getRefMetaObjectId(),metaObjectNode.getMetaObjectName());
         //重新设置关联的元数据
         if(metaObject!=null){
             metaObjectNode.setRefMetaObjectId(metaObject.getId());
         }
         return metaObjectNodeDao.save(metaObjectNode);
+    }
+
+    @EsbServiceMapping
+    public List<FieldItem> getMetaObjectFieldItems(
+            @ServiceParam(name = "loginAreaId",pubProperty = "areaId") String loginAreaId,
+            @ServiceParam(name = "loginAgencyId",pubProperty = "agencyId") String loginAgencyId,
+            @ServiceParam(name = "id") String id,
+            @ServiceParam(name = "metaObjectName") String metaObjectName){
+
+        if(!metaObjectNodeDao.exists(id)){
+            return new ArrayList<>();
+        }
+        //主键查询节点
+        MetaObjectNode metaObjectNode = metaObjectNodeDao.get(id);
+        //查询元数据对象
+        IMetaObject metaObject = metaObjectService.getMetaObject(loginAreaId,loginAgencyId,
+                metaObjectNode.getRefMetaObjectId(),metaObjectNode.getMetaObjectName());
+        //更新关联的元数据数据对象
+        if(metaObject!=null && !metaObject.getId().equals(metaObjectNode.getRefMetaObjectId())){
+            metaObjectNode.setRefMetaObjectId(metaObject.getId());
+            metaObjectNodeDao.save(metaObjectNode);
+        }
+
+        //获取元数据对象属性集合
+        return metaObjectService.getMetaObjectFieldItems(loginAreaId, loginAgencyId, metaObject.getId(), metaObjectName);
     }
 
     @Override
@@ -107,15 +141,26 @@ public class MetaObjectNodeManagerImpl implements MetaObjectNodeManager {
     }
 
     @Override
-    public void removeMetaObjectNode(String id) {
-
+    @EsbServiceMapping
+    public void removeMetaObjectNode(@ServiceParam(name = "id")String id) {
+        //删除节点
+        metaObjectNodeDao.remove(id);
+        //TODO 删除未使用的元数据
     }
+
 
     @Override
-    public MetaObject getRefMetaObject(String id) {
+    @EsbServiceMapping
+    public MetaObjectVO getRefMetaObject(@ServiceParam(name = "id")String id) {
+        if(metaObjectNodeDao.exists(id)){
+            MetaObjectNode metaObjectNode = metaObjectNodeDao.get(id);
+            IMetaObject metaObject = metaObjectService.getMetaObject("","",
+                    metaObjectNode.getRefMetaObjectId(),metaObjectNode.getMetaObjectName());
+            //返回VO对象
+            return new MetaObjectVO(metaObject,id);
+        }
         return null;
     }
-
 
     /**
      * 制度和方案树
