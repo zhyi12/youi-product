@@ -1,0 +1,18 @@
+#服务访问地址标签url属性映射配置
+id: web
+text: web
+mapping:
+  #基础服务
+  base:
+    basePath: /baseServices/services/
+    urls:
+      codeMapManager_getConvert: codeitemManager/getConvert
+  #元数据服务
+  metadata:
+    basePath: /metadataServices/services/
+    postfix: json
+    urls:
+      metaProjectManager_getPagerMetaProject: metaProjectManager/getPagerMetaProject
+      metaProjectManager_removeMetaProject: metaProjectManager/removeMetaProject
+
+
