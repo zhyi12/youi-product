@@ -1,0 +1,24 @@
+{
+  "id":"80010302",
+  "idAttrName":"id",
+  "table":"youi_metadata_resource",
+  "name":"dataResource",
+  "caption":"数据资源",
+  "attributes":[{
+    "isId":true,
+    "name":"id",
+    "caption":"主键"
+  },{
+    "name":"caption",
+    "caption":"资源名称"
+  },{
+    "name":"catalog",
+    "caption":"资源目录"
+  },{
+    "name":"schema",
+    "caption":"数据结构"
+  },{
+    "name":"status",
+    "caption":"资源状态"
+  }]
+}
