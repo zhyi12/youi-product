@@ -4,7 +4,7 @@
 <youi:page caption="">
 
     <youi:ajaxUrl name="getFieldItemsUrl"
-                  src="/metadataServices/services/metaObjectService/getMetaObjectFieldItems.json?id=${param.refMetaObjectId}&metaObjectName=${param.metaObjectName}"/>
+                  src="/metadataServices/services/metaObjectNodeManager/getMetaObjectFieldItems.json?id=${param.id}&metaObjectName=${param.metaObjectName}"/>
 
     <youi:customWidget data-metaObjectName="${param.metaObjectName}"
                        urls="getFieldItemsUrl"

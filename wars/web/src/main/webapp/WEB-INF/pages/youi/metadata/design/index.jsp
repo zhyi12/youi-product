@@ -11,8 +11,8 @@
     <youi:subpage src="page/${_pagePath}/designer.html?projectId={projectId}&title={projectCaption}" height="240"
                   subpageId="designer" caption="元数据设计器" type="page"/>
 
-    <youi:grid id="grid_meta_project" src="/metadataServices/services/metaProjectManager/getPagerMetaProject.json"
-               idKeys="projectId" removeSrc="/metadataServices/services/metaProjectManager/removeMetaProject.json"
+    <youi:grid id="grid_meta_project" src="metadata.metaProjectManager.getPagerMetaProject"
+               idKeys="projectId" removeSrc="metadata.metaProjectManager.removeMetaProject"
                query="NOT" reset="NOT" showConvertDropdown="false">
 
         <youi:toolbar refWidgetId="grid_meta_project">
@@ -24,7 +24,7 @@
             <youi:fieldText operator="LIKE" property="projectCaption"  caption="项目名称"/>
         </youi:fieldLayout>
 
-        <youi:gridCol width="60%"  property="projectCaption"  caption="项目名称" orderBy="asc" nowrap="false"/>
+        <youi:gridCol type="link" width="60%"  property="projectCaption"  caption="项目名称" orderBy="asc" nowrap="false"/>
         <youi:gridCol width="15%" property="projectCode"  caption="项目代码"/>
 
         <youi:gridCol width="10%" type="button" property="button" caption="操作">
@@ -39,15 +39,19 @@
     <youi:func name="grid_meta_project_addMetaProject">
         $elem('subpage_addMetaProject',pageId).subpage('open');
     </youi:func>
+
     <%-- grid回调函数 - 打开编辑项目窗口页面 --%>
     <youi:func name="grid_meta_project_editMetaProject" params="dom,commandOptions,record">
         $elem('subpage_editMetaProject',pageId).subpage('open',{},{},record);
     </youi:func>
-    <%-- grid回调函数 - 打开编辑项目窗口页面 --%>
+    <%-- grid回调函数 - 打开项目设计窗口页面 --%>
     <youi:func name="grid_meta_project_designer" params="dom,commandOptions,record">
         $elem('subpage_designer',pageId).subpage('open',{},{},record);
     </youi:func>
-
+    <%-- 通过单元格链接打开项目设计窗口页面 --%>
+    <youi:func name="grid_meta_project_cellLink" params="dom,commandOptions,record">
+        $elem('subpage_designer',pageId).subpage('open',{},{},record);
+    </youi:func>
 
     <!-- 新增项目的subpage内容变化回调函数 -->
     <youi:func name="subpage_addMetaProject_change" params="record">
