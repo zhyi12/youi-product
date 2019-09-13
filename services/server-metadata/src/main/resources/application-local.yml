@@ -40,6 +40,15 @@ spring:
       database: stats2-filing
       username: query
       password: query123
+  presto:
+    url: jdbc:presto://192.168.173.130:8071
+    username: root
+    password:
+    driver-class-name: com.facebook.presto.jdbc.PrestoDriver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
 security:
   oauth2:
     client:
