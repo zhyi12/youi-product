@@ -6,6 +6,7 @@
 <youi:script src="/asserts/js/lib/jquery-3.3.1.min.js"/>
 <youi:script src="/asserts/js/lib/jquery-ui.min.js"/>
 <youi:script src="/asserts/js/lib/jquery.mousewheel.js"/>
+<youi:script src="/asserts/js/lib/jquery.selectable.js"/>
 <youi:script src="/asserts/js/lib/bootstrap.min.js?_version=20180117"/>
 
 
