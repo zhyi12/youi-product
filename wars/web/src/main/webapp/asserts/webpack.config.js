@@ -7,6 +7,7 @@ module.exports = {
             "./js/youi/youi.designer.js",
             "./js/youi/extra/youi.treepage.js",
             "./js/youi/extra/youi.sheet.js",
+            "./js/youi/extra/youi.expressioneditor.js",
             "./css/youi/youi.assignlist.css",
             "./css/youi/youi.core.css",
             "./css/youi/youi.awesome.css",
@@ -19,6 +20,7 @@ module.exports = {
             "./css/youi/youi.tree.css",
             "./css/youi/youi.grid.css",
             "./css/youi/youi.xmenu.css",
+            "./css/youi/youi.expressioneditor.css",
         ]
     },
     output: {

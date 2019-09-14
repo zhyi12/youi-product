@@ -1,0 +1,88 @@
+
+.youi-expressionEditor .panel-heading{
+    padding:3px;
+}
+
+.youi-expressionEditor .panel-body{
+    padding:0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height:334px;
+}
+
+.youi-expressionEditor .panel-body .option-item{
+    width: 100%;
+    float: left;
+    white-space: nowrap;
+}
+
+.youi-expressionEditor .panel-body .max:before{
+    font-family: "icomoon";
+    content: "\e6a4";
+}
+
+.youi-expressionEditor .panel-body .min:before{
+    font-family: "icomoon";
+    content: "\e6a3";
+}
+
+.youi-expressionEditor .panel-body .avg:before{
+    font-family: "icomoon";
+    content: "\e68f";
+}
+
+.youi-expressionEditor .panel-body .yearOnYear:before{
+    font-family: "icomoon";
+    content: "\e761";
+}
+
+.youi-expressionEditor .panel-body .monthOnMonth:before{
+    font-family: "icomoon";
+    content: "\e764";
+}
+
+.youi-expressionEditor .panel-body .add:before{
+    font-family: "icomoon";
+    content: "\e6fb";
+}
+
+.youi-expressionEditor .panel-body .subtract:before{
+    font-family: "icomoon";
+    content:"\e76a";
+}
+
+.youi-expressionEditor .panel-body .multiply:before{
+    font-family: "icomoon";
+    content:"\e76e";
+}
+
+
+.youi-expressionEditor .panel-body .divide:before{
+    font-family: "icomoon";
+    content:"\e76d";
+}
+
+.youi-expressionEditor .panel-body .pow:before{
+    font-family: "icomoon";
+    content:"\e76b";
+}
+
+.youi-expressionEditor .panel-body .mod:before{
+    font-family: "icomoon";
+    content:"\e770";
+}
+
+.youi-expressionEditor .panel-body .lbrackets:before{
+    font-family: "icomoon";
+    content:"\e76f";
+}
+
+.youi-expressionEditor .panel-body .rbrackets:before{
+    font-family: "icomoon";
+    content:"\e76c";
+}
+
+.youi-expressionEditor .panel-body .sum:before{
+    font-family: "icomoon";
+    content: "\e763";
+}

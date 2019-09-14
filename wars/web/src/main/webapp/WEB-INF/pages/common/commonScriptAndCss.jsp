@@ -9,7 +9,6 @@
 <youi:script src="/asserts/js/lib/jquery.selectable.js"/>
 <youi:script src="/asserts/js/lib/bootstrap.min.js?_version=20180117"/>
 
-
 <youi:script src="/asserts/js/lib/youi-3.0.min.js?_version=20190410"/>
 <youi:script src="/asserts/js/lib/app-1.0.min.js?_version=20190410"/>
 

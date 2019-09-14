@@ -18,7 +18,7 @@
         <youi:toolbar styleClass="fixed-height">
             <youi:toolbarItem name="refresh" caption="刷新" tooltips=""/>
         </youi:toolbar>
-        <youi:tree id="tree_dataSource" styleClass="col-sm-12 no-padding auto-height" iteratorParam="id" rootText="数据资源" xmenu="xmenu_dataSource"
+        <youi:tree id="tree_dataSource" styleClass="col-sm-12 no-padding auto-height" iteratorParam="id" rootText="数据中心资源" xmenu="xmenu_dataSource"
                 iteratorSrc="/metadataServices/services/dataDictionaryFinder/getDataSourceIteratorTree.json">
 
         </youi:tree>
@@ -30,6 +30,7 @@
         <youi:toolbar styleClass="fixed-height" refWidgetId="grid_dataResource">
             <youi:toolbarItem name="refresh" caption="查询" tooltips="" icon="search"/>
             <youi:toolbarItem name="add" caption="新增" tooltips="" icon="plus"/>
+            <youi:toolbarItem name="import" caption="导入资源" tooltips="" icon="import" groups="active1"/>
         </youi:toolbar>
 
         <youi:grid id="grid_dataResource" src="/metadataServices/services/dataResourceManager/getPagerDataResources.json"

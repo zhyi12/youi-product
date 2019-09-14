@@ -69,6 +69,10 @@
 	white-space: nowrap;
 }
 
+.youi-grid .table .grow td.editable{
+	height:30px;
+}
+
 .youi-grid .table .grow td.cell.wrap{
     white-space: normal;
 }
