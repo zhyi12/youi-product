@@ -1,6 +1,5 @@
 /*
- * YOUI框架
- * Copyright 2018 the original author or authors.
+ * Copyright 2012-2018 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.metadata.dictionary.mongo;
+package org.youi.metadata.dictionary.vo;
 
-import org.youi.framework.mongo.DaoMongo;
+import org.youi.framework.core.dataobj.cube.Item;
+import org.youi.framework.util.BeanUtils;
 import org.youi.metadata.dictionary.entity.DataTable;
 
 import java.util.List;
 
 /**
- * <p>系统描述: </p>
- * <p>功能描述: DataTable-数据持久层接口</p>
- * @author 代码生成器
- * @since 1.0.0
+ * @author zhouyi
+ * @see
+ * @since 2.0.0
  */
-public interface DataTableDao extends DaoMongo<DataTable, String>  {
+public class DataTableVO extends DataTable{
 
-    /**
-     *
-     * @param id
-     */
-    List<DataTable> findByDataResourceId(String id);
+    private List<Item> columnItems;
+
+    public DataTableVO(DataTable dataTable){
+        BeanUtils.copyProperties(dataTable,this);
+    }
+
+    public List<Item> getColumnItems() {
+        return columnItems;
+    }
+
+    public void setColumnItems(List<Item> columnItems) {
+        this.columnItems = columnItems;
+    }
 }

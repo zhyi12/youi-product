@@ -69,21 +69,21 @@ public class DataDictionaryFinder implements IDataDictionaryFinder{
             @ServiceParam(name = "catalog") String catalog,
             @ServiceParam(name = "schema") String schema,
             @ServiceParam(name = "tableName") String tableName) {
-        return buildItems(queryService.queryTableColumns(catalog,schema,tableName));
+        return queryService.queryTableColumns(catalog,schema,tableName);
     }
 
     @Override
     @EsbServiceMapping
     public List<TreeNode> getDataSourceIteratorTree(@ServiceParam(name = "id")String parentId){
         if(StringUtils.isEmpty(parentId)){
-            return buildTreeNodes(queryService.queryCatalogs(),"",DataQueryConstants.DATA_RESOURCE_CATALOG);
+            return buildTreeNodes(buildItems(queryService.queryCatalogs()),"",DataQueryConstants.DATA_RESOURCE_CATALOG);
         }
         String[] paths = parentId.split("\\"+RESOURCE_TREE_ID_SPLIT);
         if(paths.length==1){
-            return buildTreeNodes(queryService.querySchemas(paths[0]),
+            return buildTreeNodes(buildItems(queryService.querySchemas(paths[0])),
                     parentId+RESOURCE_TREE_ID_SPLIT,DataQueryConstants.DATA_RESOURCE_SCHEMA);
         }else if(paths.length==2){
-            return buildTreeNodes(queryService.queryTables(paths[0],paths[1]),
+            return buildTreeNodes(buildItems(queryService.queryTables(paths[0],paths[1])),
                     parentId+RESOURCE_TREE_ID_SPLIT,"data-"+DataQueryConstants.DATA_RESOURCE_TABLE);
         }else if(paths.length==3){
             return buildTreeNodes(queryService.queryTableColumns(paths[0],paths[1],paths[2]),
@@ -99,12 +99,12 @@ public class DataDictionaryFinder implements IDataDictionaryFinder{
      * @param group
      * @return
      */
-    private List<TreeNode> buildTreeNodes(List<String> names,String prefix,String group) {
+    private List<TreeNode> buildTreeNodes(List<Item> names,String prefix,String group) {
         List<TreeNode> treeNodes = new ArrayList<>();
         if(!CollectionUtils.isEmpty(names)){
             names.forEach(name->{
-                String id = prefix+name;
-                HtmlTreeNode htmlTreeNode = new HtmlTreeNode(id,name);
+                String id = prefix+name.getId();
+                HtmlTreeNode htmlTreeNode = new HtmlTreeNode(id,StringUtils.findNotEmpty(name.getText(),name.getId()));
                 htmlTreeNode.setGroup(group);
                 htmlTreeNode.getDatas().put("id",name);
                 if(DataQueryConstants.DATA_RESOURCE_TABLE_COLUMN.equals(group)){

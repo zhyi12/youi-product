@@ -31,7 +31,7 @@ import org.youi.designer.codegen.MongoCodeGen;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= {})
 public class CodeGenTest extends MongoCodeGen {
-    @Value("classpath:model/dictionary/80010303_dataTable.json")
+    @Value("classpath:model/dictionary/80010304_dataTableCloumn.json")
     private Resource modelResource;
 
     @Test

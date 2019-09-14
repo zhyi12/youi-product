@@ -28,7 +28,7 @@ import org.youi.framework.esb.annotation.EsbServiceMapping;
 import org.youi.framework.esb.annotation.OrderCollection;
 import org.youi.framework.esb.annotation.ServiceParam;
 
-import org.youi.metadata.dictionary.entity.DataTable;
+import org.youi.metadata.dictionary.entity.DataTableColumn;
 
 /**
  * <p>系统描述: </p>
@@ -36,45 +36,39 @@ import org.youi.metadata.dictionary.entity.DataTable;
  * @author 代码生成器
  * @since 1.0.0
  */
-public interface DataTableManager{
+public interface DataTableColumnManager{
 
     /**
      * 条件查询列表
      */
-    @EsbServiceMapping(trancode="8001030301",caption="主键查询数据表")
-    List<DataTable> getDataTables(
-        @ConditionCollection(domainClazz=DataTable.class) Collection<Condition> conditions,
+    @EsbServiceMapping(trancode="8001030401",caption="主键查询数据列")
+    List<DataTableColumn> getDataTableColumns(
+        @ConditionCollection(domainClazz=DataTableColumn.class) Collection<Condition> conditions,
         @OrderCollection Collection<Order> orders);
     /**
      * 根据主键查询
      */
-    @EsbServiceMapping(trancode="8001030302",caption="主键查询数据表")
-    DataTable getDataTable(@ServiceParam(name="id") String id);
+    @EsbServiceMapping(trancode="8001030402",caption="主键查询数据列")
+    DataTableColumn getDataTableColumn(@ServiceParam(name="id") String id);
 
 	/**
 	 * 分页查询用户
 	 * @return 分页对象
 	 */
-    @EsbServiceMapping(trancode="8001030303",caption="分页查询数据表")
-    PagerRecords getPagerDataTables(Pager pager,//分页条件
-    @ConditionCollection(domainClazz=DataTable.class) Collection<Condition> conditions,//查询条件
+    @EsbServiceMapping(trancode="8001030403",caption="分页查询数据列")
+    PagerRecords getPagerDataTableColumns(Pager pager,//分页条件
+    @ConditionCollection(domainClazz=DataTableColumn.class) Collection<Condition> conditions,//查询条件
         @OrderCollection Collection<Order> orders);
     /**
      * 保存并返回对象
      */
-    @EsbServiceMapping(trancode="8001030304",caption="保存数据表")
-    DataTable saveDataTable(DataTable o);
+    @EsbServiceMapping(trancode="8001030404",caption="保存数据列")
+    DataTableColumn saveDataTableColumn(DataTableColumn o);
 
     /**
      * 根据主键集合删除对象
      * @param id
      */
-    @EsbServiceMapping(trancode="8001030305",caption="主键删除数据表")
-    void removeDataTable(@ServiceParam(name="id") String id);
-
-    @EsbServiceMapping
-    void syncDataTables(
-            @ServiceParam(name="catalog") String catalog,
-            @ServiceParam(name="schema") String schema,
-            @ServiceParam(name="tableNames") String tableNames[]);
+    @EsbServiceMapping(trancode="8001030405",caption="主键删除数据列")
+    void removeDataTableColumn(@ServiceParam(name="id") String id);
 }

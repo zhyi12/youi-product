@@ -83,6 +83,11 @@ public class DataResource implements Domain{
 	public void setId(String id){
 		this.id = id;
 	}
+
+	public DataResource buildKey(){
+		this.id = this.catalog+"_"+this.schema;
+		return this;
+	}
 	
 	@Override
 	public int hashCode() {

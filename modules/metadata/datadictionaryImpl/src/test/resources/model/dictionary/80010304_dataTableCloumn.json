@@ -1,0 +1,24 @@
+{
+  "id":"80010304",
+  "idAttrName":"id",
+  "table":"youi_metadata_table_column",
+  "name":"dataTableColumn",
+  "caption":"数据列",
+  "attributes":[{
+    "isId":true,
+    "name":"id",
+    "caption":"主键"
+  },{
+    "name":"dataResourceId",
+    "caption":"资源目录ID"
+  },{
+    "name":"tableName",
+    "caption":"表名"
+  },{
+    "name":"columnName",
+    "caption":"列名"
+  },{
+    "name":"dataItemId",
+    "caption":"数据项ID"
+  }]
+}

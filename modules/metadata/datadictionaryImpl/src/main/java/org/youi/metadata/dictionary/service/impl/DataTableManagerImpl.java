@@ -16,11 +16,13 @@
  */
 package org.youi.metadata.dictionary.service.impl;
 
-import java.util.List;
-import java.util.Collection;
+import java.util.*;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.core.orm.Condition;
 import org.youi.framework.core.orm.Order;
 import org.youi.framework.core.orm.Pager;
@@ -30,9 +32,17 @@ import org.youi.framework.esb.annotation.EsbServiceMapping;
 import org.youi.framework.esb.annotation.OrderCollection;
 import org.youi.framework.esb.annotation.ServiceParam;
 
+import org.youi.metadata.dictionary.entity.DataResource;
 import org.youi.metadata.dictionary.entity.DataTable;
+import org.youi.metadata.dictionary.entity.DataTableColumn;
+import org.youi.metadata.dictionary.mongo.DataResourceDao;
+import org.youi.metadata.dictionary.mongo.DataTableColumnDao;
 import org.youi.metadata.dictionary.mongo.DataTableDao;
 import org.youi.metadata.dictionary.service.DataTableManager;
+import org.youi.metadata.dictionary.service.IDataDictionaryFinder;
+import org.youi.metadata.dictionary.vo.DataTableVO;
+
+import javax.xml.crypto.Data;
 
 /**
  * <p>系统描述: </p>
@@ -45,6 +55,15 @@ public class DataTableManagerImpl implements DataTableManager{
 
     @Autowired(required = false)
 	private DataTableDao dataTableDao;
+
+    @Autowired(required = false)
+    private DataTableColumnDao dataTableColumnDao;
+
+    @Autowired(required = false)
+    private DataResourceDao dataResourceDao;
+
+    @Autowired
+    private IDataDictionaryFinder dataDictionaryFinder;
 
     /**
      * setter
@@ -104,5 +123,80 @@ public class DataTableManagerImpl implements DataTableManager{
     @Override
     public void removeDataTable(@ServiceParam(name="id") String id){
     	dataTableDao.remove(id);
+    }
+
+    /**
+     *  从数据源同步数据库表
+     * @param catalog
+     * @param schema
+     * @param tableNames
+     */
+    @EsbServiceMapping
+    public void syncDataTables(
+            @ServiceParam(name="catalog") String catalog,
+            @ServiceParam(name="schema") String schema,
+            @ServiceParam(name="tableNames") String tableNames[]){
+
+        //数据库表集合
+        List<Item> tables = dataDictionaryFinder.findTables(catalog,schema);
+
+        //需要同步的数据表
+        Map<String,Item> syncTables = new HashMap<>();
+        tables.forEach(item -> {
+            if(ArrayUtils.indexOf(tableNames,item.getId())!=-1){
+                syncTables.put(item.getId(),item);
+            }
+        });
+
+        DataResource dataResource = dataResourceDao.findByCatalogAndSchema(catalog,schema);
+
+        if(dataResource!=null){
+            List<DataTable> dataTables = dataTableDao.findByDataResourceId(dataResource.getId());
+            dataTables.forEach(dataTable -> {
+                if(syncTables.containsKey(dataTable.getTableName())){
+                    syncTables.remove(dataTable.getTableName());//从同步集合中删除
+                }
+            });
+            doSyncDataTables(dataResource,syncTables);
+        }
+    }
+
+    /**
+     * 执行表同步
+     * @param syncTables
+     */
+    private void doSyncDataTables(DataResource dataResource,Map<String, Item> syncTables) {
+        if(!CollectionUtils.isEmpty(syncTables)){
+            List<DataTable> dataTables = new ArrayList<>();
+            List<DataTableColumn> dataTableColumns = new ArrayList<>();
+            syncTables.forEach((tableName,item)->{
+                DataTable dataTable = new DataTable();
+                dataTable.setDataResourceId(dataResource.getId());
+                dataTable.setTableName(tableName);
+                dataTable.setTableCaption(tableName);
+                dataTables.add(dataTable);
+                //
+            });
+            //批量保存数据表
+            List<DataTable> savedDataTables = dataTableDao.saveAll(dataTables);
+            savedDataTables.forEach(dataTable -> {
+                dataTableColumns.addAll(buildDataTableColumns(dataResource,dataTable));
+            });
+            //批量保存数据列
+            dataTableColumnDao.saveAll(dataTableColumns);
+        }
+    }
+
+    private Collection<? extends DataTableColumn> buildDataTableColumns(DataResource dataResource, DataTable dataTable) {
+        List<DataTableColumn> dataTableColumns = new ArrayList<>();
+        List<Item> columnItems = dataDictionaryFinder.findTableColumns(dataResource.getCatalog(),dataResource.getSchema(),dataTable.getTableName());
+        columnItems.forEach(columnItem->{
+            DataTableColumn dataTableColumn = new DataTableColumn();
+            dataTableColumn.setColumnName(columnItem.getId());
+            dataTableColumn.setTableName(dataTable.getTableName());
+            dataTableColumn.setDataResourceId(dataResource.getId());
+            dataTableColumns.add(dataTableColumn);
+        });
+        return dataTableColumns;
     }
 }

@@ -17,21 +17,14 @@
 package org.youi.metadata.dictionary.mongo;
 
 import org.youi.framework.mongo.DaoMongo;
-import org.youi.metadata.dictionary.entity.DataTable;
-
-import java.util.List;
+import org.youi.metadata.dictionary.entity.DataTableColumn;
 
 /**
  * <p>系统描述: </p>
- * <p>功能描述: DataTable-数据持久层接口</p>
+ * <p>功能描述: DataTableColumn-数据持久层接口</p>
  * @author 代码生成器
  * @since 1.0.0
  */
-public interface DataTableDao extends DaoMongo<DataTable, String>  {
-
-    /**
-     *
-     * @param id
-     */
-    List<DataTable> findByDataResourceId(String id);
+public interface DataTableColumnDao extends DaoMongo<DataTableColumn, String>  {
+	
 }

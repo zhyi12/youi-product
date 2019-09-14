@@ -26,5 +26,13 @@ import org.youi.metadata.dictionary.entity.DataResource;
  * @since 1.0.0
  */
 public interface DataResourceDao extends DaoMongo<DataResource, String>  {
-	
+
+    /**
+     *
+     * @param catalog
+     * @param schema
+     * @return
+     */
+    DataResource findByCatalogAndSchema(String catalog,String schema);
+
 }
