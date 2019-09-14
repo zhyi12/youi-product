@@ -431,6 +431,8 @@
 
         <module>../modules/dataquery/engine</module>
         <module>../modules/dataquery/presto</module>
+        <module>../modules/dataquery/query</module>
+        <module>../modules/dataquery/queryImpl</module>
 
         <module>../modules/exchange/engine</module>
 
