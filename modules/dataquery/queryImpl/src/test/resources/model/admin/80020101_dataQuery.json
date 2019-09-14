@@ -1,0 +1,26 @@
+{
+  "id": "80020101",
+  "idAttrName": "id",
+  "table": "youi_data_query",
+  "name": "dataQuery",
+  "caption": "数据查询",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "模版ID"
+    },
+    {
+      "name": "name",
+      "caption": "查询名称"
+    },
+    {
+      "name": "caption",
+      "caption": "中文描述"
+    },
+    {
+      "name": "sqlExpression",
+      "caption": "SQL表达式"
+    }
+  ]
+}
