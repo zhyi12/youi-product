@@ -24,6 +24,7 @@ import org.youi.dataquery.engine.service.IQueryService;
 import org.youi.dataquery.presto.dao.PrestoQueryDao;
 import org.youi.framework.core.dataobj.cube.DataCube;
 import org.youi.framework.core.dataobj.cube.Dimension;
+import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
 
@@ -68,7 +69,7 @@ public class PrestoQueryService implements IQueryService {
         return prestoQueryDao.queryTables(catalog,schema);
     }
 
-    public List<String> queryTableColumns(String catalog,String schema,String tableName){
+    public List<Item> queryTableColumns(String catalog, String schema, String tableName){
         return prestoQueryDao.queryTableColumns(catalog,schema,tableName);
     }
 

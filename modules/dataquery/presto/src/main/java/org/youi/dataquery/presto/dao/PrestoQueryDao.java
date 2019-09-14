@@ -17,6 +17,7 @@ package org.youi.dataquery.presto.dao;
 
 import org.springframework.lang.NonNull;
 import org.youi.dataquery.engine.model.*;
+import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
 
@@ -86,5 +87,5 @@ public interface PrestoQueryDao{
      * @param tableName
      * @return
      */
-    List<String> queryTableColumns(String catalog, String schema, String tableName);
+    List<Item> queryTableColumns(String catalog, String schema, String tableName);
 }

@@ -28,6 +28,7 @@ import org.youi.dataquery.engine.model.CubeRowData;
 import org.youi.dataquery.engine.model.QueryOrder;
 import org.youi.dataquery.engine.model.RowData;
 import org.youi.dataquery.presto.util.PrestoSqlUtils;
+import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
 
@@ -111,8 +112,24 @@ public class PrestoQueryDaoImpl implements PrestoQueryDao{
     }
 
     @Override
-    public List<String> queryTableColumns(String catalog, String schema, String tableName){
-        return jdbcTemplate.execute("show COLUMNS from \""+catalog+"\".\""+schema+"\".\""+tableName+"\"",new ShowStatementCallback());
+    public List<Item> queryTableColumns(String catalog, String schema, String tableName){
+        return jdbcTemplate.execute("show COLUMNS from \"" + catalog + "\".\"" + schema + "\".\"" + tableName + "\"", new PreparedStatementCallback<List<Item>>() {
+            @Override
+            public List<Item> doInPreparedStatement(PreparedStatement preparedStatement) throws SQLException, DataAccessException {
+                List<Item> columnItems = new ArrayList<>();
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if(resultSet!=null){
+                    while (resultSet.next()){
+                        Item item = new Item();
+                        item.setId(resultSet.getString(1));//Column
+                        item.setExpression(resultSet.getString(2));//Type
+                        item.setText(resultSet.getString(4));//Comment
+                        columnItems.add(item);
+                    }
+                }
+                return columnItems;
+            }
+        });
     }
 
     /**
