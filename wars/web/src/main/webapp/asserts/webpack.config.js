@@ -7,6 +7,7 @@ module.exports = {
             "./js/youi/youi.designer.js",
             "./js/youi/extra/youi.treepage.js",
             "./js/youi/extra/youi.sheet.js",
+            "./css/youi/youi.assignlist.css",
             "./css/youi/youi.core.css",
             "./css/youi/youi.awesome.css",
             "./css/youi/youi.icon.css",
