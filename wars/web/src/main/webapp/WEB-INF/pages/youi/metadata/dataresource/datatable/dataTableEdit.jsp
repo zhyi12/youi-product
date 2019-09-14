@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <youi:page caption="数据表编辑" autoLoadData="${param.id!=null}"
-	dataSrc="/esb/web/dataTableManager/getDataTable.json?id=${param.id}">
-	<youi:form id="form_dataTable" panel="false" submit="NOT" reset="NOT" action="/esb/web/dataTableManager/saveDataTable.json"
+	dataSrc="/metadataServices/services/dataTableManager/getDataTable.json?id=${param.id}">
+	<youi:form id="form_dataTable" panel="false" submit="NOT" reset="NOT" action="/metadataServices/services/dataTableManager/saveDataTable.json"
 		idKeys="id">
 		<youi:fieldLayout labelWidths="100,100">
 			<youi:fieldHidden property="id"  caption="i18n.dataTable.id"/>

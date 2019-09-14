@@ -4,17 +4,21 @@
 <youi:page caption="数据资源">
 
     <youi:subpage height="150" src="page/${_pagePath}/dataResourceEdit.html?id={id}" subpageId="dataResource_edit" caption="修改数据资源" type="dialog"/>
-    <youi:subpage height="150" src="page/${_pagePath}/dataResourceEdit.html" subpageId="dataResource_add" caption="添加数据资源" type="dialog"/>
+    <youi:subpage height="150" src="page/${_pagePath}/dataResourceEdit.html?catalog={catalog}&schema={schema}" subpageId="dataResource_add" caption="添加数据资源" type="dialog"/>
 
     <youi:subpage src="page/${_pagePath}.datatable/schemaTables.html?catalog={catalog}&schema={schema}"
                   subpageId="schemaTables" caption="数据表同步" type="dialog"/>
+
+    <youi:xmenu id="xmenu_dataSource">
+        <youi:xmenuItem name="addToDataSource" caption="添加到资源目录" groups="schema"/>
+    </youi:xmenu>
 
     <youi:customWidget name="page_spliter" widgetName="pageSpliter"
                        styleClass="col-sm-3 page-inner-height">
         <youi:toolbar styleClass="fixed-height">
             <youi:toolbarItem name="refresh" caption="刷新" tooltips=""/>
         </youi:toolbar>
-        <youi:tree styleClass="col-sm-12 no-padding auto-height" iteratorParam="id" rootText="数据资源"
+        <youi:tree id="tree_dataSource" styleClass="col-sm-12 no-padding auto-height" iteratorParam="id" rootText="数据资源" xmenu="xmenu_dataSource"
                 iteratorSrc="/metadataServices/services/dataDictionaryFinder/getDataSourceIteratorTree.json">
 
         </youi:tree>
@@ -63,6 +67,13 @@
 
     <youi:func name="grid_dataResource_schemaTables" params="dom,options,record">
         $elem('subpage_schemaTables',pageId).subpage('open',{},{},record,pageId);
+    </youi:func>
+
+
+    <youi:func name="tree_dataSource_xmenu_addToDataSource" params="treeNode">
+        var schema = treeNode.data('id'),
+            catalog = treeNode.parents('.treeNode.catalog:first').data('id');
+        $elem('subpage_dataResource_add',pageId).subpage('open',{},{},{catalog:catalog,schema:schema},pageId);
     </youi:func>
 
 
