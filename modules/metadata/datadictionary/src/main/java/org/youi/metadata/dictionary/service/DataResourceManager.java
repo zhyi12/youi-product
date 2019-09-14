@@ -71,4 +71,12 @@ public interface DataResourceManager{
      */
     @EsbServiceMapping(trancode="8001030205",caption="主键删除数据资源")
     void removeDataResource(@ServiceParam(name="id") String id);
+
+
+    /**
+     *
+     * @param userDataResourceIds
+     * @return
+     */
+    List<DataResource> findByDataResourceIdIn(String[] userDataResourceIds);
 }

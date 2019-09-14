@@ -105,4 +105,11 @@ public class DataTableColumnManagerImpl implements DataTableColumnManager{
     public void removeDataTableColumn(@ServiceParam(name="id") String id){
     	dataTableColumnDao.remove(id);
     }
+
+
+    public List<DataTableColumn> findByDataResourceIdAndTableName(String dataResourceId, String tableName){
+
+        return dataTableColumnDao.findByDataResourceIdAndTableName(dataResourceId,tableName);
+
+    }
 }

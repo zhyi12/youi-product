@@ -19,6 +19,8 @@ package org.youi.metadata.dictionary.mongo;
 import org.youi.framework.mongo.DaoMongo;
 import org.youi.metadata.dictionary.entity.DataTableColumn;
 
+import java.util.List;
+
 /**
  * <p>系统描述: </p>
  * <p>功能描述: DataTableColumn-数据持久层接口</p>
@@ -26,5 +28,12 @@ import org.youi.metadata.dictionary.entity.DataTableColumn;
  * @since 1.0.0
  */
 public interface DataTableColumnDao extends DaoMongo<DataTableColumn, String>  {
-	
+
+    /**
+     *
+     * @param dataResourceId
+     * @param tableName
+     * @return
+     */
+    List<DataTableColumn> findByDataResourceIdAndTableName(String dataResourceId, String tableName);
 }

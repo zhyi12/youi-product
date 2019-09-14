@@ -77,4 +77,10 @@ public interface DataTableManager{
             @ServiceParam(name="catalog") String catalog,
             @ServiceParam(name="schema") String schema,
             @ServiceParam(name="tableNames") String tableNames[]);
+
+    /**
+     *
+     * @param dataResourceIds
+     */
+    List<DataTable> findByDataResourceIdIn(String[] dataResourceIds);
 }

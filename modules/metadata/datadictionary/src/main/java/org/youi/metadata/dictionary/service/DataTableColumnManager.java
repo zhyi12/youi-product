@@ -71,4 +71,13 @@ public interface DataTableColumnManager{
      */
     @EsbServiceMapping(trancode="8001030405",caption="主键删除数据列")
     void removeDataTableColumn(@ServiceParam(name="id") String id);
+
+
+    /**
+     *
+     * @param dataResourceId
+     * @param tableName
+     * @return
+     */
+    List<DataTableColumn> findByDataResourceIdAndTableName(String dataResourceId, String tableName);
 }

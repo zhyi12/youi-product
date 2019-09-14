@@ -34,4 +34,6 @@ public interface DataTableDao extends DaoMongo<DataTable, String>  {
      * @param id
      */
     List<DataTable> findByDataResourceId(String id);
+
+    List<DataTable> findByDataResourceIdIn(String[] dataResourceIds);
 }

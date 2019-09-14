@@ -161,6 +161,10 @@ public class DataTableManagerImpl implements DataTableManager{
         }
     }
 
+    public List<DataTable> findByDataResourceIdIn(String[] dataResourceIds){
+        return dataTableDao.findByDataResourceIdIn(dataResourceIds);
+    }
+
     /**
      * 执行表同步
      * @param syncTables

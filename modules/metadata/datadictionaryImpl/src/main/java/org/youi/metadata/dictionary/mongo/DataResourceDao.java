@@ -19,6 +19,8 @@ package org.youi.metadata.dictionary.mongo;
 import org.youi.framework.mongo.DaoMongo;
 import org.youi.metadata.dictionary.entity.DataResource;
 
+import java.util.List;
+
 /**
  * <p>系统描述: </p>
  * <p>功能描述: DataResource-数据持久层接口</p>
@@ -35,4 +37,10 @@ public interface DataResourceDao extends DaoMongo<DataResource, String>  {
      */
     DataResource findByCatalogAndSchema(String catalog,String schema);
 
+    /**
+     *
+     * @param dataResourceIds
+     * @return
+     */
+    List<DataResource> findByIdIn(String[] dataResourceIds);
 }

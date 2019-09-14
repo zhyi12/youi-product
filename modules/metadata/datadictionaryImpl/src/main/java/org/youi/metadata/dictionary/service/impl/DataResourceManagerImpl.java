@@ -107,4 +107,8 @@ public class DataResourceManagerImpl implements DataResourceManager{
     public void removeDataResource(@ServiceParam(name="id") String id){
     	dataResourceDao.remove(id);
     }
+
+    public List<DataResource> findByDataResourceIdIn(String[] dataResourceIds){
+        return dataResourceDao.findByIdIn(dataResourceIds);
+    }
 }
