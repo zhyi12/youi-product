@@ -106,7 +106,7 @@ public class DataDictionaryFinder implements IDataDictionaryFinder{
                 String id = prefix+name.getId();
                 HtmlTreeNode htmlTreeNode = new HtmlTreeNode(id,StringUtils.findNotEmpty(name.getText(),name.getId()));
                 htmlTreeNode.setGroup(group);
-                htmlTreeNode.getDatas().put("id",name);
+                htmlTreeNode.getDatas().put("id",name.getId());
                 if(DataQueryConstants.DATA_RESOURCE_TABLE_COLUMN.equals(group)){
                     htmlTreeNode.setSrc("NOT");
                 }
