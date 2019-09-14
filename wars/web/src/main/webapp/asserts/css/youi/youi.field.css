@@ -18,6 +18,14 @@
     top: 9px;
 }
 
+.youi-fieldLayout.border-bottom-open{
+	padding-top:10px;
+	border-top:1px solid #ddd;
+	border-left:1px solid #ddd;
+	border-right:1px solid #ddd;
+	border-radius: 5px 5px 0px 0px;
+}
+
 .youi-fieldLayout .youi-field.validate-error .textInput{
 	border-bottom:1px dashed red;
 }

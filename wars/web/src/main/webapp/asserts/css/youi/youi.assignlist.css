@@ -1,0 +1,34 @@
+.youi-assignList{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.youi-assignList.border{
+    border:1px solid #ddd;
+}
+
+.youi-assignList .option-item.checked,
+.youi-assignList .option-item.ui-selecting {
+    color: blue;
+}
+
+.youi-assignList .option-item {
+    white-space: nowrap;
+}
+
+.youi-assignList .option-item.value{
+    color: #679bff;
+}
+
+.youi-assignList .option-item .icon-check-empty:before {
+    padding-right: 2px;
+}
+
+.youi-assignList .option-item.selected .icon-check-empty:before {
+    content: "\f046";
+    padding-right: 0px;
+}
+
+.youi-assignList .option-item.readonly {
+    color: silver;
+}
