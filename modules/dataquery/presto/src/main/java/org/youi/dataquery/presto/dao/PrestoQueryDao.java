@@ -42,6 +42,15 @@ public interface PrestoQueryDao{
                                List<QueryOrder> queryOrders);
 
     /**
+     *
+     * @param querySql
+     * @param params
+     * @return
+     */
+    List<Item> getQueryColumnItems(String querySql,
+                                   Object[] params);
+
+    /**
      * 支持主表 + 分类项从表 的立方体数据
      * @return
      */

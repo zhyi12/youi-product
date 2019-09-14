@@ -1,5 +1,11 @@
 package org.youi.dataquery.engine.service;
 
+import org.springframework.lang.NonNull;
+import org.youi.dataquery.engine.model.QueryOrder;
+import org.youi.framework.core.dataobj.cube.Item;
+import org.youi.framework.core.orm.Pager;
+import org.youi.framework.core.orm.PagerRecords;
+
 import java.util.List;
 
 /**
@@ -35,5 +41,26 @@ public interface IQueryService {
      * @param tableName
      * @return
      */
-    List<String> queryTableColumns(String catalog,String schema,String tableName);
+    List<Item> queryTableColumns(String catalog, String schema, String tableName);
+
+    /**
+     * 分页查询数据
+     * @param pager
+     * @param queryOrders
+     * @param querySql
+     * @param params
+     * @return
+     */
+    PagerRecords queryRowDataByPager(@NonNull Pager pager,
+                                       @NonNull List<QueryOrder> queryOrders,
+                                       @NonNull String querySql,
+                                       Object[] params);
+
+    /**
+     *
+     * @param querySql
+     * @param params
+     * @return
+     */
+    List<Item> getQueryColumns(String querySql, Object[] params);
 }

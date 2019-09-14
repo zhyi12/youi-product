@@ -16,6 +16,7 @@
 package org.youi.dataquery.presto.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.youi.dataquery.engine.DataQueryConstants;
@@ -74,8 +75,15 @@ public class PrestoQueryService implements IQueryService {
     }
 
     //执行查询，返回行数据
-    public PagerRecords queryRowDatas(Pager pager){
-        return null;
+    public PagerRecords queryRowDataByPager(@NonNull Pager pager,
+                                       @NonNull List<QueryOrder> queryOrders,
+                                       @NonNull String querySql,
+                                       Object[] params){
+        return prestoQueryDao.queryRowDataByPager(pager,queryOrders,querySql,params);
+    }
+
+    public List<Item> getQueryColumns(String querySql, Object[] params){
+        return prestoQueryDao.getQueryColumnItems(querySql,params);
     }
 
     /**

@@ -47,7 +47,8 @@ public final class PrestoSqlUtils {
     public static String buildPagerSql(String querySql, Pager pager, List<QueryOrder> queryOrders) {
         int startIndex = pager.getStartIndex();
         return MessageFormat.format("SELECT * FROM (SELECT ROW_NUMBER() over({0}) as Row,PT_.* FROM ({1}) as PT_) PTT_ WHERE PTT_.Row BETWEEN {2} AND {3}",
-                buildOrderSql(queryOrders),querySql,startIndex,startIndex+pager.getPageSize());
+                buildOrderSql(queryOrders),querySql,new Integer(startIndex).toString(),
+                new Integer(startIndex+pager.getPageSize()).toString());
     }
 
     /**

@@ -17,8 +17,7 @@ package org.youi.dataquery.presto.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.core.*;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import org.youi.dataquery.engine.core.CubeRowDataMapper;
@@ -34,6 +33,7 @@ import org.youi.framework.core.orm.PagerRecords;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,6 +61,29 @@ public class PrestoQueryDaoImpl implements PrestoQueryDao{
                                        Object[] params,
                                       List<QueryOrder> queryOrders){
         return jdbcTemplate.query(querySql, params, new RowDataMapper(null));
+    }
+
+    /**
+     *
+     * @param querySql
+     * @param params
+     * @return
+     */
+    public List<Item> getQueryColumnItems(String querySql,
+                                   Object[] params){
+        return jdbcTemplate.query(querySql+" limit 1", params, new ResultSetExtractor<List<Item>>() {
+            @Override
+            public List<Item> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                ResultSetMetaData rsmd = resultSet.getMetaData();
+                List<Item> items = new ArrayList<Item>();
+                for(int i=0;i<rsmd.getColumnCount();i++){
+                    String columnName = rsmd.getColumnName(i+1);
+                    Item item = new Item(columnName,columnName);
+                    items.add(item);
+                }
+                return items;
+            }
+        });
     }
 
     /**

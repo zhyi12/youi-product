@@ -10,6 +10,7 @@ import org.youi.dataquery.engine.model.CubeColumns;
 import org.youi.dataquery.engine.model.CubeRowData;
 import org.youi.dataquery.engine.model.QueryOrder;
 import org.youi.dataquery.presto.ModuleConfig;
+import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
 
@@ -46,7 +47,14 @@ public class PrestoQueryDaoTest {
     }
     @Test
     public void testQueryTableColumns(){
-        List<String> columns =  prestoQueryDao.queryTableColumns("mongodb","stats2-filing","standard_classification");
+        List<Item> columns =  prestoQueryDao.queryTableColumns("mongodb","stats2-filing","standard_classification");
+        System.out.println(columns);
+    }
+
+
+    @Test
+    public void testGetQueryColumnItems(){
+        List<Item> columns =  prestoQueryDao.getQueryColumnItems("select _id,agencyAreaId,agencyCaption from \"mongodb\".\"stats2-filing\".\"stats_agency\"",new String[]{});
         System.out.println(columns);
     }
 
