@@ -43,7 +43,7 @@ public class SqlExpressionBuilder {
         if(!CollectionUtils.isEmpty(sqlExpression.getItems())){
             sqlExpression.getItems().forEach(dataResourceItem -> {
                 if(DataQueryConstants.DATA_RESOURCE_TABLE_COLUMN.equals(dataResourceItem.getGroup())){
-                    params.add("\""+dataResourceItem.getTableName()+"\"."+dataResourceItem.getColumnName());//数据列
+                    params.add(dataResourceItem.getColumnName());//数据列
                 }else{
                     //数据表
                     params.add("\""+dataResourceItem.getCatalog()+"\".\""+dataResourceItem.getSchema()+"\".\""+dataResourceItem.getTableName()+"\"");//数据列
