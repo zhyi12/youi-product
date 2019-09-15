@@ -44,6 +44,12 @@
 
         <dependency>
             <groupId>org.youi.product</groupId>
+            <artifactId>youi-dataquery-queryImpl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.product</groupId>
             <artifactId>youi-dataquery-presto</artifactId>
             <version>${project.version}</version>
         </dependency>
