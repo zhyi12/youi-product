@@ -18,7 +18,7 @@
 		removeSrc="/metadataServices/services/metaDataItemManager/removeMetaDataItem.json" idKeys="id"
 		showNum="true" showCheckbox="true" reset="NOT" query="NOT" fixedFooter="true">
 
-		<youi:gridCol width="25%" property="text" caption="项名称"/>
+		<youi:gridCol orderBy="desc" width="25%" property="text" caption="项名称"/>
 		<youi:gridCol width="15%" property="name" caption="英文名称"/>
 		<youi:gridCol width="15%" property="columnName" caption="标准代码"/>
 

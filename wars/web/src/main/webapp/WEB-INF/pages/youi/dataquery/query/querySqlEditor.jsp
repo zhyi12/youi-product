@@ -8,7 +8,7 @@
     <youi:ajaxUrl name="keyTreeUrl" src="/metadataServices/services/dataResourceService/getUserDataResourceTree.json"/>
 
     <youi:xmenu id="xmenu_data">
-        <youi:xmenuItem name="select" caption="生成select语句" groups="data-table"/>
+        <youi:xmenuItem name="buildSqlSelect" caption="生成select语句" groups="data-table"/>
     </youi:xmenu>
 
     <youi:form id="form_dataQuery" panel="false" submit="NOT" reset="NOT"
@@ -20,6 +20,7 @@
                 <youi:fieldLayout columns="1" labelWidths="0">
                     <youi:fieldHidden property="id"  caption="i18n.dataQuery.id"/>
                     <youi:fieldHidden property="name"  caption="name"/>
+                    <youi:fieldHidden property="showTotalCount"  caption="showTotalCount"/>
                     <youi:fieldHidden property="caption"  caption="caption"/>
                     <youi:fieldHidden property="sqlExpression" caption=""/>
                 </youi:fieldLayout>
@@ -73,6 +74,7 @@
                     {id:'select',text:'SELECT',expression:'SELECT    FROM     WHERE  '},
                     {id:'leftJoin',text:'LEFT JOIN',expression:' LEFT JOIN ',column:12},
                     {id:'empty',text:'空值',expression:"'_EMPTY'",column:12},
+                    {id:'nullableCondition',text:'可空条件',expression:"(?='_EMPTY' or  =?)",column:12},
                 ]
             }
         });
@@ -87,6 +89,25 @@
             success:function(result){
                 $elem('form_dataQuery',pageId).form('fillRecord',result.record);
             }
+        });
+    </youi:func>
+
+    <%-- 生成表查询的sql语句 --%>
+    <youi:func name="sqlExpressiontree_xmenu_buildSqlSelect" params="treeNode">
+        var items = [];
+        treeNode.find('.treeNode.table-column').each(function(){
+            var columnNode = $(this);
+            items.push($.extend({},columnNode.data(),{text:$.youi.treeUtils.getNodeText(columnNode)}));
+        });
+        items.push($.extend({},treeNode.data(),{text:$.youi.treeUtils.getNodeText(treeNode)}));
+        var itemLength = items.length;
+        $elem('sqlExpression',pageId).expressionEditor('insertItems',items,function(itemHtml,index){
+            if(index==0){
+                return 'SELECT&nbsp;' + itemHtml;
+            }else if(index == itemLength-1){
+                return '&nbsp;FROM '+itemHtml;
+            }
+            return ','+itemHtml;
         });
     </youi:func>
 
