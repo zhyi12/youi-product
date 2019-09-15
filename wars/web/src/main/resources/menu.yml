@@ -115,7 +115,27 @@ children:
     id: dataService
     text: 数据服务
     icon: list
-
+    children:
+      -
+        id: dataServiceConfig
+        text: 数据服务配置
+        icon: list
+        children:
+          -
+            id: dataQuery
+            text: 数据查询服务
+            pageUrl: page/youi.dataquery.query/index.html
+          -
+            id: dataCubeQuery
+            text: CUBE查询服务
+            pageUrl: page/youi.dataquery.cube/index.html
+          -
+            id: dataStatsQuery
+            text: 统计查询服务
+            pageUrl: page/youi.dataquery.stats/index.html
+          -
+            id: dataQueryGroup
+            text: 服务组
   -
     id: dataQuery
     text: 数据分析
