@@ -151,13 +151,22 @@
 			_goPageHash();
 		},
 
-        _resizeSecondPage:function () {
+        _resizeSecondPage:function (skipResizeWidget) {
 			var height = this.element.find('.layout-panel.panel-center:first').height();
 			var secondPage = this.element.find('.page-container.second-page:visible:first');
             secondPage.height(height - 10);
 
-            secondPage.find('>.youi-page:first').trigger('pageResize',{headerHeight:38});
+            var pageElem = secondPage.find('>.youi-page:first').trigger('pageResize',{headerHeight:38});
+
+            if(!skipResizeWidget){
+                $.youi.widgetUtils.triggerResize(pageElem,true);
+			}
+        },
+
+		_resize:function () {
+            this._resizeSecondPage(true);
         }
+
 		
 	}));
 	
