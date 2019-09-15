@@ -17,12 +17,15 @@ package org.youi.dataquery.query.service.impl;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.youi.dataquery.query.entity.DataQuery;
 import org.youi.dataquery.query.entity.QueryParam;
 import org.youi.dataquery.query.entity.SqlExpression;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,11 +44,29 @@ public class SqlParamBuilder {
 
     public Object[] parseParams(DataQuery dataQuery, List<QueryParam> queryParams){
         Matcher matcher = paramPattern.matcher(dataQuery.getSqlExpression().getSource());
-        List params = new ArrayList();
-        while(matcher.find()){
-            params.add(PARAM_VALUE_EMPTY);
-            //
+        List<QueryParam> dataQueryParams = dataQuery.getQueryParams();
+
+        Map<String,String> paramMap = new HashMap<>();
+
+        if(!CollectionUtils.isEmpty(queryParams)){
+            queryParams.forEach(queryParam -> paramMap.put(queryParam.getProperty(),queryParam.getValue()));
         }
+
+        List params = new ArrayList();
+
+        int index = 0;
+        while(matcher.find()){
+            index++;
+            if(index<=dataQueryParams.size()){
+                String property = dataQueryParams.get(index-1).getProperty();
+                if(paramMap.containsKey(property)){
+                    params.add(paramMap.get(property));
+                    continue;
+                }
+            }
+            params.add(PARAM_VALUE_EMPTY);
+        }
+
         return params.toArray();
     }
 

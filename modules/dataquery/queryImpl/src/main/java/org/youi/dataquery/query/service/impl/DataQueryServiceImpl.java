@@ -92,8 +92,7 @@ public class DataQueryServiceImpl implements DataQueryService{
         }
 
         String querySql = parseQuerySql(dataQuery);
-
-        //parseParams
+        //
         return queryService.queryRowDataByPager(pager,queryOrders,querySql,sqlParamBuilder.parseParams(dataQuery,params));
     }
 
