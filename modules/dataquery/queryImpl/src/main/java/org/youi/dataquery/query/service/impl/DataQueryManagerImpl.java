@@ -78,7 +78,7 @@ public class DataQueryManagerImpl implements DataQueryManager{
 	public PagerRecords getPagerDataQuerys(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=DataQuery.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders) {
-		PagerRecords pagerRecords = dataQueryDao.findByPager(pager, conditions, orders);
+		PagerRecords pagerRecords = dataQueryDao.complexFindByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
     /**

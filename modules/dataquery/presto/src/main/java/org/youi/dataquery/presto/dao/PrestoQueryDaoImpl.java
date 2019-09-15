@@ -112,7 +112,10 @@ public class PrestoQueryDaoImpl implements PrestoQueryDao{
         String countSql = PrestoSqlUtils.buildCountSql(querySql);
         String pagerSql = PrestoSqlUtils.buildPagerSql(querySql,pager,queryOrders);
         //查询记录总数
-        int totalCount = jdbcTemplate.queryForObject(countSql,params,Integer.TYPE);
+        int totalCount = pager.getPageSize();
+        if(Pager.QUERY_TYPE_LIST!=pager.getPageType()){
+            totalCount = jdbcTemplate.queryForObject(countSql,params,Integer.TYPE);
+        }
         //查询数据
         List<RowData> records = jdbcTemplate.query(pagerSql, params, new RowDataMapper(null));
         PagerRecords pagerRecords = new PagerRecords(records,totalCount);

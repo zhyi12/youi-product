@@ -17,6 +17,7 @@ import org.youi.framework.core.orm.PagerRecords;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Created by zhouyi on 2019/8/21.
  */
@@ -75,7 +76,7 @@ public class PrestoQueryDaoTest {
 
     @Test
     public void testQueryCubeRowDatas(){
-        String cubeQuerySql = "SELECT t_.DATA_101_COL044,t_.DATA_101_COL007,sum(t_.S203_20180_A0) as S203_20180_A0 FROM stats_working_task_row_st001 as t_ WHERE t_.DATA_101_COL044  IN  (?,?) AND t_.DATA_101_COL007  IN  (?,?,?,?) GROUP by cube(t_.DATA_101_COL044,t_.DATA_101_COL007)";
+        String cubeQuerySql = "SELECT t_.DATA_101_COL044,t_.DATA_101_COL007,sum(t_.S203_20180_A0) as S203_20180_A0 FROM \"mongodb\".\"stats2-filing\".stats_working_task_row_st001 as t_ WHERE t_.DATA_101_COL044  IN  (?,?) AND t_.DATA_101_COL007  IN  (?,?,?,?) GROUP by cube(t_.DATA_101_COL044,t_.DATA_101_COL007)";
         String[] params = {"1","2","01","02","03","07"};//预期的生成的参数
         CubeColumns cubeColumns = new CubeColumns();
         cubeColumns.addGroupColumn("DATA_101_COL044")
@@ -84,5 +85,34 @@ public class PrestoQueryDaoTest {
         List<CubeRowData> cubeRowDatas = prestoQueryDao.queryCubeRowDatas(cubeColumns,cubeQuerySql,params);
 
         Assert.assertTrue(cubeRowDatas.size()>0);
+    }
+
+    @Test
+    public void testQueryCube(){
+
+        String cubeQuerySql = "SELECT t_.DATA_101_COL044,t_.DATA_101_COL007,sum(t_.S203_20180_A0) as S203_20180_A0 FROM \"mongodb\".\"stats2-filing\".stats_working_task_row_st001 as t_ GROUP by cube(t_.DATA_101_COL044,t_.DATA_101_COL007)";
+        CubeColumns cubeColumns = new CubeColumns();
+        cubeColumns.addGroupColumn("DATA_101_COL044")
+                .addGroupColumn("DATA_101_COL007").addMeasureColumn("S203_20180_A0");
+        //
+        List<CubeRowData> cubeRowDatas = prestoQueryDao.queryCubeRowDatas(cubeColumns,cubeQuerySql,new String[]{});
+
+        System.out.println(cubeRowDatas);
+    }
+
+    @Test
+    public  void test(){
+
+        Object[] params = new Object[]{};
+        Pager pager = new Pager(10,1,Pager.QUERY_TYPE_ALL);
+        String querySql = "";
+        List<QueryOrder> orders = new ArrayList<>();
+
+        QueryOrder queryOrder = new QueryOrder();
+        queryOrder.setProperty("_id");
+        orders.add(queryOrder);
+
+        prestoQueryDao.queryRowDataByPager(pager,orders
+                ,querySql,params);
     }
 }

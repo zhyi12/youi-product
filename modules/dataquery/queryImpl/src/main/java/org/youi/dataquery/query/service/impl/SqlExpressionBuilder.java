@@ -32,6 +32,7 @@ import java.util.List;
 @Component
 public class SqlExpressionBuilder {
 
+    private final static String SQL_EMPTY_VALUE = "_EMPTY";
     /**
      *
      * @param sqlExpression
@@ -50,6 +51,7 @@ public class SqlExpressionBuilder {
                 }
             });
         }
-        return MessageFormat.format(source.replace("'_EMPTY'","''_EMPTY''"),params.toArray()).replace(" "," ");
+        //TODO 增加sql语句替换处理规则
+        return MessageFormat.format(source.replace("'"+SQL_EMPTY_VALUE+"'","''"+SQL_EMPTY_VALUE+"''"),params.toArray()).replace(" "," ");
     }
 }

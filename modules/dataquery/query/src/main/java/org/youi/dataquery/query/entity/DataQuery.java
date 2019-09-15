@@ -43,6 +43,8 @@ public class DataQuery implements Domain{
 	@Column
 	private String caption;//中文描述
 
+	private String showTotalCount = "1";//查询记录总数
+
 	private SqlExpression sqlExpression;//SQL表达式
 
 	private List<QueryParam> queryParams;//查询参数
@@ -92,6 +94,14 @@ public class DataQuery implements Domain{
 
 	public void setQueryColumns(List<QueryColumn> queryColumns) {
 		this.queryColumns = queryColumns;
+	}
+
+	public String getShowTotalCount() {
+		return showTotalCount;
+	}
+
+	public void setShowTotalCount(String showTotalCount) {
+		this.showTotalCount = showTotalCount;
 	}
 
 	@Override

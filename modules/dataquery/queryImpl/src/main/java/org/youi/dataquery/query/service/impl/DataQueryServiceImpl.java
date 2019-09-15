@@ -70,11 +70,14 @@ public class DataQueryServiceImpl implements DataQueryService{
     public PagerRecords queryRowDataByPager(
             Pager pager,
             @OrderCollection Collection<Order> orders,
-//            @DomainCollection(name = "queryOrders", domainClazz = QueryOrder.class) List<QueryOrder> queryOrders,
             @ServiceParam(name = "id") String queryId,
             @DomainCollection(name = "params",domainClazz = QueryParam.class) List<QueryParam> params) {
 
         DataQuery dataQuery = dataQueryManager.getDataQuery(queryId);
+
+        if(!"1".equals(dataQuery.getShowTotalCount())){//只查询记录，不查询记录总数
+            pager.setPageType(Pager.QUERY_TYPE_LIST);
+        }
 
         List<QueryColumn> queryColumns = dataQuery.getQueryColumns();
 

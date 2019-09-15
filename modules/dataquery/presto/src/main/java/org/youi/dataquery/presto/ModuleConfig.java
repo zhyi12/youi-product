@@ -54,6 +54,7 @@ public class ModuleConfig {
         dataSource.setUsername(dataSourceProperties.getUsername());// 用户名
         dataSource.setPassword(dataSourceProperties.getPassword());// 密码
         dataSource.setDriverClassName(dataSourceProperties.getDriverClassName());
+        dataSource.setValidationQuery("SELECT 1");
         return dataSource;
     }
 
