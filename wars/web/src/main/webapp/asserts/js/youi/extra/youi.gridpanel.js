@@ -1,7 +1,6 @@
 /**
  * 
  */
-require("./../youi.core.js");
 (function($) {
 
     /**

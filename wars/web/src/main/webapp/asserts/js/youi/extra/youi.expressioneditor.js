@@ -162,6 +162,27 @@
             });
         },
 
+        /**
+         *
+         * @param items
+         * @param itemHtmlCallback
+         */
+        insertItems:function (items,itemHtmlCallback) {
+            var htmls = [],props = this.options.itemProps;
+
+            $(items).each(function (index) {
+                var html = _buildKeyItem(this,props);
+                if($.isFunction(itemHtmlCallback)){
+                    html = itemHtmlCallback(html,index)||html;
+                }
+                htmls.push(html);
+            });
+            var ue = this.ueditor;
+            this.ueditor.ready(function() {
+                ue.execCommand('inserthtml',htmls.join(''));
+            });
+        },
+
         parseExpressionItems:function (expressionItems) {
             var idPrefix = this.element.attr('id');
             var html = _buildExpressionItems(idPrefix,expressionItems);
