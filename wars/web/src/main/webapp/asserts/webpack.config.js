@@ -6,6 +6,7 @@ module.exports = {
         'app':[
             "./js/youi/youi.designer.js",
             "./js/youi/extra/youi.treepage.js",
+            "./js/youi/extra/youi.gridpanel.js",
             "./js/youi/extra/youi.sheet.js",
             "./js/youi/extra/youi.expressioneditor.js",
             "./css/youi/youi.assignlist.css",
