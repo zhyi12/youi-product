@@ -28,18 +28,17 @@ import org.youi.dataquery.query.entity.QueryParam;
 import org.youi.dataquery.query.service.DataQueryManager;
 import org.youi.dataquery.query.service.DataQueryService;
 import org.youi.framework.core.dataobj.cube.Item;
+import org.youi.framework.core.orm.Order;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
 import org.youi.framework.esb.annotation.DomainCollection;
 import org.youi.framework.esb.annotation.EsbServiceMapping;
+import org.youi.framework.esb.annotation.OrderCollection;
 import org.youi.framework.esb.annotation.ServiceParam;
 import org.youi.framework.util.BeanUtils;
 
 import javax.xml.crypto.Data;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author zhouyi
@@ -64,7 +63,7 @@ public class DataQueryServiceImpl implements DataQueryService{
     /**
      *
      * @param pager
-     * @param queryOrders
+     * @param orders
      * @param queryId
      * @param params  param=userId:zhangsan
      * @return
@@ -73,7 +72,8 @@ public class DataQueryServiceImpl implements DataQueryService{
     @EsbServiceMapping
     public PagerRecords queryRowDataByPager(
             Pager pager,
-            @DomainCollection(name = "queryOrders", domainClazz = QueryOrder.class) List<QueryOrder> queryOrders,
+            @OrderCollection Collection<Order> orders,
+//            @DomainCollection(name = "queryOrders", domainClazz = QueryOrder.class) List<QueryOrder> queryOrders,
             @ServiceParam(name = "id") String queryId,
             @DomainCollection(name = "params",domainClazz = QueryParam.class) List<QueryParam> params) {
 
@@ -84,16 +84,38 @@ public class DataQueryServiceImpl implements DataQueryService{
         if(CollectionUtils.isEmpty(queryColumns)){
             dataQuery = parseDataQuery(dataQuery);
         }
+        //构建排序
+        List<QueryOrder> queryOrders = parseQueryOrders(dataQuery,orders);
+        //构建sql
+        String querySql = parseQuerySql(dataQuery);
+        //
+        return queryService.queryRowDataByPager(pager,queryOrders,querySql,sqlParamBuilder.parseParams(dataQuery,params));
+    }
 
+    /**
+     *
+     * @param dataQuery
+     * @param orders
+     * @return
+     */
+    private List<QueryOrder> parseQueryOrders(DataQuery dataQuery,Collection<Order> orders){
+        List<QueryOrder> queryOrders = new ArrayList<>();
+        if(!CollectionUtils.isEmpty(orders)){
+            orders.forEach(order -> {
+                QueryOrder queryOrder = new QueryOrder();
+                queryOrder.setProperty(order.getProperty());
+                queryOrder.setAscending(order.isAscending());
+
+                queryOrders.add(queryOrder);
+            });
+        }
+        //从列中获取排序条件
         if(CollectionUtils.isEmpty(queryOrders)){
             QueryOrder queryOrder = new QueryOrder();
             queryOrder.setProperty(dataQuery.getQueryColumns().get(0).getColumnName());
             queryOrders.add(queryOrder);
         }
-
-        String querySql = parseQuerySql(dataQuery);
-        //
-        return queryService.queryRowDataByPager(pager,queryOrders,querySql,sqlParamBuilder.parseParams(dataQuery,params));
+        return queryOrders;
     }
 
     @EsbServiceMapping
