@@ -15,8 +15,6 @@
  */
 package org.youi.dataquery.query.service.impl;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -37,7 +35,6 @@ import org.youi.framework.esb.annotation.OrderCollection;
 import org.youi.framework.esb.annotation.ServiceParam;
 import org.youi.framework.util.BeanUtils;
 
-import javax.xml.crypto.Data;
 import java.util.*;
 
 /**
@@ -116,13 +113,6 @@ public class DataQueryServiceImpl implements DataQueryService{
             queryOrders.add(queryOrder);
         }
         return queryOrders;
-    }
-
-    @EsbServiceMapping
-    public List<Item> getQueryColumns(@ServiceParam(name = "id") String queryId
-            ,@ServiceParam(name = "param") String[] params){
-        DataQuery dataQuery = dataQueryManager.getDataQuery(queryId);
-        return queryService.getQueryColumns(parseQuerySql(dataQuery),params);
     }
 
     /**
