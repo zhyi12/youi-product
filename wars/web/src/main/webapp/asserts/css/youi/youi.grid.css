@@ -361,3 +361,9 @@
 .youi-grid.page-size-hide  .page-size-handler{
 	display: none;
 }
+
+.youi-gridPanel .youi-grid{
+	overflow-y:auto;
+	float:left;
+	width:100%;
+}
