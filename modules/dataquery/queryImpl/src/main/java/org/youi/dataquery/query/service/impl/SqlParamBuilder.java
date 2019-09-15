@@ -57,7 +57,7 @@ public class SqlParamBuilder {
         int index = 0;
         while(matcher.find()){
             index++;
-            if(index<=dataQueryParams.size()){
+            if(dataQueryParams!=null && index<=dataQueryParams.size()){
                 String property = dataQueryParams.get(index-1).getProperty();
                 if(paramMap.containsKey(property)){
                     params.add(paramMap.get(property));
