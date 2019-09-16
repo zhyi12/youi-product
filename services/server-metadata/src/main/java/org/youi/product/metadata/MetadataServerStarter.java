@@ -21,6 +21,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.web.bind.annotation.RestController;
 import org.youi.framework.context.ModulesRunnerBuilder;
+import org.youi.framework.services.client.ServicesClientConfig;
 import org.youi.framework.services.config.ServiceConfig;
 import org.youi.service.boot.ResourceServerConfig;
 
@@ -35,10 +36,8 @@ import org.youi.service.boot.ResourceServerConfig;
 public class MetadataServerStarter {
 
     public static void main(String[] args) {
-
-
         new ModulesRunnerBuilder(ServiceConfig.class,
-                ResourceServerConfig.class,
+                ResourceServerConfig.class,ServicesClientConfig.class,
                 MetadataServerStarter.class).run(args);
     }
 }
