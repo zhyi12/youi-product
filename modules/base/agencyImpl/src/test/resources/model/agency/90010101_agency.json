@@ -1,0 +1,27 @@
+{
+  "id":"90010101",
+  "idAttrName":"id",
+  "table":"youi_agency",
+  "name":"agency",
+  "caption":"机构",
+  "attributes":[{
+    "isId":true,
+    "name":"id",
+    "caption":"机构ID"
+  },{
+    "name":"caption",
+    "caption":"机构名称"
+  },{
+    "name":"areaId",
+    "caption":"行政区划"
+  },{
+    "name":"code",
+    "caption":"机构编码"
+  },{
+    "name":"num",
+    "caption":"机构序号"
+  },{
+    "name":"parentId",
+    "caption":"父机构ID"
+  }]
+}
