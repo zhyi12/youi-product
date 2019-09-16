@@ -418,6 +418,10 @@
 
     <modules>
 
+        <module>../modules/base/agency</module>
+        <module>../modules/base/agencyImpl</module>
+        <module>../modules/base/agencyClient</module>
+
         <module>../modules/metadata/common</module>
 
         <module>../modules/metadata/datadictionary</module>
