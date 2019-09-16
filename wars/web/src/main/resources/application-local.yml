@@ -66,6 +66,10 @@ zuul:
       path: /uaa/**
       sensitiveHeaders: Set-Cookie
       serviceId: server-sso
+    baseServices:
+      path: /baseServices/**
+      sensitiveHeaders: Set-Cookie
+      serviceId: base-services
     exchangeServices:
       path: /exchangeServices/**
       sensitiveHeaders: Set-Cookie
