@@ -79,7 +79,14 @@ children:
             id: sync
             text: 数据表
             pageUrl: page/youi.metadata.dataresource.datatable/index.html
-
+          -
+            id: resoucemap
+            text: 资源地图
+            pageUrl: page/youi.metadata.dataresource.map/index.html
+          -
+            id: tupu
+            text: 数据血缘
+            pageUrl: page/youi.metadata.dataresource.cognation/index.html
       -
         id: metadata-auth
         text: 元数据授权
