@@ -78,6 +78,10 @@ zuul:
       path: /metadataServices/**
       sensitiveHeaders: Set-Cookie
       serviceId: metadata-services
+    upload:
+      path: /fileserver/**
+      sensitiveHeaders: Set-Cookie
+      serviceId: file-services
   add-proxy-headers: true
 eureka:
   instance:
