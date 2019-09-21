@@ -36,13 +36,13 @@
         </li>
 
         <li class="dropdown hidden-xs" id="changeTheme">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="" class>
-                <span class="youi-icon icon-theme-skin padding-right-small "></span>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="切换页面风格" class>
+                <span class="youi-icon icon-list padding-right-small "></span>
             </a>
             <ul class="dropdown-menu">
                 <li class="link-item">
-                    <a class="link-item" href="javascript:;" onclick="changeTheme('default')">
-                        <div style="width: 10px;height: 10px;background-color: #367bb4;display: inline-block"></div>
+                    <a class="link-item" href="javascript:;" data-theme="default">
+                        <div style="width: 10px;height: 10px;background-color: #CC9900;display: inline-block"></div>
                         <span class="theme-icon icon-default">
                             默认
                         </span>
@@ -50,7 +50,7 @@
                 </li>
 
                 <li class="link-item">
-                    <a class="link-item" href="javascript:;" onclick="changeTheme('blue')">
+                    <a class="link-item" href="javascript:;" data-theme="blue">
                         <div style="width: 10px;height: 10px;background-color: #4884ec;display: inline-block"></div>
                         <span class="theme-icon icon-blue">
                             蓝色
@@ -60,7 +60,7 @@
                 </li>
 
                 <li class="link-item">
-                    <a class="link-item" href="javascript:;" onclick="changeTheme('green')">
+                    <a class="link-item" href="javascript:;" data-theme="green">
                         <div style="width: 10px;height: 10px;background-color: #61d466;display: inline-block"></div>
                         <span class="theme-icon icon-green">
                             绿色
@@ -69,21 +69,21 @@
                 </li>
 
                 <li class="link-item">
-                    <a class="link-item" href="javascript:;" onclick="changeTheme('red')">
+                    <a class="link-item" href="javascript:;" data-theme="red">
                         <div style="width: 10px;height: 10px;background-color: #fc7977;display: inline-block"></div>
                         <span class="theme-icon icon-red">红色</span>
                     </a>
                 </li>
 
                 <li class="link-item">
-                    <a class="link-item" href="javascript:;" onclick="changeTheme('yellow')">
+                    <a class="link-item" href="javascript:;" data-theme="yellow">
                         <div style="width: 10px;height: 10px;background-color: #fda040;display: inline-block"></div>
                         <span class="theme-icon icon-yellow">黄色</span>
                     </a>
                 </li>
 
                 <li class="link-item">
-                    <a class="link-item" href="javascript:;" onclick="changeTheme('purple')">
+                    <a class="link-item" href="javascript:;"  data-theme="purple">
                         <div  style="width: 10px;height: 10px;background-color: #d46be6;display: inline-block"></div>
                         <span class="theme-icon icon-purple" >紫色</span>
                     </a>
@@ -94,7 +94,7 @@
 
 
         <li  class="dropdown hidden-xs">
-            <a class="page-link" tabindex="-1" href="#" onclick="javascript:$.stats.logout()" title="退出系统" >
+            <a class="page-link" tabindex="-1" href="#" onclick="javascript:$.youi.logout()" title="退出系统" >
 				<span class="youi-icon icon-off padding-right-small">
 					退出
 				</span>

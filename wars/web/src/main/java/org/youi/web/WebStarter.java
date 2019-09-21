@@ -15,6 +15,7 @@
  */
 package org.youi.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -23,11 +24,13 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.context.support.ResourceBundleThemeSource;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ThemeResolver;
+import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.servlet.theme.SessionThemeResolver;
 import org.youi.decorator.modern.ModuleConfig;
 import org.youi.framework.web.ServerUrlTransformer;
 import org.youi.framework.web.WebConfig;
@@ -46,6 +49,9 @@ import javax.servlet.http.HttpServletResponse;
 @EnableZuulProxy
 @EnableEurekaClient
 public class WebStarter extends SpringBootServletInitializer {
+
+    @Autowired
+    private ThemeResolver themeResolver;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String mainIndex() {
@@ -85,6 +91,27 @@ public class WebStarter extends SpringBootServletInitializer {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
+    }
+
+    /**
+     * 页面主题选择
+     * @param request
+     * @param response
+     * @param theme
+     * @return
+     */
+    @RequestMapping("/theme/{theme}.json")
+    @ResponseBody
+    public String theme(HttpServletRequest request,
+                        HttpServletResponse response,
+                        @PathVariable("theme") String theme){
+        themeResolver.setThemeName(request,response,theme);
+        return "{\"theme\":\""+theme+"\"}";
+    }
+
+    @Bean(name = "themeResolver")
+    public ThemeResolver sessionThemeResolver(){
+        return new SessionThemeResolver();
     }
 
     @Bean

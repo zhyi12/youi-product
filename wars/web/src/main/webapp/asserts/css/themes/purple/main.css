@@ -1,0 +1,37 @@
+.youi-app.youi-bootstrapLayout .layout-panel.panel-north {
+    background: #d46be6;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #d46be6), color-stop(1, #d46be6));
+    background: -ms-linear-gradient(bottom, #d46be6, #d46be6);
+    background: -moz-gradient-linear-gradient(center bottom, #d46be6 0%, #d46be6 100%);
+    background: -o-linear-gradient(bottom, #d46be6, #d46be6);
+    filter: progid:dximagetransform.microsoft.gradient(startColorStr='#e3e3e3', EndColorStr='#ffffff');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#6f80a1',EndColorStr='#4d5b76')";
+    height: 60px;
+}
+
+.youi-app.youi-bootstrapLayout .menu-container-root .dropdown-menu{
+    background: white;
+}
+
+.youi-app.youi-bootstrapLayout #system_h_menu .dropdown-menu li.menu-item a,
+.youi-app.youi-bootstrapLayout #system_h_menu .dropdown-menu li.menu-item a:hover,
+.youi-app.youi-bootstrapLayout #system_h_menu .dropdown-menu li.menu-item a:active,
+.youi-app.youi-bootstrapLayout .menu-container-root .dropdown-menu .icon-menu:before{
+    color:#d46be6;
+}
+
+.youi-app.youi-bootstrapLayout .page-nav{
+    background: #EEEEEE;
+}
+
+.youi-app.youi-bootstrapLayout .page-nav .title-text.active {
+    background: #d46be6;
+    border: 1px solid #d46be6;
+    color: white;
+    border-radius: 25px 5px 0px 0px;
+}
+
+.youi-app .youi-grid .youi-fieldLayout{
+    border-top:none;
+    border-radius: 0px;
+}
