@@ -1,7 +1,7 @@
 <%@ taglib prefix="youi" uri="http://www.cjyoui.xyz/youi" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<youi:html title="${sysCaption}">
+<youi:html title="大数据平台">
     <%@ include file="/WEB-INF/pages/common/commonScriptAndCss.jsp"%>
     <youi:body decorator="modern">
 
