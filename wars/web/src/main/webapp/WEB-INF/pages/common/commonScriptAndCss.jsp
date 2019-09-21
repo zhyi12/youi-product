@@ -23,4 +23,6 @@
 <youi:style href="/asserts/css/app-1.0.min.css?_version=20190828"/>
 <youi:style href="/asserts/css/font.css?_version=20190828"/>
 
+<youi:style href="/asserts/css/themes/theme/main.css"/>
+
 
