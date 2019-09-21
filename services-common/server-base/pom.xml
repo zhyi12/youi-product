@@ -32,6 +32,12 @@
             <version>${youi.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.youi.framework</groupId>
+            <artifactId>youi-framework-services-swagger</artifactId>
+            <version>${youi.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
