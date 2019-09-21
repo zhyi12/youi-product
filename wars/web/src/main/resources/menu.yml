@@ -8,7 +8,7 @@ children:
     children:
       -
         id: metadata-config
-        text: 元数据配置
+        text: 统计调查元数据配置
         icon: gear
         children:
           -
@@ -37,32 +37,40 @@ children:
             pageUrl: page/youi.metadata.catalog/index.html
       -
         id: metadata-mng
-        text: 统计元数据
+        text: 统计调查元数据设计
         children:
           -
             id: metadata-design
-            text: 元数据设计
+            text: 制度设计
             pageUrl: page/youi.metadata.design/index.html
           -
             id: metadata-respondent
-            text: 调查对象管理
+            text: 调查对象
             pageUrl: page/youi.metadata.respondent/index.html
           -
             id: metadata-group-mng
-            text: 分组字典管理
+            text: 分组字典
             pageUrl: page/youi.metadata.design/index.html
       -
         id: metadata-standard
-        text: 数据标准
+        text: 标准数据
         children:
           -
-            id: metadata-area
+            id: area
             text: 行政区划
-            pageUrl: page/youi.metadata.design/index.html
+            pageUrl: page/youi.standard.area/index.html
           -
-            id: metadata-economic-industrie
+            id: govagency
+            text: 机关单位
+            pageUrl: page/youi.standard.govagency/index.html
+          -
+            id: neiclassification
             text: 国民经济行业分类
-            pageUrl: page/youi.metadata.design/index.html
+            pageUrl: page/youi.standard.neiclassification/index.html
+          -
+            id: measureuint
+            text: 计量单位
+            pageUrl: page/youi.standard.measureuint/index.html
       -
         id: metadata-resource
         text: 数据资源
@@ -84,9 +92,21 @@ children:
             text: 资源地图
             pageUrl: page/youi.metadata.dataresource.map/index.html
           -
-            id: tupu
+            id: cognation
             text: 数据血缘
             pageUrl: page/youi.metadata.dataresource.cognation/index.html
+          -
+            id: domain-resource
+            text: 主题库
+            pageUrl: page/youi.metadata.dataresource.domain/index.html
+          -
+            id: subject-resource
+            text: 专题库
+            pageUrl: page/youi.metadata.dataresource.subject/index.html
+          -
+            id: codeset-resource
+            text: 代码集
+            pageUrl: page/youi.metadata.dataresource.codeset/index.html
       -
         id: metadata-auth
         text: 元数据授权
@@ -179,7 +199,6 @@ children:
           id: analysis-design
           text: 分析报告管理
           pageUrl: page/youi.analysis.design/index.html
-
   -
     id: system
     text: 系统管理
@@ -188,5 +207,3 @@ children:
       -
         id: user
         text: 用户管理
-
-
