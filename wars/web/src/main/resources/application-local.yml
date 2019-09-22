@@ -42,7 +42,11 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 30000
-
+    metadata-services:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
 #
 #working-services:
 #  ribbon:
@@ -55,7 +59,7 @@ youi:
       ROLE_GATHER_ADMIN:
         - addGatherTask
         - addCubeTemplate
-    codeMapPath: /metadataServices/services/codeitemManager/getConvert.json?convert={name}
+    codeMapPath: /baseServices/services/codeitemManager/getConvert.json?convert={name}
 
 zuul:
 #  host:
