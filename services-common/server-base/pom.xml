@@ -28,6 +28,11 @@
 
         <dependency>
             <groupId>org.youi.framework</groupId>
+            <artifactId>youi-framework-codemapImpl</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.framework</groupId>
             <artifactId>youi-framework-services-boot</artifactId>
             <version>${youi.version}</version>
         </dependency>
