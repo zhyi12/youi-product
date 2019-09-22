@@ -81,7 +81,7 @@ children:
             pageUrl: page/youi.metadata.dataresource.dataitem/index.html
           -
             id: dir
-            text: 数据资源
+            text: 数据源
             pageUrl: page/youi.metadata.dataresource/index.html
           -
             id: sync
@@ -207,3 +207,7 @@ children:
       -
         id: user
         text: 用户管理
+      -
+        id: codemap
+        text: 代码集
+        pageUrl: page/youi.admin.codemap/index.html
