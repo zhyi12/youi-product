@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.youi.product</groupId>
+        <artifactId>server-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>server-scheduler</artifactId>
+    <name>server-scheduler</name>
+    <description>server-scheduler</description>
+    <packaging>jar</packaging>
+
+    <properties>
+        <main.basedir>${basedir}/../..</main.basedir>
+        <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
+    </properties>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-scheduler-adminImpl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-scheduler-quartz</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.framework</groupId>
+            <artifactId>youi-framework-services-boot</artifactId>
+            <version>${youi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.framework</groupId>
+            <artifactId>youi-framework-services-swagger</artifactId>
+            <version>${youi.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.0.0.M7</version>
+
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+
+        </plugins>
+    </build>
+
+</project>
