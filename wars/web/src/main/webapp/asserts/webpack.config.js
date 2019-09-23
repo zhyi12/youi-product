@@ -9,6 +9,8 @@ module.exports = {
             "./js/youi/extra/youi.gridpanel.js",
             "./js/youi/extra/youi.sheet.js",
             "./js/youi/extra/youi.expressioneditor.js",
+            "./js/youi/field/field.cron.js",
+            "./js/youi/field/field.queryparam.js",
             "./css/youi/youi.assignlist.css",
             "./css/youi/youi.core.css",
             "./css/youi/youi.awesome.css",

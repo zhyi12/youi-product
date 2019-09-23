@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/common/include.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<youi:page caption="数据资源">
+<youi:page caption="数据源">
 
     <youi:subpage height="150" src="page/${_pagePath}/dataResourceEdit.html?id={id}" subpageId="dataResource_edit" caption="修改数据资源" type="dialog"/>
     <youi:subpage height="150" src="page/${_pagePath}/dataResourceEdit.html?catalog={catalog}&schema={schema}" subpageId="dataResource_add" caption="添加数据资源" type="dialog"/>
@@ -18,7 +18,7 @@
         <youi:toolbar styleClass="fixed-height">
             <youi:toolbarItem name="refresh" caption="刷新" tooltips=""/>
         </youi:toolbar>
-        <youi:tree id="tree_dataSource" styleClass="col-sm-12 no-padding auto-height" iteratorParam="id" rootText="数据中心资源" xmenu="xmenu_dataSource"
+        <youi:tree id="tree_dataSource" styleClass="col-sm-12 no-padding auto-height" iteratorParam="id" rootText="业务数据库资源" xmenu="xmenu_dataSource"
                 iteratorSrc="/metadataServices/services/dataDictionaryFinder/getDataSourceIteratorTree.json">
 
         </youi:tree>

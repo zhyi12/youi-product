@@ -82,6 +82,10 @@ zuul:
       path: /metadataServices/**
       sensitiveHeaders: Set-Cookie
       serviceId: metadata-services
+    schedulerServices:
+      path: /schedulerServices/**
+      sensitiveHeaders: Set-Cookie
+      serviceId: scheduler-services
     upload:
       path: /fileserver/**
       sensitiveHeaders: Set-Cookie

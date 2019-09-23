@@ -36,7 +36,7 @@
 
 .youi-field.youi-fieldCron table.cronTable td.modePanel {
 	display: none;
-	width: 300px
+	width: 300px;
 }
 
 .youi-field.youi-fieldCron table.cronTable td.modePanel.show {
@@ -47,12 +47,13 @@
 	padding: 0 2px;
 	height: 28px;
 	width: 30px;
-	background: #eeffe9;
-	text-align: center
+	text-align: center;
 }
 
 .youi-field.youi-fieldCron .cron-expression {
-	border: 1px solid silver
+	border: 1px solid silver;
+	background: #f9f9f9;
+	padding: 2px;
 }
 
 .youi-field.youi-fieldCron input.mode-value{
@@ -67,4 +68,9 @@
   -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.youi-field.youi-fieldCron input.mode{
+	margin:3px;
+	cursor: pointer;
 }

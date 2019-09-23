@@ -12,7 +12,7 @@
 	<!-- grid-代码集列表-->
 	<youi:grid id="grid_codemap" idKeys="codemapId" caption="代码集列表" styleClass="grid-query-inline"
 				src="/baseServices/services/codemapManager/getPagerCodemaps.json"
-				showCheckbox="true" panel="false"
+				showCheckbox="true" panel="false" fixedFooter="true"
 				removeSrc="/baseServices/services/codemapManager/removeCodemap.json">
 		<youi:fieldLayout labelWidths="100,100">
 			<youi:fieldText operator="LIKE" property="code"  caption="代码集编码"/>

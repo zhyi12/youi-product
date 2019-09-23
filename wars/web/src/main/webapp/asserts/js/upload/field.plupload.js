@@ -8,7 +8,6 @@
  * Date: 2015-7-2
  */
 
-require("./field.core.js");
 (function($) {
 	var _log = $.youi.log;
 

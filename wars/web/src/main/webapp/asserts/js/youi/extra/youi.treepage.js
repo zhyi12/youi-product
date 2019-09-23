@@ -2,10 +2,6 @@
  * Created by zhouyi on 2018/8/7.
  */
 
-/**
- *
- */
-//require("./../youi.core.js");
 (function($) {
 
     var _STACK_URL_SPLIE_ = '###nodeId:';
