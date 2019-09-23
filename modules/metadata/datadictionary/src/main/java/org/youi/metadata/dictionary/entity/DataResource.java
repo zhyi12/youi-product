@@ -16,6 +16,7 @@
  */
 package org.youi.metadata.dictionary.entity;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.youi.framework.core.dataobj.Domain;
@@ -36,6 +37,7 @@ public class DataResource implements Domain{
 	private String id;//主键
 
 	@Column
+	@Length(max = 100)
 	private String caption;//资源名称
 
 	@Column

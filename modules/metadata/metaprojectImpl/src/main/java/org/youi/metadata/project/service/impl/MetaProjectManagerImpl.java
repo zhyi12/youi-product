@@ -17,6 +17,8 @@ package org.youi.metadata.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.youi.agency.entity.Agency;
+import org.youi.agency.service.AgencyClient;
 import org.youi.framework.core.orm.Condition;
 import org.youi.framework.core.orm.Order;
 import org.youi.framework.core.orm.Pager;
@@ -42,6 +44,9 @@ public class MetaProjectManagerImpl implements MetaProjectManager {
     @Autowired(required = false)
     private MetaProjectDao metaProjectDao;
 
+    @Autowired(required = false)
+    private AgencyClient agencyClient;
+
     @Override
     @EsbServiceMapping
     public MetaProject getMetaProject(@ServiceParam(name = "projectId") String id) {
@@ -59,6 +64,8 @@ public class MetaProjectManagerImpl implements MetaProjectManager {
             @OrderCollection Collection<Order> orders) {
 
         //TODO 按机构、行政区划、专业（businessKey） 过滤数据
+        //远程调用获取机构详细信息
+        Agency agency = agencyClient.getAgency(loginAgencyId);
 
         return metaProjectDao.complexFindByPager(pager,conditions,orders);
     }
@@ -66,9 +73,7 @@ public class MetaProjectManagerImpl implements MetaProjectManager {
     @Override
     @EsbServiceMapping
     public MetaProject saveMetaProject(MetaProject metaProject) {
-
         //
-
         //
         return metaProjectDao.save(metaProject);
     }
