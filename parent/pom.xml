@@ -422,6 +422,11 @@
         <module>../modules/base/agencyImpl</module>
         <module>../modules/base/agencyClient</module>
 
+        <module>../modules/server/common</module>
+        <module>../modules/server/servercaller</module>
+        <module>../modules/server/account</module>
+        <module>../modules/server/accountImpl</module>
+
         <module>../modules/metadata/common</module>
 
         <module>../modules/metadata/datadictionary</module>
@@ -441,6 +446,11 @@
         <module>../modules/exchange/engine</module>
 
         <module>../modules/decorators/modern</module>
+
+        <module>../modules/scheduler/common</module>
+        <module>../modules/scheduler/admin</module>
+        <module>../modules/scheduler/adminImpl</module>
+        <module>../modules/scheduler/quartz</module>
     </modules>
 
 </project>
