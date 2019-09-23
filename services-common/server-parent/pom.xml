@@ -61,6 +61,7 @@
         <youi.version>3.0.1-SNAPSHOT</youi.version>
         <mongodb.version>3.6.3</mongodb.version>
         <rabbitmq.client.version>5.4.3</rabbitmq.client.version>
+        <swagger2.version>2.9.2</swagger2.version>
         <youi.product.version>1.0.0-SNAPSHOT</youi.product.version>
     </properties>
 
@@ -83,6 +84,19 @@
                 <artifactId>amqp-client</artifactId>
                 <version>${rabbitmq.client.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
