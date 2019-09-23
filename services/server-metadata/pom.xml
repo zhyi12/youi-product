@@ -20,6 +20,11 @@
         <dependency>
             <groupId>org.youi.framework</groupId>
             <artifactId>youi-framework-services-boot</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.framework</groupId>
+            <artifactId>youi-framework-services-swagger</artifactId>
             <version>${youi.version}</version>
         </dependency>
 
