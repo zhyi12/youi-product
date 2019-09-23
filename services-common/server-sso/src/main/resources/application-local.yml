@@ -44,6 +44,11 @@ security:
       authorized-grant-types: authorization_code,refresh_token,password
       scope: auth_client
 youi:
+  server:
+    caller:
+      keystoreFile: classpath:keys/youi.keystore
+      keystoreName: youi
+      keystorePassword: youi01
   sso:
     enableValidateCode: false
     tokenExpire: 30
