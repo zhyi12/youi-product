@@ -31,7 +31,7 @@ spring:
   data:
     mongodb:
       host: 192.168.173.130:27515
-      database: stats2-filing
+      database: youi3-common
       username: query
       password: query123
 security:

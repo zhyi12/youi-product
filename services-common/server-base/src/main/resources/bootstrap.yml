@@ -3,4 +3,7 @@ spring:
     name: base-services
   cloud:
     config:
-      uri: ${SPRING_CONFIG_URI:http://localhost:8761}
+      discovery:
+        enabled: true
+        service-id: config-services
+      label: master

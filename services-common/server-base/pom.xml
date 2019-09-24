@@ -38,6 +38,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-client</artifactId>
+            <version>2.0.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.youi.framework</groupId>
             <artifactId>youi-framework-services-swagger</artifactId>
             <version>${youi.version}</version>
