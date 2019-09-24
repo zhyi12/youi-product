@@ -1,0 +1,215 @@
+{
+  "records": [
+    {
+      "name": "BASE-SERVICES",
+      "instance": [
+        {
+          "instanceId": "172.20.10.2:base-services:8258",
+          "app": "BASE-SERVICES",
+          "appGroupName": null,
+          "ipAddr": "172.20.10.2",
+          "sid": "na",
+          "homePageUrl": "http://172.20.10.2:8258/",
+          "statusPageUrl": "http://172.20.10.2:8258/actuator/info",
+          "healthCheckUrl": "http://172.20.10.2:8258/actuator/health",
+          "secureHealthCheckUrl": null,
+          "vipAddress": "base-services",
+          "secureVipAddress": "base-services",
+          "countryId": 1,
+          "dataCenterInfo": {
+            "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+            "name": "MyOwn"
+          },
+          "hostName": "172.20.10.2",
+          "status": "UP",
+          "leaseInfo": {
+            "renewalIntervalInSecs": 30,
+            "durationInSecs": 90,
+            "registrationTimestamp": 1569317185974,
+            "lastRenewalTimestamp": 1569317726233,
+            "evictionTimestamp": 0,
+            "serviceUpTimestamp": 1569317185458
+          },
+          "isCoordinatingDiscoveryServer": false,
+          "metadata": {
+            "management.port": "8258"
+          },
+          "lastUpdatedTimestamp": 1569317185974,
+          "lastDirtyTimestamp": 1569317185451,
+          "actionType": "ADDED",
+          "asgName": null,
+          "overriddenStatus": "UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "CONFIG-SERVICES",
+      "instance": [
+        {
+          "instanceId": "172.20.10.2:config-services:9118",
+          "app": "CONFIG-SERVICES",
+          "appGroupName": null,
+          "ipAddr": "172.20.10.2",
+          "sid": "na",
+          "homePageUrl": "http://172.20.10.2:9118/",
+          "statusPageUrl": "http://172.20.10.2:9118/actuator/info",
+          "healthCheckUrl": "http://172.20.10.2:9118/actuator/health",
+          "secureHealthCheckUrl": null,
+          "vipAddress": "config-services",
+          "secureVipAddress": "config-services",
+          "countryId": 1,
+          "dataCenterInfo": {
+            "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+            "name": "MyOwn"
+          },
+          "hostName": "172.20.10.2",
+          "status": "UP",
+          "leaseInfo": {
+            "renewalIntervalInSecs": 30,
+            "durationInSecs": 90,
+            "registrationTimestamp": 1569317160550,
+            "lastRenewalTimestamp": 1569317730563,
+            "evictionTimestamp": 0,
+            "serviceUpTimestamp": 1569317159902
+          },
+          "isCoordinatingDiscoveryServer": false,
+          "metadata": {
+            "management.port": "9118",
+            "configPath": "config"
+          },
+          "lastUpdatedTimestamp": 1569317160550,
+          "lastDirtyTimestamp": 1569317159805,
+          "actionType": "ADDED",
+          "asgName": null,
+          "overriddenStatus": "UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "METADATA-SERVICES",
+      "instance": [
+        {
+          "instanceId": "172.20.10.2:metadata-services:8259",
+          "app": "METADATA-SERVICES",
+          "appGroupName": null,
+          "ipAddr": "192.168.173.1",
+          "sid": "na",
+          "homePageUrl": "http://192.168.173.1:8259/",
+          "statusPageUrl": "http://192.168.173.1:8259/actuator/info",
+          "healthCheckUrl": "http://192.168.173.1:8259/actuator/health",
+          "secureHealthCheckUrl": null,
+          "vipAddress": "metadata-services",
+          "secureVipAddress": "metadata-services",
+          "countryId": 1,
+          "dataCenterInfo": {
+            "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+            "name": "MyOwn"
+          },
+          "hostName": "192.168.173.1",
+          "status": "UP",
+          "leaseInfo": {
+            "renewalIntervalInSecs": 30,
+            "durationInSecs": 90,
+            "registrationTimestamp": 1569317170668,
+            "lastRenewalTimestamp": 1569317710793,
+            "evictionTimestamp": 0,
+            "serviceUpTimestamp": 1569317170159
+          },
+          "isCoordinatingDiscoveryServer": false,
+          "metadata": {
+            "management.port": "8259"
+          },
+          "lastUpdatedTimestamp": 1569317170668,
+          "lastDirtyTimestamp": 1569317170154,
+          "actionType": "ADDED",
+          "asgName": null,
+          "overriddenStatus": "UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "SERVER-SSO",
+      "instance": [
+        {
+          "instanceId": "172.20.10.2:server-sso:8868",
+          "app": "SERVER-SSO",
+          "appGroupName": null,
+          "ipAddr": "192.168.173.1",
+          "sid": "na",
+          "homePageUrl": "http://localhost:8868/",
+          "statusPageUrl": "http://localhost:8868/info",
+          "healthCheckUrl": "http://localhost:8868/health",
+          "secureHealthCheckUrl": null,
+          "vipAddress": "server-sso",
+          "secureVipAddress": "server-sso",
+          "countryId": 1,
+          "dataCenterInfo": {
+            "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+            "name": "MyOwn"
+          },
+          "hostName": "localhost",
+          "status": "UP",
+          "leaseInfo": {
+            "renewalIntervalInSecs": 30,
+            "durationInSecs": 90,
+            "registrationTimestamp": 1569317173497,
+            "lastRenewalTimestamp": 1569317713625,
+            "evictionTimestamp": 0,
+            "serviceUpTimestamp": 1569317172990
+          },
+          "isCoordinatingDiscoveryServer": false,
+          "metadata": {
+            "management.port": "8868"
+          },
+          "lastUpdatedTimestamp": 1569317173497,
+          "lastDirtyTimestamp": 1569317172984,
+          "actionType": "ADDED",
+          "asgName": null,
+          "overriddenStatus": "UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "WEB",
+      "instance": [
+        {
+          "instanceId": "172.20.10.2:web:8080",
+          "app": "WEB",
+          "appGroupName": null,
+          "ipAddr": "192.168.173.1",
+          "sid": "na",
+          "homePageUrl": "http://192.168.173.1:8080/",
+          "statusPageUrl": "http://192.168.173.1:8080/info",
+          "healthCheckUrl": "http://192.168.173.1:8080/health",
+          "secureHealthCheckUrl": null,
+          "vipAddress": "web",
+          "secureVipAddress": "web",
+          "countryId": 1,
+          "dataCenterInfo": {
+            "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+            "name": "MyOwn"
+          },
+          "hostName": "192.168.173.1",
+          "status": "UP",
+          "leaseInfo": {
+            "renewalIntervalInSecs": 30,
+            "durationInSecs": 90,
+            "registrationTimestamp": 1569317172871,
+            "lastRenewalTimestamp": 1569317712993,
+            "evictionTimestamp": 0,
+            "serviceUpTimestamp": 1569317172357
+          },
+          "isCoordinatingDiscoveryServer": false,
+          "metadata": {
+            "management.port": "8080"
+          },
+          "lastUpdatedTimestamp": 1569317172871,
+          "lastDirtyTimestamp": 1569317172353,
+          "actionType": "ADDED",
+          "asgName": null,
+          "overriddenStatus": "UNKNOWN"
+        }
+      ]
+    }
+  ]
+}

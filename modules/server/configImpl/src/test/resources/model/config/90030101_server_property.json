@@ -1,0 +1,24 @@
+{
+  "id":"90030101",
+  "idAttrName":"id",
+  "table":"youi_server_property",
+  "name":"serverProperty",
+  "caption":"服务参数",
+  "attributes":[{
+    "isId":true,
+    "name":"id",
+    "caption":"主键"
+  },{
+    "name":"propName",
+    "caption":"参数名"
+  },{
+    "name":"propValue",
+    "caption":"参数值"
+  },{
+    "name":"profile",
+    "caption":"配置类别"
+  },{
+    "name":"serverId",
+    "caption":"服务ID"
+  }]
+}
