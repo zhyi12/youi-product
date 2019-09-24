@@ -1,0 +1,52 @@
+server:
+  port: 9118
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    max-connections: 20000
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      basePath: /
+      expose: [metrics,info,health]
+info:
+  app:
+    name: ${spring.application.name}
+    description: ${spring.application.name}
+    version: 1.0.0
+  cloud:
+    inetutils:
+      preferredNetworks:
+        - 192.168.173
+  zipkin:
+    baseUrl: http://192.168.173.130:9411
+  sleuth:
+    enabled: true
+    sampler:
+      probability: 1.0
+spring:
+  data:
+    mongodb:
+      host: 192.168.173.130:27515
+      database: youi3-common
+      username: query
+      password: query123
+  cloud:
+    config:
+      server:
+        prefix: config
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:8868/oauth/token
+      userAuthorizationUri: http://localhost:8868/oauth/authorize
+    resource:
+      id: ${spring.application.name}
+      user-info-uri: http://localhost:8868/oauth/client
+      prefer-token-info: false
