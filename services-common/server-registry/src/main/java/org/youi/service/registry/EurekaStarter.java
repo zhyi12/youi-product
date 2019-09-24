@@ -15,14 +15,20 @@
  */
 package org.youi.service.registry;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.netflix.discovery.shared.Application;
+import com.netflix.eureka.EurekaServerContextHolder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author zhouyi
@@ -32,14 +38,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @EnableEurekaServer
-@EnableConfigServer
 @EnableDiscoveryClient      //让该应用注册成为eureka客户端，以获得服务发现的能力
 @RestController
 public class EurekaStarter {
 
-    @RequestMapping(value = "/hello" , method = RequestMethod.GET)
-    public String sayHello(){
-        return "成功访问服务";
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    @RequestMapping(value = "/appList" , method = RequestMethod.GET)
+    @ResponseBody
+    public String appList(){
+        List<Application> records =  EurekaServerContextHolder.getInstance().getServerContext().getRegistry().getSortedApplications();
+        try {
+            return objectMapper.writeValueAsString(records);
+        } catch (JsonProcessingException e) {
+            //e.printStackTrace();
+        }
+        return "[]";
     }
 
     public static void main(String[] args) throws Exception {
