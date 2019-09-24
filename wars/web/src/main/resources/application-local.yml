@@ -86,6 +86,10 @@ zuul:
       path: /schedulerServices/**
       sensitiveHeaders: Set-Cookie
       serviceId: scheduler-services
+    configServices:
+      path: /configServices/**
+      sensitiveHeaders: Set-Cookie
+      serviceId: config-services
     upload:
       path: /fileserver/**
       sensitiveHeaders: Set-Cookie

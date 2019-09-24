@@ -119,7 +119,6 @@ children:
             id: agencyTaskGroup
             text: 机构方案组
             pageUrl: page/youi.metadata.taskgroup/agencyTaskGroup.html
-
           -
             id: dataResourceGroup
             text: 资源组
@@ -128,7 +127,6 @@ children:
             id: agencyDataResourceGroup
             text: 机构资源组
             pageUrl: page/youi.metadata.taskgroup/agencyTaskGroup.html
-
 
   -
     id: dataGather
@@ -192,22 +190,51 @@ children:
           text: 图表管理
           pageUrl: page/youi.visualization.graphics/index.html
       -
-       id: analysis
-       text: 分析报告
-       children:
-        -
-          id: analysis-design
-          text: 分析报告管理
-          pageUrl: page/youi.analysis.design/index.html
+        id: analysis
+        text: 分析报告
+        children:
+          -
+            id: analysis-design
+            text: 分析报告管理
+            pageUrl: page/youi.analysis.design/index.html
   -
     id: system
     text: 系统管理
     icon: gear
     children:
       -
-        id: user
-        text: 用户管理
+        id: sysconfig
+        text: 系统配置
+        children:
+          -
+            id: roleadmin
+            text: 系统角色
+            pageUrl: page/youi.admin.role/index.html
+          -
+            id: menuadmin
+            text: 系统菜单
+            pageUrl: page/youi.admin.menu/index.html
+          -
+            id: codemap
+            text: 代码集
+            pageUrl: page/youi.admin.codemap/index.html
       -
-        id: codemap
-        text: 代码集
-        pageUrl: page/youi.admin.codemap/index.html
+        id: scheduler
+        text: 定时调度
+        children:
+          -
+            id: job
+            text: 任务管理
+            pageUrl: page/youi.scheduler.job/index.html
+      -
+        id: microserver
+        text: 微服务
+        children:
+          -
+            id: serverdiscovery
+            text: 服务发现
+            pageUrl: page/youi.server.discovery/index.html
+          -
+            id: serverproperty
+            text: 服务参数
+            pageUrl: page/youi.server.property/index.html
