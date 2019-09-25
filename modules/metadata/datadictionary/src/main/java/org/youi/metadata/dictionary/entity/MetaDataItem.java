@@ -17,6 +17,11 @@ package org.youi.metadata.dictionary.entity;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.youi.framework.core.dataobj.cube.Item;
+import org.youi.metadata.common.model.IMetaObject;
+
+import javax.persistence.Column;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 元数据字典项
@@ -25,25 +30,54 @@ import org.youi.framework.core.dataobj.cube.Item;
  * @since 2.0.0
  */
 @Document("youi_metadata_item")
-public class MetaDataItem extends Item{
+public class MetaDataItem extends Item implements IMetaObject {
+
+    private String folderId;//字典项文件夹  - 数据元分类编号
 
     private String dataType;//数据类型
 
-    private String name;//元数据标准名称
+    private String oldName;//元数据标准名称(原名称)
 
-    private String description;//元数据描述
+    @Column
+    private String name;//数据字段名称(修改后)
 
-    private String folderId;//字典项文件夹
+    @Column
+    private String code;//数据项编号
+
+    @Column
+    private String convert;//代码集
+
+    private String description;//元数据描述 - 说明
+
+    @Column
+    private String version;//版本
+
+    private Long updateTime;//变更时间
+
+    private String updateDescription;//变更内容
+
+    private String updateOperator;//变更人
+
+    private String owner;//    数据责任主体
+
+    private String grade;//    标准层级
+
+    private String  scope;//    备注适用范围
+
+    private String accordingTo;//    国标数据源编号
 
     private String dataLength;//数据长度
 
     private String dataPrecision;//数据精度
 
+    @Column
     private String dataFormat;//数据格式
 
     private String defaultValue;//默认值
 
     private Boolean nullable = Boolean.TRUE;
+
+    private Map<String, String[]> datas = new HashMap<>();
 
     public String getDataType() {
         return dataType;
@@ -116,4 +150,103 @@ public class MetaDataItem extends Item{
     public void setNullable(Boolean nullable) {
         this.nullable = nullable;
     }
+
+    public String getOldName() {
+        return oldName;
+    }
+
+    public void setOldName(String oldName) {
+        this.oldName = oldName;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public Long getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getUpdateDescription() {
+        return updateDescription;
+    }
+
+    public void setUpdateDescription(String updateDescription) {
+        this.updateDescription = updateDescription;
+    }
+
+    public String getUpdateOperator() {
+        return updateOperator;
+    }
+
+    public void setUpdateOperator(String updateOperator) {
+        this.updateOperator = updateOperator;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
+    public String getAccordingTo() {
+        return accordingTo;
+    }
+
+    public void setAccordingTo(String accordingTo) {
+        this.accordingTo = accordingTo;
+    }
+
+    public String getConvert() {
+        return convert;
+    }
+
+    public void setConvert(String convert) {
+        this.convert = convert;
+    }
+
+    @Override
+    public Map<String, String[]> getDatas() {
+        return datas;
+    }
+
+    public void setDatas(Map<String, String[]> datas) {
+        this.datas = datas;
+    }
+
+
 }
