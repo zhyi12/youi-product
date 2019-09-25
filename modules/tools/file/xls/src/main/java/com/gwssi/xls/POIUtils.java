@@ -13,10 +13,6 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * POI related utils
- * Created by liu on 2016/12/5.
- */
 public class POIUtils {
     private static DataFormatter formatter = new DataFormatter();
 
@@ -95,8 +91,6 @@ public class POIUtils {
     private static boolean isReservedDate(int formatIndex) {
         return  (formatIndex >= 27 && formatIndex <= 31);
     }
-
-    
 
     private static String formatReservedDate(Cell cell) {
     	DateFormat FORMAT_reserved_0x1F = new SimpleDateFormat("yyyy年M月d日");
