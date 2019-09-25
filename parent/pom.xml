@@ -94,6 +94,7 @@
 
         <youi.version>3.0.1-SNAPSHOT</youi.version>
         <springboot.version>2.0.0.M7</springboot.version>
+        <spring.cloud.version>2.0.0.RELEASE</spring.cloud.version>
         <springframework.version>5.1.3.RELEASE</springframework.version>
         <springframework.integration.version>5.1.1.RELEASE</springframework.integration.version>
         <tomcat.version>8.5.23</tomcat.version>
@@ -426,6 +427,8 @@
         <module>../modules/server/servercaller</module>
         <module>../modules/server/account</module>
         <module>../modules/server/accountImpl</module>
+        <module>../modules/server/config</module>
+        <module>../modules/server/configImpl</module>
 
         <module>../modules/metadata/common</module>
 
@@ -451,6 +454,11 @@
         <module>../modules/scheduler/admin</module>
         <module>../modules/scheduler/adminImpl</module>
         <module>../modules/scheduler/quartz</module>
+
+        <module>../modules/tools/file/xls</module>
+
+        <module>../modules/tools/rowdata/common</module>
+        <module>../modules/tools/rowdata/xls</module>
     </modules>
 
 </project>
