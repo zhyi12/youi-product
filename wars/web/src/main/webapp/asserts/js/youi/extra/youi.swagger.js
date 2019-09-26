@@ -16,7 +16,7 @@
          * @private
          */
         _initWidget:function () {
-
+            this.contentElem = this.element.find('>.'+this.widgetName+'-content').accordion();
             this._loadApi();
         },
 
@@ -52,12 +52,12 @@
             });
 
             for(var iTag in tagHtmls){
-                htmls.push('<div><div>'+iTag+'</div>');
+                htmls.push('<div class="youi-panel panel panel-default"><div style="padding:5px;" class="panel-heading panel-title">'+iTag+'</div><div class="panel-body no-padding">');
                 htmls = htmls.concat(tagHtmls[iTag]);
-                htmls.push('</div>');
+                htmls.push('</div></div>');
             }
 
-            this.element.html(htmls.join(''));
+            this.contentElem.html(htmls.join(''));
         }
 
     }));
@@ -73,10 +73,11 @@
     function _buildApiItemHtml(httpMethod,apiItem,path) {
         var htmls = [];
 
-        htmls.push('<div class="option-item bg-info ">');
+        htmls.push('<div class="option-item">');
 
         htmls.push('<span class="col-sm-1">'+httpMethod+'</span>');
-        htmls.push('<span class="col-sm-11">'+path+'</span>');
+        htmls.push('<span class="col-sm-6">'+path+'</span>');
+        htmls.push('<span class="col-sm-5">'+(apiItem.description||'')+'</span>');
 
         htmls.push('</div>');
 
