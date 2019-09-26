@@ -6,7 +6,8 @@
     <youi:ajaxUrl name="apiUrl" src="/${param.serverId}/v2/api-docs"/>
 
     <%--  --%>
-    <youi:customWidget widgetName="swagger" name="swagger" urls="apiUrl">
+    <youi:customWidget widgetName="swagger" name="swagger" urls="apiUrl" styleClass="no-padding">
 
     </youi:customWidget>
+
 </youi:page>
