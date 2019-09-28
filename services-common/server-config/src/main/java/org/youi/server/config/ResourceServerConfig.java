@@ -37,7 +37,6 @@ import java.util.Map;
  * @see
  * @since 2.0.0
  */
-
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
@@ -74,7 +73,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         });
         return accessTokenConverter;
     }
-
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
