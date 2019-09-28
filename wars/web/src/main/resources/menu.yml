@@ -127,6 +127,32 @@ children:
             id: agencyDataResourceGroup
             text: 机构资源组
             pageUrl: page/youi.metadata.taskgroup/agencyTaskGroup.html
+  -
+    id: datacenter
+    text: 中心库
+    icon: list
+    children:
+      -
+        id: odsdata
+        text: 贴源数据
+        children:
+          -
+            id: odsloader
+            text: 贴源数据加载
+            pageUrl: page/youi.datacenter.ods.loader/index.html
+      -
+        id: dwdata
+        text: 标准数据
+        children:
+          -
+            id: dwdatamodel
+            text: 数据模型
+      -
+        id: domain-data
+        text: 主题数据
+      -
+        id: subject-data
+        text: 专题数据
 
   -
     id: dataGather
