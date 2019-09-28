@@ -36,4 +36,11 @@ public interface DataTableColumnDao extends DaoMongo<DataTableColumn, String>  {
      * @return
      */
     List<DataTableColumn> findByDataResourceIdAndTableName(String dataResourceId, String tableName);
+
+    /**
+     *
+     * @param dataResourceId
+     * @param tableName
+     */
+    void removeByDataResourceIdAndTableName(String dataResourceId, String tableName);
 }

@@ -36,6 +36,24 @@
 			<version>${project.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.youi.product</groupId>
+			<artifactId>youi-tools-rowdata-xls</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.youi.framework</groupId>
+			<artifactId>youi-framework-mongo-fileClient</artifactId>
+		</dependency>
+
+		<!-- only for Generate SQL script-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.17.Final</version>
+		</dependency>
+
 		<!-- test -->
 		<dependency>
 			<groupId>org.youi.framework</groupId>

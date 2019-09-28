@@ -46,25 +46,25 @@ public class DataDictionaryFinder implements IDataDictionaryFinder{
     private final static String RESOURCE_TREE_ID_SPLIT = "|";//资源树ID的分隔符
 
     @Override
-    @EsbServiceMapping
+    @EsbServiceMapping(trancode = "8001030501",caption = "查询资源数据库的catalog集合")
     public List<Item> findDataCatalogs() {
         return buildItems(queryService.queryCatalogs());
     }
 
     @Override
-    @EsbServiceMapping
+    @EsbServiceMapping(trancode = "8001030502",caption = "根据catalog获取schemas集合")
     public List<Item> findSchemas(@ServiceParam(name = "catalog") String catalog) {
         return buildItems(queryService.querySchemas(catalog));
     }
 
     @Override
-    @EsbServiceMapping
+    @EsbServiceMapping(trancode = "8001030503",caption = "根据catalog和schema获取table集合")
     public List<Item> findTables(@ServiceParam(name = "catalog") String catalog, @ServiceParam(name = "schema") String schema) {
         return buildItems(queryService.queryTables(catalog,schema));
     }
 
     @Override
-    @EsbServiceMapping
+    @EsbServiceMapping(trancode = "8001030504",caption = "根据catalog,schem,tableName 获取表的列集合")
     public List<Item> findTableColumns(
             @ServiceParam(name = "catalog") String catalog,
             @ServiceParam(name = "schema") String schema,
@@ -73,7 +73,7 @@ public class DataDictionaryFinder implements IDataDictionaryFinder{
     }
 
     @Override
-    @EsbServiceMapping
+    @EsbServiceMapping(trancode = "8001030504",caption = "分级获取数据资源树")
     public List<TreeNode> getDataSourceIteratorTree(@ServiceParam(name = "id")String parentId){
         if(StringUtils.isEmpty(parentId)){
             return buildTreeNodes(buildItems(queryService.queryCatalogs()),"",DataQueryConstants.DATA_RESOURCE_CATALOG);

@@ -65,6 +65,9 @@ public class DataTableManagerImpl implements DataTableManager{
     @Autowired
     private IDataDictionaryFinder dataDictionaryFinder;
 
+    @Autowired
+    private DataTableSqlBuilder dataTableSqlBuilder;
+
     /**
      * setter
      * @param dataTableDao

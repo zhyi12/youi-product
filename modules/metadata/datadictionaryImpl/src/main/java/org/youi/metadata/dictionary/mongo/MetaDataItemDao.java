@@ -19,6 +19,8 @@ package org.youi.metadata.dictionary.mongo;
 import org.youi.framework.mongo.DaoMongo;
 import org.youi.metadata.dictionary.entity.MetaDataItem;
 
+import java.util.List;
+
 /**
  * <p>系统描述: </p>
  * <p>功能描述: MetaDataItem-数据持久层接口</p>
@@ -26,5 +28,18 @@ import org.youi.metadata.dictionary.entity.MetaDataItem;
  * @since 1.0.0
  */
 public interface MetaDataItemDao extends DaoMongo<MetaDataItem, String>  {
-	
+
+    /**
+     * 根据名称集合精确匹配
+     * @param texts
+     * @return
+     */
+    List<MetaDataItem> findByTextIn(String[] texts);
+
+    /**
+     *
+     * @param names
+     * @return
+     */
+    List<MetaDataItem> findByNameIn(String[] names);
 }

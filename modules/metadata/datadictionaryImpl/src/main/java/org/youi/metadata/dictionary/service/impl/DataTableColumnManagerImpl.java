@@ -21,14 +21,12 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.youi.framework.core.orm.Condition;
 import org.youi.framework.core.orm.Order;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
-import org.youi.framework.esb.annotation.ConditionCollection;
-import org.youi.framework.esb.annotation.EsbServiceMapping;
-import org.youi.framework.esb.annotation.OrderCollection;
-import org.youi.framework.esb.annotation.ServiceParam;
+import org.youi.framework.esb.annotation.*;
 
 import org.youi.metadata.dictionary.entity.DataTableColumn;
 import org.youi.metadata.dictionary.mongo.DataTableColumnDao;
@@ -106,10 +104,30 @@ public class DataTableColumnManagerImpl implements DataTableColumnManager{
     	dataTableColumnDao.remove(id);
     }
 
+    @EsbServiceMapping(trancode="8001030406",caption="更新数据库表列集合")
+    public void updateDataTableColumns(
+            @ServiceParam(name="dataResourceId") String dataResourceId,
+            @ServiceParam(name="tableName") String tableName,
+            @DomainCollection(domainClazz = DataTableColumn.class,name = "columns") List<DataTableColumn> columns){
+        //删除原有的数据
+        dataTableColumnDao.removeByDataResourceIdAndTableName(dataResourceId,tableName);
 
+        if(!CollectionUtils.isEmpty(columns)){
+            columns.forEach(dataTableColumn -> {
+                dataTableColumn.setDataResourceId(dataResourceId);
+                dataTableColumn.setTableName(tableName);
+            });
+            dataTableColumnDao.saveAll(columns);
+        }
+    }
+
+    /**
+     *
+     * @param dataResourceId
+     * @param tableName
+     * @return
+     */
     public List<DataTableColumn> findByDataResourceIdAndTableName(String dataResourceId, String tableName){
-
         return dataTableColumnDao.findByDataResourceIdAndTableName(dataResourceId,tableName);
-
     }
 }

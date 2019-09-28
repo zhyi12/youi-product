@@ -16,6 +16,12 @@
 */
 package org.youi.metadata.dictionary.service;
 
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
+import org.hibernate.tool.schema.TargetType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -26,6 +32,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.youi.framework.util.PropertyUtils;
@@ -34,6 +42,10 @@ import static org.mockito.Mockito.*;
 
 import org.youi.metadata.dictionary.entity.DataTable;
 import org.youi.metadata.dictionary.mongo.DataTableDao;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.EnumSet;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= {ServiceTestConfig.class})
@@ -50,6 +62,10 @@ public class DataTableManagerTest{
 
     @Mock
     private DataTableDao dataTableDao;
+
+    @Value("classpath:mapping.xml")
+    private Resource mappingResource;
+
 
     @Before
     public void setup(){
@@ -82,6 +98,38 @@ public class DataTableManagerTest{
         String dataTableId = "id";
         dataTableManager.removeDataTable(dataTableId);
         verify(dataTableDao, times(1)).remove(dataTableId);
+    }
+
+
+    @Test
+    public void testSchemaExport() throws IOException {
+        ServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure()
+                .build();
+
+        byte[] bytes = ("<hibernate-mapping>\n" +
+                "    <class name=\"STATS_PERSON\">\n" +
+                "        <id name=\"ID\" type=\"java.lang.Integer\">\n" +
+                "        </id>\n" +
+                "        <property name=\"NAME\" type=\"java.lang.String\"/>\n" +
+                "        <property name=\"AGE\" type=\"java.lang.Integer\"/>\n" +
+                "    </class>\n" +
+                "\n" +
+                "    <class name=\"STATS_AGENCY\" >\n" +
+                "        <id name=\"ID\" type=\"java.lang.Integer\">\n" +
+                "        </id>\n" +
+                "    </class>\n" +
+                "</hibernate-mapping>").getBytes();
+
+        ByteArrayInputStream xmlInput = new ByteArrayInputStream(bytes);
+
+        Metadata metadata = new MetadataSources(registry).addInputStream(xmlInput).buildMetadata();
+
+        SchemaExport export = new SchemaExport();
+        export.setFormat(true);
+        export.setDelimiter(";");
+        export.setOutputFile(mappingResource.getFile().getAbsolutePath()+".sql");
+        export.create(EnumSet.of(TargetType.SCRIPT),metadata);
     }
 
 }

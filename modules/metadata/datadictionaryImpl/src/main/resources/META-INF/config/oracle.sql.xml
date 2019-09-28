@@ -1,0 +1,8 @@
+<hibernate-configuration>
+    <session-factory>
+        <!-- 配置Hibernate方言，即使用的不同的数据库类型，该方言支持事务 -->
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <!-- 数据库编码方式 -->
+        <property name="Connection.characterEncoding">UTF-8</property>
+    </session-factory>
+</hibernate-configuration>

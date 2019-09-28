@@ -16,11 +16,15 @@
  */
 package org.youi.metadata.dictionary.service.impl;
 
-import java.util.List;
-import java.util.Collection;
+import java.util.*;
 
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.youi.fileserver.filestore.service.FileClientManager;
+import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.core.orm.Condition;
 import org.youi.framework.core.orm.Order;
 import org.youi.framework.core.orm.Pager;
@@ -33,6 +37,10 @@ import org.youi.framework.esb.annotation.ServiceParam;
 import org.youi.metadata.dictionary.entity.MetaDataItem;
 import org.youi.metadata.dictionary.mongo.MetaDataItemDao;
 import org.youi.metadata.dictionary.service.MetaDataItemManager;
+import org.youi.rowdata.common.model.BatchResult;
+import org.youi.tools.indexing.entity.IndexResult;
+import org.youi.tools.indexing.entity.MatchingItem;
+import org.youi.tools.indexing.service.IndexingService;
 
 /**
  * <p>系统描述: </p>
@@ -45,6 +53,15 @@ public class MetaDataItemManagerImpl implements MetaDataItemManager{
 
     @Autowired(required = false)
 	private MetaDataItemDao metaDataItemDao;
+
+    @Autowired(required = false)
+    private IndexingService indexingService;//本地索引
+
+    @Autowired(required = false)
+    private FileClientManager fileClientManager;//文件客户端
+
+    @Autowired
+    private MetaDataItemImporter metaDataItemImporter;
 
     /**
      * setter
@@ -78,7 +95,7 @@ public class MetaDataItemManagerImpl implements MetaDataItemManager{
 	public PagerRecords getPagerMetaDataItems(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=MetaDataItem.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders) {
-		PagerRecords pagerRecords = metaDataItemDao.findByPager(pager, conditions, orders);
+		PagerRecords pagerRecords = metaDataItemDao.complexFindByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
     /**
@@ -104,5 +121,80 @@ public class MetaDataItemManagerImpl implements MetaDataItemManager{
     @Override
     public void removeMetaDataItem(@ServiceParam(name="id") String id){
     	metaDataItemDao.remove(id);
+    }
+
+    @EsbServiceMapping(trancode="8001030106",caption="多文本匹配数据项")
+    public List<MatchingItem> matchingMetaDataItems(@ServiceParam(name="text")String[] texts){
+        List<Item> itemList = new ArrayList<>();
+        int index = 1;
+        for(String text:texts){
+            itemList.add(new Item(Integer.toString(index++),text));
+        }
+        Map<String,MetaDataItem> fullMatches = findFullMatches(texts);
+
+        //检索数据
+        List<MatchingItem> matchingItems = indexingService.matchingItems(itemList, metaDataItemDao.commonQuery(null, null), (domain) -> {
+            List<TextField> fields = new ArrayList<>();
+            MetaDataItem metaDataItem = (MetaDataItem) domain;
+            fields.add(new TextField("id", metaDataItem.getName(), Field.Store.YES));
+            fields.add(new TextField("text", metaDataItem.getText(), Field.Store.YES));
+            fields.add(new TextField("fullText", metaDataItem.getDescription(), Field.Store.YES));
+            return fields;
+        });
+        //补充处理完全匹配的规则，返回完全匹配的项
+        matchingItems.forEach(matchingItem -> {
+            if(fullMatches.containsKey(matchingItem.getText())){
+                MetaDataItem fullMatched = fullMatches.get(matchingItem.getText());
+                List<IndexResult> indexResults = new ArrayList<>();
+                IndexResult indexResult = new IndexResult();
+                indexResult.setId(fullMatched.getName());
+                indexResult.setText(matchingItem.getText());
+                indexResult.setScore(10f);
+                indexResults.add(indexResult);
+                matchingItem.setMappedId(fullMatched.getName());
+                matchingItem.setText(fullMatched.getText());
+                matchingItem.setMatchingResults(indexResults);
+            }
+        });
+        return matchingItems;
+    }
+
+    @EsbServiceMapping(trancode="8001030107",caption="检索")
+    public List<MetaDataItem> searchByTerm(@ServiceParam(name = "term") String term){
+        return metaDataItemDao.findStartByTermOnAOrB("text","name",term);
+    }
+
+    @EsbServiceMapping(trancode="8001030108",caption="从xls文件导入数据项")
+    public List<BatchResult> importFromXls(@ServiceParam(name = "xlsFileName") String xlsFileName){
+        //消费文件，使用后文件自动清理
+        return fileClientManager.consumeFile(xlsFileName,(file -> {
+            return metaDataItemImporter.fromXls(file);
+        }));
+    }
+
+    /**
+     * 根据name集合查询数据项集合
+     * @param dataItemIds
+     * @return
+     */
+    public List<MetaDataItem> getMetaDataItemByNames(List<String> dataItemIds){
+        return metaDataItemDao.findByNameIn(dataItemIds.toArray(new String[0]));
+    }
+
+    /**
+     * 从数据使用全文本匹配查询
+     * @param texts 匹配的文本集合
+     * @return 返回map对象健值为：text，MetaDataItem
+     */
+    private Map<String,MetaDataItem> findFullMatches(String[] texts) {
+        Map<String,MetaDataItem> fullMatches = new HashMap<>();
+        //完全匹配
+        List<MetaDataItem> metaDataItems = metaDataItemDao.findByTextIn(texts);
+        for(MetaDataItem metaDataItem:metaDataItems){
+            if(ArrayUtils.contains(texts,metaDataItem.getText())){
+                fullMatches.put(metaDataItem.getText(),metaDataItem);
+            }
+        }
+        return fullMatches;
     }
 }

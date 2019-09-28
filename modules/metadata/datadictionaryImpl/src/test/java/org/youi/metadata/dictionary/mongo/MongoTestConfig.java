@@ -15,10 +15,15 @@
  */
 package org.youi.metadata.dictionary.mongo;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.youi.framework.mongo.BaseDaoMongo;
+import org.youi.metadata.dictionary.entity.MetaDataItem;
+import org.youi.rowdata.xls.XlsRowFileExecutor;
+import org.youi.tools.indexing.service.IndexingService;
+import org.youi.tools.indexing.service.impl.IndexingServiceImpl;
 
 /**
  * @author zhouyi
@@ -30,5 +35,17 @@ import org.youi.framework.mongo.BaseDaoMongo;
 @PropertySource("classpath:application-test.properties")
 public class MongoTestConfig {
 
+    /**
+     * 数据项xls文件解析工具
+     * @return
+     */
+    @Bean
+    public XlsRowFileExecutor<MetaDataItem> metaDataItemXlsRowFileExecutor(){
+        return new XlsRowFileExecutor<>();
+    }
 
+    @Bean
+    public IndexingService indexingService(){
+        return new IndexingServiceImpl();
+    }
 }
