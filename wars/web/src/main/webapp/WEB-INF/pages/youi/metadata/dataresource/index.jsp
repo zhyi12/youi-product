@@ -10,7 +10,7 @@
                   subpageId="schemaTables" caption="数据表同步" type="dialog"/>
 
     <youi:xmenu id="xmenu_dataSource">
-        <youi:xmenuItem name="addToDataSource" caption="添加到资源目录" groups="schema"/>
+        <youi:xmenuItem name="addToDataSource" caption="添加到catalog" groups="schema"/>
     </youi:xmenu>
 
     <youi:customWidget name="page_spliter" widgetName="pageSpliter"
@@ -38,14 +38,14 @@
                    showNum="true" query="NOT" reset="NOT" fixedFooter="true">
             <youi:fieldLayout prefix="query">
                 <youi:fieldText property="caption"  caption="资源名称"/>
-                <youi:fieldText property="catalog"  caption="资源目录"/>
-                <youi:fieldText property="schema"  caption="数据结构"/>
+                <youi:fieldText property="catalog"  caption="catalog"/>
+                <youi:fieldText property="schema"  caption="schema"/>
                 <youi:fieldText property="status"  caption="资源状态"/>
             </youi:fieldLayout>
 
             <youi:gridCol width="45%" property="caption"  caption="资源名称"/>
-            <youi:gridCol width="15%" property="catalog"  caption="资源目录"/>
-            <youi:gridCol width="15%" property="schema"  caption="数据结构"/>
+            <youi:gridCol width="15%" property="catalog"  caption="catalog"/>
+            <youi:gridCol width="15%" property="schema"  caption="schema"/>
             <youi:gridCol width="15%" property="status"  caption="资源状态"/>
 
             <youi:gridCol width="10%" type="button" property="button" caption="操作">

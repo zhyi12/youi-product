@@ -7,8 +7,8 @@
     <youi:form id="form" styleClass="no-padding"
                action="/metadataServices/services/dataTableManager/syncDataTables.json" panel="false" reset="NOT" submit="NOT" confirmMessage="确认同步?">
         <youi:fieldLayout styleClass="border-bottom-open">
-            <youi:fieldLabel property="catalog" caption="资源目录" defaultValue="${param.catalog}"/>
-            <youi:fieldLabel property="schema" caption="数据结构" defaultValue="${param.schema}"/>
+            <youi:fieldLabel property="catalog" caption="catalog" defaultValue="${param.catalog}"/>
+            <youi:fieldLabel property="schema" caption="schema" defaultValue="${param.schema}"/>
         </youi:fieldLayout>
 
         <youi:customWidget widgetName="assignList" name="tableNames" data-columns="6" data-height="360"

@@ -6,6 +6,10 @@
 
     $.youi = $.youi||{};
 
+    window.getClientRects = window.getClientRects||function () {
+        return [];
+    };
+
     $.extend($.youi,{
 
         /**

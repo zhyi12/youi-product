@@ -6,7 +6,7 @@
     <youi:subpage height="150" src="page/${_pagePath}/dataTableEdit.html?id={id}" subpageId="dataTable_edit" caption="修改数据表" type="dialog"/>
     <youi:subpage height="150" src="page/${_pagePath}/dataTableEdit.html" subpageId="dataTable_add" caption="添加数据表" type="dialog"/>
 
-    <youi:subpage  src="page/youi.metadata.dataresource.datacolumn/index.html?dataResourceId={dataResourceId}&tableName={tableName}" subpageId="dataColumns" caption="数据列" type="secondPage"/>
+    <youi:subpage  src="page/youi.metadata.dataresource.datacolumn/dataTableColumnsEdit.html?dataResourceId={dataResourceId}&tableName={tableName}" subpageId="dataColumns" caption="数据列" type="secondPage"/>
 
     <youi:toolbar refWidgetId="grid_dataTable">
         <youi:toolbarItem name="refresh" caption="查询" tooltips="" icon="search"/>

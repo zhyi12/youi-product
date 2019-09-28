@@ -8,8 +8,8 @@
 		<youi:fieldLayout columns="1" labelWidths="100">
 			<youi:fieldHidden property="id"  caption="i18n.dataResource.id"/>
 			<youi:fieldText notNull="true" property="caption"  caption="资源名称"/>
-			<youi:fieldText notNull="true" property="catalog" defaultValue="${param.catalog}" caption="资源目录"/>
-			<youi:fieldText notNull="true" property="schema" defaultValue="${param.schema}"  caption="数据结构"/>
+			<youi:fieldText notNull="true" property="catalog" defaultValue="${param.catalog}" caption="catalog"/>
+			<youi:fieldText notNull="true" property="schema" defaultValue="${param.schema}"  caption="schema"/>
 			<youi:fieldText property="status"  caption="数据状态"/>
 		</youi:fieldLayout>
 	</youi:form>

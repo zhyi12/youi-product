@@ -95,9 +95,9 @@
 
         <li  class="dropdown hidden-xs">
             <a class="page-link" tabindex="-1" href="#" onclick="javascript:$.youi.logout()" title="退出系统" >
-				<span class="youi-icon icon-off padding-right-small">
-					退出
-				</span>
+                <form action="/logout" method="post">
+                    <input  style="border:none;background: transparent;" type="submit" name="submit" value="退出">
+                </form>
             </a>
         </li>
     </ul>
