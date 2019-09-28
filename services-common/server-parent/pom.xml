@@ -62,6 +62,7 @@
         <mongodb.version>3.6.3</mongodb.version>
         <rabbitmq.client.version>5.4.3</rabbitmq.client.version>
         <swagger2.version>2.9.2</swagger2.version>
+        <spring.cloud.version>2.0.0.RELEASE</spring.cloud.version>
         <youi.product.version>1.0.0-SNAPSHOT</youi.product.version>
     </properties>
 
@@ -83,6 +84,18 @@
                 <groupId>com.rabbitmq</groupId>
                 <artifactId>amqp-client</artifactId>
                 <version>${rabbitmq.client.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config-client</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.youi.framework</groupId>
+                <artifactId>youi-framework-services-swagger</artifactId>
+                <version>${youi.version}</version>
             </dependency>
 
             <dependency>
