@@ -24,6 +24,7 @@ import org.youi.framework.context.ModulesRunnerBuilder;
 import org.youi.framework.services.client.ServicesClientConfig;
 import org.youi.framework.services.config.ServiceConfig;
 import org.youi.service.boot.ResourceServerConfig;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  *
@@ -33,6 +34,7 @@ import org.youi.service.boot.ResourceServerConfig;
 @EnableEurekaClient
 @EnableOAuth2Sso
 @EnableAutoConfiguration(exclude = org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration.class)
+@EnableSwagger2
 public class MetadataServerStarter {
 
     public static void main(String[] args) {
