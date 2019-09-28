@@ -29,6 +29,8 @@ import org.youi.framework.esb.annotation.OrderCollection;
 import org.youi.framework.esb.annotation.ServiceParam;
 
 import org.youi.metadata.dictionary.entity.MetaDataItem;
+import org.youi.rowdata.common.model.BatchResult;
+import org.youi.tools.indexing.entity.MatchingItem;
 
 /**
  * <p>系统描述: </p>
@@ -71,4 +73,30 @@ public interface MetaDataItemManager{
      */
     @EsbServiceMapping(trancode="8001030105",caption="主键删除数据项")
     void removeMetaDataItem(@ServiceParam(name="id") String id);
+
+    /**
+     * 多文本匹配数据项
+     * @param texts
+     * @return
+     */
+    @EsbServiceMapping(trancode="8001030106",caption="多文本匹配数据项")
+    List<MatchingItem> matchingMetaDataItems(@ServiceParam(name="text")String[] texts);
+
+    /**
+     * 代码或者名称模糊检索数据元
+     * @param term
+     * @return
+     */
+    @EsbServiceMapping(trancode="8001030107",caption="代码或者名称模糊检索数据元")
+    List<MetaDataItem> searchByTerm(@ServiceParam(name = "term") String term);
+
+    /**
+     *
+     * @param xlsFileName
+     * @return
+     */
+    @EsbServiceMapping(trancode="8001030108",caption="从xls文件导入数据项")
+    List<BatchResult> importFromXls(@ServiceParam(name = "xlsFileName") String xlsFileName);
+
+    List<MetaDataItem> getMetaDataItemByNames(List<String> dataItemIds);
 }

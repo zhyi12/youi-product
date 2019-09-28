@@ -39,6 +39,9 @@ public class DataTableColumn implements Domain{
 	private String columnName;//列名
 
 	@Column
+	private String columnCaption;//列中文描述
+
+	@Column
 	private String tableName;//表名
 
 	@Column
@@ -82,7 +85,15 @@ public class DataTableColumn implements Domain{
 	public void setId(String id){
 		this.id = id;
 	}
-	
+
+	public String getColumnCaption() {
+		return columnCaption;
+	}
+
+	public void setColumnCaption(String columnCaption) {
+		this.columnCaption = columnCaption;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

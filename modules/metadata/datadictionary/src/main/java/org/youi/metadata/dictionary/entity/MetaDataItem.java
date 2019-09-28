@@ -15,8 +15,8 @@
  */
 package org.youi.metadata.dictionary.entity;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.metadata.common.model.IMetaObject;
 
 import javax.persistence.Column;
@@ -30,7 +30,13 @@ import java.util.Map;
  * @since 2.0.0
  */
 @Document("youi_metadata_item")
-public class MetaDataItem extends Item implements IMetaObject {
+public class MetaDataItem implements IMetaObject {
+
+    @Id
+    private String id;
+
+    @Column
+    private String text;
 
     private String folderId;//字典项文件夹  - 数据元分类编号
 
@@ -78,6 +84,23 @@ public class MetaDataItem extends Item implements IMetaObject {
     private Boolean nullable = Boolean.TRUE;
 
     private Map<String, String[]> datas = new HashMap<>();
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public String getDataType() {
         return dataType;
