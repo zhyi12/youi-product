@@ -50,6 +50,9 @@ public class DataTableColumn implements Domain{
 	@Column
 	private String id;//主键
 
+	@Column
+	private String primary;//"0","1" 是否主键
+
 	public String getDataResourceId(){
 		return this.dataResourceId;
 	}
@@ -92,6 +95,14 @@ public class DataTableColumn implements Domain{
 
 	public void setColumnCaption(String columnCaption) {
 		this.columnCaption = columnCaption;
+	}
+
+	public String getPrimary() {
+		return primary;
+	}
+
+	public void setPrimary(String primary) {
+		this.primary = primary;
 	}
 
 	@Override
