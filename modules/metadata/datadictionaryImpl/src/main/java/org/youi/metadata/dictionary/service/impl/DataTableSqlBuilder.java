@@ -16,6 +16,8 @@
 package org.youi.metadata.dictionary.service.impl;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentFactory;
 import org.dom4j.Element;
@@ -35,6 +37,7 @@ import org.youi.metadata.dictionary.entity.MetaDataItem;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.EnumSet;
 import java.util.List;
@@ -50,6 +53,8 @@ import java.util.regex.Pattern;
  */
 @Component
 public class DataTableSqlBuilder {
+
+    private  static final Log logger = LogFactory.getLog(DataTableSqlBuilder.class);
 
     @Autowired
     private MetaDataItemFormatConverter metaDataItemFormatConverter;
@@ -76,12 +81,22 @@ public class DataTableSqlBuilder {
      * @return
      */
     private String writeCreateSql(Document doc ){
-        ServiceRegistry registry = null;
+        ServiceRegistry registry;
         try {
+            File tmpFile = new File(FileUtils.getTempDirectory(),UUID.randomUUID()+".xml");
+
+            try(FileOutputStream outputStream = new FileOutputStream(tmpFile)){
+                FileCopyUtils.copy(oracleResource.getInputStream(),outputStream);
+            }
+
             registry = new StandardServiceRegistryBuilder()
-                    .configure(oracleResource.getFile())
+                    .configure(tmpFile)
                     .build();
+            logger.info("hibernate-configuration load complete");
+            FileUtils.deleteQuietly(tmpFile);//删除临时文件
         } catch (IOException e) {
+            logger.error("配置文件加载失败:"+e.getMessage());
+            e.printStackTrace();
             return "";
         }
 

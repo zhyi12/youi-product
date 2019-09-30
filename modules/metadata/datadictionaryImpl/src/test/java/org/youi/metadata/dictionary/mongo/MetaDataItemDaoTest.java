@@ -79,46 +79,6 @@ public class MetaDataItemDaoTest {
 
     @Test
     public void matchItems(){
-        String[] texts = {"其他姓名","男性别"};
-
-        List<Item> itemList = new ArrayList<>();
-        Map<String,MetaDataItem> fullMatcheds = new HashMap<>();
-        int index = 1;
-        for(String text:texts){
-            itemList.add(new Item(Integer.toString(index++),text));
-        }
-        //完全匹配
-        List<MetaDataItem> metaDataItems = metaDataItemDao.findByTextIn(texts);
-        for(MetaDataItem metaDataItem:metaDataItems){
-            if(ArrayUtils.contains(texts,metaDataItem.getText())){
-                fullMatcheds.put(metaDataItem.getText(),metaDataItem);
-            }
-        }
-
-        List<MatchingItem> matchingItems = indexingService.matchingItems(itemList, metaDataItemDao.commonQuery(null, null), (domain) -> {
-            List<TextField> fields = new ArrayList<>();
-            MetaDataItem metaDataItem = (MetaDataItem) domain;
-            fields.add(new TextField("id", metaDataItem.getName(), Field.Store.YES));
-            fields.add(new TextField("text", metaDataItem.getText(), Field.Store.YES));
-            fields.add(new TextField("fullText", metaDataItem.getDescription(), Field.Store.YES));
-            return fields;
-        });
-
-        matchingItems.forEach(matchingItem -> {
-            //如果是完全匹配的，返回完成匹配的项
-            if(fullMatcheds.containsKey(matchingItem.getText())){
-                MetaDataItem fullMatched = fullMatcheds.get(matchingItem.getText());
-                List<IndexResult> indexResults = new ArrayList<>();
-                IndexResult indexResult = new IndexResult();
-                indexResult.setId(fullMatched.getName());
-                indexResult.setText(matchingItem.getText());
-                indexResult.setScore(10f);
-                indexResults.add(indexResult);
-                matchingItem.setMatchingResults(indexResults);
-            }
-
-            System.out.println(matchingItem.getMatchingResults());
-        });
 
     }
 

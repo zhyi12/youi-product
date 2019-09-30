@@ -52,6 +52,7 @@ public class DataTableSqlServiceImpl implements DataTableSqlService {
     @EsbServiceMapping(trancode="8001030311",caption="生成createSql")
     public String buildCreateSql(@ServiceParam(name = "dataResourceId") String dataResourceId, @ServiceParam(name = "tableName") String tableName) {
         List<String> dataItemIds = new ArrayList<>();
+        List<String> keyItemIds = new ArrayList<>();
         List<DataTableColumn> columnList = dataTableColumnManager.findByDataResourceIdAndTableName(dataResourceId,tableName);
 
         columnList.forEach(dataTableColumn -> dataItemIds.add(dataTableColumn.getDataItemId()));
