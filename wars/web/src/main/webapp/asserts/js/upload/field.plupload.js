@@ -31,7 +31,7 @@
 		 * 参数配置
 		 */
 		options:{
-			uploadUrl:'zuul/fileserver/upload.json',
+			uploadUrl:'fileServer/upload.json',
 			flash_swf_url:'asserts/js/upload/Moxie.swf',
 			silverlight_xap_url:'asserts/js/upload/Moxie.xap',
 			serverFileCaption:'在服务器中选择',

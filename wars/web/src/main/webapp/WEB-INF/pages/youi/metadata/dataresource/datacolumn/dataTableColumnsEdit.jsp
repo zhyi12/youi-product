@@ -14,7 +14,7 @@
         <youi:toolbarItem name="save" caption="保存" icon="save" tooltips=""/>
         <youi:toolbarItem name="matchMetadataItems" caption="匹配数据项" icon="link" tooltips=""/>
         <youi:toolbarItem name="showCreateTableSql" caption="建表语句" icon="config" tooltips=""/>
-        <youi:toolbarItem name="refreshColumns" caption="刷新" icon="search" tooltips=""/>
+        <youi:toolbarItem name="refreshColumns" caption="刷新" icon="reload" tooltips=""/>
     </youi:toolbar>
 
     <youi:grid id="grid_dataTableColumn" editable="true" reset="NOT" query="NOT"
@@ -29,16 +29,18 @@
         <youi:gridCol editor="fieldText" width="35%" property="columnCaption" nowrap="false" caption="中文名"/>
         <youi:gridCol editor="fieldMatching" width="40%" property="dataItemId" nowrap="false" caption="数据项"/>
         <youi:gridCol width="15%" property="columnName" caption="列名"/>
+        <youi:gridCol editor="fieldSelect" width="5%" property="primary" caption="主键" convert="boolean"/>
+
         <youi:gridCol width="10%" type="button" property="button" caption="操作">
             <youi:button name="search" caption="检索数据项" icon="search"/>
         </youi:gridCol>
     </youi:grid>
 
     <youi:form id="dialog_search" dialog="true" caption="检索数据项" reset="NOT">
-        <youi:fieldLayout columns="1" prefix="search">
+        <youi:fieldLayout columns="1" prefix="search" labelWidths="100">
             <youi:fieldHidden property="id"/>
             <youi:fieldHidden property="columnText"/>
-            <youi:fieldAutocomplete property="columnName" code="name" show="text" showProperty="text" src="/metadataServices/services/metaDataItemManager/searchByTerm.json" caption="数据项"/>
+            <youi:fieldAutocomplete notNull="true" property="columnName" code="name" show="text" showProperty="text" src="/metadataServices/services/metaDataItemManager/searchByTerm.json" caption="数据项"/>
         </youi:fieldLayout>
     </youi:form>
 
@@ -123,20 +125,23 @@
 
     <%--  --%>
     <youi:func name="dialog_search_afterSubmit" params="result">
-        var record = result.record,id = record.id[0];
-        if(!id)return;
+        var record = result.record,id = record.id[0],text = record.columnText[0];
+
+        if(!record.columnName)return;
+
         var rowElem = $elem('grid_dataTableColumn',pageId).find('tr.grow[data-id='+id+']');
-        rowElem.find('td.fieldText:first').text(record.columnText).data('value',record.columnText);
+        rowElem.find('td.fieldText:first').text(text).data('value',text);
         rowElem.find('td.fieldMatching:first')
-            .data('matchingItem',{id:id,mappedId:'',matchingResults:[{id:record.columnName,text:record.columnText}]})
+            .data('matchingItem',{id:id,mappedId:record.columnName,matchingResults:[{id:record.columnName,text:text}]})
             .data('value',record.columnName)
             .attr('data-value',record.columnName)
-            .text(record.columnName+'-'+record.columnText);
+            .text(record.columnName+'-'+text);
     </youi:func>
 
     <%--  --%>
     <youi:func name="grid_dataTableColumn_save" urls="updateDataTableColumnsUrl">
         var records = $elem('grid_dataTableColumn',pageId).grid('getRecords');
+
         var paramRecord = {
             dataResourceId:$elem('field_dataResourceId',pageId).fieldValue(),
             tableName:$elem('field_tableName',pageId).fieldValue(),

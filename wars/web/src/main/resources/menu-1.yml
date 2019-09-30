@@ -1,0 +1,24 @@
+id: MENU_ROOT
+text: 系统菜单
+children:
+  -
+    id: metadata
+    text: 元数据
+    icon: list
+    children:
+      -
+        id: metadata-resource
+        text: 数据资源
+        children:
+          -
+            id: list
+            text: 数据项
+            pageUrl: page/youi.metadata.dataresource.dataitem/index.html
+          -
+            id: dir
+            text: 数据源
+            pageUrl: page/youi.metadata.dataresource/index.html
+          -
+            id: sync
+            text: 数据表
+            pageUrl: page/youi.metadata.dataresource.datatable/index.html

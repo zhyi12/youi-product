@@ -5,9 +5,11 @@
 
     <youi:subpage height="150" src="page/${_pagePath}/dataResourceEdit.html?id={id}" subpageId="dataResource_edit" caption="修改数据资源" type="dialog"/>
     <youi:subpage height="150" src="page/${_pagePath}/dataResourceEdit.html?catalog={catalog}&schema={schema}" subpageId="dataResource_add" caption="添加数据资源" type="dialog"/>
-
     <youi:subpage src="page/${_pagePath}.datatable/schemaTables.html?catalog={catalog}&schema={schema}"
                   subpageId="schemaTables" caption="数据表同步" type="dialog"/>
+
+    <youi:subpage src="page/${_pagePath}.conceptmodel/designer.html?dataResourceId={id}"
+                  subpageId="conceptmodel" caption="概念模型设计" type="page"/>
 
     <youi:xmenu id="xmenu_dataSource">
         <youi:xmenuItem name="addToDataSource" caption="添加到catalog" groups="schema"/>
@@ -51,6 +53,7 @@
             <youi:gridCol width="10%" type="button" property="button" caption="操作">
                 <youi:button name="edit" caption="编辑"/>
                 <youi:button name="schemaTables" caption="表同步" icon="table"/>
+                <youi:button name="conceptmodel" caption="模型" icon="sitemap"/>
                 <youi:button name="split" caption=""/>
                 <youi:button name="removeRecord" icon="remove" caption="删除"/>
             </youi:gridCol>
@@ -68,6 +71,10 @@
 
     <youi:func name="grid_dataResource_schemaTables" params="dom,options,record">
         $elem('subpage_schemaTables',pageId).subpage('open',{},{},record,pageId);
+    </youi:func>
+    <%-- 概念模型设计 --%>
+    <youi:func name="grid_dataResource_conceptmodel" params="dom,options,record">
+        $elem('subpage_conceptmodel',pageId).subpage('open',{},{},record,pageId);
     </youi:func>
 
 

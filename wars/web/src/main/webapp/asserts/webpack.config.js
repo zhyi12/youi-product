@@ -24,6 +24,7 @@ module.exports = {
             "./css/youi/youi.grid.css",
             "./css/youi/youi.xmenu.css",
             "./css/youi/youi.expressioneditor.css",
+            "./css/youi/youi.flow.css",
         ]
     },
     output: {

@@ -1,6 +1,6 @@
 #
 server:
-  port: 8080
+  port: 8088
   tomcat:
     max-threads: 1000
     max-connections: 20000
@@ -91,7 +91,7 @@ zuul:
       sensitiveHeaders: Set-Cookie
       serviceId: config-services
     upload:
-      path: /fileServer/**
+      path: /fileserver/**
       sensitiveHeaders: Set-Cookie
       serviceId: file-services
   add-proxy-headers: true
@@ -106,24 +106,20 @@ eureka:
 security:
   oauth2:
     client:
-      access-token-uri: http://localhost:8080/uaa/oauth/token
+      access-token-uri: http://192.168.173.130:8088/uaa/oauth/token
       user-authorization-uri: http://192.168.173.130:8868/oauth/authorize
       client-id: ${spring.application.name}
       client-secret: 123456
       registered-redirect-uri: /oauth/code
     resource:
-      user-info-uri: http://localhost:8080/uaa/oauth/client
+      user-info-uri: http://192.168.173.130:8088/uaa/oauth/client
     sso:
-      app-login-uri: http://192.168.173.1:8080/login
+      app-login-uri: http://192.168.173.130:8088/login
       logout-uri: http://192.168.173.130:8868/logout
-      role-menu-uri: http://localhost:8080/uaa/services/roleManager/getRoleMenus.json
+      role-menu-uri: http://192.168.173.130:8088/uaa/services/roleManager/getRoleMenus.json
 spring:
-  servlet:
-    multipart:
-      enabled: true   # 启用http上传处理
-      max-file-size: 1024MB # 设置单个文件的最大长度
-      max-request-size: 1024MB # 设置最大的请求文件的大小
-      file-size-threshold: 1MB  # 当上传文件达到1MB的时候进行磁盘写入
+  application:
+    name: web-product
   session:
     store-type: redis
   redis:
