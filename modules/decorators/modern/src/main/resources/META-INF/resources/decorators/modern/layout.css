@@ -106,6 +106,15 @@ body{
     padding-right: 2px;
 }
 
+.youi-bootstrapLayout #system_h_menu .dropdown-menu li.menu-item{
+    padding:1px 2px;
+}
+
+.youi-bootstrapLayout #system_h_menu .dropdown-menu li.menu-item>span>a{
+    padding: 5px 1px;
+    display: inline-block;
+}
+
 .page-nav{
     margin-top: 0px\9;
     vertical-align: middle;
@@ -181,6 +190,7 @@ body{
     width: 500px;
     height: auto;
 }
+
 .menu-container-root>.menu-item>.dropdown-menu>li.menu-item>ul.dropdown-menu{
     display:block;
     width: 460px;
