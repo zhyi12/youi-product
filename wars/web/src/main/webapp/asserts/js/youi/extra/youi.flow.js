@@ -46,7 +46,11 @@
 		options:{
 			readonly:false,
 			delay: 100,//
+			bindResize:true,
 			distance: 1,
+			nodeHtml:function (node) {
+				return '';
+            },
 			cancel: "input,textarea,button,select,option,[contenteditable=true],.content-editable"
 		},
 		/**
@@ -108,18 +112,16 @@
 					}
 				},
 				'mousedown .over-item':function(event){
-					var item = $(event.target);//浮动菜单鼠标点击
-					this.execCommand($(event.target),item.data());
+					var item = $(event.currentTarget);//浮动菜单鼠标点击
+					this.execCommand(item,item.data());
 					
 					this.overpanelsElement.hide();
 				},
 				'click .node,.lane-title':function(event){
-					this._clickElement($(event.target),event);
+					this._clickElement($(event.currentTarget),event);
 				},
 				'mouseenter .node':function(event){
-					var nodeElement = $(event.target);
-					nodeElement.attr('title',nodeElement.text());
-					
+					var nodeElement = $(event.currentTarget);
 					this._showOverpanels(nodeElement);
 				},
 				'mouseleave [contenteditable=true]':function(event){
@@ -131,9 +133,9 @@
 						this.executeCommand('doSetNodeText',nodeElement,text,oldText);
 					}
 				},
-				'dblclick .node,.content-editable':function(event){
-					var nodeElement = $(event.target);
-					nodeElement.attr('contenteditable',true).data('text',nodeElement.text()).focus();
+				'dblclick .node':function(event){
+					var nodeElement = $(event.currentTarget);
+					this._trigger('nodeDblClick',event,$.extend({},{id:nodeElement.attr('id')},nodeElement.data()));
 				},
 				'mouseleave .over-panels':function(event){
 					this.overpanelsElement.hide();
@@ -230,58 +232,53 @@
 		
 		
 		//注册命令
-		_registerCommand:function(){
-			this.registerCommand('doMoveElements')
-				.registerCommand('doRemoveSelected','Ctrl+D')
-				.registerCommand('doSetNodeText')
-				.registerCommand('doRemoveLaneSelected')
-				.registerCommand('doColResize')
-				.registerCommand('doRowResize')
-				.registerCommand('doAddTransition')
-				.registerCommand('doAddNode')
-				.registerCommand('doAddLane')
-				.registerCommand('doAlignElements')
-				.registerCommand('doValignElements');
-		},
+        _registerCommand:function(){
+            this.registerCommand('doMoveElements')
+                .registerCommand('doRemoveSelected','Ctrl+D')
+                .registerCommand('doSetNodeText')
+                .registerCommand('doRemoveLaneSelected')
+                .registerCommand('doColResize')
+                .registerCommand('doRowResize')
+                .registerCommand('doAddTransition')
+                .registerCommand('doAddNode')
+                .registerCommand('doAddLane')
+                .registerCommand('doAlignElements')
+                .registerCommand('doValignElements');
+        },
 		
 		/**************************************命令开始***********************************/
 		/**
 		 * command - 移动流程元素命令
 		 * 
 		 */
-		doMoveElements:function(context,dragElement,moves,xDelt,yDelt){
-			this._moveElements(dragElement,moves,xDelt,yDelt,context.oldPos);
+		doMoveElements:function(dragElement,moves,xDelt,yDelt){
+			this._moveElements(dragElement,moves,xDelt,yDelt,this.lastOffset);
 			
 			var dragOffset = {
 					left:dragElement[0].offsetLeft,
 					top:dragElement[0].offsetTop
 			};
 			//记录移动后的位置
-			if(!context.oldPos){
-				context.oldPos = dragOffset;
-			}
+			this.lastOffset = dragOffset;
+			return dragOffset;
 		},
 		/**
 		 * command-undo 撤销移动
 		 */
-		doMoveElementsUndo:function(context,dragElement,moves,xDelt,yDelt){
-			
-			this._moveElements(dragElement,moves,-xDelt,-yDelt,context.newPos);
+		doMoveElementsUndo:function(params,dragOffset){
+			var dragElement = params[0];
+			this._moveElements(dragElement,params[1],-params[2],-params[3],dragOffset);
 			
 			//记录撤销移动后的位置
-			var dragOffset = {
-					left:dragElement[0].offsetLeft,
-					top:dragElement[0].offsetTop
-			};
-			
-			if(!context.newPos){
-				context.newPos = dragOffset;
-			}
+            this.lastOffset = {
+                left:dragElement[0].offsetLeft,
+                top:dragElement[0].offsetTop
+            };
 		},
 		/**
 		 * 删除选择元素
 		 */
-		doRemoveSelected:function(context,element,refTransitions){
+		doRemoveSelected:function(element,refTransitions){
 			element.remove();
 			if(refTransitions){
 				refTransitions.remove();
@@ -291,7 +288,7 @@
 			this._afterModelsChange();//模型变化
 		},
 		
-		doRemoveSelectedUndo:function(context,element,refTransitions){
+		doRemoveSelectedUndo:function(element,refTransitions){
 			this.element.append(element);
 			
 			if(refTransitions){
@@ -303,13 +300,13 @@
 			this._afterModelsChange();//模型变化
 		},
 		
-		doSetNodeText:function(context,nodeElement,text,oldText){
+		doSetNodeText:function(nodeElement,text,oldText){
 			nodeElement.text(text);
 			
 			this._afterTextChange(nodeElement,text);//文本变化
 		},
 		
-		doSetNodeTextUndo:function(context,nodeElement,text,oldText){
+		doSetNodeTextUndo:function(nodeElement,text,oldText){
 			nodeElement.text(oldText);
 			
 			this._afterTextChange(nodeElement,oldText);//文本变化
@@ -318,7 +315,7 @@
 		/**
 		 * 删除泳道命令
 		 */
-		doRemoveLaneSelected:function(context,laneElement){
+		doRemoveLaneSelected:function(laneElement){
 			if(laneElement.prev().length){
 				context.prevLane = laneElement.prev();
 			}else if(laneElement.next().length){
@@ -331,7 +328,7 @@
 		/**
 		 * 撤销删除泳道命令
 		 */
-		doRemoveLaneSelectedUndo:function(context,laneElement){
+		doRemoveLaneSelectedUndo:function(laneElement,context){
 			if(context.prevLane){
 				context.prevLane.after(laneElement);
 			}else if(context.nextLane){
@@ -395,7 +392,7 @@
 		/**
 		 * 添加节点
 		 */
-		doAddNode:function(context,nodeElement){
+		doAddNode:function(nodeElement){
 			this.element.append(nodeElement);
 			
 			this._afterModelsChange();//模型变化
@@ -403,9 +400,8 @@
 		/**
 		 * 撤销添加节点
 		 */
-		doAddNodeUndo:function(context,nodeElement){
-			nodeElement.remove();
-			
+		doAddNodeUndo:function(params,execResult){
+            params[0].remove();
 			this._afterModelsChange();//模型变化
 		},
 		
@@ -665,6 +661,13 @@
 				this._doRemove(this.overNodeElement);
 			}
 		},
+
+        /**
+		 * 创建节点
+         */
+        createNode:function (nodeType,text,x,y,nodeModel) {
+			return this._addNode('',text||'新节点',nodeType,x,y,nodeModel);
+        },
 		
 		/**
 		 * 添加关联节点
@@ -749,7 +752,7 @@
 			this.element.find('.node').each(function(){
 				var elem = $(this),
 					datas = elem.data();
-				xmls.push('<node id="'+elem.attr('id')+' ');
+				xmls.push('<node id="'+elem.attr('id')+'" ');
 				
 				for(var property in datas){
 					if($.inArray(property,skipProps)!=-1){
@@ -759,7 +762,7 @@
 					if(propertySplit.length>1){
 						xmls.push(propertySplit[1]+'="'+datas[property]+'" ');
 					}else{
-						xmls.push(property+'="'+datas[property]+'" ');
+						xmls.push('data-'+$.youi.stringUtils.convertDataProperty(property,'-')+'="'+datas[property]+'" ');
 					}
 				}
 				
@@ -768,9 +771,9 @@
 				xmls.push(' width="'+(this.offsetWidth-2)+'" ');
 				xmls.push(' height="'+(this.offsetHeight-2)+'" ');
 				
-				xmls.push('">');
-				xmls.push(elem.text());
-				xmls.push('</node>');
+				xmls.push('><![CDATA[');
+				xmls.push(elem.html());
+				xmls.push(']]></node>');
 			});
 			
 			this.element.find('.transition').each(function(){
@@ -821,10 +824,13 @@
 				this.executeCommand('doSetNodeText',textElement,value,textElement.text());
 			}
 		},
-		
-//		_expressionPropertyChange:function(element,value,text){
-//			
-//		},
+        /**
+		 * 命令变化
+         * @private
+         */
+		_commandChanged:function(){
+			this._trigger('change',null,{groups:this._getCommandGroups()});
+		},
 		/**
 		 * 
 		 */
@@ -1133,7 +1139,11 @@
 				//拖动元素
 				this.currentDrag = dragElement;
 				this.helper = this._createHelper(event,this.currentDrag);
-			}else if(dragElement.hasClass('point-text')){
+			}else if(dragElement.parents('.node:first').length){
+                //拖动元素
+                this.currentDrag = dragElement.parents('.node:first');
+                this.helper = this._createHelper(event,this.currentDrag);
+            }else if(dragElement.hasClass('point-text')){
 				//拖动线条的点
 				//this.currentDrag = dragElement;
 			}else if(dragElement.hasClass('col-resize-handler')){
@@ -1332,7 +1342,11 @@
 		
 		_mouseStop: function(event) {
 			if(this.startSequenceNode){
-				this.stopSequence($(event.target));
+				var stopNode = $(event.target);
+				if(!stopNode.hasClass('node')){
+                    stopNode = stopNode.parents('.node:first');
+				}
+				this.stopSequence(stopNode);
 			}else if(this.helper&&this.currentDrag){
 				var xDelt = this.helper.offset().left -this.currentDrag.offset().left-this.currentDrag.width()/2-2,
 					yDelt = this.helper.offset().top - this.currentDrag.offset().top-this.currentDrag.height()/2-2;
@@ -1345,7 +1359,7 @@
 					moves = $(moves);
 				}
 				
-				this.executeCommand('doMoveElements',{},this.currentDrag,moves,xDelt,yDelt);
+				this.executeCommand('doMoveElements',this.currentDrag,moves,xDelt,yDelt);
 			}else if(this.resizeHelper){
 				this.resizeHelper.removeClass('resizing');
 				
@@ -1740,7 +1754,7 @@
 		/**
 		 * 添加节点
 		 */
-		_addNode:function(id,text,type,x,y){
+		_addNode:function(id,text,type,x,y,nodeModel){
 			var htmls = [],
 				styles = ['node'];
 			
@@ -1753,14 +1767,24 @@
 			
 			var nodeId = id||this._genNodeUUID();
 			
-			htmls.push('<div id="'+nodeId+'" class="'+styles.join(' ')+'"');
+			htmls.push('<div id="'+nodeId+'" '+_buildDataAttrs(nodeModel)+' class="'+styles.join(' ')+'"');
 			htmls.push(' style="left:'+x+'px;top:'+y+'px;"');
 			htmls.push('>');
-			htmls.push($.youi.stringUtils.fixValue(text));
+
+			var nodeHtml = '';
+
+			if($.isFunction(this.options.nodeHtml)){
+                nodeHtml = this.options.nodeHtml(nodeId,text,nodeModel);
+			}
+
+			if($.youi.stringUtils.isEmpty(nodeHtml)){
+                nodeHtml = text||'';
+			}
+
+			htmls.push(nodeHtml);
 			htmls.push('</div>');
 			
 			this.element.append(htmls.join(''));
-			
 			return this.element.find('.node#'+nodeId);
 		},
 		/**
@@ -1783,7 +1807,7 @@
 		 */
 		_doRemove:function(element){
 			if(!element||element.length==0){
-				element = this.element.find('.ui-click');
+				element = this.element.find('.ui-click:first');
 			}
 			
 			var refTransitions;
@@ -1982,4 +2006,16 @@
 			element.addClass(className+'-last');
 		}
 	}
+
+    function _buildDataAttrs(nodeModel) {
+        nodeModel = nodeModel||{};
+        var attrHtmls = [];
+
+        for(var attr in nodeModel){
+            if(typeof nodeModel[attr] == 'string'){
+                attrHtmls.push('data-'+$.youi.stringUtils.convertDataProperty(attr,'-')+'="'+nodeModel[attr]+'"');
+            }
+        }
+        return attrHtmls.join(' ');
+    }
 })(jQuery);
