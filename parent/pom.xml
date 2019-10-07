@@ -110,6 +110,24 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${springframework.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.rabbitmq</groupId>
                 <artifactId>amqp-client</artifactId>
                 <version>${rabbitmq.client.version}</version>
@@ -441,6 +459,9 @@
         <module>../modules/metadata/metaproject</module>
         <module>../modules/metadata/metaprojectImpl</module>
 
+        <module>../modules/metadata/conceptdesign</module>
+        <module>../modules/metadata/conceptdesignImpl</module>
+
         <module>../modules/dataquery/engine</module>
         <module>../modules/dataquery/presto</module>
         <module>../modules/dataquery/query</module>
@@ -459,6 +480,8 @@
 
         <module>../modules/tools/rowdata/common</module>
         <module>../modules/tools/rowdata/xls</module>
+        <module>../modules/tools/indexing</module>
+        <module>../modules/tools/flow</module>
     </modules>
 
 </project>
