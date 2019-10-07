@@ -364,3 +364,13 @@ a.page-message-alert{
 .border-show{
 	border:1px solid #ddd;
 }
+.youi-page [data-dirty="1"] [data-name="save"],
+.youi-page [data-dirty="1"] [data-name="save"] a{
+	color:blue;
+}
+
+.youi-page [data-dirty="1"] [data-name="save"]:before{
+	font-family: "FontAwesome";
+	content: '*';
+	padding-right:2px;
+}

@@ -1,0 +1,36 @@
+
+.youi-metaCdmDesigner .youi-flow .node.entity{
+    line-height: 20px;
+    height:auto;
+    width: auto;
+    min-width: 100px;
+    padding:5px 0px;
+}
+
+.youi-metaCdmDesigner .youi-flow .node.entity .entity-attributes{
+    border-top:1px solid #aacbf3;
+    border-bottom:1px solid #aacbf3;
+    display: block;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.youi-metaCdmDesigner .youi-flow .node.entity.hide-attributes .entity-attributes{
+    display: none;
+}
+
+.youi-metaCdmDesigner .youi-flow .node.entity .entity-attributes .entity-attribute{
+    padding:2px;
+    text-align: left;
+}
+
+.youi-metaCdmDesigner .youi-flow .node.entity .entity-attributes .entity-attribute.primary:after{
+    font-family: 'FontAwesome';
+    content: "\f084";
+    position: absolute;
+    right: 2px;
+}
+
+.youi-metaCdmDesigner .entity-repository>.dropdown-menu{
+    width:600px;
+}

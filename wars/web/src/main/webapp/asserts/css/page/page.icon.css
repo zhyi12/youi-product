@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+.youi-icon.icon-sub-system:before{
+    content: "\f09d";
+}
+
+.youi-icon.icon-module:before{
+    content: "\f0ae";
+}
+
+.youi-icon.icon-diagram:before{
+    content: "\f03e";
+}
+
+.youi-icon.icon-dataItems:before{
+    content: "\f0c9";
+}
+
+.youi-icon.icon-entities:before{
+    content: "\f0ce";
+}
+
+.youi-icon.icon-relationships:before{
+    content: "\f0c1";
+}
+
+.youi-icon.icon-redo:before{
+    content:"\f01e";
+}

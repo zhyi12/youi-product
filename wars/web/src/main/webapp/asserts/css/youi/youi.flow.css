@@ -209,3 +209,18 @@
 	height:5px;
 	z-index:3;
 }
+
+.youi-flow .over-panels .over-item{
+	background:white;
+	float:right;
+	font-size:0px;
+	color:white;
+	background:no-repeat center white;
+	cursor:pointer;
+	padding:13px;
+	display:none;
+}
+
+.youi-flow .over-panels .over-item.removeNode{background-image:url(../images/flow/delete.gif);}
+.youi-flow .over-panels .over-item.startSequence{background-image:url(../images/flow/sequence.gif);}
+.youi-flow .over-panels .over-item.addRefNode{background-image:url(../images/flow/addRefNode.png);}
