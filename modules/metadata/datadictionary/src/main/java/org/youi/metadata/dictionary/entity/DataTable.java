@@ -39,6 +39,9 @@ public class DataTable implements Domain{
 	private String tableName;//表名
 
 	@Column
+	private String entityCode;//实体编号
+
+	@Column
 	private String dataResourceId;//资源ID
 
 	@Column
@@ -73,7 +76,15 @@ public class DataTable implements Domain{
 	public void setId(String id){
 		this.id = id;
 	}
-	
+
+	public String getEntityCode() {
+		return entityCode;
+	}
+
+	public void setEntityCode(String entityCode) {
+		this.entityCode = entityCode;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

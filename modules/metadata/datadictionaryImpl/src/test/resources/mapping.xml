@@ -1,0 +1,13 @@
+<hibernate-mapping>
+    <class name="STATS_PERSON">
+        <id name="ID" type="java.lang.Integer">
+        </id>
+        <property name="NAME" type="java.lang.String"/>
+        <property name="AGE" type="java.lang.Integer"/>
+    </class>
+
+    <class name="STATS_AGENCY" >
+        <id name="ID" type="java.lang.Integer">
+        </id>
+    </class>
+</hibernate-mapping>

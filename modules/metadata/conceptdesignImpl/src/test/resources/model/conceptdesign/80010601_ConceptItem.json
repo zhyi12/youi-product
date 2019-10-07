@@ -1,0 +1,24 @@
+{
+  "id":"80010601",
+  "idAttrName":"id",
+  "table":"youi_metadata_concept_item",
+  "name":"conceptItem",
+  "caption":"模型项",
+  "attributes":[{
+    "isId":true,
+    "name":"id",
+    "caption":"模型项ID"
+  },{
+    "name":"name",
+    "caption":"英文名称"
+  },{
+    "name":"caption",
+    "caption":"模型项名称"
+  },{
+    "name":"group",
+    "caption":"模型项类型"
+  },{
+    "name":"parentId",
+    "caption":"父模型项ID"
+  }]
+}

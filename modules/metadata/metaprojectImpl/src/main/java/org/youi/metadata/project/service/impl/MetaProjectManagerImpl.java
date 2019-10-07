@@ -43,7 +43,7 @@ public class MetaProjectManagerImpl implements MetaProjectManager {
 
     @Autowired(required = false)
     private MetaProjectDao metaProjectDao;
-
+//
     @Autowired(required = false)
     private AgencyClient agencyClient;
 
@@ -65,8 +65,7 @@ public class MetaProjectManagerImpl implements MetaProjectManager {
 
         //TODO 按机构、行政区划、专业（businessKey） 过滤数据
         //远程调用获取机构详细信息
-        Agency agency = agencyClient.getAgency(loginAgencyId);
-
+//        Agency agency = agencyClient.getAgency(loginAgencyId);
         return metaProjectDao.complexFindByPager(pager,conditions,orders);
     }
 

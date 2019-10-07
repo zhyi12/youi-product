@@ -1,0 +1,12 @@
+{
+  "id":"80010602",
+  "idAttrName":"id",
+  "table":"youi_metadata_concept_diagram",
+  "name":"conceptDiagram",
+  "caption":"概念模型图",
+  "attributes":[{
+    "isId":true,
+    "name":"id",
+    "caption":"主键"
+  }]
+}
