@@ -21,6 +21,7 @@
             <youi:fieldText property="dataResourceId" column="2" caption="数据资源"/>
         </youi:fieldLayout>
         <youi:gridCol width="25%" property="dataResourceId"  caption="数据资源"/>
+        <youi:gridCol width="10%" property="entityCode"  caption="实体编号"/>
         <youi:gridCol width="15%" property="tableName"  caption="表名"/>
         <youi:gridCol width="55%" property="tableCaption"  caption="中文表名"/>
 

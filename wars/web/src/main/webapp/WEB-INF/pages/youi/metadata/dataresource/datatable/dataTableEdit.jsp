@@ -10,7 +10,8 @@
 
 			<youi:fieldText notNull="true" column="2" property="dataResourceId"  caption="数据资源"/>
 			<youi:fieldText notNull="true" property="tableName"  caption="表名"/>
-			<youi:fieldText notNull="true" property="tableCaption"  caption="中文表名"/>
+			<youi:fieldText notNull="true" property="entityCode"  caption="实体编号"/>
+			<youi:fieldText notNull="true" column="2" property="tableCaption"  caption="中文表名"/>
 		</youi:fieldLayout>
 	</youi:form>
 	

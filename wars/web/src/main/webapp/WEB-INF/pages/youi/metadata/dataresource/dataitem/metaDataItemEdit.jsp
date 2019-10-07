@@ -9,7 +9,7 @@
 			<youi:fieldHidden property="id"  caption="i18n.metaDataItem.id"/>
 
 			<youi:fieldText notNull="true" property="name" caption="英文名称"/>
-			<youi:fieldText notNull="true" property="columnName" caption="标准代码"/>
+			<youi:fieldText notNull="true" property="code" caption="标准代码"/>
 
 			<youi:fieldText notNull="true" property="text" column="2" caption="项名称"/>
 

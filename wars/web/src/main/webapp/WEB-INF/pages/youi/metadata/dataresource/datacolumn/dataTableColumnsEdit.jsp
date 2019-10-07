@@ -18,7 +18,7 @@
     </youi:toolbar>
 
     <youi:grid id="grid_dataTableColumn" editable="true" reset="NOT" query="NOT"
-               showFooter="false" pageSize="200" showCheckbox="true"
+               showFooter="false" pageSize="2000" showCheckbox="true"
                removeSrc="/metadataServices/services/dataTableColumnManager/removeDataTableColumn.json" idKeys="id"
                src="/metadataServices/services/dataTableColumnManager/getPagerDataTableColumns.json">
         <youi:fieldLayout>

@@ -84,7 +84,6 @@
         $elem('subpage_dataResource_add',pageId).subpage('open',{},{},{catalog:catalog,schema:schema},pageId);
     </youi:func>
 
-
     <!-- 编辑数据资源的subpage内容变化回调函数 -->
     <youi:func name="subpage_dataResource_edit_change" params="record">
         $elem('grid_dataResource',pageId).grid('refresh');
@@ -93,4 +92,5 @@
     <youi:func name="subpage_dataResource_add_change" params="record">
         $elem('grid_dataResource',pageId).grid('refresh');
     </youi:func>
+
 </youi:page>

@@ -8,7 +8,7 @@
 <youi:script src="/asserts/js/lib/jquery.mousewheel.js"/>
 <youi:script src="/asserts/js/lib/jquery.selectable.js"/>
 <youi:script src="/asserts/js/lib/bootstrap.min.js?_version=20180117"/>
-
+<youi:script src="/asserts/js/lib/xss-filters.min.js"/>
 <youi:script src="/asserts/js/lib/youi-3.0.min.js?_version=20190410"/>
 <youi:script src="/asserts/js/lib/app-1.0.min.js?_version=20190410"/>
 
@@ -24,5 +24,8 @@
 <youi:style href="/asserts/css/font.css?_version=20190828"/>
 
 <youi:style href="/asserts/css/themes/theme/main.css"/>
+<%-- 开发测试用css文件 --%>
+<youi:style href="/asserts/css/page/page.icon.css"/>
+<youi:style href="/asserts/css/test.css"/>
 
 
