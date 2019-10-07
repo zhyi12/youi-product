@@ -117,16 +117,12 @@ children:
             pageUrl: page/youi.metadata.taskgroup/index.html
           -
             id: agencyTaskGroup
-            text: 机构方案组
+            text: 方案组授权
             pageUrl: page/youi.metadata.taskgroup/agencyTaskGroup.html
           -
             id: dataResourceGroup
-            text: 资源组
-            pageUrl: page/youi.metadata.taskgroup/index.html
-          -
-            id: agencyDataResourceGroup
-            text: 机构资源组
-            pageUrl: page/youi.metadata.taskgroup/agencyTaskGroup.html
+            text: 资源组授权
+            pageUrl: page/youi.metadata.dataresource.authority/index.html
   -
     id: datacenter
     text: 中心库
