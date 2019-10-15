@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.youi.framework.gwssi.stats</groupId>
+    <artifactId>youi-module-int</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>youi-module-int</name>
+    <description>youi-module-int</description>
+
+    <repositories>
+
+        <repository>
+            <id>maven.central</id>
+            <url>${nexus.root}/content/repositories/central</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>local-snapshot</id>
+            <url>${nexus.root}/repository/maven-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>spring-milestone</id>
+            <name>Spring Milestone</name>
+            <url>http://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>local-snapshot</id>
+            <url>${nexus.root}/repository/maven-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>local-releases</id>
+            <url>${nexus.root}/repository/maven-releases</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>local-snapshot</id>
+            <url>${nexus.root}/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <main.basedir>${basedir}</main.basedir>
+        <nexus.root>http://49.4.13.100:8081</nexus.root>
+
+        <youi.version>3.0.1-SNAPSHOT</youi.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.youi.framework.plugin</groupId>
+                <artifactId>youi-framework-maven-plugin</artifactId>
+                <version>${youi.version}</version>
+                <configuration>
+                    <basePackage>org.youi</basePackage>
+                    <modules>
+                        <param>base/agencydatauth</param>
+                        <param>base/agencydatauthImpl</param>
+                        <param>base/dataccess</param>
+                        <param>base/dataccessImpl</param>
+                    </modules>
+                    <mongoHost>192.168.173.130:27515</mongoHost>
+                    <mongoUsername>query</mongoUsername>
+                    <mongoPassword>query123</mongoPassword>
+                    <mongoDatabase>youi3-common</mongoDatabase>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
