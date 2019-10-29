@@ -47,11 +47,11 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 30000
-#
-#working-services:
-#  ribbon:
-#    ReadTimeout: 30000
-#    ConnectTimeout: 30000
+    softwaresp-services:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
 
 youi:
   page:
@@ -82,6 +82,10 @@ zuul:
       path: /metadataServices/**
       sensitiveHeaders: Set-Cookie
       serviceId: metadata-services
+    softwarespServices:
+      path: /softwarespServices/**
+      sensitiveHeaders: Set-Cookie
+      serviceId: softwaresp-services
     schedulerServices:
       path: /schedulerServices/**
       sensitiveHeaders: Set-Cookie

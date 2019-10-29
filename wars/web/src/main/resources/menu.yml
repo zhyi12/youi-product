@@ -107,21 +107,25 @@ children:
             id: codeset-resource
             text: 代码集
             pageUrl: page/youi.metadata.dataresource.codeset/index.html
+          -
+            id: data-demand
+            text: 数据需求
+            pageUrl: page/youi.metadata.dataresource.demand/index.html
+          -
+            id: soft-project
+            text: 业务系统
+            pageUrl: page/youi.itassert.software.project/index.html
       -
         id: metadata-auth
         text: 元数据授权
         children:
           -
-            id: taskGroup
-            text: 方案组管理
-            pageUrl: page/youi.metadata.taskgroup/index.html
-          -
             id: agencyTaskGroup
-            text: 方案组授权
+            text: 方案授权
             pageUrl: page/youi.metadata.taskgroup/agencyTaskGroup.html
           -
             id: dataResourceGroup
-            text: 资源组授权
+            text: 数据源授权
             pageUrl: page/youi.metadata.dataresource.authority/index.html
   -
     id: datacenter
@@ -224,6 +228,22 @@ children:
     text: 系统管理
     icon: gear
     children:
+      -
+        id: agency
+        text: 组织机构
+        children:
+          -
+            id: agency-admin
+            text: 机构管理
+            pageUrl: page/youi.admin.agency/index.html
+          -
+            id: sp-company-admin
+            text: 开发商
+            pageUrl: page/youi.softwaresp.spcompany/index.html
+          -
+            id: sp-user-admin
+            text: 开发人员
+            pageUrl: page/youi.softwaresp.spuser/index.html
       -
         id: sysconfig
         text: 系统配置
