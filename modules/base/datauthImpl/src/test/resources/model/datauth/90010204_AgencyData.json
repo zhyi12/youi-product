@@ -1,0 +1,18 @@
+{
+  "id": "90010204",
+  "idAttrName": "id",
+  "table": "youi_agency_data",
+  "name": "AgencyData",
+  "caption": "机构数据",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "dataIds",
+      "caption": "数据ID集合"
+    }
+  ]
+}

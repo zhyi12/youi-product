@@ -1,0 +1,18 @@
+{
+  "id": "90010205",
+  "idAttrName": "id",
+  "table": "youi_user_data",
+  "name": "UserData",
+  "caption": "用户数据",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "dataIds",
+      "caption": "数据ID集合"
+    }
+  ]
+}

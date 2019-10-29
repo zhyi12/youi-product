@@ -1,0 +1,22 @@
+{
+  "id": "90010202",
+  "idAttrName": "id",
+  "table": "youi_agency_data_group",
+  "name": "AgencyDataGroup",
+  "caption": "机构数据权限组",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "agencyId",
+      "caption": "机构ID"
+    },
+    {
+      "name": "agencyType",
+      "caption": "机构类型"
+    }
+  ]
+}

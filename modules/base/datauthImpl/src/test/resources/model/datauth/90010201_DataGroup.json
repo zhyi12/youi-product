@@ -1,0 +1,18 @@
+{
+  "id": "90010201",
+  "idAttrName": "id",
+  "table": "youi_data_group",
+  "name": "DataGroup",
+  "caption": "数据权限组",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "groupCaption",
+      "caption": "权限组名称"
+    }
+  ]
+}

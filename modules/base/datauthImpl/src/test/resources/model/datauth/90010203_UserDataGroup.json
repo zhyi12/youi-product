@@ -1,0 +1,22 @@
+{
+  "id": "90010203",
+  "idAttrName": "id",
+  "table": "youi_user_data_group",
+  "name": "UserDataGroup",
+  "caption": "用户数据权限组",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "userId",
+      "caption": "用户ID"
+    },
+    {
+      "name": "userType",
+      "caption": "用户类型"
+    }
+  ]
+}
