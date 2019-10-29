@@ -145,6 +145,9 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                     </archive>
+                    <warSourceExcludes>
+                        **/asserts/node_modules/**,**/asserts/webpack*,**/README.MD
+                    </warSourceExcludes>
                 </configuration>
             </plugin>
         </plugins>
