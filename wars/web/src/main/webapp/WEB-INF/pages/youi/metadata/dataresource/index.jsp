@@ -14,10 +14,10 @@
     <youi:xmenu id="xmenu_dataSource">
         <youi:xmenuItem name="addToDataSource" caption="添加到catalog" groups="schema"/>
     </youi:xmenu>
-
+    <%-- --%>
     <youi:customWidget name="page_spliter" widgetName="pageSpliter"
                        styleClass="col-sm-3 page-inner-height">
-        <youi:toolbar styleClass="fixed-height">
+        <youi:toolbar styleClass="fixed-height" refWidgetId="tree_dataSource">
             <youi:toolbarItem name="refresh" caption="刷新" tooltips=""/>
         </youi:toolbar>
         <youi:tree id="tree_dataSource" styleClass="col-sm-12 no-padding auto-height" iteratorParam="id" rootText="业务数据库资源" xmenu="xmenu_dataSource"

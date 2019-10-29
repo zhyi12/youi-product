@@ -1,8 +1,9 @@
 <%@ taglib prefix="youi" uri="http://www.cjyoui.xyz/youi" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<youi:html title="分布式开发平台">
+<youi:html title="开发平台">
     <%@ include file="/WEB-INF/pages/common/commonScriptAndCss.jsp"%>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <youi:body decorator="modern">
 
         <youi:ajaxUrl name="themeUrl" src="/theme/{theme}.json"/>
@@ -27,7 +28,7 @@
 
 
             if(!window.location.hash){
-                window.location.hash = '#p:page/youi.metadata.dataresource.dataitem/index.html';
+                window.location.hash = '#p:welcome.html';
             }
         </youi:func>
     </youi:body>

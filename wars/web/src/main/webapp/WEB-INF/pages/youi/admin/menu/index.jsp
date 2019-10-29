@@ -18,7 +18,7 @@
             <youi:toolbarItem caption="全展开" tooltips="展开菜单" name="expandAll" icon="open-all"/>
         </youi:toolbar>
         <youi:tree id="tree_menu" rootText="系统菜单" hideRoot="true" height="450"
-                   styleClass="col-sm-12 auto-height"
+                   styleClass="col-sm-12 auto-height hide-root"
                    iteratorSrc="/page/getMenuTree.json" xmenu="xmenu_menu">
         </youi:tree>
     </youi:customWidget>

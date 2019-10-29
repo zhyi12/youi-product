@@ -8,7 +8,8 @@
 		<youi:fieldLayout labelWidths="100,100">
 			<youi:fieldHidden property="id"  caption="i18n.dataTable.id"/>
 
-			<youi:fieldText notNull="true" column="2" property="dataResourceId"  caption="数据资源"/>
+			<youi:fieldText notNull="true" property="catalog"  caption="catalog"/>
+			<youi:fieldText notNull="true" property="schema"  caption="schema"/>
 			<youi:fieldText notNull="true" property="tableName"  caption="表名"/>
 			<youi:fieldText notNull="true" property="entityCode"  caption="实体编号"/>
 			<youi:fieldText notNull="true" column="2" property="tableCaption"  caption="中文表名"/>

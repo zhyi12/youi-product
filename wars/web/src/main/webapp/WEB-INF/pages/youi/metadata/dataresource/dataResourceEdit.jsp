@@ -3,7 +3,8 @@
 
 <youi:page caption="数据资源编辑" autoLoadData="${param.id!=null}"
 	dataSrc="/metadataServices/services/dataResourceManager/getDataResource.json?id=${param.id}">
-	<youi:form id="form_dataResource" panel="false" submit="NOT" reset="NOT" action="/metadataServices/services/dataResourceManager/saveDataResource.json"
+	<youi:form id="form_dataResource" panel="false" submit="NOT" reset="NOT"
+			   action="/metadataServices/services/dataResourceManager/saveDataResource.json"
 		idKeys="id" >
 		<youi:fieldLayout columns="1" labelWidths="100">
 			<youi:fieldHidden property="id"  caption="i18n.dataResource.id"/>

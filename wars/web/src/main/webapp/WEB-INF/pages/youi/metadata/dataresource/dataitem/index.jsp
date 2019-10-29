@@ -27,8 +27,7 @@
 		<youi:gridCol orderBy="desc" width="15%" property="code" caption="标准代码"/>
 
 		<youi:gridCol width="15%" property="dataType" caption="项类型"/>
-		<youi:gridCol width="15%" property="dataLength" caption="项长度"/>
-		<youi:gridCol width="15%" property="dataFormat" caption="项格式"/>
+		<youi:gridCol width="25%" property="dataFormat" caption="项格式"/>
 
 		<youi:gridCol width="10%" type="button" property="button" caption="操作">
 			<youi:button name="edit" caption="编辑"/>

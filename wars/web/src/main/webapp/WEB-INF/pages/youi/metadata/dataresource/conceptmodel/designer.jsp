@@ -40,7 +40,7 @@
             <youi:treeNode id="tree_metadata" caption="概念模型"/>
         </youi:tree>
     </youi:customWidget>
-
+    <%--customWidget--%>
     <youi:customWidget widgetName="metaCdmDesigner" pageModule="metadata" name="metaCdmDesigner"
                        refs="tree_dataResource,subpage_addSubSystem,subpage_addModule,subpage_editEntity"
                        urls="removeConceptItemUrl,getModelTreeUrl,getConceptDiagramTreeUrl,getDataTablesUrl,getDataTableColumnsUrl,getDiagramContentUrl,saveDiagramUrl"
