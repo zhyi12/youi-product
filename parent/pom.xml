@@ -93,10 +93,12 @@
         <rabbitmq.client.version>5.4.3</rabbitmq.client.version>
 
         <youi.version>3.0.1-SNAPSHOT</youi.version>
-        <springboot.version>2.0.0.M7</springboot.version>
+        <springboot.version>2.0.7.RELEASE</springboot.version>
         <spring.cloud.version>2.0.0.RELEASE</spring.cloud.version>
         <springframework.version>5.1.3.RELEASE</springframework.version>
         <springframework.integration.version>5.1.1.RELEASE</springframework.integration.version>
+        <spring.data.version>2.1.1.RELEASE</spring.data.version>
+        <jedis.version>2.10.1</jedis.version>
         <tomcat.version>8.5.23</tomcat.version>
     </properties>
 
@@ -286,9 +288,33 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springframework.integration</groupId>
+                <artifactId>spring-integration-jpa</artifactId>
+                <version>${springframework.integration.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-amqp</artifactId>
                 <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-redis</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${spring.data.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
             </dependency>
 
             <!-- servlet provider -->
@@ -440,6 +466,13 @@
         <module>../modules/base/agency</module>
         <module>../modules/base/agencyImpl</module>
         <module>../modules/base/agencyClient</module>
+        <module>../modules/base/datauth</module>
+        <module>../modules/base/datauthImpl</module>
+        <module>../modules/base/datauthClient</module>
+
+        <module>../modules/cache/common</module>
+        <module>../modules/cache/ehcache</module>
+        <module>../modules/cache/redis</module>
 
         <module>../modules/server/common</module>
         <module>../modules/server/servercaller</module>
@@ -461,6 +494,8 @@
 
         <module>../modules/metadata/conceptdesign</module>
         <module>../modules/metadata/conceptdesignImpl</module>
+        <module>../modules/metadata/datademand</module>
+        <module>../modules/metadata/datademandImpl</module>
 
         <module>../modules/dataquery/engine</module>
         <module>../modules/dataquery/presto</module>
@@ -482,6 +517,20 @@
         <module>../modules/tools/rowdata/xls</module>
         <module>../modules/tools/indexing</module>
         <module>../modules/tools/flow</module>
+
+        <!-- software service provider -->
+        <module>../modules/softwaresp/spcompany</module>
+        <module>../modules/softwaresp/spcompanyImpl</module>
+        <module>../modules/softwaresp/spuser</module>
+        <module>../modules/softwaresp/spuserImpl</module>
+        <!-- software project -->
+        <module>../modules/itassert/softproject</module>
+        <module>../modules/itassert/softprojectImpl</module>
+
+
+        <module>../modules/itassert/software</module>
+        <module>../modules/itassert/softwareImpl</module>
+
     </modules>
 
 </project>
