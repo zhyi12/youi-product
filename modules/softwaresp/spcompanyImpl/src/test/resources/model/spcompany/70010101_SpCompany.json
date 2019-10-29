@@ -1,0 +1,18 @@
+{
+  "id":"70010101",
+  "idAttrName":"id",
+  "table":"youi_ssp_company",
+  "name":"spCompany",
+  "caption":"软件开发商",
+  "attributes":[{
+    "isId":true,
+    "name":"id",
+    "caption":"主键"
+  },{
+    "name":"agencyId",
+    "caption":"机构ID"
+  },{
+    "name":"companyCaption",
+    "caption":"开发商名称"
+  }]
+}

@@ -1,0 +1,24 @@
+{
+  "id":"70010101",
+  "idAttrName":"id",
+  "table":"youi_ssp_user",
+  "name":"spUser",
+  "caption":"开发人员",
+  "attributes":[{
+    "isId":true,
+    "name":"id",
+    "caption":"主键"
+  },{
+    "name":"agencyId",
+    "caption":"机构ID"
+  },{
+    "name":"username",
+    "caption":"登录名"
+  },{
+    "name":"userCaption",
+    "caption":"用户名称"
+  },{
+    "name":"password",
+    "caption":"密码"
+  }]
+}
