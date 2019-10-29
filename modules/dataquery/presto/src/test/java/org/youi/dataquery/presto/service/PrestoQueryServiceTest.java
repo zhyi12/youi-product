@@ -279,6 +279,6 @@ public class PrestoQueryServiceTest {
     }
 
     private Double randomValue() {
-        return  new Double(Math.random()*10000).intValue() / 100d;
+        return  Double.valueOf((Math.random()*10000)).intValue() / 100d;
     }
 }

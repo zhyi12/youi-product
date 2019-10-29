@@ -1,0 +1,14 @@
+{
+  "id": "80020101",
+  "idAttrName": "id",
+  "table": "youi_%tableName%",
+  "name": "%modelName%",
+  "caption": "%modelCaption%",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    }
+  ]
+}

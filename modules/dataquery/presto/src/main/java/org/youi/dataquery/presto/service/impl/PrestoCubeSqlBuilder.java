@@ -21,6 +21,8 @@ import org.youi.dataquery.engine.core.CubeQuerySqlBuilder;
 import org.youi.dataquery.engine.model.Catalog;
 import org.youi.dataquery.engine.model.Group;
 import org.youi.dataquery.engine.model.QueryCondition;
+import org.youi.framework.core.Constants;
+import org.youi.framework.core.exception.BusException;
 import org.youi.framework.core.orm.Condition;
 import org.youi.framework.util.StringUtils;
 
@@ -50,7 +52,6 @@ public class PrestoCubeSqlBuilder extends CubeQuerySqlBuilder {
 
     @Override
     protected String buildWhereSql(List<Group> groups, Catalog catalog, List<QueryCondition> queryConditions,List<Object> params) {
-
         if(CollectionUtils.isEmpty(queryConditions)){
             return "";//快速返回空串
         }

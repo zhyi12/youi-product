@@ -166,9 +166,9 @@ public abstract class CubeQuerySqlBuilder {
 
     /**
      * 生成查询条件语句
-     * @param groups
-     * @param catalog
-     * @param queryConditions
+     * @param groups 分组条件
+     * @param catalog 目录条件
+     * @param queryConditions 查询条件
      * @return
      */
     protected abstract String buildWhereSql(List<Group> groups,
