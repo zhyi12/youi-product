@@ -15,3 +15,17 @@ export JAVA_HOME="/home/filing/gxb-project/jdk"
 export JAVA_OPTS="-server -Xms1024m -Xmx2048m  -Djava.awt.headless=true -Dfile.encoding=UTF8 -Dspring.config.location=/home/filing/gxb-project/config/config-web.yml"
 
 特别注意JSESSIONID的名称，SSO和web的配置需要不同
+
+
+#上传组件使用
+    <youi:script src="/asserts/js/webuploader/webuploader.min.js"/>
+    <youi:script src="/asserts/js/webuploader/field.webuploader.js"/>
+    <youi:style href="/asserts/js/webuploader/webuploader.css"/>
+
+    <youi:form id="form_upload" action="a.json">
+        <youi:fieldLayout columns="1" labelWidths="100">
+            <youi:fieldCustom property="xlsFileName" custom="fieldWebuploader" notNull="true"
+                              customOptions="{limits:1,mineTypeCaption:'',mineTypeExtensions:'xls,xlsx'}" caption="选择文件"/>
+    
+        </youi:fieldLayout>
+    </youi:form>
