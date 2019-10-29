@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow>
+    <node id="node1" selectableItem="[object Object]" left="100" top="100" width="252" height="134">
+        <![CDATA[<div class="entity-header">统计用户</div><div class="entity-attributes col-sm-12 no-padding"><div class="entity-attribute"><span class="col-sm-6">用户名称</span><span class="col-sm-6">USER_NAME</span></div><div class="entity-attribute"><span class="col-sm-6">用户地址</span><span class="col-sm-6">ADDRESS_INFO</span></div><div class="entity-attribute"><span class="col-sm-6">联系电话</span><span class="col-sm-6">CONTACT_PHONE</span></div><div class="entity-attribute"><span class="col-sm-6">联系人</span><span class="col-sm-6">CONTACT_MAN</span></div></div><div class="entity-identify col-sm-12 no-padding">2</div>]]></node>
+    <node id="node4" selectableItem="[object Object]" left="454" top="111" width="315" height="114">
+        <![CDATA[<div class="entity-header">stats_gather_form_quest</div><div class="entity-attributes col-sm-12 no-padding"><div class="entity-attribute"><span class="col-sm-6">姓名</span><span class="col-sm-6">NAME</span></div><div class="entity-attribute"><span class="col-sm-6">心理咨询师设置岗位数</span><span class="col-sm-6">XLZXS_SZGWS</span></div><div class="entity-attribute"><span class="col-sm-6">日期周期表</span><span class="col-sm-6">DATE_PERIOD</span></div></div><div class="entity-identify col-sm-12 no-padding">2</div>]]></node>
+    <transition id="node1_node4" from="node1" to="node4" caption=""></transition>
+</flow>
