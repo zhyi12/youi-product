@@ -27,6 +27,18 @@
         </dependency>
 
         <dependency>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-data-authImpl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-software-projectImpl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.youi.framework</groupId>
             <artifactId>youi-framework-codemapImpl</artifactId>
         </dependency>
