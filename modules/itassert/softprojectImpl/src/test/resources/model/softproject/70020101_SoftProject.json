@@ -1,0 +1,26 @@
+{
+  "id": "70020101",
+  "idAttrName": "id",
+  "table": "youi_software_project",
+  "name": "softProject",
+  "caption": "软件项目",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },{
+      "name": "projectCaption",
+      "caption": "项目名称"
+    },{
+      "name": "projectCode",
+      "caption": "项目编号"
+    },{
+      "name": "agencyId",
+      "caption": "所属机构"
+    },{
+      "name": "enableDate",
+      "caption": "启用日期"
+    }
+  ]
+}
