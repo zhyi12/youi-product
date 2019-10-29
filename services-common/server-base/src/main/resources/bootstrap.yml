@@ -2,8 +2,15 @@ spring:
   application:
     name: base-services
   cloud:
+    inetutils:
+      preferredNetworks:
+        - 192.168.173
     config:
       discovery:
         enabled: true
         service-id: config-services
       label: master
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.173.130:8761/eureka/
