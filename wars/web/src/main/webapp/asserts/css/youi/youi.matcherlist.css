@@ -1,0 +1,37 @@
+.youi-matcherList{
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.youi-matcherList>.matcherList-content{
+    position: relative;
+}
+
+.youi-matcherList canvas{
+    position: absolute;
+    left:0px;
+    right:0px;
+    z-index: 2;
+}
+
+.youi-matcherList .node{
+    position: absolute;
+    width:30%;
+    height:32px;
+    border:1px solid #ddd;
+    border-radius: 5px;
+    z-index: 3;
+    background: #d9edf7;
+    padding:3px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.youi-matcherList .source-container .node{
+    left:20px;
+}
+
+.youi-matcherList .target-container .node{
+    right:20px;
+}

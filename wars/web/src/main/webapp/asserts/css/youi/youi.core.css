@@ -239,11 +239,6 @@ a.page-message-alert{
 	background:#eeefff;
 }
 
-
-.no-padding{
-	padding:0px;
-}
-
 .overflow{
 	overflow: auto;
 }
@@ -253,6 +248,10 @@ a.page-message-alert{
     float: left;
     border-radius: 20px;
     margin: 5px;
+}
+
+.top-border{
+	border-top: 1px solid #ddd;
 }
 
 .youi-shadow-border{
@@ -373,4 +372,25 @@ a.page-message-alert{
 	font-family: "FontAwesome";
 	content: '*';
 	padding-right:2px;
+}
+
+.ui-icon.ui-icon-gripsmall-diagonal-se{
+	cursor: se-resize;
+	width: 12px;
+	height: 12px;
+	right: 1px;
+	bottom: 1px;
+	position: absolute;
+}
+
+.ui-selected .ui-icon.ui-icon-gripsmall-diagonal-se:before{
+	font-family:'FontAwesome';
+	content: "\f078";
+
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1)
 }
