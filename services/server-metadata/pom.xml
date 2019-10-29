@@ -17,15 +17,29 @@
 
     <dependencies>
 
+        <!-- use redis cache -->
         <dependency>
-            <groupId>org.youi.framework</groupId>
-            <artifactId>youi-framework-services-boot</artifactId>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-cache-redis</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.youi.framework</groupId>
-            <artifactId>youi-framework-services-swagger</artifactId>
-            <version>${youi.version}</version>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-data-auth-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-metadata-concept-designImpl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-metadata-demandImpl</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -58,6 +72,19 @@
             <artifactId>youi-dataquery-presto</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!-- framework -->
+        <dependency>
+            <groupId>org.youi.framework</groupId>
+            <artifactId>youi-framework-services-boot</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.framework</groupId>
+            <artifactId>youi-framework-services-swagger</artifactId>
+            <version>${youi.version}</version>
+        </dependency>
+
 
     </dependencies>
 
