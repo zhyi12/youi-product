@@ -4,6 +4,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');//
 module.exports = {
     entry: {
         'app':[
+            "./js/youi/youi.resizable.js",
             "./js/youi/youi.designer.js",
             "./js/youi/extra/youi.treepage.js",
             "./js/youi/extra/youi.gridpanel.js",
