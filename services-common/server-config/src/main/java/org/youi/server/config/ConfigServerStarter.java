@@ -17,6 +17,7 @@ package org.youi.server.config;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.integration.config.EnableIntegration;
@@ -35,6 +36,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableConfigServer
 @RestController
 @EnableEurekaClient
+@EnableDiscoveryClient
 @EnableOAuth2Sso
 @EnableSwagger2
 public class ConfigServerStarter {
