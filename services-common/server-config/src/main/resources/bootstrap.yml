@@ -1,3 +1,12 @@
 spring:
   application:
     name: config-services
+#eureka:
+#  instance:
+#    preferIpAddress: true
+#    app-group-name: base
+#  client:
+#    healthcheck:
+#      enabled: true
+#    serviceUrl:
+#      defaultZone: http://192.168.173.130:8761/eureka/
