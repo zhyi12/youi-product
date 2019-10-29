@@ -27,6 +27,12 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-software-sp-userImpl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- normal login support -->
         <dependency>
             <groupId>org.youi.framework</groupId>
