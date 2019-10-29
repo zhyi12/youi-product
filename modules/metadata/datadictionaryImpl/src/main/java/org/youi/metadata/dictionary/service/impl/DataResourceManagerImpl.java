@@ -25,10 +25,7 @@ import org.youi.framework.core.orm.Condition;
 import org.youi.framework.core.orm.Order;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
-import org.youi.framework.esb.annotation.ConditionCollection;
-import org.youi.framework.esb.annotation.EsbServiceMapping;
-import org.youi.framework.esb.annotation.OrderCollection;
-import org.youi.framework.esb.annotation.ServiceParam;
+import org.youi.framework.esb.annotation.*;
 
 import org.youi.framework.util.StringUtils;
 import org.youi.metadata.dictionary.entity.DataResource;
@@ -74,12 +71,13 @@ public class DataResourceManagerImpl implements DataResourceManager{
     	return dataResourceDao.get(id);
     }
 	
-	@EsbServiceMapping(trancode="8001030203",caption="分页查询数据资源")
+	@EsbServiceMapping(trancode="8001030203",caption="分页查询数据资源",
+            dataAccesses = {@DataAccess(name = "datasource",property = "catalog")})
     @Override
 	public PagerRecords getPagerDataResources(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=DataResource.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders) {
-		PagerRecords pagerRecords = dataResourceDao.findByPager(pager, conditions, orders);
+		PagerRecords pagerRecords = dataResourceDao.complexFindByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
     /**

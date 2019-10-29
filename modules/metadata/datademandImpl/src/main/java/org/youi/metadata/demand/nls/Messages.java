@@ -14,19 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.metadata.conceptdesign.mongo;
+package org.youi.metadata.demand.nls;
 
-import org.youi.framework.mongo.DaoMongo;
-import org.youi.metadata.conceptdesign.entity.ConceptDiagram;
+import org.springframework.stereotype.Component;
+import org.youi.framework.context.NLS;
 
 /**
- * <p>系统描述: </p>
- * <p>功能描述: ConceptDiagram-数据持久层接口</p>
+ * <p>系统描述: 模块文本消息类型静态变量类</p>
+ * <p>功能描述 :</p>
  * @author 代码生成器
  * @since 1.0.0
  */
-public interface ConceptDiagramDao extends DaoMongo<ConceptDiagram, String>  {
-
-
+@Component("demand.messages")
+public class Messages extends NLS {
 
 }

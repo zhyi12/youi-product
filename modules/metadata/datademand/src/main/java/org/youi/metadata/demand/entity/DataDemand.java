@@ -14,50 +14,59 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.metadata.conceptdesign.entity;
+package org.youi.metadata.demand.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.youi.framework.core.dataobj.Domain;
+import org.youi.framework.core.dataobj.tree.TreeAttribute;
 
 import javax.persistence.Column;
 /**
- * 实体: 概念模型图
+ * 实体: 数据需求
  * @author 代码生成器
  * @since 1.0.0
  */
-@Document(collection = "youi_metadata_concept_diagram")
-@JsonIgnoreProperties("content")
-public class ConceptDiagram implements Domain{
+@Document(collection = "youi_metadata_demand")
+public class DataDemand implements Domain{
 	
-	private static final long serialVersionUID = 7878349091802368741L;
+	private static final long serialVersionUID = 6283898169414910483L;
 	
 	@Id
 	@Column
 	private String id;//主键
 
+	@Column
+	private String realmId;//需求域
+
+	@Column
+	private String demandCaption;//需求名称
+
+	@TreeAttribute(TreeAttribute.TREE_ATTR_ID)
 	public String getId(){
 		return this.id;
 	}
-
+	
 	public void setId(String id){
 		this.id = id;
 	}
 
-	private String content;
-
-	public String getContent() {
-		return content;
+	@TreeAttribute(TreeAttribute.TREE_ATTR_TEXT)
+	public String getDemandCaption(){
+		return this.demandCaption;
+	}
+	
+	public void setDemandCaption(String demandCaption){
+		this.demandCaption = demandCaption;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	@TreeAttribute(TreeAttribute.TREE_ATTR_PID)
+	public String getRealmId() {
+		return realmId;
 	}
 
-	public String buildKey(String moduleId){
-		this.id = "Diagram"+moduleId;
-		return this.id;
+	public void setRealmId(String realmId) {
+		this.realmId = realmId;
 	}
 
 	@Override
@@ -65,6 +74,7 @@ public class ConceptDiagram implements Domain{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((demandCaption == null) ? 0 : demandCaption.hashCode());
 		return result;
 	}
 	
@@ -76,11 +86,16 @@ public class ConceptDiagram implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final ConceptDiagram other = (ConceptDiagram) obj;
+		final DataDemand other = (DataDemand) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (demandCaption == null) {
+			if (other.demandCaption != null)
+				return false;
+		} else if (!demandCaption.equals(other.demandCaption))
 			return false;
 		return true;
 	}

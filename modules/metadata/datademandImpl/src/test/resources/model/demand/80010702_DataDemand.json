@@ -1,0 +1,18 @@
+{
+  "id": "80010702",
+  "idAttrName": "id",
+  "table": "youi_metadata_demand",
+  "name": "DataDemand",
+  "caption": "数据需求",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "demandCaption",
+      "caption": "需求名称"
+    }
+  ]
+}

@@ -2,9 +2,13 @@ package org.youi.metadata.dictionary.service;
 
 import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.core.dataobj.tree.TreeNode;
-import org.youi.framework.esb.annotation.EsbServiceMapping;
-import org.youi.framework.esb.annotation.ServiceParam;
+import org.youi.framework.core.orm.Condition;
+import org.youi.framework.esb.DataAccesses;
+import org.youi.framework.esb.annotation.*;
+import org.youi.metadata.dictionary.Constant;
+import org.youi.metadata.dictionary.entity.DataResource;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -42,11 +46,14 @@ public interface IDataDictionaryFinder {
      * @param parentId
      * @return
      */
-    @EsbServiceMapping(trancode = "8001030504",caption = "分级获取数据资源树")
-    List<TreeNode> getDataSourceIteratorTree(@ServiceParam(name = "id")String parentId);
+    @EsbServiceMapping(trancode = "8001030504",caption = "分级获取数据资源树",
+            dataAccesses = {@DataAccess(property = Constant.AUTH_DATA_PROP_DATASOURCE,name = "datasource")})
+    List<TreeNode> getDataSourceIteratorTree(
+            @ServiceParam(name = "id")String parentId,
+            @DataAccessParam(property = Constant.AUTH_DATA_PROP_DATASOURCE)DataAccesses catalogDataAccesses);
 
     /**
-     * 根据catalog,schem,tableName 获取表的列集合
+     * 根据catalog,schema,tableName 获取表的列集合
      * @param catalog
      * @param schema
      * @param tableName

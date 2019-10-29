@@ -15,6 +15,7 @@
  */
 package org.youi.metadata.dictionary.service.impl;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -23,12 +24,16 @@ import org.youi.dataquery.engine.service.IQueryService;
 import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.core.dataobj.tree.HtmlTreeNode;
 import org.youi.framework.core.dataobj.tree.TreeNode;
-import org.youi.framework.esb.annotation.EsbServiceMapping;
-import org.youi.framework.esb.annotation.ServiceParam;
+import org.youi.framework.core.orm.Condition;
+import org.youi.framework.esb.DataAccesses;
+import org.youi.framework.esb.annotation.*;
 import org.youi.framework.util.StringUtils;
+import org.youi.metadata.dictionary.Constant;
+import org.youi.metadata.dictionary.entity.DataResource;
 import org.youi.metadata.dictionary.service.IDataDictionaryFinder;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -59,7 +64,8 @@ public class DataDictionaryFinder implements IDataDictionaryFinder{
 
     @Override
     @EsbServiceMapping(trancode = "8001030503",caption = "根据catalog和schema获取table集合")
-    public List<Item> findTables(@ServiceParam(name = "catalog") String catalog, @ServiceParam(name = "schema") String schema) {
+    public List<Item> findTables(
+            @ServiceParam(name = "catalog") String catalog, @ServiceParam(name = "schema") String schema) {
         return buildItems(queryService.queryTables(catalog,schema));
     }
 
@@ -73,10 +79,18 @@ public class DataDictionaryFinder implements IDataDictionaryFinder{
     }
 
     @Override
-    @EsbServiceMapping(trancode = "8001030504",caption = "分级获取数据资源树")
-    public List<TreeNode> getDataSourceIteratorTree(@ServiceParam(name = "id")String parentId){
+    @EsbServiceMapping(trancode = "8001030504",caption = "分级获取数据资源树",
+            dataAccesses = {@DataAccess(property = Constant.AUTH_DATA_PROP_DATASOURCE,name = "datasource")})
+    public List<TreeNode> getDataSourceIteratorTree(
+            @ServiceParam(name = "id")String parentId,
+            @DataAccessParam(property = Constant.AUTH_DATA_PROP_DATASOURCE)DataAccesses catalogDataAccesses){
         if(StringUtils.isEmpty(parentId)){
-            return buildTreeNodes(buildItems(queryService.queryCatalogs()),"",DataQueryConstants.DATA_RESOURCE_CATALOG);
+            List<String> queryCatalogs = new ArrayList<>(queryService.queryCatalogs());
+            if(catalogDataAccesses!=null && ArrayUtils.isNotEmpty(catalogDataAccesses.getDataIds())){
+                //数据权限过滤
+                queryCatalogs.removeIf(queryCatalog->ArrayUtils.indexOf(catalogDataAccesses.getDataIds(),queryCatalog)==-1);
+            }
+            return buildTreeNodes(buildItems(queryCatalogs),"",DataQueryConstants.DATA_RESOURCE_CATALOG);
         }
         String[] paths = parentId.split("\\"+RESOURCE_TREE_ID_SPLIT);
         if(paths.length==1){

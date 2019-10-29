@@ -42,6 +42,12 @@ public class DataTable implements Domain{
 	private String entityCode;//实体编号
 
 	@Column
+	private String catalog;//数据库catalog
+
+	@Column
+	private String schema;//数据库schema
+
+	@Column
 	private String dataResourceId;//资源ID
 
 	@Column
@@ -83,6 +89,22 @@ public class DataTable implements Domain{
 
 	public void setEntityCode(String entityCode) {
 		this.entityCode = entityCode;
+	}
+
+	public String getCatalog() {
+		return catalog;
+	}
+
+	public void setCatalog(String catalog) {
+		this.catalog = catalog;
+	}
+
+	public String getSchema() {
+		return schema;
+	}
+
+	public void setSchema(String schema) {
+		this.schema = schema;
 	}
 
 	@Override

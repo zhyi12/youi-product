@@ -14,19 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.metadata.conceptdesign.mongo;
+package org.youi.metadata.demand.mongo;
 
 import org.youi.framework.mongo.DaoMongo;
-import org.youi.metadata.conceptdesign.entity.ConceptDiagram;
+import org.youi.metadata.demand.entity.DataDemand;
+
+import java.util.List;
 
 /**
  * <p>系统描述: </p>
- * <p>功能描述: ConceptDiagram-数据持久层接口</p>
+ * <p>功能描述: DataDemand-数据持久层接口</p>
  * @author 代码生成器
  * @since 1.0.0
  */
-public interface ConceptDiagramDao extends DaoMongo<ConceptDiagram, String>  {
+public interface DataDemandDao extends DaoMongo<DataDemand, String>  {
 
-
-
+    /**
+     * 查询需求域下的需求
+     * @param realmId
+     */
+    List<DataDemand> findByRealmId(String realmId);
 }

@@ -14,19 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.metadata.conceptdesign.mongo;
+package org.youi.metadata.demand.mongo;
 
 import org.youi.framework.mongo.DaoMongo;
-import org.youi.metadata.conceptdesign.entity.ConceptDiagram;
+import org.youi.metadata.demand.entity.DataDemandMindMap;
 
 /**
  * <p>系统描述: </p>
- * <p>功能描述: ConceptDiagram-数据持久层接口</p>
+ * <p>功能描述: DataDemandMindMap-数据持久层接口</p>
  * @author 代码生成器
  * @since 1.0.0
  */
-public interface ConceptDiagramDao extends DaoMongo<ConceptDiagram, String>  {
-
-
-
+public interface DataDemandMindMapDao extends DaoMongo<DataDemandMindMap, String>  {
+	
 }

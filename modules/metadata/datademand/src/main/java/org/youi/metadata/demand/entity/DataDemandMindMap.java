@@ -14,38 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.metadata.conceptdesign.entity;
+package org.youi.metadata.demand.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.youi.framework.core.dataobj.Domain;
 
 import javax.persistence.Column;
 /**
- * 实体: 概念模型图
+ * 实体: 思维导图
  * @author 代码生成器
  * @since 1.0.0
  */
-@Document(collection = "youi_metadata_concept_diagram")
-@JsonIgnoreProperties("content")
-public class ConceptDiagram implements Domain{
+@Document(collection = "youi_metadata_demand_mind_map")
+public class DataDemandMindMap implements Domain{
 	
-	private static final long serialVersionUID = 7878349091802368741L;
+	private static final long serialVersionUID = 2663863369805240421L;
 	
 	@Id
 	@Column
-	private String id;//主键
+	private String dataDemandId;//主键
 
-	public String getId(){
-		return this.id;
+	private String content;//思维导图xml内容
+
+	public String getDataDemandId(){
+		return this.dataDemandId;
 	}
-
-	public void setId(String id){
-		this.id = id;
+	
+	public void setDataDemandId(String dataDemandId){
+		this.dataDemandId = dataDemandId;
 	}
-
-	private String content;
 
 	public String getContent() {
 		return content;
@@ -55,16 +53,11 @@ public class ConceptDiagram implements Domain{
 		this.content = content;
 	}
 
-	public String buildKey(String moduleId){
-		this.id = "Diagram"+moduleId;
-		return this.id;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((dataDemandId == null) ? 0 : dataDemandId.hashCode());
 		return result;
 	}
 	
@@ -76,11 +69,11 @@ public class ConceptDiagram implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final ConceptDiagram other = (ConceptDiagram) obj;
-		if (id == null) {
-			if (other.id != null)
+		final DataDemandMindMap other = (DataDemandMindMap) obj;
+		if (dataDemandId == null) {
+			if (other.dataDemandId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!dataDemandId.equals(other.dataDemandId))
 			return false;
 		return true;
 	}

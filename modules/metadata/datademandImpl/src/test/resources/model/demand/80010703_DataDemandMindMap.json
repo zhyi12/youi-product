@@ -1,0 +1,14 @@
+{
+  "id": "80010703",
+  "idAttrName": "dataDemandId",
+  "table": "youi_metadata_demand_mind_map",
+  "name": "DataDemandMindMap",
+  "caption": "思维导图",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "dataDemandId",
+      "caption": "主键"
+    }
+  ]
+}

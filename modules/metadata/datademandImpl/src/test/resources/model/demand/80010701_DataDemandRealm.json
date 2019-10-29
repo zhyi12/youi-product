@@ -1,0 +1,21 @@
+{
+  "id": "80010701",
+  "idAttrName": "id",
+  "table": "youi_metadata_demand_realm",
+  "name": "DataDemandRealm",
+  "caption": "数据需求域",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "realmCaption",
+      "caption": "需求域名称"
+    },{
+      "name": "parentId",
+      "caption": "父需求域"
+    }
+  ]
+}

@@ -27,10 +27,7 @@ import org.youi.framework.core.orm.Condition;
 import org.youi.framework.core.orm.Order;
 import org.youi.framework.core.orm.Pager;
 import org.youi.framework.core.orm.PagerRecords;
-import org.youi.framework.esb.annotation.ConditionCollection;
-import org.youi.framework.esb.annotation.EsbServiceMapping;
-import org.youi.framework.esb.annotation.OrderCollection;
-import org.youi.framework.esb.annotation.ServiceParam;
+import org.youi.framework.esb.annotation.*;
 
 import org.youi.metadata.dictionary.entity.DataResource;
 import org.youi.metadata.dictionary.entity.DataTable;
@@ -95,12 +92,13 @@ public class DataTableManagerImpl implements DataTableManager{
     	return dataTableDao.get(id);
     }
 	
-	@EsbServiceMapping(trancode="8001030303",caption="分页查询数据表")
+	@EsbServiceMapping(trancode="8001030303",caption="分页查询数据表",
+            dataAccesses = {@DataAccess(name = "datasource",property = "catalog")})
     @Override
 	public PagerRecords getPagerDataTables(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=DataTable.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders) {
-		PagerRecords pagerRecords = dataTableDao.findByPager(pager, conditions, orders);
+		PagerRecords pagerRecords = dataTableDao.complexFindByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
     /**
@@ -116,6 +114,7 @@ public class DataTableManagerImpl implements DataTableManager{
 //    	}else{//新增
 //    		
 //    	}
+        o.setDataResourceId(o.getCatalog()+"_"+o.getSchema());
     	return dataTableDao.save(o);
     }
 
@@ -179,6 +178,8 @@ public class DataTableManagerImpl implements DataTableManager{
             syncTables.forEach((tableName,item)->{
                 DataTable dataTable = new DataTable();
                 dataTable.setDataResourceId(dataResource.getId());
+                dataTable.setCatalog(dataResource.getCatalog());
+                dataTable.setSchema(dataResource.getSchema());
                 dataTable.setTableName(tableName);
                 dataTable.setTableCaption(tableName);
                 dataTables.add(dataTable);

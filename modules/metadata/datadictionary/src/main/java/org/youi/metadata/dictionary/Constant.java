@@ -1,6 +1,5 @@
 /*
- * YOUI框架
- * Copyright 2018 the original author or authors.
+ * Copyright 2012-2018 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.metadata.conceptdesign.mongo;
-
-import org.youi.framework.mongo.DaoMongo;
-import org.youi.metadata.conceptdesign.entity.ConceptDiagram;
+package org.youi.metadata.dictionary;
 
 /**
- * <p>系统描述: </p>
- * <p>功能描述: ConceptDiagram-数据持久层接口</p>
- * @author 代码生成器
- * @since 1.0.0
+ * @author zhouyi
+ * @see
+ * @since 2.0.0
  */
-public interface ConceptDiagramDao extends DaoMongo<ConceptDiagram, String>  {
+public final class Constant {
 
+    /**
+     * 私有构造函数
+     */
+    private Constant(){
+        //ignore
+    }
 
-
+    public final static String AUTH_DATA_PROP_DATASOURCE = "catalog";
 }

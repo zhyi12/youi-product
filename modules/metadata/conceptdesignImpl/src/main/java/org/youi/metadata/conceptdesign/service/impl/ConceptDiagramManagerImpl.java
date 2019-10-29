@@ -86,7 +86,7 @@ public class ConceptDiagramManagerImpl implements ConceptDiagramManager{
 	public PagerRecords getPagerConceptDiagrams(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=ConceptDiagram.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders) {
-		PagerRecords pagerRecords = conceptDiagramDao.findByPager(pager, conditions, orders);
+		PagerRecords pagerRecords = conceptDiagramDao.complexFindByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
     /**
