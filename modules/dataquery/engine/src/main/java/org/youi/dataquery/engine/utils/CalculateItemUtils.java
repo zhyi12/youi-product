@@ -65,7 +65,7 @@ public class CalculateItemUtils {
      * @param dataItem
      * @return
      */
-    private static Double findDataItemValue(DataItem dataItem) {
+    public static Double findDataItemValue(DataItem dataItem) {
         Double value = null;
         if (dataItem != null && dataItem.getData() != null) {
             return dataItem.getData().getValue().doubleValue();
