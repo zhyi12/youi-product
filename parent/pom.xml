@@ -527,9 +527,8 @@
         <module>../modules/itassert/softproject</module>
         <module>../modules/itassert/softprojectImpl</module>
 
-
-        <module>../modules/itassert/software</module>
-        <module>../modules/itassert/softwareImpl</module>
+        <module>../modules/chart/engine</module>
+        <module>../modules/chart/echarts</module>
 
     </modules>
 
