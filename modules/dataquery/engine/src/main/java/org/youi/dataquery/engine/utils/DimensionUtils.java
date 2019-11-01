@@ -18,6 +18,7 @@ package org.youi.dataquery.engine.utils;
 import org.springframework.util.CollectionUtils;
 import org.youi.dataquery.engine.model.Group;
 import org.youi.dataquery.engine.model.ItemTreeNode;
+import org.youi.framework.core.dataobj.cube.DataCube;
 import org.youi.framework.core.dataobj.cube.Dimension;
 import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.core.dataobj.tree.TreeNode;
@@ -112,21 +113,21 @@ public final class DimensionUtils {
     }
 
     /**
-     *
-     * @param groups
+     * 一维展开cube的维度
+     * @param dimensions
      * @return
      */
-    public static List<Item>[] expendedCrossColItems(List<Dimension> groups){
-        int dimensionCount = groups.size();
+    public static List<Item>[] expendedCrossColItems(List<Dimension> dimensions){
+        int dimensionCount = dimensions.size();
         int itemCount = 1;
         int spans = 1;
         List<Integer> spansList = new ArrayList<>();
 
         //计算占位
         for (int i = dimensionCount; i > 0; i--) {
-            Dimension dimension = groups.get(i-1);
+            Dimension dimension = dimensions.get(i-1);
             if (i < dimensionCount) {
-                spans = spans * (groups.get(i).getItems().size());
+                spans = spans * (dimensions.get(i).getItems().size());
             }
             spansList.add(spans);
             itemCount = itemCount * dimension.getItems().size();
@@ -135,7 +136,7 @@ public final class DimensionUtils {
         List<Item> crossColItems[] = new List[itemCount];
         int index =0;
         double itemBlocks = 1;
-        for(Dimension dimension:groups){
+        for(Dimension dimension:dimensions){
             //对维度进行笛卡尔组合
             for(int i=0;i<itemCount;i++){
                 double itemIndex = (Math.floor(new Integer(i).doubleValue() / spansList.get(dimensionCount - index - 1))) % dimension.getItems().size();
@@ -152,6 +153,23 @@ public final class DimensionUtils {
             index++;
         }
         return crossColItems;
+    }
+
+    /**
+     * 查找维度
+     * @param dataCube
+     * @param dimId
+     * @return
+     */
+    public static Dimension findDimension(DataCube dataCube,String dimId){
+        if(dimId!=null && dataCube!=null && dataCube.getDimensions()!=null){
+            for(Dimension dimension:dataCube.getDimensions()){
+                if(dimId.equals(dimension.getId())){
+                    return dimension;
+                }
+            }
+        }
+        return null;
     }
 
 }
