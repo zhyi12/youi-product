@@ -68,7 +68,6 @@ public class ServerOAuth2Caller {
         HttpEntity entity = new HttpEntity(valueMap, headers);
 
         ResponseEntity<String> responseEntity = serverRestTemplate.exchange(url, HttpMethod.GET,entity,String.class);
-        System.out.println(responseEntity.getBody());
         return new ResContext();
     }
 
