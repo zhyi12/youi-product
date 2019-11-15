@@ -69,7 +69,20 @@
 
         <dependency>
             <groupId>org.youi.product</groupId>
+            <artifactId>youi-dataquery-exporter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youi.product</groupId>
             <artifactId>youi-dataquery-presto</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- standard -->
+        <dependency>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-standard-measure-unitImpl</artifactId>
             <version>${project.version}</version>
         </dependency>
 
