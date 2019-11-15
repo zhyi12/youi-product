@@ -71,4 +71,11 @@ public interface DataQueryManager{
      */
     @EsbServiceMapping(trancode="8002010105",caption="主键删除数据查询")
     void removeDataQuery(@ServiceParam(name="id") String id);
+
+
+    /**
+     * 根据查询名称获取查询对象
+     * @param queryName
+     */
+    DataQuery getDataQueryByName(String queryName);
 }

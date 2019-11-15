@@ -105,4 +105,8 @@ public class DataQueryManagerImpl implements DataQueryManager{
     public void removeDataQuery(@ServiceParam(name="id") String id){
     	dataQueryDao.remove(id);
     }
+
+    public DataQuery getDataQueryByName(String queryName){
+        return dataQueryDao.findByName(queryName);
+    }
 }

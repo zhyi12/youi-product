@@ -57,6 +57,18 @@ public class DataQueryServiceImpl implements DataQueryService{
     @Autowired
     private SqlParamBuilder sqlParamBuilder;
 
+    @EsbServiceMapping
+    public PagerRecords query(@ServiceParam(name = "queryName") String queryName,
+                              Pager pager,
+                              @OrderCollection Collection<Order> orders,
+                              @DomainCollection(name = "params",domainClazz = QueryParam.class) List<QueryParam> params){
+        DataQuery query = dataQueryManager.getDataQueryByName(queryName);
+        if(query==null){
+            return new PagerRecords(null,0);
+        }
+        return this.queryRowDataByPager(pager,orders,query.getId(),params);
+    }
+
     /**
      *
      * @param pager

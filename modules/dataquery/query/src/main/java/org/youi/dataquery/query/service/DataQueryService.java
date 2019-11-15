@@ -20,6 +20,21 @@ import java.util.List;
  */
 public interface DataQueryService {
 
+
+    /**
+     * 查询接口
+     * @param queryName
+     * @param pager
+     * @param orders
+     * @param params
+     * @return
+     */
+    @EsbServiceMapping
+    PagerRecords query(
+            @ServiceParam(name = "queryName") String queryName,
+            Pager pager,
+            @OrderCollection Collection<Order> orders,
+            @DomainCollection(name = "params",domainClazz = QueryParam.class) List<QueryParam> params);
     /**
      * 分页查询明细数据
      * @param pager
@@ -35,6 +50,11 @@ public interface DataQueryService {
             @ServiceParam(name="id") String queryId,
             @DomainCollection(name = "params",domainClazz = QueryParam.class) List<QueryParam> params);
 
+    /**
+     *
+     * @param dataQuery
+     * @return
+     */
     @EsbServiceMapping
     DataQuery parseDataQuery(DataQuery dataQuery);
 }

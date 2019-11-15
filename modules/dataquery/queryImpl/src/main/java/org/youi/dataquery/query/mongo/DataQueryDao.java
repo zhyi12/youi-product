@@ -26,5 +26,11 @@ import org.youi.dataquery.query.entity.DataQuery;
  * @since 1.0.0
  */
 public interface DataQueryDao extends DaoMongo<DataQuery, String>  {
-	
+
+    /**
+     * 根据查询接口名称查询接口信息
+     * @param name
+     * @return
+     */
+    DataQuery findByName(String name);
 }
