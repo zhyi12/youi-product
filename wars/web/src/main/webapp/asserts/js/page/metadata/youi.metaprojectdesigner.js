@@ -57,6 +57,14 @@
             return {parentId:record.id,projectId:record.projectId};
         },
 
+        _addMetaIndicatorFormRecord:function (record) {
+            if("metaReport" == record.metaObjectName){
+                //在报表节点上添加指标，展开指标节点
+                this.modelTreeElem.tree('openPath','M_'+record.id+'/');
+            }
+            return {parentId:record.id,projectId:record.projectId};
+        },
+
         /**
          *
          * @param treeNode
