@@ -33,6 +33,9 @@
 			<youi:button name="removeRecord" icon="remove" caption="删除"></youi:button>
 		</youi:gridCol>
 
+
+		<div id="111"> </div>
+
 	</youi:grid>
 	<!-- Grid编辑按钮动作：打开修改用户弹出页 -->
 	<youi:func name="grid_user_edit" params="dom,options,record">

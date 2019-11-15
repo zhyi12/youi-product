@@ -3,14 +3,24 @@
 
 <youi:page caption="元数据设计器-${param.title}">
 
-    <youi:subpage src="page/${_pagePath}.dialog/editMetaPlan.html?pageId={subPageId}" subpageId="addMetaPlan" caption="新增制度" type="dialog"/>
-    <youi:subpage src="page/${_pagePath}.dialog/editMetaPlan.html?pageId={subPageId}&id={id}" subpageId="editMetaPlan" caption="修改制度" type="dialog"/>
-    <youi:subpage src="page/${_pagePath}.dialog/editMetaTask.html?pageId={subPageId}" subpageId="addMetaTask" caption="新增方案" type="dialog"/>
+    <youi:subpage src="page/${_pagePath}.dialog/editMetaPlan.html?pageId={subPageId}"
+                  subpageId="addMetaPlan" caption="新增制度" type="dialog"/>
+    <youi:subpage src="page/${_pagePath}.dialog/editMetaPlan.html?pageId={subPageId}&id={id}"
+                  subpageId="editMetaPlan" caption="修改制度" type="dialog"/>
+    <youi:subpage src="page/${_pagePath}.dialog/editMetaTask.html?pageId={subPageId}"
+                  subpageId="addMetaTask" caption="新增方案" type="dialog"/>
+    <youi:subpage src="page/${_pagePath}.dialog/editMetaReport.html?pageId={subPageId}" height="160"
+                  subpageId="addMetaReport" caption="新增报表" type="dialog"/>
+    <youi:subpage src="page/${_pagePath}.dialog/editMetaIndicator.html?pageId={subPageId}" height="160"
+                  subpageId="addMetaIndicator" caption="新增指标" type="dialog"/>
+
+    <%-- 指标管理 --%>
+    <youi:subpage src="page/${_pagePath}.indicator/index.html?projectId=${param.projectId}&title=${param.title}"
+                  subpageId="indicator" caption="指标管理" type="secondPage"/>
 
     <youi:ajaxUrl name="editMetaObjectUrl" src="page/${_pagePath}.dialog/editMetaObject.html"/>
-
+    <%-- 元数据树右键菜单 --%>
     <youi:xmenu id="xmenu_meta">
-
         <youi:xmenuItem name="openEditMetaPlan" caption="修改制度" groups="metaPlan"/>
         <youi:xmenuItem name="openAddMetaTask" caption="新增方案" groups="metaPlan"/>
 
@@ -26,9 +36,10 @@
                 <a class="page-link youi-icon icon-reply" href="#p:page/${_pagePath}/index.html"> 返回</a>
             </li>
             <youi:toolbarItem name="openAddMetaPlan" caption="新增制度" tooltips="" icon="plus"/>
+            <youi:toolbarItem name="openIndicatoPage" caption="项目指标" tooltips="" icon="link"/>
         </youi:toolbar>
         <%-- 元数据模型树 --%>
-        <youi:tree id="tree_metaobject" iteratorSrc="/metadataServices/services/metaObjectNodeManager/getTopProjectMetaObjectTreeNodes.json?projectId=proj001"
+        <youi:tree id="tree_metaobject" iteratorSrc="/metadataServices/services/metaObjectNodeManager/getTopProjectMetaObjectTreeNodes.json?projectId=proj001&urlPrefix=/metadataServices/services"
                    rootText="" hideRoot="true" xmenu="xmenu_meta" styleClass="no-padding col-sm-12 auto-height hide-root">
         </youi:tree>
     </youi:customWidget>
@@ -46,7 +57,7 @@
 
         <youi:customWidget data-useModelTree="true"  data-projectId="${param.projectId}"
                            urls="editMetaObjectUrl"
-                           refs="tree_metaobject,subpage_addMetaPlan,subpage_editMetaPlan,subpage_addMetaTask"
+                           refs="tree_metaobject,subpage_addMetaReport,subpage_indicator,subpage_addMetaPlan,subpage_editMetaPlan,subpage_addMetaTask,subpage_addMetaIndicator"
                 widgetName="metaProjectDesigner" name="metaProjectDesigner" pageModule="metadata">
         </youi:customWidget>
 

@@ -19,7 +19,7 @@
 
 
     <youi:func name="init" params="result">
-        console.log(result);
+
     </youi:func>
 
 </youi:page>
