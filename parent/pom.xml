@@ -416,7 +416,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>8.5</version>
+                        <version>8.18</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -463,13 +463,17 @@
 
     <modules>
 
+        <!-- base -->
         <module>../modules/base/agency</module>
         <module>../modules/base/agencyImpl</module>
         <module>../modules/base/agencyClient</module>
         <module>../modules/base/datauth</module>
         <module>../modules/base/datauthImpl</module>
         <module>../modules/base/datauthClient</module>
-
+        <!-- standard -->
+        <module>../modules/standard/measureunit</module>
+        <module>../modules/standard/measureunitImpl</module>
+        <!-- cache -->
         <module>../modules/cache/common</module>
         <module>../modules/cache/ehcache</module>
         <module>../modules/cache/redis</module>
@@ -480,7 +484,7 @@
         <module>../modules/server/accountImpl</module>
         <module>../modules/server/config</module>
         <module>../modules/server/configImpl</module>
-
+        <!-- metadata -->
         <module>../modules/metadata/common</module>
 
         <module>../modules/metadata/datadictionary</module>
@@ -496,7 +500,7 @@
         <module>../modules/metadata/conceptdesignImpl</module>
         <module>../modules/metadata/datademand</module>
         <module>../modules/metadata/datademandImpl</module>
-
+        <!-- dataquery -->
         <module>../modules/dataquery/engine</module>
         <module>../modules/dataquery/presto</module>
         <module>../modules/dataquery/query</module>
@@ -505,13 +509,15 @@
         <module>../modules/exchange/engine</module>
 
         <module>../modules/decorators/modern</module>
-
+        <!-- scheduler -->
         <module>../modules/scheduler/common</module>
         <module>../modules/scheduler/admin</module>
         <module>../modules/scheduler/adminImpl</module>
         <module>../modules/scheduler/quartz</module>
-
+        <!-- tools -->
         <module>../modules/tools/file/xls</module>
+        <module>../modules/tools/file/detector</module>
+        <module>../modules/tools/file/xlsreport</module>
 
         <module>../modules/tools/rowdata/common</module>
         <module>../modules/tools/rowdata/xls</module>
@@ -526,9 +532,10 @@
         <!-- software project -->
         <module>../modules/itassert/softproject</module>
         <module>../modules/itassert/softprojectImpl</module>
-
+        <!-- chart -->
         <module>../modules/chart/engine</module>
         <module>../modules/chart/echarts</module>
+        <module>../modules/chart/three</module>
 
     </modules>
 
