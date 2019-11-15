@@ -1,0 +1,29 @@
+{
+  "id": "80040201",
+  "idAttrName": "id",
+  "table": "youi_measure_unit",
+  "name": "measureUnit",
+  "caption": "计量单位",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },{
+      "name": "unitCaption",
+      "caption": "名称"
+    },{
+      "name": "rate",
+      "caption": "换算率"
+    },{
+      "name": "baseUnitId",
+      "caption": "元单位主键"
+    },{
+      "name": "measurement",
+      "caption": "度量衡"
+    },{
+      "name": "description",
+      "caption": "说明"
+    }
+  ]
+}
