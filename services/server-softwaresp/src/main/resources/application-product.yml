@@ -1,0 +1,57 @@
+server:
+  port: 8550
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    max-connections: 20000
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://192.168.173.130:8761/eureka/
+management:
+  endpoints:
+    web:
+      basePath: /
+      expose: [metrics,info,health]
+info:
+  app:
+    name: ${spring.application.name}
+    description: server metadata
+    version: 1.0.0
+
+spring:
+  application:
+    name: softwaresp-services
+  cloud:
+    inetutils:
+      preferredNetworks:
+        - 192.168.173
+  data:
+    mongodb:
+      host: 192.168.173.130:27515
+      database: stats2-filing
+      username: query
+      password: query123
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://192.168.173.130:8868/oauth/token
+      userAuthorizationUri: http://192.168.173.130:8868/oauth/authorize
+    resource:
+      id: ${spring.application.name}
+      user-info-uri: http://192.168.173.130:8868/oauth/client
+      prefer-token-info: false
+
+youi:
+  service:
+    restBaseUrl: http://localhost:8080 #配置rest服务调用
+  file:
+    client:
+      mongo:
+        sameMongo: false
+        uri: mongodb://query:query123@192.168.173.130:27515/stats2-common
+        database: stats2-common

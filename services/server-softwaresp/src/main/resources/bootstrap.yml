@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: softwaresp-services
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-services
+      label: master

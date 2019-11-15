@@ -1,0 +1,70 @@
+server:
+  port: 8250
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    max-connections: 20000
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      basePath: /
+      expose: [metrics,info,health]
+info:
+  app:
+    name: ${spring.application.name}
+    description: server metadata
+    version: 1.0.0
+
+spring:
+  rabbitmq:
+    host: 192.168.173.130
+    port: 5672
+    username: filing
+    password: filing
+    virtual-host: filing
+  cloud:
+    inetutils:
+      preferredNetworks:
+        - 192.168.173
+  data:
+    mongodb:
+      host: 192.168.173.130:27515
+      database: stats2-filing
+      username: query
+      password: query123
+  presto:
+    url: jdbc:presto://192.168.173.130:8071
+    username: root
+    password:
+    driver-class-name: com.facebook.presto.jdbc.PrestoDriver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:8868/oauth/token
+      userAuthorizationUri: http://localhost:8868/oauth/authorize
+    resource:
+      id: ${spring.application.name}
+      user-info-uri: http://localhost:8868/oauth/client
+      prefer-token-info: false
+
+youi:
+  service:
+    restBaseUrl: http://localhost:8080 #配置rest服务调用
+  file:
+    client:
+      mongo:
+        sameMongo: false
+        uri: mongodb://query:query123@192.168.173.130:27515/stats2-common
+        database: stats2-common
