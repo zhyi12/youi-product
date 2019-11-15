@@ -98,5 +98,13 @@ public interface MetaDataItemManager{
     @EsbServiceMapping(trancode="8001030108",caption="从xls文件导入数据项")
     List<BatchResult> importFromXls(@ServiceParam(name = "xlsFileName") String xlsFileName);
 
+    /**
+     *
+     * @param name 唯一名称（对应数据库列名）
+     * @return
+     */
+    @EsbServiceMapping(trancode="8001030109",caption="根据唯一的name查找数据项")
+    MetaDataItem getMetaDataItemByName(@ServiceParam(name = "name") String name);
+
     List<MetaDataItem> getMetaDataItemByNames(List<String> dataItemIds);
 }

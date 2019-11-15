@@ -13,24 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.youi.metadata.project.mongo;
+package org.youi.metadata.object.mongo;
 
 import org.youi.framework.mongo.DaoMongo;
-import org.youi.metadata.project.entity.MetaProjectIndicator;
-
-import java.util.List;
+import org.youi.metadata.object.entity.MetaIndicator;
 
 /**
+ * 数据持久化类： 元数据对象 - 指标
  * @author zhouyi
  * @see
  * @since 2.0.0
  */
-public interface MetaProjectIndicatorDao extends DaoMongo<MetaProjectIndicator,String>{
+public interface MetaIndicatorDao extends DaoMongo<MetaIndicator,String> {
 
-    /**
-     * 查询项目指标集合
-     * @param metaProjectId
-     * @return
-     */
-    List<MetaProjectIndicator> findByMetaProjectId(String metaProjectId);
 }

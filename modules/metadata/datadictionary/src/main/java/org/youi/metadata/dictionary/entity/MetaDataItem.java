@@ -15,11 +15,13 @@
  */
 package org.youi.metadata.dictionary.entity;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.youi.metadata.common.model.IMetaObject;
 
 import javax.persistence.Column;
+import javax.persistence.UniqueConstraint;
 import java.util.HashMap;
 import java.util.Map;
 

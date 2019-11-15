@@ -30,6 +30,7 @@ import org.youi.metadata.object.mongo.MetaReportDao;
 import java.util.Collection;
 
 /**
+ * 报表元数据对象操作适配处理类
  * @author zhouyi
  * @see
  * @since 2.0.0

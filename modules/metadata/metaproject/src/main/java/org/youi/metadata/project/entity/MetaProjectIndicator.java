@@ -18,8 +18,12 @@ package org.youi.metadata.project.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.youi.framework.core.dataobj.Domain;
+import org.youi.framework.core.dataobj.tree.TreeAttribute;
+
+import javax.persistence.Column;
 
 /**
+ * 调查项目使用的指标
  * @author zhouyi
  * @see
  * @since 2.0.0
@@ -34,10 +38,25 @@ public class MetaProjectIndicator implements Domain{
 
     private String parentId;//父节点
 
+    @Column
     private String text;//指标名称
 
-    private String refMetaObjectId;//关联的指标元数据ID
+    @Column
+    private String unitId;//计量单位ID
 
+    @Column
+    private String metaProjectId;//项目ID
+
+    private Integer num;//指标序号，用于指标排序
+
+    @Column
+    private String metaDataItemName;//关联数据项name
+
+    private Long createTime;//创建时间
+
+    private Long updateTime;//更新时间
+
+    @TreeAttribute(TreeAttribute.TREE_ATTR_ID)
     public String getId() {
         return id;
     }
@@ -46,6 +65,7 @@ public class MetaProjectIndicator implements Domain{
         this.id = id;
     }
 
+    @TreeAttribute(TreeAttribute.TREE_ATTR_PID)
     public String getParentId() {
         return parentId;
     }
@@ -54,6 +74,7 @@ public class MetaProjectIndicator implements Domain{
         this.parentId = parentId;
     }
 
+    @TreeAttribute(TreeAttribute.TREE_ATTR_TEXT)
     public String getText() {
         return text;
     }
@@ -62,11 +83,56 @@ public class MetaProjectIndicator implements Domain{
         this.text = text;
     }
 
-    public String getRefMetaObjectId() {
-        return refMetaObjectId;
+    public String getMetaDataItemName() {
+        return metaDataItemName;
     }
 
-    public void setRefMetaObjectId(String refMetaObjectId) {
-        this.refMetaObjectId = refMetaObjectId;
+    public MetaProjectIndicator setMetaDataItemName(String metaDataItemName) {
+        this.metaDataItemName = metaDataItemName;
+        return this;
+    }
+
+    public String getMetaProjectId() {
+        return metaProjectId;
+    }
+
+    public MetaProjectIndicator setMetaProjectId(String metaProjectId) {
+        this.metaProjectId = metaProjectId;
+        return this;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public MetaProjectIndicator setCreateTime(Long createTime) {
+        this.createTime = createTime;
+        return this;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public MetaProjectIndicator setNum(Integer num) {
+        this.num = num;
+        return this;
+    }
+
+    public Long getUpdateTime() {
+        return updateTime;
+    }
+
+    public MetaProjectIndicator setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
+        return this;
+    }
+
+    public String getUnitId() {
+        return unitId;
+    }
+
+    public void setUnitId(String unitId) {
+        this.unitId = unitId;
     }
 }

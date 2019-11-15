@@ -29,6 +29,7 @@ import org.youi.metadata.object.mongo.MetaPlanDao;
 import java.util.Collection;
 
 /**
+ * 调查制度元数据对象操作适配处理类
  * @author zhouyi
  * @see
  * @since 2.0.0

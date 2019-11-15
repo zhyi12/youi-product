@@ -30,10 +30,15 @@ import java.util.List;
 public interface DataTableDao extends DaoMongo<DataTable, String>  {
 
     /**
-     *
+     * 根据资源ID查询数据表集合
      * @param id
      */
     List<DataTable> findByDataResourceId(String id);
 
+    /**
+     *
+     * @param dataResourceIds
+     * @return
+     */
     List<DataTable> findByDataResourceIdIn(String[] dataResourceIds);
 }

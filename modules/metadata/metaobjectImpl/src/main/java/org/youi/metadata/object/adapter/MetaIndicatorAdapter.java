@@ -22,62 +22,63 @@ import org.youi.metadata.common.IMetaObjectRemoveAdapter;
 import org.youi.metadata.common.IMetaObjectSaveAdapter;
 import org.youi.metadata.common.IMetaParentFinderAdapter;
 import org.youi.metadata.common.model.IMetaObject;
+import org.youi.metadata.common.model.PropertyItem;
 import org.youi.metadata.object.MetaObjectConstants;
-import org.youi.metadata.object.entity.MetaTask;
-import org.youi.metadata.object.mongo.MetaTaskDao;
+import org.youi.metadata.object.entity.MetaIndicator;
+import org.youi.metadata.object.mongo.MetaIndicatorDao;
+
 
 import java.util.Collection;
 
 /**
- *
- * 方案元数据对象操作适配处理类
+ * 指标元数据对象操作适配处理类
  * @author zhouyi
  * @see
  * @since 2.0.0
  */
 @Component
-public class MetaTaskAdapter implements IMetaParentFinderAdapter,
-        IMetaObjectSaveAdapter<MetaTask>,IMetaObjectGetAdapter,IMetaObjectRemoveAdapter {
+public class MetaIndicatorAdapter implements IMetaParentFinderAdapter,IMetaObjectSaveAdapter<MetaIndicator>,IMetaObjectGetAdapter,IMetaObjectRemoveAdapter {
 
-    @Autowired
-    private MetaTaskDao metaTaskDao;
+    @Autowired(required = false)
+    private MetaIndicatorDao metaIndicatorDao;
 
     @Override
     public boolean supports(String metaObjectName) {
-        return MetaObjectConstants.META_OBJECT_NAME_TASK.equals(metaObjectName);
+        return MetaObjectConstants.META_OBJECT_NAME_INDICATOR.equals(metaObjectName);
     }
 
     @Override
-    public MetaTask createMetaObject(MetaTask metaObject) {
-        return metaTaskDao.save(metaObject);
+    public MetaIndicator createMetaObject(MetaIndicator metaObject) {
+        return metaIndicatorDao.save(metaObject);
     }
 
     @Override
-    public MetaTask buildMetaObject() {
-        return new MetaTask();
-    }
-
-    @Override
-    public MetaTask updateMetaObject(String id, Collection collection) {
+    public MetaIndicator updateMetaObject(String id, Collection<PropertyItem> propertyItems) {
         return null;
     }
 
     @Override
+    public MetaIndicator buildMetaObject() {
+        return new MetaIndicator();
+    }
+
+    @Override
     public boolean exist(String id) {
-        return metaTaskDao.exists(id);
+        return metaIndicatorDao.equals(id);
     }
 
     @Override
     public IMetaObject getMetaObject(String id) {
-        return metaTaskDao.get(id);
+        return metaIndicatorDao.get(id);
     }
 
     @Override
     public void removeMetaObject(String id) {
-        metaTaskDao.remove(id);
+        metaIndicatorDao.remove(id);
     }
 
-    public String findParentMetaObjectName(){
-        return MetaObjectConstants.META_OBJECT_NAME_PLAN;
+    @Override
+    public String findParentMetaObjectName() {
+        return MetaObjectConstants.META_OBJECT_NAME_REPORT;
     }
 }

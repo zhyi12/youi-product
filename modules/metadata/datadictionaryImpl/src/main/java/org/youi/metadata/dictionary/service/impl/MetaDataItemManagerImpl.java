@@ -22,6 +22,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
 import org.youi.fileserver.filestore.service.FileClientManager;
 import org.youi.framework.core.dataobj.cube.Item;
@@ -170,6 +171,16 @@ public class MetaDataItemManagerImpl implements MetaDataItemManager{
         return fileClientManager.consumeFile(xlsFileName,(file -> {
             return metaDataItemImporter.fromXls(file);
         }));
+    }
+
+    @EsbServiceMapping(trancode="8001030109",caption="根据唯一的name查找数据项")
+    public MetaDataItem getMetaDataItemByName(@ServiceParam(name = "name") String name){
+        try {
+            return metaDataItemDao.findByName(name);
+        } catch (IncorrectResultSizeDataAccessException e) {
+            //找到多余一条记录
+            return metaDataItemDao.findByNameIn(new String[]{name}).get(0);
+        }
     }
 
     /**

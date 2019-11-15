@@ -42,4 +42,11 @@ public interface MetaDataItemDao extends DaoMongo<MetaDataItem, String>  {
      * @return
      */
     List<MetaDataItem> findByNameIn(String[] names);
+
+    /**
+     * 根据name字段值查找数据项
+     * @param name 数据项（元）英文字段名
+     * @return
+     */
+    MetaDataItem findByName(String name);
 }

@@ -16,11 +16,14 @@
  */
 package org.youi.metadata.dictionary.entity;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.youi.framework.core.dataobj.Domain;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+
 /**
  * 实体: 数据表
  * @author 代码生成器
@@ -33,6 +36,7 @@ public class DataTable implements Domain{
 
 	@Id
 	@Column
+	@Length(max = 200)
 	private String id;//主键
 
 	@Column

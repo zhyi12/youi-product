@@ -81,7 +81,13 @@ public class DataTableManagerTest{
     public void testSaveDataTable(){
         DataTable dataTable = new DataTable();
 
+        String dataId = "000111";
+        dataTable.setId(dataId);
+
+        when(dataTableDao.save(dataTable)).thenReturn(dataTable);
+
         dataTableManager.saveDataTable(dataTable);
+
         //thrown.expect(BusException.class);//预期返回BusException异常
         //保存：调用了一次pageDao的save方法
         verify(dataTableDao, times(1)).save(dataTable);

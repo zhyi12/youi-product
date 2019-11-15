@@ -106,4 +106,14 @@ public interface MetaObjectNodeManager {
     List<TreeNode> getTopProjectMetaObjectTreeNodes(@ServiceParam(name="projectId")String projectId,
                                                     @ServiceParam(name="urlPrefix")String urlPrefix);
 
+    /**
+     * 调查项目下的报表节点的子元数据树
+     * @param projectId 项目ID
+     * @param reportId 报表元数据对象ID
+     * @return
+     */
+    @EsbServiceMapping
+    List<TreeNode> getReportMetaObjectTreeNode(
+            @ServiceParam(name="projectId") String projectId,
+            @ServiceParam(name="reportId") String reportId);
 }

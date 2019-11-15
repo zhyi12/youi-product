@@ -30,6 +30,7 @@ import org.youi.framework.core.dataobj.tree.TreeNodeConfig;
 import org.youi.framework.core.dataobj.tree.TreeUtils;
 import org.youi.framework.util.StringUtils;
 import org.youi.metadata.common.IMetaParentFinderAdapter;
+import org.youi.metadata.object.MetaObjectConstants;
 import org.youi.metadata.project.entity.MetaObjectNode;
 
 import java.util.*;
@@ -56,7 +57,7 @@ public class MetaProjectTreeBuilder implements ApplicationContextAware{
      * @param metaObjectNodes
      * @return
      */
-    public List<TreeNode> buildTreeNodes(String topMetaObjectName, List<MetaObjectNode> metaObjectNodes){
+    public List<TreeNode> buildTreeNodes(String topMetaObjectName, List<MetaObjectNode> metaObjectNodes,String urlPrefix){
         //树节点集合
         Map<String,TreeNode> treeNodeMap = new LinkedHashMap<>();
         for(MetaObjectNode metaObjectNode:metaObjectNodes){
@@ -75,6 +76,10 @@ public class MetaProjectTreeBuilder implements ApplicationContextAware{
                 if(parentNode!=null){
                     parentNode.addChild(treeNode);
                 }
+            }
+            //设置报表节点树展开的URL
+            if(MetaObjectConstants.META_OBJECT_NAME_REPORT.equals(metaObjectNode.getMetaObjectName())){
+                treeNode.setSrc(urlPrefix+"/metaObjectNodeManager/getReportMetaObjectTreeNode.json?projectId="+metaObjectNode.getProjectId()+"&reportId="+metaObjectNode.getRefMetaObjectId());
             }
         }
         //增加辅助节点

@@ -77,7 +77,7 @@ public class MetaProjectTreeBuilderTest {
                 .addMetaObjectParent(MetaObjectConstants.META_OBJECT_NAME_PLAN,planId)
                 .addMetaObjectParent(MetaObjectConstants.META_OBJECT_NAME_TASK,taskId));
 
-        List<TreeNode> treeNodes = metaProjectTreeBuilder.buildTreeNodes(MetaObjectConstants.META_OBJECT_NAME_PLAN,metaObjectNodes);
+        List<TreeNode> treeNodes = metaProjectTreeBuilder.buildTreeNodes(MetaObjectConstants.META_OBJECT_NAME_PLAN,metaObjectNodes,"");
         //验证树形结构
         Assert.assertEquals("","M_plan001\n" +
                 "  M_task001\n" +
@@ -107,7 +107,7 @@ public class MetaProjectTreeBuilderTest {
                 .addMetaObjectParent(MetaObjectConstants.META_OBJECT_NAME_PLAN,planId)
                 .addMetaObjectParent(MetaObjectConstants.META_OBJECT_NAME_TASK,taskId));
 
-        List<TreeNode> treeNodes = metaProjectTreeBuilder.buildTreeNodes(MetaObjectConstants.META_OBJECT_NAME_PLAN,metaObjectNodes);
+        List<TreeNode> treeNodes = metaProjectTreeBuilder.buildTreeNodes(MetaObjectConstants.META_OBJECT_NAME_PLAN,metaObjectNodes,"");
 
         //验证树形结构
         Assert.assertEquals("","M_plan001\n" +

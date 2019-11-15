@@ -177,7 +177,7 @@ public class MetaObjectNodeManagerImpl implements MetaObjectNodeManager {
         metaObjectNames.add(MetaObjectConstants.META_OBJECT_NAME_REPORT);
         List<MetaObjectNode> metaObjectNodes = metaObjectNodeDao.findByProjectIdAndMetaObjectNameIn(projectId,metaObjectNames);
 
-        return metaProjectTreeBuilder.buildTreeNodes(MetaObjectConstants.META_OBJECT_NAME_PLAN,metaObjectNodes);
+        return metaProjectTreeBuilder.buildTreeNodes(MetaObjectConstants.META_OBJECT_NAME_PLAN,metaObjectNodes,urlPrefix);
     }
 
     /**
@@ -186,16 +186,22 @@ public class MetaObjectNodeManagerImpl implements MetaObjectNodeManager {
      * @param reportId
      * @return
      */
-    public List<TreeNode> getReportMetaObjectTreeNode(String projectId,String reportId){
-        Collection<String> metaObjectNames = new ArrayList<>();
+    @EsbServiceMapping
+    public List<TreeNode> getReportMetaObjectTreeNode(
+            @ServiceParam(name="projectId") String projectId,
+            @ServiceParam(name="reportId") String reportId){
+        List<TreeNode> treeNodes = new ArrayList<>();
+        treeNodes.add(new HtmlTreeNode("KEY_"+reportId,"数据主键"));
         //主键
         //填报信息
+        treeNodes.add(new HtmlTreeNode("INFO_"+reportId,"填报信息"));
         //物理表
         //指标
+        treeNodes.add(new HtmlTreeNode("MAIN_INDICATOR"+reportId,"主要指标表"));
         //分组
         //目录
         //报告期属性
 
-        return null;
+        return treeNodes;
     }
 }
