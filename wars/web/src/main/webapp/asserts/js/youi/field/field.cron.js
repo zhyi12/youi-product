@@ -116,8 +116,8 @@
 			//this.element.find('input.value').val(value);
 			//设置为自由模式
 			this.element.find('input.mode[value=free]').click();
-			var valueArray = value.split(' ');//使用空格切分
-			
+			var valueArray = value.split(/\s+/);//使用空格切分
+
 			this.element.find('.modePanel.free .mode-value').each(function(index){
 				var value = valueArray[index]||'';
 				$(this).val(value);
