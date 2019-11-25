@@ -26,6 +26,7 @@ import org.youi.framework.core.orm.PagerRecords;
 import org.youi.framework.esb.annotation.ConditionCollection;
 import org.youi.framework.esb.annotation.EsbServiceMapping;
 import org.youi.framework.esb.annotation.OrderCollection;
+import org.youi.framework.esb.annotation.ServiceParam;
 import org.youi.scheduler.admin.entity.SchedulerJob;
 import org.youi.scheduler.admin.service.SchedulerService;
 import org.youi.scheduler.common.ISchedulerManager;
@@ -60,20 +61,38 @@ public class SchedulerServiceImpl implements SchedulerService,InitializingBean {
         return schedulerManager.getPagerSchedulerJobs(pager, conditions, orders);
     }
 
+    @EsbServiceMapping
+    public ISchedulerJob getSchedulerJob(
+            @ServiceParam(name = "schedName") String schedName,
+            @ServiceParam(name = "triggerGroup") String triggerGroup,
+            @ServiceParam(name = "triggerName") String triggerName) {
+        return schedulerManager.get(schedName,triggerGroup,triggerName);
+    }
+
+    @EsbServiceMapping
+    public void pause(@ServiceParam(name = "triggerGroup") String triggerGroup,
+                      @ServiceParam(name = "triggerName") String triggerName) {
+        schedulerManager.pause(triggerGroup, triggerName);
+    }
+
+    @EsbServiceMapping
+    public void resume(@ServiceParam(name = "triggerGroup") String triggerGroup,
+                       @ServiceParam(name = "triggerName") String triggerName) {
+        schedulerManager.resume(triggerGroup, triggerName);
+    }
+
+    @EsbServiceMapping
+    public void removeSchedulerJob(
+        @ServiceParam(name = "schedName") String schedName,
+        @ServiceParam(name = "triggerGroup") String triggerGroup,
+        @ServiceParam(name = "triggerName") String triggerName) {
+        schedulerManager.remove(schedName,triggerGroup,triggerName);
+    }
+
     @Override
     public void afterPropertiesSet() throws Exception {
         if(schedulerManager==null){
-            schedulerManager = new ISchedulerManager(){
-                @Override
-                public void saveSchedulerJob(ISchedulerJob schedulerJob) {
-
-                }
-
-                @Override
-                public PagerRecords getPagerSchedulerJobs(Pager pager, Collection collection, Collection collection2) throws BusException {
-                    return null;
-                }
-            };
+            schedulerManager = new EmptySchedulerManager();
         }
     }
 }
