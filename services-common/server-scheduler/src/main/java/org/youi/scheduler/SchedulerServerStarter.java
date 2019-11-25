@@ -15,7 +15,6 @@
  */
 package org.youi.scheduler;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
@@ -30,13 +29,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  *
  */
-@SpringBootApplication
 @RestController
 @EnableIntegration
 @EnableEurekaClient
 @EnableOAuth2Sso
 @EnableSwagger2
-@EnableAutoConfiguration(exclude = MongoAutoConfiguration.class)
+@SpringBootApplication(exclude =  MongoAutoConfiguration.class)
 public class SchedulerServerStarter {
 
     public static void main(String[] args) {
