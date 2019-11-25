@@ -22,8 +22,48 @@ public interface ISchedulerManager<T extends ISchedulerJob> {
      */
     void saveSchedulerJob(ISchedulerJob schedulerJob);
 
+    /**
+     *
+     * @param pager
+     * @param conditions
+     * @param orders
+     * @return
+     * @throws BusException
+     */
     PagerRecords getPagerSchedulerJobs(Pager pager,//分页条件
                                               Collection<Condition> conditions,//查询条件
                                               Collection<Order> orders) throws BusException;
 
+    /**
+     *
+     * 根据schedName、triggerGroup、triggerName获取定时触发的任务
+     * @param schedName
+     * @param triggerGroup
+     * @param triggerName
+     * @return
+     */
+    ISchedulerJob get(String schedName, String triggerGroup, String triggerName);
+
+
+    /**
+     * 暂停触发任务
+     * @param triggerGroup
+     * @param triggerName
+     */
+    void pause(String triggerGroup, String triggerName);
+
+    /**
+     * 恢复触发任务
+     * @param triggerGroup
+     * @param triggerName
+     */
+    void resume(String triggerGroup, String triggerName);
+
+    /**
+     * 删除任务
+     * @param schedName
+     * @param triggerGroup
+     * @param triggerName
+     */
+    void remove(String schedName, String triggerGroup, String triggerName);
 }

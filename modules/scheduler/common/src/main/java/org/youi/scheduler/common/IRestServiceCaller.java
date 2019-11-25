@@ -26,9 +26,9 @@ public interface IRestServiceCaller {
 
     /**
      * 服务调用
-     * @param serverName
-     * @param servicesName
-     * @param serviceName
+     * @param serverName  服务名
+     * @param servicesName 交易组名称
+     * @param serviceName 交易名称
      * @param params 任务参数
      */
     void callService(String serverName, String servicesName, String serviceName, MultiValueMap params);
