@@ -48,47 +48,32 @@ public class SchedulerJobKey implements Domain{
 	@javax.persistence.Column(name = "TRIGGER_GROUP",insertable=false,updatable=false)
 	@org.hibernate.validator.constraints.Length(max=200)
 	private String triggerGroup;//触发组
-	
-	/**
-	 * @return the schedName
-	 */
+
 	public String getSchedName() {
 		return schedName;
 	}
 
-	/**
-	 * @param schedName the schedName to set
-	 */
-	public void setSchedName(String schedName) {
+	public SchedulerJobKey setSchedName(String schedName) {
 		this.schedName = schedName;
+		return this;
 	}
 
-	/**
-	 * @return the triggerName
-	 */
 	public String getTriggerName() {
 		return triggerName;
 	}
 
-	/**
-	 * @param triggerName the triggerName to set
-	 */
-	public void setTriggerName(String triggerName) {
+	public SchedulerJobKey setTriggerName(String triggerName) {
 		this.triggerName = triggerName;
+		return this;
 	}
 
-	/**
-	 * @return the triggerGroup
-	 */
 	public String getTriggerGroup() {
 		return triggerGroup;
 	}
 
-	/**
-	 * @param triggerGroup the triggerGroup to set
-	 */
-	public void setTriggerGroup(String triggerGroup) {
+	public SchedulerJobKey setTriggerGroup(String triggerGroup) {
 		this.triggerGroup = triggerGroup;
+		return this;
 	}
 
 	/* (non-Javadoc)

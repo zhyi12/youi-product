@@ -75,7 +75,7 @@ public class QuartzSchedulerManager implements ISchedulerManager<SchedulerJob> {
         quartzSchedulerJob.setCronTrigger(cronTrigger);
         quartzSchedulerJob.setJobDetails(jobDetails);
 
-        Object serverName = PropertyUtils.getPropertyValue(schedulerJob, Constants.JOB_PARAM_SERVER_NAME);
+        Object serverName = cronTrigger.getTriggerGroup();//使用trigger group作为serverName
 
         if(serverName==null){
             serverName = "";
@@ -97,6 +97,15 @@ public class QuartzSchedulerManager implements ISchedulerManager<SchedulerJob> {
         return schedulerJobDao.findByPager(pager, conditions, orders);
     }
 
+    @Override
+    public ISchedulerJob get(String schedName, String triggerGroup, String triggerName) {
+        SchedulerJobKey schedulerJobKey =
+                new SchedulerJobKey().setSchedName(schedName)
+                .setTriggerGroup(triggerGroup)
+                .setTriggerName(triggerName);
+        return getSchedulerJob(schedulerJobKey);
+    }
+
     /**
      * 主键查询调度任务
      * @param schedulerJobKey
@@ -104,6 +113,44 @@ public class QuartzSchedulerManager implements ISchedulerManager<SchedulerJob> {
      */
     public SchedulerJob getSchedulerJob(SchedulerJobKey schedulerJobKey) {
         return schedulerJobDao.get(schedulerJobKey);
+    }
+
+    /**
+     * 暂停触发任务
+     * @param triggerGroup
+     * @param triggerName
+     */
+    public void pause(String triggerGroup, String triggerName){
+        try {
+            scheduler.pauseTrigger(new TriggerKey(triggerName, triggerGroup));
+        } catch (SchedulerException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 恢复触发任务
+     * @param triggerGroup
+     * @param triggerName
+     */
+    public void resume( String triggerGroup, String triggerName){
+        try {
+            scheduler.resumeTrigger(new TriggerKey(triggerName, triggerGroup));
+        } catch (SchedulerException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 删除任务
+     * @param schedName
+     * @param triggerGroup
+     * @param triggerName
+     */
+    public void remove(String schedName, String triggerGroup, String triggerName){
+        schedulerJobDao.remove(new SchedulerJobKey().setSchedName(schedName)
+                .setTriggerGroup(triggerGroup)
+                .setTriggerName(triggerName));
     }
 
     /**
@@ -117,7 +164,7 @@ public class QuartzSchedulerManager implements ISchedulerManager<SchedulerJob> {
 
                 if(sCronTrigger.getTriggerName()==null){
                     sCronTrigger.setTriggerName(UUID.randomUUID().toString());
-                    sCronTrigger.setTriggerGroup("DEFAULT");
+                    sCronTrigger.setTriggerGroup(serverName);//使用trigger group存储微服务名称（serverName）
                 }
 
                 TriggerKey triggerKey =
