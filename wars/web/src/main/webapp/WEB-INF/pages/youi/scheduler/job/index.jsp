@@ -20,6 +20,7 @@
 	<youi:grid styleClass="col-sm-12 no-padding" id="grid_job" reset="NOT" query="NOT" idKeys="schedName,cronTrigger.triggerGroup,cronTrigger.triggerName"
 			   src="/schedulerServices/services/schedulerService/getPagerSchedulerJobs.json">
 		<youi:gridCol width="10%" caption="服务名" property="cronTrigger.triggerGroup"></youi:gridCol>
+		<youi:gridCol width="10%" caption="任务标识" nowrap="false" property="cronTrigger.triggerName"></youi:gridCol>
 		<youi:gridCol width="10%" caption="交易组名" property="jobDetails.jobGroup"></youi:gridCol>
 		<youi:gridCol width="10%" caption="交易名" property="jobDetails.jobName"></youi:gridCol>
 
