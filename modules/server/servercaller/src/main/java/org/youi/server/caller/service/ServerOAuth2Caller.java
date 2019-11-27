@@ -15,19 +15,25 @@
  */
 package org.youi.server.caller.service;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.youi.framework.services.data.ResContext;
+import org.youi.framework.util.PojoMapper;
 import org.youi.framework.util.StringUtils;
 import org.youi.server.caller.config.ServerCallerProperties;
 import org.youi.server.caller.model.AccessToken;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Base64;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhouyi
@@ -51,23 +57,44 @@ public class ServerOAuth2Caller {
      * @return
      */
     public ResContext doService(String serverName, String servicesName, String serviceName, MultiValueMap params){
-        String url = StringUtils.arrayToDelimitedString(new String[]{
+        StringBuilder urlBuilder = new StringBuilder(StringUtils.arrayToDelimitedString(new String[]{
                 serverCallerProperties.getApiBaseUri(),
                 serverName,
                 "services",
                 servicesName,
                 serviceName+".json"
-        },"/");
+        },"/"));
 
         String authorization = "Bearer "+serverOAuth2Connector.connect();
 
-        MultiValueMap  valueMap = new LinkedMultiValueMap();
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, authorization);
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
-        HttpEntity entity = new HttpEntity(valueMap, headers);
+        headers.setContentType(MediaType.valueOf("application/x-www-form-urlencoded;charset=UTF-8"));
+        HttpEntity entity = new HttpEntity(new LinkedMultiValueMap(), headers);
 
-        ResponseEntity<String> responseEntity = serverRestTemplate.exchange(url, HttpMethod.GET,entity,String.class);
+        if(params!=null){
+            //添加get请求参数
+            urlBuilder.append("?");
+            for(Object key: params.keySet()){
+                if(params.get(key) !=null){
+                    for(Object value:(List)params.get(key)){
+                        urlBuilder.append(key).append("=").append(value).append("&");
+                    }
+                }
+            }
+            urlBuilder.deleteCharAt(urlBuilder.length()-1);
+        }
+
+        ResponseEntity<String> responseEntity = serverRestTemplate.exchange(urlBuilder.toString(),HttpMethod.GET,entity,String.class,params);
+
+        try {
+            String jsonStr = new String(responseEntity.getBody().getBytes("ISO-8859-1"),"UTF-8");
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(jsonStr,ResContext.class);
+        } catch (IOException e) {
+            //TODO
+            e.printStackTrace();
+        }
         return new ResContext();
     }
 
