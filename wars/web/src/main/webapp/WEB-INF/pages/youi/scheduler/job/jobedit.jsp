@@ -8,9 +8,10 @@
 			   action="/schedulerServices/services/schedulerService/saveSchedulerJob.json" styleClass="col-sm-12"  reset="NOT" submit="NOT">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldHidden property="schedName" caption="调度任务"/>
-			<youi:fieldHidden styleClass="string" property="cronTrigger.triggerName" caption="触发器"/>
 
-			<youi:fieldText notNull="true" column="2" property="cronTrigger.triggerGroup" caption="服务"/>
+			<youi:fieldText notNull="true" property="cronTrigger.triggerGroup" caption="服务"/>
+			<youi:fieldText styleClass="string" property="cronTrigger.triggerName" caption="任务标识"/>
+
 			<youi:fieldText notNull="true" property="jobDetails.jobGroup" caption="交易组"/>
 			<youi:fieldText notNull="true" property="jobDetails.jobName" caption="交易名"/>
 
