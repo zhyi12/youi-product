@@ -68,7 +68,7 @@ public class ServerOAuth2Connector {
             AccessToken accessToken = getOAuth2Token(appName,clientSecret,code);
             //TODO token过期判断，刷新token
             if(accessToken!=null){
-                logger.info("token 获取完成");
+                logger.info("token 获取完成.");
                 return accessToken;
             }
         }
