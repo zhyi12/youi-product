@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<script src="../asserts/js/lib/jquery-3.3.1.min.js"></script>
+<script src="../asserts/js/lib/jquery-ui.min.js"></script>
+<script src="../asserts/js/lib/jquery.selectable.js"></script>
+<script src="../asserts/js/lib/youi-3.0.min.js"></script>
+
+<script src="../asserts/js/d3/d3.min.js"></script>
+<script src="../asserts/js/d3/d3-array.min.js"></script>
+<script src="../asserts/js/d3/d3-geo.min.js"></script>
+<script src="../asserts/js/d3/d3-geo-projection.min.js"></script>
+<script src="../asserts/js/d3/topojson.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="../asserts/css/bootstrap.min.css"/>
+<link type="text/css" rel="stylesheet" href="../asserts/css/app-1.0.min.css"/>
+
+<body>
+<div style="margin-bottom: -30px;z-index: 3">审图号： GS（2018）2512号</div>
+    <svg width="960" height="500"></svg>
+</body>
+
+<script>
+
+    //边界颜色
+    var stk_clr_linsheng_linshi = "#5a5b5c", //浅灰色
+        stk_clr_sheng_shi = "#3e3f3f", //香港省界颜色
+        stk_clr_sheng = "#494848", //临省省界线颜色
+        stk_clr_shi = "#909393", //临市界线颜色
+        stk_clr_linguo = "#231f20",//邻国界线颜色
+        stk_clr_hai = "#4190da",//006fbd
+        stk_clr_fanwei = "black",
+        stk_clr_sekuai_quanguo = "white", //全国图边界为粉色#e6bad6
+        stk_clr_sekuai_xianji = "white",
+        stk_clr_sekuai_sheng_shi = "white",
+        stk_clr_daodian = "#006fbd",
+        stk_clr_linsheng_linshi_hainan = "#bcbcbd" //更浅的灰色
+
+    //字体颜色
+    var txt_clr_linsheng_linshi = "#5e6060",
+        txt_clr_linguo = "black",
+        txt_clr_hai = "#006fbd",
+        txt_clr_zhou_meng_zizhiqu = "red";
+
+    var width = 930;
+    var height = 750;
+    var g = d3.select('svg')
+        .attr('width',width)
+        .attr('height',height)
+        .append('g');
+
+    var projection = d3.geoMercator()
+        .center([104.2, 32])      //设置地图中心位置，前经度后纬度  11945937, 4090836
+        .scale(550 / 766 * width) //map宽766时，对应缩放比例700比较合适
+        .translate([width / 2, height / 2])//设置平移量
+        .precision(0) //拒绝插值;
+
+    var path = d3.geoPath().projection(projection);
+//
+    d3.json("../datas/quanguo.json",{}).then(function(response) {
+        var land = topojson.feature(response,response.objects['quanguo']);
+        g.selectAll('path') // 绘画所有的省
+            .data(land.features)
+            .enter()
+            .append('path')
+            .attr('stroke', '#ddd')
+            .attr('stroke-width', 1)
+            .attr('fill', function(d, i) {
+                return parseAreaColor(d);
+            })
+            .attr('d', path)
+            .on('mouseover', function(d, i) {
+                d3.select(this).attr('fill', 'yellow')
+            })
+            .on('mouseout', function(d, i) {
+                d3.select(this).attr('fill', parseAreaColor(d));
+            });
+    });
+
+//    d3.json("../datas/quanguo_Point.geojson",{}).then(function(response) {
+//        var textGroup = d3.select('svg').append('g');
+//
+//        textGroup.selectAll("rect")
+//            .data(response.features)
+//            .enter()
+//            .append("rect")
+//            .attr('width',10)
+//            .attr('height',10)//.append('rect')
+//
+//            //            .attr("id","text")
+////            .text(function (d) { return d.properties.Name != null ? d.properties.Name : d.properties.NAME })
+//            .attr("x", function (d) {
+//                return projection(d.geometry.coordinates)[0].toString();
+//            }).attr("y", function (d) {
+//                return projection(d.geometry.coordinates)[1];
+//            }).style("font-size", function (d) {
+//                return "8px";
+//            }).style("cursor", "pointer")
+//    });
+
+    /**
+     *
+     */
+    d3.json("../datas/quanguo_Line.geojson",{}).then(function(response) {
+        var noteGroup = d3.select('svg').append('g'),
+            barGroup = d3.select('svg').append('g'),//柱状图
+            borderlineGroup = d3.select('svg').append('g');//国界线
+
+        var textValues = response.features.filter(function (d) {
+            if (d.properties.QUHUADAIMA == undefined) return false;
+            var len = d.properties.QUHUADAIMA.length;
+            if (len == 4 || len == 5 || len == 6 || len == 7) return true;
+        });
+        //
+        var barValues = response.features.filter(function (d) {
+            if (d.properties.QUHUADAIMA == undefined) return false;
+            var len = d.properties.QUHUADAIMA.length;
+
+            if (d.properties.NAME && d.properties.QUHUADAIMA.match(/[0-9]{6}/)) return true;
+        });
+        //
+        var valueBar = barGroup.selectAll("g").data(barValues).enter()
+                .append("g")
+                .on('mouseover', function(d, i) {
+                    var barItem = d3.select(this);
+                    barItem.select('rect').style('fill', 'yellow');
+                    barItem.selectAll('path').style('fill', 'yellow');
+                    var x = projection(d.geometry.coordinates[0])[0].toString() - 0,
+                        y = projection(d.geometry.coordinates[0])[1].toString()-60;
+                    //
+                    console.log(x+' '+ y)
+                }).on('mouseout', function(d, i) {
+                    var barItem = d3.select(this);
+                    barItem.select('rect').style('fill', '#09F');
+                    barItem.selectAll('path').style('fill', '#09F');
+                });
+
+        var barWidth = 10;
+        //矩形
+        valueBar.append('rect')
+            .attr('width',barWidth)
+            .attr('height',50)
+            .attr("x", function (d) {
+                return projection(d.geometry.coordinates[0])[0].toString();
+            }).attr("y", function (d) {
+                return projection(d.geometry.coordinates[0])[1].toString()-60;
+            }).style('fill','#09F');
+
+        //上面
+        valueBar.append('path')
+            .attr('d',function (d) {
+                var x = projection(d.geometry.coordinates[0])[0].toString() - 0,
+                    y = projection(d.geometry.coordinates[0])[1].toString()-60;
+
+                return bar3DCubeTop({x:x,y:y,width:barWidth,height:50});
+            }).style('fill','#09F');
+
+        //侧面
+        valueBar
+            .append('path')
+            .attr('d',function (d) {
+                var x = projection(d.geometry.coordinates[0])[0].toString() - 0,
+                    y = projection(d.geometry.coordinates[0])[1].toString()-60;
+
+                return bar3DCubeSide({x:x,y:y,width:barWidth,height:50});
+            }).style('fill','#09F');
+
+        //
+        noteGroup.selectAll("g")
+            .data(textValues)
+            .enter()
+            .append("g")
+            .style('fill',function (d) {
+                if (d.properties.QUHUADAIMA == undefined) return "none";
+
+                if (d.properties.QUHUADAIMA.length == 2) { return txt_clr_hai }
+                else if (d.properties.QUHUADAIMA.length == 6) { return txt_clr_linguo; }
+                else if (d.properties.QUHUADAIMA.length == 7) { return txt_clr_zhou_meng_zizhiqu; } //洲、盟、地区
+                else { return txt_clr_linsheng_linshi; }
+            });
+        //
+        noteGroup.selectAll("g").selectAll("text").data(function (d,i) {
+            var data = [];
+            var name = d.properties.Name != null ? d.properties.Name : d.properties.NAME
+            var qhdm = d.properties.QUHUADAIMA != null ? d.properties.QUHUADAIMA : ""
+            for (var j = 0 ; j < d.geometry.coordinates.length; j++) {
+                var n = { "text": name.substr(j, 1), "coordinates": projection(d.geometry.coordinates[j]), "qhdm": qhdm }
+                data.push(n);
+            }
+            return data;
+        }).enter().append("text").text(function (d) {
+            return d.text;
+        }).style("font-size", function (d) {
+            return "9px";
+        }).attr("x", function (d) {
+            return d.coordinates[0].toString();
+        }).attr("y", function (d) {
+            return d.coordinates[1].toString();
+        });
+        //画国界线
+        var borderlinePath = response.features.filter(function (d) {
+            if (d.properties.QUHUADAIMA == undefined) return false;
+            var len = d.properties.QUHUADAIMA.length;
+            if (len != 4 && len != 5 && len != 6 && len != 7) return true;
+        });
+        //国界线
+        borderlineGroup.selectAll("path")
+            .data(borderlinePath)
+            .enter()
+            .append("path").attr("stroke", function (d) {
+            var guojieClr = "gray";
+            var anjiaoClr = "gray";
+            var len = d.properties.QUHUADAIMA.length;
+            if (len == 8) {
+                return "white"
+            } else if (len == 9) {
+                return stk_clr_hai;
+            } else if (len == 11 || len == 12) {
+                return stk_clr_sekuai_quanguo;
+            }
+            else if (len == 10) {
+                return guojieClr;
+            }
+            else if (len == 3) {
+                return anjiaoClr;
+            }
+            else {
+                return "black"
+            }
+        })
+            .attr("fill", "none")
+            .attr("stroke-width", function (d) {
+                var len = d.properties.QUHUADAIMA.length;
+                if (len == 8) {
+                    return "2"
+                } else if (len == 9) {
+                    return "1";
+                }
+                else {
+                    return "1";
+                }
+            })
+            .attr("vector-effect", "non-scaling-stroke") //边框不缩放
+            .attr("d", path)
+            .attr("stroke-dasharray", function (d) {
+                var len = d.properties.QUHUADAIMA.length;
+                if (len == 11) { //海南省广东省界线
+                    return "6,6";
+                } else if (len == 12) {//香港省界
+                    return "2,4,6,4";
+                }
+            });
+
+
+    });
+
+    function parseAreaColor(d) {
+        if(d.properties && d.properties.FillColor){
+            return  d.properties.FillColor;
+        }
+        return 'white';
+    }
+
+    var angleRate = 7,widthRate = 2;
+    /**
+     *
+     *立方体侧面
+     */
+    function bar3DCubeSide(rect) {
+        var path = d3.path();
+        var angle = Math.PI/angleRate;
+
+        var deltX = rect.width/widthRate,
+            deltY = deltX/Math.cos(angle) ;
+
+        path.moveTo(rect.x+deltX+rect.width, rect.y-deltY);
+        path.lineTo(rect.x+deltX+rect.width, rect.y-deltY+rect.height);
+        path.lineTo(rect.x+rect.width, rect.y+rect.height);
+
+        path.lineTo(rect.x+rect.width, rect.y);
+
+        path.closePath();
+
+        return path.toString();
+    }
+
+    /**
+     * 立方体顶面
+     */
+    function bar3DCubeTop(rect) {
+        var path = d3.path();
+        var angle = Math.PI/angleRate;
+
+        var deltX = rect.width/widthRate,
+            deltY = deltX/Math.cos(angle) ;
+
+        //x,y,width,height
+
+        path.moveTo(rect.x,rect.y);
+        path.lineTo(rect.x+deltX, rect.y-deltY);
+        path.lineTo(rect.x+deltX+rect.width, rect.y-deltY);
+        path.lineTo(rect.x+rect.width, rect.y);
+
+        path.closePath();
+
+        return path.toString();
+    }
+
+</script>

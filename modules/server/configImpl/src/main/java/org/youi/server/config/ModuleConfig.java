@@ -29,8 +29,8 @@ import org.youi.server.config.nls.Messages;
  * @author 代码生成器
  * @since 1.0.0
  */
-@Configuration("config.config")
-@Module(name = "config",caption = "config")
+@Configuration("config.serverConfig")
+@Module(name = "serverConfig",caption = "serverConfig")
 @ComponentScan(basePackages = {"org.youi.server.config.service.impl"})
 @EnableMongoRepositories(basePackages = "org.youi.server.config.mongo",repositoryBaseClass = BaseDaoMongo.class)
 public class ModuleConfig{

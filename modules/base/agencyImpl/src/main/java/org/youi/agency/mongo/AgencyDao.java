@@ -19,6 +19,8 @@ package org.youi.agency.mongo;
 import org.youi.framework.mongo.DaoMongo;
 import org.youi.agency.entity.Agency;
 
+import java.util.List;
+
 /**
  * <p>系统描述: </p>
  * <p>功能描述: Agency-数据持久层接口</p>
@@ -26,5 +28,18 @@ import org.youi.agency.entity.Agency;
  * @since 1.0.0
  */
 public interface AgencyDao extends DaoMongo<Agency, String>  {
-	
+
+    /**
+     *
+     *
+     * @param parentId
+     * @return
+     */
+    List<Agency> findByParentIdOrderByNum(String parentId);
+
+    /**
+     *
+     * @return
+     */
+    List<Agency> findByParentIdIsNullOrderByNum();
 }

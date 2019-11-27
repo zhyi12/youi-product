@@ -34,6 +34,6 @@ public interface ISchedulerJob {
      * @return
      */
     ICronTrigger getCronTrigger();
-
+    
     IJobDetails getJobDetails();
 }

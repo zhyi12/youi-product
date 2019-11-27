@@ -39,6 +39,10 @@
 			<groupId>org.youi.framework</groupId>
 			<artifactId>youi-framework-dao-mongo</artifactId>
 		</dependency>
-
+		<!-- test -->
+		<dependency>
+			<groupId>org.youi.framework</groupId>
+			<artifactId>youi-framework-test</artifactId>
+		</dependency>
     </dependencies>
 </project>

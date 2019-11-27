@@ -19,6 +19,7 @@ package org.youi.agency.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.youi.framework.core.dataobj.Domain;
+import org.youi.framework.core.dataobj.tree.TreeAttribute;
 
 import javax.persistence.Column;
 /**
@@ -30,7 +31,6 @@ import javax.persistence.Column;
 public class Agency implements Domain{
 	
 	private static final long serialVersionUID = -5250864320226106229L;
-	
 
 	@Column
 	private String caption;//机构名称
@@ -50,6 +50,7 @@ public class Agency implements Domain{
 	@Column
 	private String id;//机构ID
 
+	@TreeAttribute(TreeAttribute.TREE_ATTR_TEXT)
 	public String getCaption(){
 		return this.caption;
 	}
@@ -71,6 +72,8 @@ public class Agency implements Domain{
 	public void setAreaId(String areaId){
 		this.areaId = areaId;
 	}
+
+	@TreeAttribute(TreeAttribute.TREE_ATTR_PID)
 	public String getParentId(){
 		return this.parentId;
 	}
@@ -85,6 +88,8 @@ public class Agency implements Domain{
 	public void setNum(String num){
 		this.num = num;
 	}
+
+	@TreeAttribute(TreeAttribute.TREE_ATTR_ID)
 	public String getId(){
 		return this.id;
 	}

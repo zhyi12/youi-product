@@ -106,7 +106,7 @@ public class DataDemandManagerImpl implements DataDemandManager{
      */
     @EsbServiceMapping(trancode="8001070205",caption="主键删除数据需求")
     @Override
-    public void removeDataDemand(@ServiceParam(name="id") String id){
+    public void removeDataDemand(@ServiceParam(name="id" ,pubProperty = "userName") String id){
     	dataDemandDao.remove(id);
     }
 

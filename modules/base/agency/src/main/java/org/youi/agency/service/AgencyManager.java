@@ -19,6 +19,7 @@ package org.youi.agency.service;
 import java.util.List;
 import java.util.Collection;
 
+import org.youi.framework.core.dataobj.tree.TreeNode;
 import org.youi.framework.core.orm.Condition;
 import org.youi.framework.core.orm.Order;
 import org.youi.framework.core.orm.Pager;
@@ -71,4 +72,13 @@ public interface AgencyManager{
      */
     @EsbServiceMapping(trancode="9001010105",caption="主键删除机构")
     void removeAgency(@ServiceParam(name="id") String id);
+
+    /**
+     *
+     * 机构的下级树节点集合
+     * @param parentId
+     * @return
+     */
+    @EsbServiceMapping(trancode="9001010106",caption="分级获取机构树")
+    List<TreeNode> getAgencyChildTree(@ServiceParam(name="id")String parentId);
 }

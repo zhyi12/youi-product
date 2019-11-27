@@ -1,0 +1,30 @@
+{
+  "id": "90050201",
+  "idAttrName": "id",
+  "table": "youi_gis_area_svg",
+  "name": "areaSvg",
+  "caption": "行政区划SVG地图",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "areaId",
+      "caption": "行政区划代码"
+    },
+    {
+      "name": "areaCaption",
+      "caption": "行政区划名称"
+    },
+    {
+      "name": "areaVersion",
+      "caption": "行政区划版本"
+    },
+    {
+      "name": "svgContent",
+      "caption": "svg内容"
+    }
+  ]
+}

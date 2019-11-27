@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>省级地图</title>
+
+    <script src="../asserts/js/lib/jquery-3.3.1.min.js"></script>
+    <script src="../asserts/js/lib/jquery-ui.min.js"></script>
+    <script src="../asserts/js/lib/jquery.selectable.js"></script>
+    <script src="../asserts/js/lib/youi-3.0.min.js"></script>
+    <script src="../asserts/js/lib/bootstrap.min.js"></script>
+
+    <script src="../asserts/js/d3/d3.min.js"></script>
+    <script src="../asserts/js/d3/d3-array.min.js"></script>
+    <script src="../asserts/js/d3/d3-geo.min.js"></script>
+    <script src="../asserts/js/d3/d3-geo-projection.min.js"></script>
+    <script src="../asserts/js/d3/topojson.min.js"></script>
+
+    <script src="../asserts/js/youi/extra/youi.geomap.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../asserts/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="../asserts/css/app-1.0.min.css"/>
+
+</head>
+<body>
+    <div id="geomap_province">
+        <div class="geomap-content"></div>
+    </div>
+</body>
+
+<script>
+
+    $(function () {
+        $('#geomap_province').geomap({
+            areaId:'110000'
+        });
+    });
+
+</script>
+</html>

@@ -79,7 +79,9 @@ public class MetaDataItemDaoTest {
 
     @Test
     public void matchItems(){
+        List<MetaDataItem> results = metaDataItemDao.commonQuery(null, null);
 
+        System.out.println(results);
     }
 
 }

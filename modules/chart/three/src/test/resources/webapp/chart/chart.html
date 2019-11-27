@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>three chart 1</title>
+
+    <script type="application/javascript" src="../asserts/js/three/three.min.js"></script>
+    <script type="application/javascript" src="../asserts/js/three/OrbitControls.js"></script>
+    <script type="application/javascript" src="../asserts/js/three/chinaMapConfig.js"></script>
+    <script type="application/javascript" src="../asserts/js/three/SVGLoader.js"></script>
+    <script type="application/javascript" src="../asserts/js/three/SVGRenderer.js"></script>
+    <script type="application/javascript" src="../asserts/js/three/d3-threeD.js"></script>
+</head>
+<body>
+    <div id="container">
+
+    </div>
+</body>
+
+<script>
+
+    var renderer, scene, camera,group;
+
+    var materials = [
+        new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } ), // front
+        new THREE.MeshPhongMaterial( { color: 0xffffff } ) // side
+    ];
+
+    try{
+        init();
+        animate();
+    }catch (err){
+        console.log(err);
+    }
+
+    //
+    function init() {
+        var container = document.getElementById( 'container' );
+        //
+        camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
+        camera.position.set( 0, 10, 200 );
+
+        //
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        container.appendChild( renderer.domElement );
+        //
+        var controls = new THREE.OrbitControls( camera, renderer.domElement );
+        controls.screenSpacePanning = true;
+        controls.autoRotate = true;
+        //
+        window.addEventListener( 'resize', onWindowResize, false );
+        window.addEventListener( 'click', onMouseClick, false );
+//            loadSVG( '/asserts/svg/china.svg?1=121' );
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color('white');
+
+        group = new THREE.Group();
+        group.scale.multiplyScalar( 0.3 );
+        group.position.x = - 160;
+        group.position.y = 80;
+        group.scale.y *= - 1;
+
+        var extrudeSettings = {
+            steps: 2,
+            depth: 16,
+            bevelEnabled: true,
+            bevelThickness: 10,
+            bevelSize: 1,
+            bevelSegments: 1
+        };
+        //R G B  126 194 243
+        var colors1 = getItemColors([50,80,80],[178,194,243],50);
+        var colors2 = getItemColors([120,120,120],[210,120,215],50);
+
+        var i=0;
+        for (var shapesKey in chinaMapConfig.shapes) {
+            var area = chinaMapConfig.names[shapesKey];
+
+            var material = new THREE.MeshPhongMaterial( {
+                shadowSide:THREE.DoubleSide,
+                side:THREE.FrontSide,
+                emissive: new THREE.Color('#'+area.color.replace(/ /g,'')),
+                clipShadows:true,
+                bumpScale:0.5,
+                shininess:10,
+                skinning:true,
+                vertexColors:THREE.VertexColors
+            } );
+
+            var shapesvgs= transformSVGPathExposed(chinaMapConfig.shapes[shapesKey]);
+            shapesvgs[0].stroke = '#ffeedd';
+            var geometry = new THREE.ExtrudeGeometry( shapesvgs, extrudeSettings);
+
+            geometry.computeBoundingBox();
+
+            var mesh = new THREE.Mesh( geometry, material ) ;
+            mesh.name = shapesKey;
+            group.add( mesh );
+
+        }
+
+        //group.add(mesh)
+
+
+        scene.add( group );
+
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+    }
+
+    function onMouseClick(event) {
+        var intersects = getIntersects( event.layerX, event.layerY );
+        if ( intersects.length > 0 ) {
+            var res = intersects.filter( function ( res ) {
+                return res && res.object;
+            } )[ 0 ];
+            if ( res && res.object ) {
+                res.object.material.emissive.set( '#eeef12' );
+            }
+        }
+    }
+
+    var raycaster = new THREE.Raycaster();
+    var mouseVector = new THREE.Vector3();
+    function getIntersects( x, y ) {
+        x = ( x / window.innerWidth ) * 2 - 1;
+        y = - ( y / window.innerHeight ) * 2 + 1;
+        mouseVector.set( x, y, 0.5 );
+        raycaster.setFromCamera( mouseVector, camera );
+        return raycaster.intersectObject( group, true );
+    }
+
+    function animate() {
+        requestAnimationFrame( animate );
+        render();
+    }
+
+    function render() {
+        renderer.render( scene, camera );
+    }
+
+    function getItemColors (minRgbArr,maxRgbArr,colorLevel) {
+        var colors= [];
+        //默认的最深颜色
+        var red = minRgbArr[0],green = minRgbArr[1], blue = minRgbArr[2];
+        //最浅颜色是239,239,239 比如：最浅颜色的red是 239 则差值为239-134=105
+        var maxRed = maxRgbArr[0],maxGreen = maxRgbArr[1],maxBlue = maxRgbArr[2];
+        var level = colorLevel;
+        while(level--) {
+            colors.push( 'rgb('+red +','+green+','+blue+')');
+            red += parseInt(maxRed/colorLevel);
+            green += parseInt(maxGreen/colorLevel);
+            blue += parseInt(maxBlue/colorLevel);
+        }
+        return colors;
+    }
+
+</script>
+</html>

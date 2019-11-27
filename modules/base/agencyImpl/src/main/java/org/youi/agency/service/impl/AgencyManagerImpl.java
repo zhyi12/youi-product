@@ -21,6 +21,10 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.youi.framework.core.dataobj.Record;
+import org.youi.framework.core.dataobj.tree.HtmlTreeNode;
+import org.youi.framework.core.dataobj.tree.TreeNode;
+import org.youi.framework.core.dataobj.tree.TreeUtils;
 import org.youi.framework.core.orm.Condition;
 import org.youi.framework.core.orm.Order;
 import org.youi.framework.core.orm.Pager;
@@ -33,6 +37,7 @@ import org.youi.framework.esb.annotation.ServiceParam;
 import org.youi.agency.entity.Agency;
 import org.youi.agency.mongo.AgencyDao;
 import org.youi.agency.service.AgencyManager;
+import org.youi.framework.util.StringUtils;
 
 /**
  * <p>系统描述: </p>
@@ -104,5 +109,24 @@ public class AgencyManagerImpl implements AgencyManager{
     @Override
     public void removeAgency(@ServiceParam(name="id") String id){
     	agencyDao.remove(id);
+    }
+
+    @EsbServiceMapping(trancode="9001010106",caption="分级获取机构树")
+    public List<TreeNode> getAgencyChildTree(@ServiceParam(name="id")String parentId){
+        List<Agency> agencies;
+        if(StringUtils.isEmpty(parentId)){
+            agencies = agencyDao.findByParentIdIsNullOrderByNum();
+        }else{
+            agencies = agencyDao.findByParentIdOrderByNum(parentId);
+        }
+        return TreeUtils.listToHtmlTree(agencies,parentId,"",treeNode -> {
+            if(treeNode.getDomain() instanceof Agency){
+                Record datas = new Record();
+                datas.put("id",((Agency) treeNode.getDomain()).getId());
+                datas.put("area-id",((Agency) treeNode.getDomain()).getAreaId());
+                datas.put("num",((Agency) treeNode.getDomain()).getNum());
+                ((HtmlTreeNode)treeNode).setDatas(datas);
+            }
+        }).getChildren();
     }
 }

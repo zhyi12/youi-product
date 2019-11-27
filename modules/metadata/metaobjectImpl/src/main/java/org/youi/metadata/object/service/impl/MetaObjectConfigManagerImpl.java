@@ -35,7 +35,7 @@ public class MetaObjectConfigManagerImpl implements MetaObjectConfigManager{
     private MetaObjectConfigDao metaObjectConfigDao;
 
     @Override
-    @EsbServiceMapping
+    @EsbServiceMapping(trancode = "",caption = "主键查询元数据配置")
     public MetaObjectConfig getMetaObjectConfig(@ServiceParam(name = "metaObjectName") String metaObjectName) {
         if(!metaObjectConfigDao.exists(metaObjectName)){//没有则创建
             return metaObjectConfigDao.save(new MetaObjectConfig()

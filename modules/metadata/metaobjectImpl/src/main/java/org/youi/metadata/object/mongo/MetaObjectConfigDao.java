@@ -18,10 +18,14 @@ package org.youi.metadata.object.mongo;
 import org.youi.framework.mongo.DaoMongo;
 import org.youi.metadata.object.entity.MetaObjectConfig;
 
+import java.util.List;
+
 /**
  * @author zhouyi
  * @see
  * @since 2.0.0
  */
 public interface MetaObjectConfigDao extends DaoMongo<MetaObjectConfig,String>{
+
+
 }

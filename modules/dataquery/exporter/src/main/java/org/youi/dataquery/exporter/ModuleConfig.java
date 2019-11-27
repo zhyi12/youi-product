@@ -54,8 +54,6 @@ public class ModuleConfig {
 
     private static final ExpressionParser EXPRESSION_PARSER = new SpelExpressionParser();
 
-
-
     /**
      *
      * @return

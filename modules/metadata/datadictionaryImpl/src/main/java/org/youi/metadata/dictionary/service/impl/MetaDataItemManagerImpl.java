@@ -133,8 +133,9 @@ public class MetaDataItemManagerImpl implements MetaDataItemManager{
         }
         Map<String,MetaDataItem> fullMatches = findFullMatches(texts);
 
+        List<MetaDataItem> metaDataItems = metaDataItemDao.findAll();
         //检索数据
-        List<MatchingItem> matchingItems = indexingService.matchingItems(itemList, metaDataItemDao.commonQuery(null, null), (domain) -> {
+        List<MatchingItem> matchingItems = indexingService.matchingItems(itemList, metaDataItems, (domain) -> {
             List<TextField> fields = new ArrayList<>();
             MetaDataItem metaDataItem = (MetaDataItem) domain;
             fields.add(new TextField("id", metaDataItem.getName(), Field.Store.YES));
