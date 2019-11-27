@@ -416,7 +416,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>8.18</version>
+                        <version>8.26</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -507,6 +507,10 @@
         <module>../modules/dataquery/queryImpl</module>
         <module>../modules/dataquery/exporter</module>
 
+        <!-- datacenter -->
+        <module>../modules/datacenter/ods</module>
+        <module>../modules/datacenter/odsImpl</module>
+
         <module>../modules/exchange/engine</module>
 
         <module>../modules/decorators/modern</module>
@@ -537,6 +541,9 @@
         <module>../modules/chart/engine</module>
         <module>../modules/chart/echarts</module>
         <module>../modules/chart/three</module>
+        <module>../modules/chart/d3</module>
+        <module>../modules/chart/gisdata</module>
+        <module>../modules/chart/gisdataImpl</module>
 
     </modules>
 
