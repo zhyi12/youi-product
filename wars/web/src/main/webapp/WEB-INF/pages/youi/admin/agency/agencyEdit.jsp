@@ -2,16 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <youi:page caption="机构编辑" autoLoadData="${param.id!=null}"
-	dataSrc="/esb/web/agencyManager/getAgency.json?id=${param.id}">
-	<youi:form id="form_agency" panel="false" submit="NOT" reset="NOT" action="/esb/web/agencyManager/saveAgency.json"
+	dataSrc="/baseServices/services/agencyManager/getAgency.json?id=${param.id}">
+	<youi:form id="form_agency" panel="false" submit="NOT" reset="NOT" action="/baseServices/services/agencyManager/saveAgency.json"
 		idKeys="id">
-		<youi:fieldLayout columns="1">
+		<youi:fieldLayout columns="1" labelWidths="100">
 			<youi:fieldHidden property="id"  caption="i18n.agency.id"/>
-			<youi:fieldText property="caption"  caption="i18n.agency.caption"/>
-			<youi:fieldText property="code"  caption="i18n.agency.code"/>
-			<youi:fieldText property="areaId"  caption="i18n.agency.areaId"/>
-			<youi:fieldText property="parentId"  caption="i18n.agency.parentId"/>
-			<youi:fieldText property="num"  caption="i18n.agency.num"/>
+			<youi:fieldText notNull="true" property="caption"  caption="机构名称"/>
+			<youi:fieldText property="areaId"  caption="行政区划"/>
+			<youi:fieldText property="parentId"  caption="父节点"/>
+			<youi:fieldText property="num"  caption="序号"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
