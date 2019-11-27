@@ -53,12 +53,11 @@ public class QuartzServiceJob extends QuartzJobBean {
 
         if(restServiceCaller!=null && jobExecutionContext.getJobDetail()!=null){
             MultiValueMap params = buildJobServiceParam(jobExecutionContext);
-            JobDataMap jobDataMap = jobExecutionContext.getJobDetail().getJobDataMap();
-            String serverName = jobDataMap.getString(Constants.JOB_PARAM_SERVER_NAME);//获取serverName数据
+            String serverName = jobExecutionContext.getTrigger().getKey().getGroup();//获取serverName数据
             String servicesName = jobExecutionContext.getJobDetail().getKey().getGroup();
             String serviceName = jobExecutionContext.getJobDetail().getKey().getName();
             restServiceCaller.callService(serverName,servicesName,serviceName,params);
-            //保存任务调用日志
+            //TODO 保存任务调用日志
         }
     }
 
@@ -69,9 +68,13 @@ public class QuartzServiceJob extends QuartzJobBean {
      */
     private MultiValueMap buildJobServiceParam(JobExecutionContext jobExecutionContext) {
         MultiValueMap params = new LinkedMultiValueMap();
-        params.add(Constants.JOB_PARAM_START_TIME,jobExecutionContext.getFireTime());
-        params.add(Constants.JOB_PARAM_END_TIME,jobExecutionContext.getNextFireTime());
         params.add("jobInstanceId",jobExecutionContext.getFireInstanceId());
+        params.add("serviceTaskCode",jobExecutionContext.getTrigger().getKey().getName());//
+        params.add("fireTime",Long.valueOf(jobExecutionContext.getFireTime().getTime()).toString());//启动时间
+        params.add("nextFireTime",Long.valueOf(jobExecutionContext.getNextFireTime().getTime()).toString());//下次启动时间
+        if(jobExecutionContext.getPreviousFireTime()!=null){
+            params.add("prevFireTime",Long.valueOf(jobExecutionContext.getPreviousFireTime().getTime()).toString());//下次启动时间
+        }
         return params;
     }
 
