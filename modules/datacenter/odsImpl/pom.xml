@@ -10,8 +10,8 @@
 		<relativePath>../../../parent/</relativePath>
 	</parent>
 
-	<name>youi-datacenter-ods</name>
-	<artifactId>youi-datacenter-ods</artifactId>
+	<name>youi-datacenter-odsImpl</name>
+	<artifactId>youi-datacenter-odsImpl</artifactId>
 	<packaging>jar</packaging>
 
 	<url>http://maven.apache.org</url>
@@ -38,6 +38,12 @@
 		<dependency>
 			<groupId>org.youi.framework</groupId>
 			<artifactId>youi-framework-dao-mongo</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.youi.product</groupId>
+			<artifactId>youi-datacenter-ods</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<!-- test -->
