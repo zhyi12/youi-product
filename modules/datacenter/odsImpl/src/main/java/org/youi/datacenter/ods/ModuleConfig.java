@@ -15,9 +15,11 @@
  */
 package org.youi.datacenter.ods;
 
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.youi.datacenter.ods.config.OdsProperties;
 import org.youi.framework.context.annotation.Module;
 import org.youi.framework.mongo.BaseDaoMongo;
 
@@ -30,6 +32,7 @@ import org.youi.framework.mongo.BaseDaoMongo;
 @Module(name = "datacenter.ods",caption = "datacenter.ods")
 @ComponentScan({"org.youi.datacenter.ods.service.impl"})
 @EnableMongoRepositories(basePackages = "org.youi.datacenter.ods.mongo",repositoryBaseClass = BaseDaoMongo.class)
+@EnableConfigurationProperties(OdsProperties.class)
 public class ModuleConfig {
 
 }
