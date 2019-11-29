@@ -64,6 +64,12 @@ security:
       prefer-token-info: false
 
 youi:
+  ods:
+    catalog: cassandra
+    schema: dw
+    cassandra:
+      host: 192.168.173.130
+      port: 9042
   service:
     restBaseUrl: http://localhost:8080 #配置rest服务调用
   file:
