@@ -85,9 +85,9 @@ public class OdsBusinessDbTaskExecutor extends ThreadPoolTaskExecutor {
                 try {
                     result.get();
                 } catch (InterruptedException e) {
-                    //e.printStackTrace();
+                    logger.error("数据同步中断："+e.getMessage());
                 } catch (ExecutionException e) {
-                    //e.printStackTrace();
+                    logger.error("数据同步异常："+e.getMessage());
                 }
             });
             //TODO 通知完成本批次的任务
