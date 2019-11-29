@@ -46,6 +46,12 @@
 			<version>${project.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.youi.product</groupId>
+			<artifactId>youi-dataquery-presto</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 		<!-- test -->
 		<dependency>
 			<groupId>org.youi.framework</groupId>
