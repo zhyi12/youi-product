@@ -24,6 +24,8 @@ import org.springframework.data.cassandra.core.cql.keyspace.CreateTableSpecifica
 import org.springframework.stereotype.Component;
 import org.youi.datacenter.ods.entity.OdsTableMapping;
 import org.youi.datacenter.ods.service.IOdsTableBuilder;
+import org.youi.framework.core.dataobj.Record;
+import org.youi.metadata.common.MetaItemDataType;
 
 /**
  * @author zhouyi
@@ -54,10 +56,32 @@ public class OdsCassandraTableBuilder implements IOdsTableBuilder {
         //普通列
         for(String column:odsTableMapping.getColumnMapping().keySet()){
             if(!ArrayUtils.contains(keyColumns,column)){
-                createTableSpecification = createTableSpecification.column(column, DataType.text());
+                createTableSpecification = createTableSpecification.column(column, parseColumnType(column,odsTableMapping.getColumnTypes()));
             }
         }
         //生成
         cqlTemplate.execute(CreateTableCqlGenerator.toCql(createTableSpecification));
+    }
+
+    /**
+     * 解析数据类型
+     * @param column
+     * @param columnTypes
+     * @return
+     */
+    private DataType parseColumnType(String column, Record columnTypes) {
+        String type = (columnTypes!=null && columnTypes.containsKey(column)) ?columnTypes.get(column).toString():MetaItemDataType.string.getKey();
+        //TODO 使用type converter来处理类型转换
+        if(MetaItemDataType.integer.getKey().equals(type)){
+            return DataType.cint();//整型
+        }else if(MetaItemDataType.bigint.getKey().equals(type)){
+            return DataType.bigint();//长整型
+        }else if(MetaItemDataType.number.getKey().equals(type)){
+            return DataType.cdouble();//数值
+        }else if(MetaItemDataType.date.getKey().equals(type)){
+            return DataType.date();//日期型
+        }else {
+            return DataType.text();//字符
+        }
     }
 }

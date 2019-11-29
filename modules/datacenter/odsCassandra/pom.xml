@@ -31,6 +31,12 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>org.youi.product</groupId>
+			<artifactId>youi-metadata-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.youi.framework</groupId>
 			<artifactId>youi-framework-services</artifactId>
 		</dependency>
