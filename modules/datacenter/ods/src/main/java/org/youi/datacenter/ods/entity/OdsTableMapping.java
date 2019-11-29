@@ -47,7 +47,11 @@ public class OdsTableMapping implements Domain {
     @Column
     private String tableName;//表名称
 
+    private String[] keyColumns;//主键字段
+
     private Record columnMapping;//列映射
+
+    private Record columnTypes;//列字段类型
 
     private String timestampColumn = "update_time";//时间戳列
 
@@ -105,6 +109,14 @@ public class OdsTableMapping implements Domain {
         return this;
     }
 
+    public String[] getKeyColumns() {
+        return keyColumns;
+    }
+
+    public void setKeyColumns(String[] keyColumns) {
+        this.keyColumns = keyColumns;
+    }
+
     /**
      * 构建主键
      * @return
@@ -134,12 +146,38 @@ public class OdsTableMapping implements Domain {
         return Objects.hash(id, catalog,schema, tableName);
     }
 
+    public Record getColumnTypes() {
+        return columnTypes;
+    }
+
+    public OdsTableMapping setColumnTypes(Record columnTypes) {
+        this.columnTypes = columnTypes;
+        return this;
+    }
 
     public OdsTableMapping addColumnMapping(String columnName, String mapName) {
         if(columnMapping==null){
             columnMapping = new Record();
         }
-        columnMapping.put(columnName,mapName);
+        if(StringUtils.isNotEmpty(columnName)&&StringUtils.isNotEmpty(mapName)){
+            columnMapping.put(columnName,mapName);
+        }
+        return this;
+    }
+
+    /**
+     *
+     * @param columnName
+     * @param dataType
+     * @return
+     */
+    public OdsTableMapping addColumnType(String columnName, String dataType){
+        if(columnTypes==null){
+            columnTypes = new Record();
+        }
+        if(StringUtils.isNotEmpty(columnName)&&StringUtils.isNotEmpty(dataType)){
+            columnTypes.put(columnName,dataType);
+        }
         return this;
     }
 }
