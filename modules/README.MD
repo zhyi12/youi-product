@@ -13,6 +13,10 @@
 
 #datagather 数据采集 8005
 
+#dataworking 数据处理 8006
+
+#datacenter 数据中心 8007
+
 #base 基础信息 9001
 
 #scheduler 定时调度 9002
@@ -20,6 +24,8 @@
 #server 微服务处理 9003
 
 #workflow 工作流 9004
+
+#chart 图表 9005
 
 #decorators 页面装饰器
 
