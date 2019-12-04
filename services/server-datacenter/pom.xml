@@ -23,6 +23,12 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.youi.product</groupId>
+            <artifactId>youi-datacenter-ods-cassandra</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- framework -->
         <dependency>
             <groupId>org.youi.framework</groupId>
