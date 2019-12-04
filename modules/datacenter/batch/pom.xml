@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.youi.product</groupId>
+		<artifactId>youi-product-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../../parent/</relativePath>
+	</parent>
+
+	<name>youi-datacenter-batch</name>
+	<artifactId>youi-datacenter-batch</artifactId>
+	<packaging>jar</packaging>
+
+	<url>http://maven.apache.org</url>
+	<!-- 导入项目公共包 -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.youi.product</groupId>
+				<artifactId>youi-product-parent</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.youi.product</groupId>
+			<artifactId>youi-metadata-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.youi.framework</groupId>
+			<artifactId>youi-framework-services</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+			<version>${springboot.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-deployer-local</artifactId>
+			<version>2.0.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.youi.framework</groupId>
+			<artifactId>youi-framework-dao-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>spring-batch-test</artifactId>
+			<version>4.0.1.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.37</version>
+		</dependency>
+
+		<!-- test -->
+		<dependency>
+			<groupId>org.youi.framework</groupId>
+			<artifactId>youi-framework-test</artifactId>
+		</dependency>
+
+    </dependencies>
+</project>

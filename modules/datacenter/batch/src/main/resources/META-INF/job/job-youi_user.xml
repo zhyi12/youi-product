@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-5.0.xsd
+        http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.2.xsd">
+
+    <!--包含读贴源数据  处理贴源数据到标准数据的转换  写数据-->
+    <batch:job id="odsToDwjob" job-repository="jobRepository">
+        <batch:step id="userStep">
+            <batch:tasklet>
+                <batch:chunk
+                        reader="odsDataReader"
+                        processor="dwDataProcessor"
+                        writer="dwDataWriter"
+                        cache-capacity="100"
+                        chunk-completion-policy="timeoutCompletionPolicy"/>
+            </batch:tasklet>
+        </batch:step>
+    </batch:job>
+    <!--  贴源数据读取  -->
+    <bean name="odsDataReader" class="org.youi.datacenter.batch.job.OdsDataReader">
+        <property name="dataSource" ref="odsDataSource"/>
+        <property name="pageSize" value="1000"/>
+        <property name="queryProvider" ref="queryProvider"></property>
+        <property name="rowMapper" ref="rowMapper"></property>
+        <property name="parameterValues">
+            <map>
+                <entry key="active" value="1"/>
+            </map>
+        </property>
+    </bean>
+    <!--  贴源数据行输出到标准到转换处理  -->
+    <bean name="rowMapper" class="org.youi.datacenter.batch.job.OdsRowMapper"></bean>
+    <!--  贴源数据查询  -->
+    <bean name="queryProvider" class="org.springframework.batch.item.database.support.SqlPagingQueryProviderFactoryBean">
+        <property name="dataSource" ref="odsDataSource"/>
+        <property name="selectClause" value="select USER_ID, AGENCY_ID, USER_CAPTION"/>
+        <property name="fromClause" value="from YOUI_USER"/>
+        <property name="whereClause" value="where USER_ACTIVE=:active"/>
+        <property name="sortKey" value="USER_ID"/>
+    </bean>
+
+    <!--  标准数据写入 -->
+    <bean name="dwDataWriter" class="org.youi.datacenter.batch.job.DwDataWriter">
+        <property name="dataSource" ref="dwDataSource"/>
+        <property name="sql" value="insert into youi_user_copy (USER_ID,AGENCY_ID,USER_CAPTION) values(:USER_ID,:AGENCY_ID,:USER_CAPTION)"></property>
+    </bean>
+
+    <bean name="dwDataProcessor" class="org.youi.datacenter.batch.job.OdsToDwDataProcessor"></bean>
+
+</beans>
