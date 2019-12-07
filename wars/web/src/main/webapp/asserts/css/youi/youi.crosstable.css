@@ -1,0 +1,77 @@
+@CHARSET "UTF-8";
+
+.youi-crossTable{
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    margin-left:-1px;
+    border-top: 1px solid #ddd;
+}
+
+.youi-crossTable .crossTable-content{
+    width:10000px;
+    margin-top:-1px;
+}
+
+.youi-crossTable .crossTable-content .table{
+    table-layout: fixed;
+    width: auto;
+}
+
+.youi-crossTable td.cell{
+    border:1px solid #ddd;
+    height: 30px;
+    padding:2px;
+    vertical-align: middle;
+    width:100px;
+}
+
+.youi-crossTable td.cell.slave{
+    text-align: center;
+    white-space: nowrap;
+}
+
+.youi-crossTable td.cell.slave,.youi-crossTable td.cell.main{
+    font-weight: bold;
+    background:#f9f9f9;
+}
+
+.youi-crossTable td.cell.merge{
+
+}
+
+.youi-crossTable td.cell.slave.merge{
+    text-align: center;
+}
+
+.youi-crossTable td.cell.data{
+    text-align: right;
+}
+
+.youi-crossTable .main-table-helper{
+    min-width:100px;
+    min-height:30px;
+    background: white;
+    position: absolute;
+    left:0px;
+    top:-1px;
+}
+
+.youi-crossTable .scroll-helper-x{
+    width:100%;
+    height:12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: fixed;
+    bottom: 0px;
+    display: none;
+}
+
+.youi-crossTable.scroll-x .scroll-helper-x{
+    display: block;
+}
+
+.youi-crossTable .scroll-helper-x .scroll-helper-inner{
+    height: 1px;
+}
+

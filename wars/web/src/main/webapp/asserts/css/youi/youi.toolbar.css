@@ -58,3 +58,14 @@
 .youi-toolbar .dropdown.open>span:after{
 	content: "\f0d8";
 }
+
+.youi-toolbar li.search .input-group.youi-field,
+.youi-toolbar li.search,
+.youi-toolbar li.search input.textInput{
+	width:100%;
+	padding:0px;
+}
+
+.youi-toolbar li.search input.textInput{
+	padding:2px 5px;
+}
