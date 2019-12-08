@@ -4,6 +4,9 @@
 <youi:style href="/asserts/css/page/page.cubeDesigner.css"/>
 <youi:page caption="CUBE设计-${param.title}">
 
+    <youi:subpage src="page/${_pagePath}/crossTableViewer.html?pageId={subPageId}" subpageId="crossTableViewer"
+                  caption="CUBE查询结果" type="secondPage"/>
+
     <youi:customWidget name="page_spliter" widgetName="pageSpliter"
                        styleClass="col-sm-2 page-inner-height">
         <youi:toolbar styleClass="fixed-height" refWidgetId="cubeDesigner">
@@ -26,6 +29,7 @@
 
     <%-- asserts/js/page/youi.cubedesigner.js --%>
     <youi:customWidget widgetName="cubeDesigner" name="cubeDesigner" pageModule="dataquery"
+                       refs="subpage_crossTableViewer"
                        styleClass="no-padding page-inner-height col-sm-10 page-spliter-right">
         <youi:toolbar styleClass="fixed-height" refWidgetId="cubeDesigner">
             <youi:toolbarItem name="query" caption="查询" icon="search" tooltips=""/>
