@@ -6,6 +6,7 @@ module.exports = {
         'app':[
             "./js/youi/youi.resizable.js",
             "./js/youi/youi.designer.js",
+            "./js/youi/youi.crosstable.js",
             "./js/youi/extra/youi.treepage.js",
             "./js/youi/extra/youi.gridpanel.js",
             "./js/youi/extra/youi.sheet.js",
@@ -26,6 +27,7 @@ module.exports = {
             "./css/youi/youi.xmenu.css",
             "./css/youi/youi.expressioneditor.css",
             "./css/youi/youi.flow.css",
+            "./css/youi/youi.crosstable.css",
         ]
     },
     output: {
