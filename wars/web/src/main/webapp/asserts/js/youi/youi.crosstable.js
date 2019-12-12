@@ -13,6 +13,9 @@
         _POS_MAIN = 1,//主栏
         _POS_SLAVE = 2;//宾栏
 
+    $.youi.crossTableUtils = {
+        expandCrossItems:_expandCrossItems
+    };
     /**
      * 交叉表
      */
@@ -114,6 +117,14 @@
             this.cubes = cubes||[];//记录cubes
             //
             this._trigger('afterParse',null,{cubes:this.cubes,canTransposition:this.canTransposition});
+        },
+
+        /**
+         *
+         * @private
+         */
+        _parseCrossReport:function(){
+
         },
 
         /*************************************** 方法 ****************************************/
