@@ -26,4 +26,64 @@ public class DimensionArea extends Dimension {
 
     private static final long serialVersionUID = -867079589999187381L;
 
+    private int startCol;
+    private int endCol;
+    private int startRow;
+    private int endRow;
+    private int rows;
+    private int cols;
+
+    public int getStartCol() {
+        return startCol;
+    }
+
+    public DimensionArea setStartCol(int startCol) {
+        this.startCol = startCol;
+        return this;
+    }
+
+    public int getEndCol() {
+        return endCol;
+    }
+
+    public DimensionArea setEndCol(int endCol) {
+        this.endCol = endCol;
+        return this;
+    }
+
+    public int getStartRow() {
+        return startRow;
+    }
+
+    public DimensionArea setStartRow(int startRow) {
+        this.startRow = startRow;
+        return this;
+    }
+
+    public int getEndRow() {
+        return endRow;
+    }
+
+    public DimensionArea setEndRow(int endRow) {
+        this.endRow = endRow;
+        return this;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public DimensionArea setRows(int rows) {
+        this.rows = rows;
+        return this;
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public DimensionArea setCols(int cols) {
+        this.cols = cols;
+        return this;
+    }
 }
