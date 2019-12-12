@@ -13,12 +13,16 @@
      */
     $.widget("youi.crossTableViewer",$.youi.abstractWidget,$.extend({},{
 
+        options:{
+            bindResize:true
+        },
         /**
          * 初始化组件
          * @private
          */
         _initWidget:function(){
             this._initContent();
+            this.element.trigger('initParseRecords');
         },
 
         _initContent:function(){
@@ -28,9 +32,21 @@
                 this.contentElem = $('<div class="'+contentClazz+'"></div>');
             }
 
-            this.contentElem.crossTable({
-
+            this.contentElem.addClass('auto-height').crossTable({
+                afterParse:this._proxy('_afterParseCubes')
             });
+        },
+
+        _initAction:function(){
+            // this._on({
+            //     'initParseRecords':function (event,ui) {
+            //         console.log(ui);
+            //     }
+            // });
+        },
+
+        _afterParseCubes:function(cubes){
+            this._resize();
         },
 
         /**
@@ -38,8 +54,14 @@
          */
         parseRecords:function (result) {
             if(result.records){
+                console.log( this.contentElem);
+                console.log( this.contentElem.crossTable);
                 this.contentElem.crossTable('drawCubes',result.records);
             }
+        },
+
+        _resize:function () {
+            this._resizePageHeight();
         }
     }));
 
