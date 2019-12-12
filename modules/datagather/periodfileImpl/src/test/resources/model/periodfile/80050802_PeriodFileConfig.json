@@ -1,0 +1,30 @@
+{
+  "id": "80050802",
+  "idAttrName": "periodFileId",
+  "table": "youi_datagather_period_file_config",
+  "name": "periodFileConfig",
+  "caption": "固定期文件报表配置",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "periodFileId",
+      "caption": "固定期文件ID"
+    },
+    {
+      "name": "reportCode",
+      "caption": "报表编号"
+    },
+    {
+      "name": "periodId",
+      "caption": "报告期"
+    },
+    {
+      "name": "areaId",
+      "caption": "行政区划"
+    },
+    {
+      "name": "createTime",
+      "caption": "创建时间"
+    }
+  ]
+}

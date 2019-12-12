@@ -1,0 +1,58 @@
+{
+  "id": "80050801",
+  "idAttrName": "id",
+  "table": "youi_datagather_period_file",
+  "name": "periodFile",
+  "caption": "固定期文件",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "surveyTaskId",
+      "caption": "调查方案"
+    },
+    {
+      "name": "reportCode",
+      "caption": "报表编号"
+    },
+    {
+      "name": "periodId",
+      "caption": "报告期"
+    },
+    {
+      "name": "agencyId",
+      "caption": "机构"
+    },
+    {
+      "name": "areaId",
+      "caption": "行政区划"
+    },
+    {
+      "name": "startTime",
+      "caption": "上传开始时间"
+    },
+    {
+      "name": "endTime",
+      "caption": "上传截止时间"
+    },
+    {
+      "name": "createTime",
+      "caption": "创建时间"
+    },
+    {
+      "name": "uploadTime",
+      "caption": "上传时间"
+    },
+    {
+      "name": "filePath",
+      "caption": "文件路径"
+    },
+    {
+      "name": "memo",
+      "caption": "上传说明"
+    }
+  ]
+}
