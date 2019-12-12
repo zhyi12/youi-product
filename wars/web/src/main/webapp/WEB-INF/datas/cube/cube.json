@@ -2,17 +2,17 @@
   "records": [
     {
       "dimensions":[
-        {"id":"I","position":1,"items":[{"id":"I01","text":"指标1"},{"id":"I02","text":"指标2"},{"id":"I03","text":"指标3"}]},
-        {"id":"D","position":1,"items":[{"id":"D01","text":"北京"},{"id":"D02","text":"上海"},{"id":"D03","text":"天津"}]},
-        {"id":"P","position":2,"items":[{"id":"20180000","text":"2018年"},{"id":"20190000","text":"2019年"}]},
-        {"id":"A","position":2,"items":[{"id":"1","text":"本期"},{"id":"2","text":"上年同期"},{"id":"3","text":"增加率"}]}
+        {"id":"I","position":1,"items":[{"id":"I01","text":"指标1"},{"id":"I02","text":"指标2"},{"id":"I03","text":"指标3"},{"id":"I04","text":"指标4"},{"id":"I05","text":"指标5"}]},
+        {"id":"D","position":1,"items":[{"id":"D01","text":"北京"},{"id":"D02","text":"上海"},{"id":"D03","text":"天津"},{"id":"D04","text":"重庆"}]},
+        {"id":"P","position":2,"items":[{"id":"20160000","text":"2016年"},{"id":"20170000","text":"2017年"},{"id":"20180000","text":"2018年"},{"id":"20190000","text":"2019年"}]},
+        {"id":"A","position":2,"items":[{"id":"1","text":"本期"},{"id":"2","text":"上年同期"},{"id":"3","text":"增长率"}]}
       ]
     },
     {
       "dimensions":[
         {"id":"I","position":1,"items":[{"id":"I01","text":"指标1"},{"id":"I02","text":"指标2"},{"id":"I03","text":"指标3"}]},
         {"id":"P","position":2,"items":[{"id":"20180000","text":"2018年"},{"id":"20190000","text":"2019年"}]},
-        {"id":"A","position":2,"items":[{"id":"1","text":"本期"},{"id":"2","text":"上年同期"},{"id":"3","text":"增加率"}]}
+        {"id":"A","position":2,"items":[{"id":"1","text":"本期"},{"id":"2","text":"上年同期"},{"id":"3","text":"增长率"}]}
       ]
     }
   ]

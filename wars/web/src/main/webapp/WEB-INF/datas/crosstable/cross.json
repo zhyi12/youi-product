@@ -1,0 +1,425 @@
+{
+  "record": {
+    "mainAreas": [
+      {
+        "id": "B_6_1",
+        "dimensions": [
+          {
+            "id": "B_6_1periods3",
+            "items": [
+              {
+                "id": "B_6_1period0",
+                "text": "2019/1-2月",
+                "mappedId": "20190020",
+                "mappedText": "2019年2月累计",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period1",
+                "text": "2018/1-2月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period2",
+                "text": "/",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period3",
+                "text": "2019/1-3月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period4",
+                "text": "2018/1-3月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period5",
+                "text": "2019/3月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period6",
+                "text": "2018/3月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period7",
+                "text": "/",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period8",
+                "text": "2019/1-4月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period9",
+                "text": "2018/1-4月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period10",
+                "text": "2019/4月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period11",
+                "text": "2018/4月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period12",
+                "text": "/",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period13",
+                "text": "2019/1-5月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period14",
+                "text": "2018/1-5月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period15",
+                "text": "2019/5月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period16",
+                "text": "2018/5月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period17",
+                "text": "/",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period18",
+                "text": "2019/1-6月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period19",
+                "text": "2018/1-6月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period20",
+                "text": "2019/6月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period21",
+                "text": "2018/6月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period22",
+                "text": "/",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period23",
+                "text": "2019/1-7月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period24",
+                "text": "2018/1-7月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period25",
+                "text": "2019/7月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period26",
+                "text": "2018/7月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period27",
+                "text": "/",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period28",
+                "text": "2019/1-8月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period29",
+                "text": "2018/1-8月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period30",
+                "text": "2019/8月",
+                "group": "period-item",
+                "dimId": "period"
+              },
+              {
+                "id": "B_6_1period31",
+                "text": "2018/8月",
+                "group": "period-item",
+                "dimId": "period"
+              }
+            ],
+            "group": "period",
+            "startRow": 5,
+            "endRow": 36,
+            "startCol": 1,
+            "endCol": 2,
+            "rows": 32,
+            "cols": 2,
+            "text": "报告期"
+          }
+        ],
+        "startRow": 5,
+        "endRow": 36,
+        "startCol": 1,
+        "endCol": 2,
+        "rows": 32,
+        "cols": 2,
+        "position": 1,
+        "text": "主栏区域B_6_1"
+      }
+    ],
+    "slaveAreas": [
+      {
+        "id": "B_3_3",
+        "dimensions": [
+          {
+            "id": "B_3_3attrs0",
+            "items": [
+              {
+                "id": "B_3_3attr0",
+                "text": "数量",
+                "group": "attr-item",
+                "dimId": "attr"
+              },
+              {
+                "id": "B_3_3attr1",
+                "text": "同比",
+                "group": "attr-item",
+                "dimId": "attr"
+              }
+            ],
+            "group": "attr",
+            "startRow": 3,
+            "endRow": 3,
+            "startCol": 3,
+            "endCol": 4,
+            "rows": 1,
+            "cols": 2,
+            "text": "属性"
+          }
+        ],
+        "startRow": 2,
+        "endRow": 3,
+        "startCol": 3,
+        "endCol": 4,
+        "rows": 2,
+        "cols": 2,
+        "position": 2,
+        "text": "宾栏区域B_3_3"
+      },
+      {
+        "id": "B_3_5",
+        "dimensions": [
+          {
+            "id": "B_3_5categorys1",
+            "items": [
+              {
+                "id": "B_3_5category0",
+                "text": "分行业煤炭消费量",
+                "group": "category-item",
+                "dimId": "category"
+              },
+              {
+                "id": "B_3_5category1",
+                "text": "I1",
+                "group": "category-item",
+                "dimId": "category"
+              },
+              {
+                "id": "B_3_5category2",
+                "text": "I2",
+                "group": "category-item",
+                "dimId": "category"
+              },
+              {
+                "id": "B_3_5category3",
+                "text": "I3",
+                "group": "category-item",
+                "dimId": "category"
+              },
+              {
+                "id": "B_3_5category4",
+                "text": "I4",
+                "group": "category-item",
+                "dimId": "category"
+              },
+              {
+                "id": "B_3_5category5",
+                "text": "I5",
+                "group": "category-item",
+                "dimId": "category"
+              },
+              {
+                "id": "B_3_5category6",
+                "text": "I6",
+                "group": "category-item",
+                "dimId": "category"
+              },
+              {
+                "id": "B_3_5category7",
+                "text": "I7",
+                "group": "category-item",
+                "dimId": "category"
+              },
+              {
+                "id": "B_3_5category8",
+                "text": "I8",
+                "group": "category-item",
+                "dimId": "category"
+              },
+              {
+                "id": "B_3_5category9",
+                "text": "I9",
+                "group": "category-item",
+                "dimId": "category"
+              }
+            ],
+            "group": "category",
+            "startRow": 2,
+            "endRow": 2,
+            "startCol": 5,
+            "endCol": 14,
+            "rows": 1,
+            "cols": 10,
+            "text": "分类"
+          },
+          {
+            "id": "B_3_5attrs2",
+            "items": [
+              {
+                "id": "B_3_5attr0",
+                "text": "电力",
+                "group": "attr-item",
+                "dimId": "attr"
+              },
+              {
+                "id": "B_3_5attr1",
+                "text": "同比",
+                "group": "attr-item",
+                "dimId": "attr"
+              },
+              {
+                "id": "B_3_5attr2",
+                "text": "钢铁",
+                "group": "attr-item",
+                "dimId": "attr"
+              },
+              {
+                "id": "B_3_5attr3",
+                "text": "同比",
+                "group": "attr-item",
+                "dimId": "attr"
+              },
+              {
+                "id": "B_3_5attr4",
+                "text": "建材",
+                "group": "attr-item",
+                "dimId": "attr"
+              },
+              {
+                "id": "B_3_5attr5",
+                "text": "同比",
+                "group": "attr-item",
+                "dimId": "attr"
+              },
+              {
+                "id": "B_3_5attr6",
+                "text": "化工",
+                "group": "attr-item",
+                "dimId": "attr"
+              },
+              {
+                "id": "B_3_5attr7",
+                "text": "同比",
+                "group": "attr-item",
+                "dimId": "attr"
+              },
+              {
+                "id": "B_3_5attr8",
+                "text": "其他",
+                "group": "attr-item",
+                "dimId": "attr"
+              },
+              {
+                "id": "B_3_5attr9",
+                "text": "同比",
+                "group": "attr-item",
+                "dimId": "attr"
+              }
+            ],
+            "group": "attr",
+            "startRow": 3,
+            "endRow": 3,
+            "startCol": 5,
+            "endCol": 14,
+            "rows": 1,
+            "cols": 10,
+            "text": "属性"
+          }
+        ],
+        "startRow": 2,
+        "endRow": 3,
+        "startCol": 5,
+        "endCol": 14,
+        "rows": 2,
+        "cols": 10,
+        "position": 2,
+        "text": "宾栏区域B_3_5"
+      }
+    ]
+  }
+}
