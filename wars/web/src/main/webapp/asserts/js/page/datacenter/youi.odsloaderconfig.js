@@ -13,8 +13,7 @@
         options:{
             useModelTree:true,
             bindResize:true,
-            getModelTreeUrl:'',//模型树url
-            getDataTablesUrl:'',//模块子节点树url
+            getOdsTableMappingUrl:''
         },
 
         /**
@@ -23,45 +22,38 @@
          */
         _initWidget:function () {
             this._initRefWidget();//初始化关联组件
-            this._loadModelTree();//加载模型树
             this._bindWidgetCommand();//组件事件代理
         },
 
         /**
-         *
+         * 模型树节点选择
+         * @param treeNode
          * @private
          */
-        _loadModelTree : function () {
-            if(this.options.getModelTreeUrl){
+        _treeNodeSelect:function (treeNode) {
+            if(this.options.getOdsTableMappingUrl && !treeNode.hasClass('root')){
+                var tableName = treeNode.attr('id');
+                //获取OdsMapping信息
+                var url = $.youi.recordUtils.replaceByRecord(this.options.getOdsTableMappingUrl,{tableName:tableName},true);
                 $.youi.ajaxUtils.ajax({
-                    url:this.options.getModelTreeUrl,
-                    success:this._proxy('_parseModelTree')
+                    url:url,
+                    success:this._proxy('_parseTableMapping')
                 });
             }
         },
 
         /**
-         * 解析树
+         *
          * @param result
          * @private
          */
-        _parseModelTree:function (result) {
-            if(!result || !$.isArray(result.records)){
-                return;
+        _parseTableMapping:function (result) {
+            if(result.record){
+                //
+            }else{
+                //没有则通过
             }
-            var rootId = 'ROOT',rootText = '数据库',getDataTablesUrl = this.options.getDataTablesUrl;
-            //
-            $(result.records).each(function () {
-                $(this.children).each(function () {
-                    if(getDataTablesUrl){
-                        this.src =  $.youi.parameterUtils.connectParameter(getDataTablesUrl,'moduleId',this.id);
-                    }
-                });
-            });
-
-            var html = $.youi.treeUtils.treeNodeHtml(rootId,rootText,{group:'root'},{children:result.records});
-            this.modelTreeElem.find('>ul:first').html(html);
-        },
+        }
     }));
 
 })(jQuery);
