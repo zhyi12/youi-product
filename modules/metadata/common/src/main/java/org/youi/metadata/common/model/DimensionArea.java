@@ -26,6 +26,8 @@ public class DimensionArea extends Dimension {
 
     private static final long serialVersionUID = -867079589999187381L;
 
+    private String group;//维度类型
+
     private int startCol;
     private int endCol;
     private int startRow;
@@ -84,6 +86,15 @@ public class DimensionArea extends Dimension {
 
     public DimensionArea setCols(int cols) {
         this.cols = cols;
+        return this;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public DimensionArea setGroup(String group) {
+        this.group = group;
         return this;
     }
 }
