@@ -35,6 +35,8 @@ public class CrossReport implements Domain {
 
     private List<BlockArea> slaveAreas;//宾栏区域集合
 
+    private String content;//表单内容
+
     public List<Item> getHeaderItems() {
         return headerItems;
     }
@@ -59,6 +61,15 @@ public class CrossReport implements Domain {
 
     public CrossReport setSlaveAreas(List<BlockArea> slaveAreas) {
         this.slaveAreas = slaveAreas;
+        return this;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public CrossReport setContent(String content) {
+        this.content = content;
         return this;
     }
 }
