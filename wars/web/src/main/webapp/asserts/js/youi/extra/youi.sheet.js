@@ -411,6 +411,11 @@
                 startColIndex = startCell.prevAll().length,
                 endColIndex = endCell.prevAll().length;
 
+            if(endCell.hasClass('merged-cell')){
+                endRowIndex = endRowIndex+parseInt(endCell.attr('rowspan'))-1;
+                endColIndex = endColIndex+parseInt(endCell.attr('colspan'))-1;
+            }
+
             var area = {
                 startRow : Math.min(startRowIndex,endRowIndex),
                 endRow : Math.max(startRowIndex,endRowIndex),
