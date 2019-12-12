@@ -12,13 +12,18 @@
     <youi:subpage height="80" src="page/${_pagePath}.dialog/rename.html?pageId={subPageId}"
                   subpageId="rename" caption="重命名" type="dialog"/>
 
-    <youi:subpage src="page/${_pagePath}.dialog/crossTable.html?pageId={subPageId}"
+    <youi:subpage height="500" width="1080" src="page/${_pagePath}.dialog/crossTable.html?pageId={subPageId}"
                   subpageId="crossTable" caption="交叉表" type="dialog"/>
     <%--    --%>
     <youi:xmenu id="xmenu_tree">
         <youi:xmenuItem name="removeTreeNode" caption="删除" groups="categorys,category-item,periods,period-item,areas,area-item,attrs,attr-item"/>
 
         <youi:xmenuItem name="removeNextAllNode" caption="删除下方全部节点" groups="category-item,period-item,area-item,attr-item"/>
+
+        <youi:xmenuItem name="treeNodeMoveUp" caption="上移"
+                        groups="main,slave,categorys,periods,areas,attrs"/>
+        <youi:xmenuItem name="treeNodeMoveDown" caption="下移"
+                        groups="main,slave,categorys,periods,areas,attrs"/>
 
         <youi:xmenuItem name="removeMainArea" caption="删除主栏区域" groups="main"/>
         <youi:xmenuItem name="removeSlaveArea" caption="删除宾栏区域" groups="slave"/>
@@ -28,6 +33,8 @@
         <youi:xmenuItem name="openAddCategoryItem" caption="新增分组项" groups="pub-items,header-items"/>
         <youi:xmenuItem name="openAddYear" caption="新增年份" groups="pub-items,header-items"/>
 
+
+
         <youi:xmenuItem name="openRename" caption="重命名" groups="categorys,category-item,period-item,area-item,attr-item"/>
     </youi:xmenu>
     <%--    --%>
@@ -35,6 +42,7 @@
                        styleClass="col-sm-2 page-inner-height">
         <youi:toolbar styleClass="fixed-height" refWidgetId="reportFileEditor">
             <youi:toolbarItem name="refresh" caption="清空配置" tooltips=""/>
+            <youi:toolbarItem name="showCrossTable" caption="交叉表" tooltips=""/>
         </youi:toolbar>
         <youi:tree id="tree_model" xmenu="xmenu_tree"
                    styleClass="col-sm-12 no-padding hide-root overflow auto-height" hideRoot="true">
@@ -58,8 +66,6 @@
             <youi:toolbarItem name="setMonthArea" caption="月份区" icon="time" tooltips=""/>
             <youi:toolbarItem name="setQuarterArea" caption="季度区" icon="time" tooltips=""/>
             <youi:toolbarItem name="setAttrArea" caption="属性区" icon="tag" tooltips=""/>
-
-            <youi:toolbarItem value="1111" name="showCrossTable" caption="交叉表" tooltips=""/>
         </youi:toolbar>
     </youi:customWidget>
 
