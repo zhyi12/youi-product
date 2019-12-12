@@ -54,8 +54,6 @@
          */
         parseRecords:function (result) {
             if(result.records){
-                console.log( this.contentElem);
-                console.log( this.contentElem.crossTable);
                 this.contentElem.crossTable('drawCubes',result.records);
             }
         },

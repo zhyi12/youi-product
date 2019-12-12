@@ -93,23 +93,25 @@
         },
 
         _parseModel:function(result){
-            this.model = $.extend({mainAreas:[],slaveAreas:[]},result.record);
+            this.model = $.extend({mainAreas:[],slaveAreas:[]},result.record.crossReport);
 
             var mainAreaNodes = [],slaveAreaNodes = [],headerNodes = [];
-            if(result.record && result.record.mainAreas && result.record.slaveAreas){
-                //主栏
-                for(var i=0;i<result.record.mainAreas.length;i++){
-                    mainAreaNodes.push(_buildAreaNode(result.record.mainAreas[i],_MAIN_CELL_CLASS));
-                    this._renderBlockArea(result.record.mainAreas[i],_MAIN_CELL_CLASS);
-                }
 
-                //宾栏
-                for(var i=0;i<result.record.slaveAreas.length;i++){
-                    var slaveArea = result.record.slaveAreas[i];
+            if(this.model.mainAreas){//主栏
+                for(var i=0;i<this.model.mainAreas.length;i++){
+                    mainAreaNodes.push(_buildAreaNode(this.model.mainAreas[i],_MAIN_CELL_CLASS));
+                    this._renderBlockArea(this.model.mainAreas[i],_MAIN_CELL_CLASS);
+                }
+            }
+
+            if(this.model.slaveAreas){ //宾栏
+                for(var i=0;i<this.model.slaveAreas.length;i++){
+                    var slaveArea = this.model.slaveAreas[i];
                     slaveAreaNodes.push(_buildAreaNode(slaveArea,_SLAVE_CELL_CLASS));
                     this._renderBlockArea(slaveArea,_SLAVE_CELL_CLASS);
                 }
             }
+
             var treeHtmls = [];
             treeHtmls.push($.youi.treeUtils.treeNodeHtml('header_node','表头项',{},{group:'header-items',children:headerNodes}));
             treeHtmls.push($.youi.treeUtils.treeNodeHtml(_MAIN_CELL_CLASS+'_node','主栏',{},{expanded:true,children:mainAreaNodes}));
