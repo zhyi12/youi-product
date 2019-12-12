@@ -23,8 +23,9 @@
     $.widget("youi.reportFileEditor", $.youi.abstractWidget, $.extend({}, $.youi.abstractDesigner,{
 
         options:{
-            fileUrl:'',//文件内容
-            getModelUrl:'',//报表文件模型
+            fileUrl:'',//获取数据文件内容
+            getModelUrl:'',//获取报表文件模型
+            saveModelUrl:'',//保存模型
             bindResize:true,
             useModelTree:true,
         },
@@ -93,7 +94,9 @@
         },
 
         _parseModel:function(result){
-            this.model = $.extend({mainAreas:[],slaveAreas:[]},result.record.crossReport);
+            this.model = $.extend({},result.record.crossReport);
+            this.model.mainAreas  = this.model.mainAreas||[];
+            this.model.slaveAreas  = this.model.slaveAreas||[];
 
             var mainAreaNodes = [],slaveAreaNodes = [],headerNodes = [];
 
@@ -221,8 +224,8 @@
          * @param commandOptions
          */
         showCrossTable:function(dom,commandOptions){
-            var model = this._getModel();
-            var cubes = _modelToCubes(model);
+            var model = this._getModel(),
+                cubes = _modelToCubes(model);
             this._openSubPage('crossTable',{record:{cubes:cubes}},{});
         },
 
@@ -261,6 +264,15 @@
          */
         removeSlaveArea:function(treeNode){
             this._removeBlockArea(treeNode,_SLAVE_CELL_CLASS);
+        },
+
+
+        treeNodeMoveUp:function(treeNode){
+            this._treeNodeMoveUp();
+        },
+
+        treeNodeMoveDown:function(treeNode){
+            this._treeNodeMoveDown();
         },
 
         /**************************************** 弹出窗口回调方法 ***************************************/
@@ -332,7 +344,10 @@
                 return;
             }
             var dimensionId = this._genUUID(blockArea.id+type+'s',this.modelTreeElem);
-            var items = _buildMetaAreaItems(this.contentElem,area,blockArea,type),children = [];
+            var items = _buildMetaAreaItems(this.contentElem,area,blockArea,type),
+                children = [];
+
+            blockArea.dimensions = blockArea.dimensions||[];
             blockArea.dimensions.push($.extend({id:dimensionId,items:items,group:type},area));
 
             $(items).each(function () {
@@ -567,19 +582,30 @@
      * @private
      */
     function _modelToCubes(model) {
-        var cubes = [],
-            mainAreas = model.mainAreas||[],slaveAreas=model.slaveAreas||[];
+        return [{dimensions:[
+            {id:'main',items:_buildCubeItems(model.mainAreas,'M')},
+                {id:'slave',items:_buildCubeItems(model.slaveAreas,'S')}]}];
 
-        console.log(model);
-        $(mainAreas).each(function () {
-            var mainDimensions = this.dimensions;
-            $(slaveAreas).each(function(){
-                var cube = {dimensions:[].concat(mainDimensions).concat(this.dimensions)};
-                cubes.push(cube);
+    }
+
+    function _buildCubeItems(areas,type) {
+        var crossItems = [],items = [];
+        $(areas).each(function () {
+            crossItems = crossItems.concat($.youi.crossTableUtils.expandCrossItems(this.dimensions));
+        });
+
+        //
+        $(crossItems).each(function (index) {
+            var texts = [];
+            $(this).each(function () {
+                texts.push(this.text);
+            });
+            items.push({
+                id:type+index,
+                text:texts.join('/')
             });
         });
 
-        return cubes;
-
+        return items;
     }
 })(jQuery);
