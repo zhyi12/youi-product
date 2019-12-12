@@ -27,6 +27,7 @@ module.exports = {
             "./css/youi/youi.xmenu.css",
             "./css/youi/youi.expressioneditor.css",
             "./css/youi/youi.flow.css",
+            "./css/youi/youi.sheet.css",
             "./css/youi/youi.crosstable.css",
         ]
     },
