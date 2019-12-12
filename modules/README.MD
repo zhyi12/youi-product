@@ -27,6 +27,8 @@
 
 #chart 图表 9005
 
+#deployer 微服务部署 9006
+
 #decorators 页面装饰器
 
 #tools 工具包
