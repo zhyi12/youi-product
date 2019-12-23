@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+.youi-fieldPeriodType .time-year,.youi-fieldPeriodType .time{
+	width:50%;
+	float:left;
+	cursor:pointer;
+}
+
+.youi-fieldPeriodType.year-only .time-year{
+	width:100%;
+}
+
+.youi-fieldPeriodType>.dropdown.field-select.youi-fieldSelect .dropdown-menu{
+	max-height:200px;
+    overflow-y: auto;
+    width: 100%;
+	min-width:100px
+}
