@@ -49,3 +49,16 @@ MetaDomainTable 主题表
 80010701 需求分类（树）
 80010702 数据需求
 80010703 数据需求模型（思维导图，节点类型包括：主题、多级子主题、报表、维度、计量）
+
+
+##metamatching 元数据匹配 800108
+
+##metadimension 维度信息 800109
+80010901 时间属性维度      attrDimension
+80010902 对象分类维度      category
+80010903 分类项           categoryItem
+
+##metaperiod 报告期维度 800110
+
+
+
