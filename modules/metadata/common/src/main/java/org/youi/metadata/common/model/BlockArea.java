@@ -16,6 +16,7 @@
 package org.youi.metadata.common.model;
 
 import org.youi.framework.core.dataobj.cube.Area;
+import org.youi.framework.core.dataobj.cube.Item;
 
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class BlockArea extends Area {
     private String text;
 
     private List<DimensionArea> dimensions;
+
+    private List<Item> pubItems;
 
     public String getId() {
         return id;
@@ -58,6 +61,15 @@ public class BlockArea extends Area {
 
     public BlockArea setDimensions(List<DimensionArea> dimensions) {
         this.dimensions = dimensions;
+        return this;
+    }
+
+    public List<Item> getPubItems() {
+        return pubItems;
+    }
+
+    public BlockArea setPubItems(List<Item> pubItems) {
+        this.pubItems = pubItems;
         return this;
     }
 }

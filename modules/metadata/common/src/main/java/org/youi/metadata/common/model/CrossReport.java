@@ -15,12 +15,14 @@
  */
 package org.youi.metadata.common.model;
 
+import org.springframework.util.CollectionUtils;
 import org.youi.framework.core.dataobj.Domain;
 import org.youi.framework.core.dataobj.cube.Item;
 
 import java.util.List;
 
 /**
+ * 交叉表表式
  * @author zhouyi
  * @see
  * @since 2.0.0
@@ -71,5 +73,14 @@ public class CrossReport implements Domain {
     public CrossReport setContent(String content) {
         this.content = content;
         return this;
+    }
+
+    /**
+     * 判断是否可以交叉计算
+     * @return
+     */
+    public boolean canCalculate() {
+        return !CollectionUtils.isEmpty(mainAreas)
+                && !CollectionUtils.isEmpty(slaveAreas);
     }
 }

@@ -24,19 +24,19 @@ public class FieldItem extends PropertyItem{
 
     private static final long serialVersionUID = -8595091321531259857L;
 
-    private String fieldType;
+    private String fieldType;//字段录入类型
 
-    private String property;
+    private String property;//属性名称
 
-    private String caption;
+    private String caption;//字段名称
 
-    private String column;
+    private String column;//列名称
 
     private String defaultValue;
 
-    private String dataType;
+    private String dataType;//数据类型
 
-    private String dataLength;
+    private String dataLength;//数据长度
 
     public String getFieldType() {
         return fieldType;
