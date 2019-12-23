@@ -1,0 +1,15 @@
+.youi-reportFileEditor{
+
+}
+
+.youi-reportFileEditor .table{
+    width: auto;
+}
+
+.youi-reportFileEditor .cell.main{
+    background: #f6fff4;
+}
+
+.youi-reportFileEditor .cell.slave{
+    background: #eff2ff;
+}
