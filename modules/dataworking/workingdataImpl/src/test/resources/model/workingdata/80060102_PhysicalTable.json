@@ -1,0 +1,34 @@
+{
+  "id": "80060102",
+  "idAttrName": "id",
+  "table": "youi_dataworking_physical_table",
+  "name": "PhysicalTable",
+  "caption": "物理表",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "reportCode",
+      "caption": "报表编号"
+    },
+    {
+      "name": "physicalTableNum",
+      "caption": "物理表序号"
+    },
+    {
+      "name": "caption",
+      "caption": "物理表描述"
+    },
+    {
+      "name": "createTime",
+      "caption": "创建时间"
+    },
+    {
+      "name": "updateTime",
+      "caption": "更新时间"
+    }
+  ]
+}

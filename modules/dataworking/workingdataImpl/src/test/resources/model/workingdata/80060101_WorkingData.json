@@ -1,0 +1,34 @@
+{
+  "id": "80060101",
+  "idAttrName": "id",
+  "table": "youi_dataworking_data",
+  "name": "workingData",
+  "caption": "工作数据",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "areaId",
+      "caption": "管理行政区划"
+    },
+    {
+      "name": "respondentId",
+      "caption": "调查对象ID"
+    },
+    {
+      "name": "periodId",
+      "caption": "报告期"
+    },
+    {
+      "name": "createTime",
+      "caption": "创建时间"
+    },
+    {
+      "name": "updateTime",
+      "caption": "更新时间"
+    }
+  ]
+}

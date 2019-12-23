@@ -1,0 +1,30 @@
+{
+  "id": "80060103",
+  "idAttrName": "id",
+  "table": "youi_dataworking_cross_data",
+  "name": "workingCrossData",
+  "caption": "交叉表数据",
+  "attributes": [
+    {
+      "isId": true,
+      "name": "id",
+      "caption": "主键"
+    },
+    {
+      "name": "areaId",
+      "caption": "管理行政区划"
+    },
+    {
+      "name": "periodId",
+      "caption": "报告期"
+    },
+    {
+      "name": "createTime",
+      "caption": "创建时间"
+    },
+    {
+      "name": "updateTime",
+      "caption": "更新时间"
+    }
+  ]
+}
