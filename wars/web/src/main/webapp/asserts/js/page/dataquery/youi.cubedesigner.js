@@ -20,6 +20,8 @@
          */
         _initWidget:function () {
             this.element.addClass('page-inner-height');
+
+            this._initRefWidget();//初始化关联组件
             this._initContentHtml();
             this._bindWidgetCommand();
             //初始化交叉表
@@ -91,6 +93,7 @@
             });
         },
 
+        /************************************** method begin ************************************/
         addRowDimensionContainer:function(dom,commandOptions){
             var html = _buildCubeQueryRowHtml({id:'row',text:'行标签',icon:'list'},true);
             var lastRowContainer = this.element.find('.dimension-row:last').parent();
@@ -107,6 +110,15 @@
             //生成示例结构
             this._drawMockCrossTable();
         },
+
+        /**
+         *
+         */
+        query:function(dom,commandOptions){
+            this._openSubPage('crossTableViewer',{},{});
+        },
+
+        /************************************ method end ****************************************/
         /**
          *
          * @param container
@@ -216,7 +228,7 @@
         var htmls = [];
         htmls.push('<span title="'+dataItem.text+'" data-column-name="'+dataItem.columnName+'" class="dimension-item '+itemStyle+'">');
         htmls.push( '<span class="youi-icon icon-columns"></span>');
-        htmls.push( '<span class="item-text" contenteditable="true">'+dataItem.text+'</span>');
+        htmls.push( '<span data-text="'+dataItem.text+'" class="item-text" contenteditable="true">'+dataItem.text+'</span>');
         htmls.push(extraHtml||'');
         htmls.push('<span data-command="'+_COMMAND+'" data-name="removeDimension" class="youi-icon icon-remove"></span>');
         return htmls.join('');
