@@ -75,3 +75,6 @@
     height: 1px;
 }
 
+.auto-height.youi-crossTable{
+    overflow-y:auto;
+}
