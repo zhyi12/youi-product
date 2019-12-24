@@ -10,8 +10,10 @@
     <%--  执行数据查询  --%>
     <youi:ajaxUrl name="cubeQueryUrl" src="page/datas/data.html?path=cube/cube"/>
 
-    <youi:customWidget widgetName="crossTableViewer" name="crossTableViewer">
-
+    <youi:customWidget widgetName="crossTableViewer" name="crossTableViewer" styleClass="page-inner-height">
+        <youi:toolbar refWidgetId="crossTableViewer" styleClass="fixed-height">
+            <youi:toolbarItem name="exportXls" caption="导出" tooltips=""/>
+        </youi:toolbar>
     </youi:customWidget>
 
     <youi:func name="init" params="result">
