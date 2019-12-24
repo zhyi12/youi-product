@@ -75,6 +75,10 @@
 	overflow: hidden;
 }
 
+.youi-fieldLayout .youi-fieldTree.input-group{
+	display: block;
+}
+
 .youi-fieldLayout .youi-fieldSelect.multiple .option-item{
 	float:left;
 }
