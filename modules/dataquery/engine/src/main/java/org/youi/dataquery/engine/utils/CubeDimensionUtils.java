@@ -22,10 +22,10 @@ import org.youi.framework.core.dataobj.cube.DataCube;
 import org.youi.framework.core.dataobj.cube.Dimension;
 import org.youi.framework.core.dataobj.cube.Item;
 import org.youi.framework.core.dataobj.tree.TreeNode;
+import org.youi.metadata.common.utils.DimensionUtils;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +35,7 @@ import java.util.Map;
  * @see
  * @since 2.0.0
  */
-public final class DimensionUtils {
+public final class CubeDimensionUtils {
 
     private static NumberFormat numberFormat = DecimalFormat.getInstance();
 
@@ -47,7 +47,7 @@ public final class DimensionUtils {
     /**
      * 私有构造函数
      */
-    private DimensionUtils(){
+    private CubeDimensionUtils(){
         //ignore
     }
 
@@ -118,41 +118,7 @@ public final class DimensionUtils {
      * @return
      */
     public static List<Item>[] expendedCrossColItems(List<Dimension> dimensions){
-        int dimensionCount = dimensions.size();
-        int itemCount = 1;
-        int spans = 1;
-        List<Integer> spansList = new ArrayList<>();
-
-        //计算占位
-        for (int i = dimensionCount; i > 0; i--) {
-            Dimension dimension = dimensions.get(i-1);
-            if (i < dimensionCount) {
-                spans = spans * (dimensions.get(i).getItems().size());
-            }
-            spansList.add(spans);
-            itemCount = itemCount * dimension.getItems().size();
-        }
-        //构建维度项的一维交叉数组，方便数据计算
-        List<Item> crossColItems[] = new List[itemCount];
-        int index =0;
-        double itemBlocks = 1;
-        for(Dimension dimension:dimensions){
-            //对维度进行笛卡尔组合
-            for(int i=0;i<itemCount;i++){
-                double itemIndex = (Math.floor(new Integer(i).doubleValue() / spansList.get(dimensionCount - index - 1))) % dimension.getItems().size();
-                Item item = dimension.getItems().get(new Double(itemIndex).intValue());
-                if(crossColItems[i]==null){
-                    crossColItems[i] = new ArrayList<>();
-                }
-                item.setDimId(dimension.getId());
-                crossColItems[i].add(item);
-            }
-            if(index<dimensionCount-1){
-                itemBlocks = itemBlocks*dimension.getItems().size();
-            }
-            index++;
-        }
-        return crossColItems;
+        return DimensionUtils.expendedCrossColItems(dimensions);
     }
 
     /**
