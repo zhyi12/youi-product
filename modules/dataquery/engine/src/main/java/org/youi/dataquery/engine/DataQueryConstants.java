@@ -41,4 +41,10 @@ public final class DataQueryConstants {
     public final static String PARAM_GROUP_SUM = "groupSum";//
     public final static String PARAM_SUM = "sum";//
     public final static String PARAM_ITEM_COUNT = "itemCount";//
+
+
+    public final static String PARAM_RANKING = "ranking";//占比
+    public final static String PARAM_PROPORTION = "proportion";//排名
+
+
 }
