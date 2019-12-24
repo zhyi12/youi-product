@@ -55,7 +55,7 @@ public class CubeDataCalculator {
     }
 
     /**
-     *
+     * 维度计算项：实现小记、平均值、维度项表达式等计算项
      * @param dataCube 立方体
      * @param dimId 计算维度的ID
      * @param calculateItems 计算项
@@ -66,7 +66,7 @@ public class CubeDataCalculator {
     }
 
     /**
-     * 实现排名、占比类型的计算计算
+     * 维度计算项：实现排名、占比类型的计算
      * @param dataCube 立方体
      * @param dimId 计算维度的ID
      * @return
@@ -74,6 +74,32 @@ public class CubeDataCalculator {
     public DataCube calculateDimension(DataCube dataCube, String dimId,
                                        String refDimId,List<CalculateItem> refCalculateItems){
         return doCalculateDimension(dataCube,dimId,null,refDimId,refCalculateItems);
+    }
+
+    /**
+     * 示例：营业收入基于行政区划占比 dimId=行政区划，refDimId=计量，refItemId=营业收入ID
+     * @param dataCube 数据立方体
+     * @param dimId 计算维度
+     * @param refDimId  关联维度
+     * @param refItemId 关联维度项，基于这个项的值在计算维度进行排名
+     * @return
+     */
+    public DataCube calculateRanking(DataCube dataCube, String dimId,
+                                       String refDimId,String refItemId){
+        return calculateRefCalculate(dataCube,dimId,null,refDimId,PARAM_RANKING);
+    }
+
+    /**
+     * 示例：营业收入基于行政区划排名 dimId=行政区划，refDimId=计量，refItemId=营业收入ID
+     * @param dataCube 数据立方体
+     * @param dimId 计算维度
+     * @param refDimId  关联维度
+     * @param refItemId 关联维度项，基于这个项的值在计算维度进行排名
+     * @return
+     */
+    public DataCube calculateProportion(DataCube dataCube, String dimId,
+                                     String refDimId,String refItemId){
+        return calculateRefCalculate(dataCube,dimId,null,refDimId,PARAM_PROPORTION);
     }
 
     /**
@@ -112,6 +138,19 @@ public class CubeDataCalculator {
         for(String removingKey:removingKeys){
             dataCube.getDatas().remove(removingKey);
         }
+    }
+
+
+    //计算占比
+    public DataCube calculateRefCalculate(DataCube dataCube, String dimId,
+                                     String refDimId,String refItemId,String refType){
+        List<CalculateItem> refCalculateItems = new ArrayList<>();
+        CalculateItem calculateItem = new CalculateItem();
+        calculateItem.setMappedId(refItemId);
+        calculateItem.setId(refItemId+"_"+refType);
+        calculateItem.setExpression("["+refType+"]");
+        refCalculateItems.add(calculateItem);
+        return doCalculateDimension(dataCube,dimId,null,refDimId,refCalculateItems);
     }
 
     /**
