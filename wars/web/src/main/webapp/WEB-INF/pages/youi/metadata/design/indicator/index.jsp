@@ -16,6 +16,7 @@
     <youi:xmenu id="xmenu_indicator">
         <youi:xmenuItem name="addChildIndicator" caption="新增下级指标" groups="metaprojectindicator"/>
         <youi:xmenuItem name="removeIndicator" caption="删除指标" groups="metaprojectindicator"/>
+        <youi:xmenuItem name="refreshNode" caption="刷新" groups="root"/>
     </youi:xmenu>
 
     <youi:customWidget name="page_spliter" widgetName="pageSpliter"
@@ -73,6 +74,10 @@
             $.youi.pageUtils.doPageFunc('doRemoveIndicator',pageId,null,treeNode);
         });
     </youi:func>
+    <%--  刷新具有src属性的节点（此处为root节点）  --%>
+    <youi:func name="tree_indicator_xmenu_refreshNode" params="treeNode">
+        $elem('tree_indicator',pageId).tree('refreshNode',treeNode);
+    </youi:func>
 
     <%-- 删除指标 --%>
     <youi:func name="doRemoveIndicator" params="treeNode" urls="removeIndicatorUrl">
@@ -115,10 +120,8 @@
 
     <%-- 批量新增指标成功后更新树 --%>
     <youi:func name="subpage_addIndicatorTree_change" params="record">
-        var treeElem = $elem('tree_indicator',pageId),
-            rootElem = treeElem.find('.treeNode.root:first').removeClass('loaded').removeClass('expanded');
-        rootElem.find('>ul').empty();
-        treeElem.tree('openPath',rootElem.attr('id')+'/');
+        var treeElem = $elem('tree_indicator',pageId);
+        treeElem.tree('refreshNode',treeElem.find('.treeNode.root:first'));
     </youi:func>
 
     <%-- 指标保存成功后 --%>
