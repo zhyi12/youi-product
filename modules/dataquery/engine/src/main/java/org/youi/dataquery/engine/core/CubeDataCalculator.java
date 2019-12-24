@@ -135,19 +135,41 @@ public class CubeDataCalculator {
         //
         List<Dimension> dimensions = processCalculateDimension(dataCube,dimId,refDimId);
         Dimension calculateDimension = dimensions.get(dimensions.size()-1);//最后一个维度为计算维度
-
         //
         if(!dimId.equals(calculateDimension.getId())){
             return dataCube;
         }
-        //处理外部加入的计算项
-        if(!CollectionUtils.isEmpty(calculateItems)){
-            List<CalculateItem> convertExpressionCalculateItems = new ArrayList<>(calculateItems);
-            for(CalculateItem calculateItem:convertExpressionCalculateItems){
-                calculateItem.setExpression(CalculateItemUtils.convertItemExpression(calculateItem));
+        //处理计算项
+        processCalculateItems(calculateDimension,calculateItems);
+        //分块处理维度数据
+        processDimensionBlocks(dataCube,dimensions,calculateDimension,refDimId,refCalculateItems);
+
+        //增加关联维度的项
+        processRefCalculateItems(dimensions,refDimId,refCalculateItems);
+
+
+        return dataCube;
+    }
+
+    /**
+     * 处理占比、排名等关联计算项
+     * @param dimensions
+     * @param refDimId
+     * @param refCalculateItems
+     */
+    private void processRefCalculateItems(List<Dimension> dimensions,String refDimId, List<CalculateItem> refCalculateItems) {
+        if(dimensions.size()>1 && !CollectionUtils.isEmpty(refCalculateItems)){
+            Dimension refCalculateDimension = dimensions.get(dimensions.size()-2);
+            if(refCalculateDimension.getId().equals(refDimId)){
+                refCalculateDimension.getItems().addAll(refCalculateItems);
             }
-            calculateDimension.getItems().addAll(convertExpressionCalculateItems);
         }
+    }
+
+    /**
+     * 处理维度数据块
+     */
+    private void processDimensionBlocks(DataCube dataCube, List<Dimension> dimensions, Dimension calculateDimension, String refDimId, List<CalculateItem> refCalculateItems) {
         //展开维度为交叉单元格集合
         List<Item>[] crossColItems = CubeDimensionUtils.expendedCrossColItems(dimensions);
 
@@ -163,21 +185,26 @@ public class CubeDataCalculator {
             }
             blockItems.add(crossColItems[i]);
         }
-
         if(blockItems.size()>0){
             //执行最后一块的计算
             calculateBlockItems(dataCube,calculateDimension,blockItems,refDimId,refCalculateItems);
         }
+    }
 
-        //增加关联维度的项
-        if(dimensions.size()>1 && !CollectionUtils.isEmpty(refCalculateItems)){
-            Dimension refCalculateDimension = dimensions.get(dimensions.size()-2);
-            if(refCalculateDimension.getId().equals(refDimId)){
-                refCalculateDimension.getItems().addAll(refCalculateItems);
+    /**
+     * 处理计算项
+     * @param calculateDimension
+     * @param calculateItems
+     */
+    private void processCalculateItems(Dimension calculateDimension,List<CalculateItem> calculateItems) {
+        //处理外部加入的计算项
+        if(!CollectionUtils.isEmpty(calculateItems)){
+            List<CalculateItem> convertExpressionCalculateItems = new ArrayList<>(calculateItems);
+            for(CalculateItem calculateItem:convertExpressionCalculateItems){
+                calculateItem.setExpression(CalculateItemUtils.convertItemExpression(calculateItem));
             }
+            calculateDimension.getItems().addAll(convertExpressionCalculateItems);
         }
-
-        return dataCube;
     }
 
     /**
