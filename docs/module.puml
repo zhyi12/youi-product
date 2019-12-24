@@ -1,0 +1,50 @@
+@startuml
+
+
+package "基础包-base" {
+    [机构-agency]
+    [数据权限-datauth]
+}
+
+package "数据标准-standard" {
+    [数据标准公共包-common]
+    [行政区划-area]
+}
+
+package "缓存-cache" {
+    [common]
+    [ehcache]
+    [redis]
+}
+
+package "通用数据查询-dataquery" {
+    [数据查询-query]
+    [查询引擎-engine]
+    [presto查询实现-presto]
+}
+
+
+package "IT资产-itassert" {
+    [软件项目-softproject]
+}
+
+package "元数据-metadata" {
+    [元数据公共包-common]
+    [概念模型设计-conceptdesign]
+    [数据字典-datadictionary]
+    [数据需求-datademand]
+    [统计项目-metaproject] -->[统计元数据-metaobject]
+}
+
+package "定时调度 - scheduler" {
+    [定时调度公共包-common]
+    [调度管理-admin]
+    [调度实现-quartz]
+}
+
+package "软件提供商 - softwaresp" {
+    [开发商-spcompany]
+    [开发人员-spuser]
+}
+
+@enduml
