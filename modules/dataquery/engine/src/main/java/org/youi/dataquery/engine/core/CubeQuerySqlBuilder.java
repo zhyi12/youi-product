@@ -23,8 +23,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.youi.dataquery.engine.DataQueryConstants;
 import org.youi.dataquery.engine.model.*;
-import org.youi.dataquery.engine.utils.DimensionUtils;
-import org.youi.framework.core.dataobj.cube.Item;
+import org.youi.dataquery.engine.utils.CubeDimensionUtils;
 import org.youi.framework.core.orm.Condition;
 
 import java.text.MessageFormat;
@@ -112,7 +111,7 @@ public abstract class CubeQuerySqlBuilder {
      * @return
      */
     private boolean isUseGroupCondition(Group group){
-        return !DimensionUtils.isTreeGroupItems(group) && !GroupTemplate.class.isAssignableFrom(group.getClass());
+        return !CubeDimensionUtils.isTreeGroupItems(group) && !GroupTemplate.class.isAssignableFrom(group.getClass());
     }
 
     /**

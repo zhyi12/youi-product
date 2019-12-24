@@ -23,7 +23,7 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.util.CollectionUtils;
 import org.youi.dataquery.engine.model.CalculateItem;
 import org.youi.dataquery.engine.utils.CalculateItemUtils;
-import org.youi.dataquery.engine.utils.DimensionUtils;
+import org.youi.dataquery.engine.utils.CubeDimensionUtils;
 import org.youi.framework.core.dataobj.cube.*;
 import org.youi.framework.util.StringUtils;
 
@@ -81,7 +81,7 @@ public class CubeDataCalculator {
      */
     public void cleanCubeDatas(DataCube dataCube){
         if(dataCube.getDatas()==null)return;
-        List<Item>[] crossColItems = DimensionUtils.expendedCrossColItems(dataCube.getDimensions());
+        List<Item>[] crossColItems = CubeDimensionUtils.expendedCrossColItems(dataCube.getDimensions());
         List<String> dataKeys = new ArrayList<>();
 
         //交叉维度生成data keys集合
@@ -143,7 +143,7 @@ public class CubeDataCalculator {
             calculateDimension.getItems().addAll(convertExpressionCalculateItems);
         }
         //展开维度为交叉单元格集合
-        List<Item>[] crossColItems = DimensionUtils.expendedCrossColItems(dimensions);
+        List<Item>[] crossColItems = CubeDimensionUtils.expendedCrossColItems(dimensions);
 
         int calculateDimensionCount = calculateDimension.getItems().size();
         //
@@ -282,13 +282,13 @@ public class CubeDataCalculator {
                 }else if(groupSumValues.containsKey(PARAM_GROUP_SUM) && dataCube.getDatas().containsKey(dataKey)){
                     dataItem = dataCube.getDatas().get(dataKey);
                     dataItem.getData().setValue(groupSumValues.get(PARAM_GROUP_SUM));
-                    dataItem.getData().setStrValue(DimensionUtils.format(groupSumValues.get(PARAM_GROUP_SUM)));
+                    dataItem.getData().setStrValue(CubeDimensionUtils.format(groupSumValues.get(PARAM_GROUP_SUM)));
                     continue;
                 }
             }
             double value = calculateExpressionValue(calculateItem.getExpression(),values);
 
-            DataValue dataValue = new DataValue(DimensionUtils.format(value));
+            DataValue dataValue = new DataValue(CubeDimensionUtils.format(value));
             dataValue.setValue(value);
             values.put(calculateItem.getId(),value);
             dataItem.setData(dataValue);

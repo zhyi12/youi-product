@@ -18,7 +18,7 @@ package org.youi.dataquery.engine.core;
 import org.springframework.util.CollectionUtils;
 import org.youi.dataquery.engine.DataQueryConstants;
 import org.youi.dataquery.engine.model.CubeRowData;
-import org.youi.dataquery.engine.utils.DimensionUtils;
+import org.youi.dataquery.engine.utils.CubeDimensionUtils;
 import org.youi.framework.core.dataobj.cube.DataCube;
 import org.youi.framework.core.dataobj.cube.DataItem;
 import org.youi.framework.core.dataobj.cube.DataValue;
@@ -89,7 +89,7 @@ public abstract class CubeRowDataWriter {
         //处理计量指标项
         dataItem.addDim(DataQueryConstants.DIM_MEASURE_ID,indicatorId);
         //数据
-        DataValue dataValue = new DataValue(DimensionUtils.format(value));
+        DataValue dataValue = new DataValue(CubeDimensionUtils.format(value));
         dataValue.setValue(value);//设置数字值
 
         dataItem.setData(dataValue);
