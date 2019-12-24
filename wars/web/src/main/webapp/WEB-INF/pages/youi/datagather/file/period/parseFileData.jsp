@@ -8,17 +8,35 @@
     <youi:ajaxUrl name="getModelUrl" src="/dataFileServices/services/periodFileConfigManager/getPeriodFileConfig.json?periodFileId=${param.id}"/>
     <youi:ajaxUrl name="saveModelUrl" src="/dataFileServices/services/periodFileConfigManager/savePeriodFileConfig.json?periodFileId=${param.id}"/>
     <youi:ajaxUrl name="fileUrl" src="/dataFileServices/services/periodFileService/parseXlsReport.json?id=${param.id}"/>
+    <youi:ajaxUrl name="saveDataUrl" src="/dataWorkingServices/services/crossReportService/saveWorkingDatasFromCrossReport.json?id=${param.id}"/>
 
     <youi:subpage height="80" src="page/${_pagePath}.dialog/rename.html?pageId={subPageId}"
                   subpageId="rename" caption="重命名" type="dialog"/>
+
+    <youi:subpage height="80" src="page/${_pagePath}.dialog/addPubYear.html?pageId={subPageId}"
+                  subpageId="addPubYear" caption="新增年份" type="dialog"/>
+
+    <youi:subpage height="80" src="page/${_pagePath}.dialog/addPubIndicator.html?pageId={subPageId}"
+                  subpageId="addPubIndicator" caption="新增指标" type="dialog"/>
+
+    <youi:subpage height="80" src="page/${_pagePath}.dialog/refMonth.html?pageId={subPageId}"
+                  subpageId="refMonth" caption="关联月份" type="dialog"/>
+    <youi:subpage height="80" src="page/${_pagePath}.dialog/refPeriod.html?pageId={subPageId}"
+                  subpageId="refPeriod" caption="关联报告期" type="dialog"/>
+
+    <youi:subpage height="500" src="page/${_pagePath}.dialog/refPeriods.html?pageId={subPageId}"
+                  subpageId="refPeriods" caption="关联报告期" type="dialog"/>
+
+    <youi:subpage height="80" src="page/${_pagePath}.dialog/refAttr.html?pageId={subPageId}"
+                  subpageId="refAttr" caption="关联属性" type="dialog"/>
 
     <youi:subpage height="500" width="1080" src="page/${_pagePath}.dialog/crossTable.html?pageId={subPageId}"
                   subpageId="crossTable" caption="交叉表" type="dialog"/>
     <%--    --%>
     <youi:xmenu id="xmenu_tree">
-        <youi:xmenuItem name="removeTreeNode" caption="删除" groups="categorys,category-item,periods,period-item,areas,area-item,attrs,attr-item"/>
+        <youi:xmenuItem name="removeTreeNode" caption="删除" groups="categorys,indicators-item,categorys-item,periods,periods-item,areas,areas-item,attrs,attrs-item,years-item"/>
 
-        <youi:xmenuItem name="removeNextAllNode" caption="删除下方全部节点" groups="category-item,period-item,area-item,attr-item"/>
+        <youi:xmenuItem name="removeNextAllNode" caption="删除下方全部节点" groups="categorys-item,periods-item,area-item,attrs-item"/>
 
         <youi:xmenuItem name="treeNodeMoveUp" caption="上移"
                         groups="main,slave,categorys,periods,areas,attrs"/>
@@ -29,13 +47,16 @@
         <youi:xmenuItem name="removeSlaveArea" caption="删除宾栏区域" groups="slave"/>
         <youi:xmenuItem name="openAddCategoryItem" caption="新增分类项" groups="categorys"/>
 
-        <youi:xmenuItem name="openAddIndicator" caption="新增指标" groups="pub-items,header-items"/>
+        <youi:xmenuItem name="openAddPubIndicator" caption="新增指标" groups="pub-items,header-items"/>
         <youi:xmenuItem name="openAddCategoryItem" caption="新增分组项" groups="pub-items,header-items"/>
-        <youi:xmenuItem name="openAddYear" caption="新增年份" groups="pub-items,header-items"/>
+        <youi:xmenuItem name="openAddPubYear" value="year" caption="新增年份" groups="pub-items,header-items"/>
 
+        <youi:xmenuItem name="openRefMonth"  caption="关联月份" groups="months-item"/>
+        <youi:xmenuItem name="openRefAttr"  caption="关联属性" groups="attrs-item"/>
+        <youi:xmenuItem name="openRefPeriod"  caption="关联报告期" groups="periods-item"/>
+        <youi:xmenuItem name="openRefPeriods"  caption="关联报告期" groups="periods"/>
 
-
-        <youi:xmenuItem name="openRename" caption="重命名" groups="categorys,category-item,period-item,area-item,attr-item"/>
+        <youi:xmenuItem name="openRename" caption="重命名" groups="categorys,categorys-item,periods-item,areas-item,attrs-item"/>
     </youi:xmenu>
     <%--    --%>
     <youi:customWidget name="page_spliter" widgetName="pageSpliter"
@@ -52,8 +73,8 @@
     <%--    --%>
     <youi:customWidget widgetName="reportFileEditor" name="reportFileEditor" pageModule="datafile"
                        styleClass="page-inner-height page-spliter-right col-sm-10"
-                       refs="tree_model,subpage_rename,subpage_crossTable"
-                       urls="getModelUrl,saveModelUrl,fileUrl">
+                       refs="tree_model,subpage_rename,subpage_crossTable,subpage_addPubYear,subpage_addPubIndicator,subpage_refMonth,subpage_refAttr,subpage_refPeriod,subpage_refPeriods"
+                       urls="getModelUrl,saveModelUrl,fileUrl,saveDataUrl">
         <youi:toolbar styleClass="fixed-height" refWidgetId="reportFileEditor">
             <youi:toolbarItem name="save" caption="保存配置" tooltips="" icon="save"/>
             <youi:toolbarItem name="saveData" caption="保存数据" tooltips="" icon="save" groups="data"/>

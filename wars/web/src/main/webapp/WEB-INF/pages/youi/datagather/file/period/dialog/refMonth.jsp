@@ -6,6 +6,7 @@
     <youi:form id="form" submit="NOT" reset="NOT" panel="false">
         <youi:fieldLayout columns="1">
             <youi:fieldHidden property="id" caption="id"/>
+            <youi:fieldText property="mappedId" caption="月份"/>
             <youi:fieldText property="text" caption="名称"/>
         </youi:fieldLayout>
     </youi:form>
