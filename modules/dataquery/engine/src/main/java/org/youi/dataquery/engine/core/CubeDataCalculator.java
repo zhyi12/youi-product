@@ -114,6 +114,7 @@ public class CubeDataCalculator {
     }
 
     /**
+     * 立方体维度计算
      *
      * @param dataCube 立方体
      * @param dimId 计算的维度ID
@@ -252,7 +253,7 @@ public class CubeDataCalculator {
             }
         }
 
-        values.put(PARAM_ITEM_COUNT,sum);//分组合计
+        values.put(PARAM_SUM,sum);//分组合计
         values.put(PARAM_GROUP_SUM,1d);//用于占比计算等
         values.put(PARAM_ITEM_COUNT,new Integer(calculateDimension.getItems().size()).doubleValue());//维度项数
 
@@ -265,8 +266,8 @@ public class CubeDataCalculator {
     /**
      *
      * @param dataCube
-     * @param values
-     * @param calculateDataItems
+     * @param values 用于计算表达式的参数值
+     * @param calculateDataItems 计算项集合
      * @param groupSumValues
      */
     private void doGroupCalculate(DataCube dataCube,Map<String,Double> values,
