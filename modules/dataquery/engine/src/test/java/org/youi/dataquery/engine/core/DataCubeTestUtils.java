@@ -16,9 +16,11 @@
 package org.youi.dataquery.engine.core;
 
 import org.youi.dataquery.engine.DataQueryConstants;
-import org.youi.dataquery.engine.utils.DimensionUtils;
+import org.youi.dataquery.engine.utils.CubeDimensionUtils;
 import org.youi.framework.core.dataobj.cube.*;
+import org.youi.metadata.common.utils.DimensionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,16 +30,19 @@ import java.util.List;
  */
 public class DataCubeTestUtils {
 
+    public static final String DIM_GROUP_A = "A";
 
     public static DataCube buildDataCube(){
 
         DataCube  dataCube = new DataCube();
 
         Dimension measureDimension = buildDimension(DataQueryConstants.DIM_MEASURE_ID,"计量");
-        measureDimension.addItem(new Item("m001","数量1"));
-        measureDimension.addItem(new Item("m002","数量2"));
+        measureDimension.addItem(new Item("m001","项目1"));
+        measureDimension.addItem(new Item("m002","项目2"));
+        measureDimension.addItem(new Item("m003","项目3"));
+        measureDimension.addItem(new Item("m004","项目4"));
 
-        Dimension answerDimension = buildDimension("A","答案");
+        Dimension answerDimension = buildDimension(DIM_GROUP_A,"答案");
         answerDimension.addItem(new Item("item001","良好"));
         answerDimension.addItem(new Item("item002","一般"));
         answerDimension.addItem(new Item("item003","不佳"));
@@ -46,7 +51,7 @@ public class DataCubeTestUtils {
         dataCube.addDimension(answerDimension);
 
 
-        List<Item>[] crossItemArray = DimensionUtils.expendedCrossColItems(dataCube.getDimensions());
+        List<Item>[] crossItemArray = CubeDimensionUtils.expendedCrossColItems(dataCube.getDimensions());
 
         //
         for (List<Item> crossItems : crossItemArray) {
@@ -57,7 +62,7 @@ public class DataCubeTestUtils {
             });
 
             Double value = randomValue();
-            DataValue dataValue = new DataValue(DimensionUtils.format(value));
+            DataValue dataValue = new DataValue(CubeDimensionUtils.format(value));
             dataValue.setValue(value);
             dataItem.setData(dataValue);
             dataCube.addDataItem(dataItem);
@@ -71,6 +76,44 @@ public class DataCubeTestUtils {
         dimension.setId(id);
         dimension.setText(text);
         return dimension;
+    }
+
+    public static void printDataCube(DataCube dataCube){
+
+        List<Dimension> dimensions = new ArrayList<>(dataCube.getDimensions());
+        //打印立方体
+        Dimension mainDimension = dimensions.remove(0);
+
+        List<Item>[] crossItems =  DimensionUtils.expendedCrossColItems(dimensions);
+
+        System.out.print("项目   ");
+        for(List<Item> crossItem:crossItems){
+            System.out.print(crossItem.get(crossItem.size()-1).getText()+"  ");
+        }
+        System.out.println("");
+        //
+        for(Item mainItem:mainDimension.getItems()){
+            System.out.print(mainItem.getText()+"   ");
+            for(List<Item> crossItem:crossItems){
+                DataItem dataItem = new DataItem();
+                dataItem.addDim(mainItem.getDimId(),mainItem.getId());
+                crossItem.forEach(item -> {
+                    dataItem.addDim(item.getDimId(),item.getId());
+                });
+
+                if(dataItem!=null){
+                    String dataKey = dataItem.buildKey();
+                    DataItem crossDataItem = dataCube.getDatas().get(dataKey);
+
+                    if(crossDataItem!=null){
+                        System.out.print(crossDataItem.getData().getStrValue()+"   ");
+                    }
+                }
+
+
+            }
+            System.out.println("");
+        }
     }
 
     public static Double randomValue() {

@@ -1,13 +1,10 @@
 package org.youi.dataquery.engine.core;
 
 import org.junit.Test;
-import org.youi.dataquery.engine.utils.DimensionUtils;
 import org.youi.framework.core.dataobj.cube.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by zhouyi on 2019/8/26.
