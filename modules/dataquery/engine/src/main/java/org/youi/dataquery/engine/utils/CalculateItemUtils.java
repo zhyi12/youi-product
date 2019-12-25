@@ -16,7 +16,9 @@
 package org.youi.dataquery.engine.utils;
 
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.youi.dataquery.engine.model.CalculateItem;
+import org.youi.dataquery.engine.model.RefCalculateItem;
 import org.youi.framework.core.dataobj.cube.*;
 
 import java.text.MessageFormat;
@@ -31,6 +33,35 @@ import java.util.regex.Pattern;
  * @since 2.0.0
  */
 public class CalculateItemUtils {
+
+    private static Pattern REF_MAPPING_PATTERN = Pattern.compile("(^\\w+)\\.(\\w+)");
+    /**
+     *
+     * @param item 关联的维度项
+     * @param dimId 计算维度
+     * @return
+     */
+    public static RefCalculateItem buildRefCalculateItem(Item item,String dimId){
+
+        if(StringUtils.isEmpty(item.getMappedId())){
+            return null;
+        }
+
+        Matcher matcher = REF_MAPPING_PATTERN.matcher(item.getMappedId());
+        if(matcher.find()){
+            RefCalculateItem refCalculateItem = new RefCalculateItem();
+            refCalculateItem.setId(item.getMappedId()+"_"+item.getId());
+            refCalculateItem.setDimId(dimId);
+            refCalculateItem.setRefDimId(matcher.group(1));
+            refCalculateItem.setMappedId(item.getId());
+            refCalculateItem.setRefType(matcher.group(2));//
+            refCalculateItem.setText(item.getText()+item.getMappedId());//
+            refCalculateItem.setExpression("["+refCalculateItem.getRefType()+"]");
+            return refCalculateItem;
+        }
+
+        return null;
+    }
 
     public static DataItem buildDataItem(List<Item> crossItem){
         DataItem dataItem = new DataItem();
