@@ -22,6 +22,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.util.CollectionUtils;
 import org.youi.dataquery.engine.model.CalculateItem;
+import org.youi.dataquery.engine.model.RefCalculateItem;
 import org.youi.dataquery.engine.utils.CalculateItemUtils;
 import org.youi.dataquery.engine.utils.CubeDimensionUtils;
 import org.youi.framework.core.dataobj.cube.*;
@@ -41,17 +42,39 @@ import static org.youi.dataquery.engine.DataQueryConstants.*;
  */
 public class CubeDataCalculator {
 
-
     private  static ExpressionParser parser = new SpelExpressionParser();
 
     /**
      * 计算维度中的表达式数据
      * @param dataCube
-     * @param dimId
+     * @param dimId 计算维度
      * @return
      */
     public DataCube calculateDimension(DataCube dataCube, String dimId){
-        return doCalculateDimension(dataCube,dimId,null,null,null);
+        dataCube = doCalculateDimension(dataCube,dimId,null,null,null,false);
+        //从立方体维度中识别出关联计算项
+        Map<String,List<RefCalculateItem>> refCalculateItemMap = new HashMap<>();//关联计算项
+        for(Dimension dimension:dataCube.getDimensions()){
+            dimension.getItems().forEach(item -> {
+                item.setDimId(dimension.getId());//设置dimID
+                RefCalculateItem refCalculateItem = CalculateItemUtils.buildRefCalculateItem(item,dimId);//构建关联计算项
+                if(refCalculateItem!=null && dimension.getId().equals(dimId)){//关联的维度为计算维度
+                    String refKey = refCalculateItem.getDimId();
+                    if(!refCalculateItemMap.containsKey(refKey)){
+                        //设置空集合对象到map
+                        refCalculateItemMap.put(refKey,new ArrayList<>());
+                    }
+                    refCalculateItemMap.get(refKey).add(refCalculateItem);
+                }
+            });
+        }
+        if(!CollectionUtils.isEmpty(refCalculateItemMap)){
+            for(Map.Entry<String,List<RefCalculateItem>> entry:refCalculateItemMap.entrySet()){
+                List<RefCalculateItem> refCalculateItems = entry.getValue();
+                doCalculateDimension(dataCube,refCalculateItems.get(0).getRefDimId(),null,dimId,refCalculateItems,true);
+            }
+        }
+        return dataCube;
     }
 
     /**
@@ -62,7 +85,7 @@ public class CubeDataCalculator {
      * @return
      */
     public DataCube calculateDimension(DataCube dataCube, String dimId, List<CalculateItem> calculateItems){
-        return doCalculateDimension(dataCube,dimId,calculateItems,null,null);
+        return doCalculateDimension(dataCube,dimId,calculateItems,null,null,false);
     }
 
     /**
@@ -72,8 +95,8 @@ public class CubeDataCalculator {
      * @return
      */
     public DataCube calculateDimension(DataCube dataCube, String dimId,
-                                       String refDimId,List<CalculateItem> refCalculateItems){
-        return doCalculateDimension(dataCube,dimId,null,refDimId,refCalculateItems);
+                                       String refDimId,List<RefCalculateItem> refCalculateItems){
+        return doCalculateDimension(dataCube,dimId,null,refDimId,refCalculateItems,false);
     }
 
     /**
@@ -86,7 +109,7 @@ public class CubeDataCalculator {
      */
     public DataCube calculateRanking(DataCube dataCube, String dimId,
                                        String refDimId,String refItemId){
-        return calculateRefCalculate(dataCube,dimId,null,refDimId,PARAM_RANKING);
+        return calculateRefCalculate(dataCube,dimId,refDimId,refItemId,PARAM_RANKING);
     }
 
     /**
@@ -99,7 +122,7 @@ public class CubeDataCalculator {
      */
     public DataCube calculateProportion(DataCube dataCube, String dimId,
                                      String refDimId,String refItemId){
-        return calculateRefCalculate(dataCube,dimId,null,refDimId,PARAM_PROPORTION);
+        return calculateRefCalculate(dataCube,dimId,refDimId,refItemId,PARAM_PROPORTION);
     }
 
     /**
@@ -140,17 +163,20 @@ public class CubeDataCalculator {
         }
     }
 
-
-    //计算占比
-    public DataCube calculateRefCalculate(DataCube dataCube, String dimId,
+    //计算占比、排名等
+    private DataCube calculateRefCalculate(DataCube dataCube, String dimId,
                                      String refDimId,String refItemId,String refType){
-        List<CalculateItem> refCalculateItems = new ArrayList<>();
-        CalculateItem calculateItem = new CalculateItem();
+        List<RefCalculateItem> refCalculateItems = new ArrayList<>();
+        RefCalculateItem calculateItem = new RefCalculateItem();
+        calculateItem.setRefDimId(dimId);//设置计算维度的dimId为refDimId
+        calculateItem.setDimId(refDimId);//设置关联维度的ID为本项的dimId
+        calculateItem.setRefType(refType);
         calculateItem.setMappedId(refItemId);
         calculateItem.setId(refItemId+"_"+refType);
         calculateItem.setExpression("["+refType+"]");
+        calculateItem.setText(refDimId+"."+refItemId+"."+refType);
         refCalculateItems.add(calculateItem);
-        return doCalculateDimension(dataCube,dimId,null,refDimId,refCalculateItems);
+        return doCalculateDimension(dataCube,dimId,null,refDimId,refCalculateItems,false);
     }
 
     /**
@@ -167,7 +193,7 @@ public class CubeDataCalculator {
                                         String dimId,
                                         List<CalculateItem> calculateItems,
                                         String refDimId,
-                                        List<CalculateItem> refCalculateItems){
+                                        List<RefCalculateItem> refCalculateItems,boolean onlyRefCalculate){
         if(dataCube.getDatas()==null){
             return  dataCube;
         }
@@ -181,11 +207,9 @@ public class CubeDataCalculator {
         //处理计算项
         processCalculateItems(calculateDimension,calculateItems);
         //分块处理维度数据
-        processDimensionBlocks(dataCube,dimensions,calculateDimension,refDimId,refCalculateItems);
-
+        processDimensionBlocks(dataCube,dimensions,calculateDimension,refDimId,refCalculateItems,onlyRefCalculate);
         //增加关联维度的项
         processRefCalculateItems(dimensions,refDimId,refCalculateItems);
-
 
         return dataCube;
     }
@@ -196,19 +220,25 @@ public class CubeDataCalculator {
      * @param refDimId
      * @param refCalculateItems
      */
-    private void processRefCalculateItems(List<Dimension> dimensions,String refDimId, List<CalculateItem> refCalculateItems) {
+    private void processRefCalculateItems(List<Dimension> dimensions,String refDimId, List<RefCalculateItem> refCalculateItems) {
         if(dimensions.size()>1 && !CollectionUtils.isEmpty(refCalculateItems)){
             Dimension refCalculateDimension = dimensions.get(dimensions.size()-2);
             if(refCalculateDimension.getId().equals(refDimId)){
+                for(RefCalculateItem calculateItem:refCalculateItems){
+                    calculateItem.setDimId(refDimId);
+                }
                 refCalculateDimension.getItems().addAll(refCalculateItems);
             }
         }
     }
 
-    /**
-     * 处理维度数据块
-     */
-    private void processDimensionBlocks(DataCube dataCube, List<Dimension> dimensions, Dimension calculateDimension, String refDimId, List<CalculateItem> refCalculateItems) {
+
+        /**
+         * 处理维度数据块
+         */
+    private void processDimensionBlocks(DataCube dataCube, List<Dimension> dimensions,
+                                        Dimension calculateDimension,
+                                        String refDimId, List<RefCalculateItem> refCalculateItems,boolean onlyRefCalculate) {
         //展开维度为交叉单元格集合
         List<Item>[] crossColItems = CubeDimensionUtils.expendedCrossColItems(dimensions);
 
@@ -218,7 +248,7 @@ public class CubeDataCalculator {
         for(int i=0;i<crossColItems.length;i++){
             if(i>0 && i%calculateDimensionCount==0){
                 //分块执行计算
-                calculateBlockItems(dataCube,calculateDimension,blockItems,refDimId,refCalculateItems);
+                calculateBlockItems(dataCube,calculateDimension,blockItems,refDimId,refCalculateItems,onlyRefCalculate);
                 //新的数组
                 blockItems = new ArrayList<>();
             }
@@ -226,7 +256,7 @@ public class CubeDataCalculator {
         }
         if(blockItems.size()>0){
             //执行最后一块的计算
-            calculateBlockItems(dataCube,calculateDimension,blockItems,refDimId,refCalculateItems);
+            calculateBlockItems(dataCube,calculateDimension,blockItems,refDimId,refCalculateItems,onlyRefCalculate);
         }
     }
 
@@ -316,7 +346,7 @@ public class CubeDataCalculator {
      */
     private void calculateBlockItems(DataCube dataCube,Dimension calculateDimension,
                                      List<List<Item>> blockItems,String refDimId,
-                                     List<CalculateItem> refCalculateItems) {
+                                     List<RefCalculateItem> refCalculateItems,boolean onlyRefCalculate) {
         double sum = 0;
         Map<String,Double> values = new HashMap<>();
         List<ValueItem> valueItems = new ArrayList<>();
@@ -326,17 +356,21 @@ public class CubeDataCalculator {
         for(List<Item> crossItem:blockItems){
             //
             Item item = calculateDimension.getItems().get(index++);
+
             //
             DataItem valueDataItem = parseValueDataItem(dataCube,crossItem);
             Double value = valueDataItem.getData().getValue().doubleValue();
+            ValueItem valueItem = new ValueItem(item.getId(),value);
             //计算合计
             sum+=value;
             values.put(item.getId(),value);
-            valueItems.add(new ValueItem(item.getId(),value));
+
             //根据表达式计算
             if(StringUtils.isNotEmpty(item.getExpression())){
                 calculateDataItems.put(item,valueDataItem);
+                valueItem.setExpression(item.getExpression());//设置值Item的表达式
             }
+            valueItems.add(valueItem);
         }
 
         values.put(PARAM_SUM,sum);//分组合计
@@ -348,8 +382,8 @@ public class CubeDataCalculator {
         }
 
         //执行分组维度项计算
-        if(!CollectionUtils.isEmpty(calculateDataItems)){
-            this.doGroupCalculate(dataCube,values,calculateDataItems,refDimId,refCalculateItems);
+        if(!onlyRefCalculate && !CollectionUtils.isEmpty(calculateDataItems)){
+            this.doGroupCalculate(dataCube,values,calculateDataItems);
         }
 
     }
@@ -363,8 +397,7 @@ public class CubeDataCalculator {
      */
     private void doGroupCalculate(DataCube dataCube,
                                   Map<String,Double> values,
-                             Map<Item,DataItem> calculateDataItems,String refDimId,
-                                  List<CalculateItem> refCalculateItems){
+                             Map<Item,DataItem> calculateDataItems){
         List<Item> calculateItems = new ArrayList(calculateDataItems.keySet());
         Collections.reverse(calculateItems);
 
@@ -383,11 +416,11 @@ public class CubeDataCalculator {
     private void addRefCalculateDatas(DataCube dataCube,Dimension calculateDimension,
                                       List<List<Item>> blockItems,
                                       Map<String,Double> values,List<ValueItem> valueItems,
-                                      String refDimId,List<CalculateItem> calculateItems) {
+                                      String refDimId,List<RefCalculateItem> calculateItems) {
 
         Map<String,Integer> rankings = buildRankingMap(valueItems);//
 
-        for(CalculateItem calculateItem:calculateItems){//分组计算项
+        for(RefCalculateItem calculateItem:calculateItems){//分组计算项
             //当blockItems中包含item时,增加项
             Item refItem = new Item(calculateItem.getMappedId(),"");
             refItem.setDimId(refDimId);
@@ -395,7 +428,7 @@ public class CubeDataCalculator {
             int index = 0;
             for(List<Item> crossItem:blockItems){
                 Item item = calculateDimension.getItems().get(index++);//计算维度项
-                if(containRefItem(crossItem,refItem)){//如果当前块中包含计算项
+                if(StringUtils.isEmpty(item.getExpression()) && containRefItem(crossItem,refItem)){//如果当前块中包含计算项,并且是非计算项
                     //增加计算项
                     Map<String,Double> refValues = new HashMap<>();
                     refValues.put(PARAM_RANKING,rankings.get(item.getId()).doubleValue());
@@ -407,6 +440,12 @@ public class CubeDataCalculator {
         }
     }
 
+    /**
+     *
+     * @param crossItem
+     * @param refItem
+     * @return
+     */
     private boolean containRefItem(List<Item> crossItem, Item refItem) {
         for(Item item :crossItem){
             if(isSameItem(item,refItem)){
@@ -448,7 +487,7 @@ public class CubeDataCalculator {
     }
 
     /**
-     *
+     * 构建排名，需要跳过计算项
      * @param valueItems
      * @return
      */
@@ -460,12 +499,17 @@ public class CubeDataCalculator {
         Map<String,Integer> rankings = new HashMap<>();
         //排名
         for(ValueItem valueItem:valueItems){
-            rankings.put(valueItem.getId(),++index);
+            if(StringUtils.isNotEmpty(valueItem.getExpression())){
+                //跳过计算项的排名
+                rankings.put(valueItem.getId(),null);//设置空对象
+            }else{
+                rankings.put(valueItem.getId(),++index);
+            }
         }
         return rankings;
     }
     /**
-     *
+     * 执行取值表达式，返回数据值
      * @param expression
      * @param values
      * @return
@@ -477,6 +521,8 @@ public class CubeDataCalculator {
             return execExpression.getValue(context,Double.class);
         } catch (EvaluationException e) {
             //e.printStackTrace();
+        } catch (Exception e){
+            //ignore
         }
         return 0d;
     }
