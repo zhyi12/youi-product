@@ -36,17 +36,15 @@ public class CalculateItemUtils {
 
     private static Pattern REF_MAPPING_PATTERN = Pattern.compile("(^\\w+)\\.(\\w+)");
     /**
-     *
+     * 识别约定格式的mappedId为关联计算项：refType.itemId
      * @param item 关联的维度项
      * @param dimId 计算维度
      * @return
      */
     public static RefCalculateItem buildRefCalculateItem(Item item,String dimId){
-
         if(StringUtils.isEmpty(item.getMappedId())){
             return null;
         }
-
         Matcher matcher = REF_MAPPING_PATTERN.matcher(item.getMappedId());
         if(matcher.find()){
             RefCalculateItem refCalculateItem = new RefCalculateItem();
@@ -59,10 +57,14 @@ public class CalculateItemUtils {
             refCalculateItem.setExpression("["+refCalculateItem.getRefType()+"]");
             return refCalculateItem;
         }
-
         return null;
     }
 
+    /**
+     * 基于项集合构建DataItem对象
+     * @param crossItem
+     * @return
+     */
     public static DataItem buildDataItem(List<Item> crossItem){
         DataItem dataItem = new DataItem();
         for(Item item:crossItem){
@@ -72,7 +74,7 @@ public class CalculateItemUtils {
     }
 
     /**
-     *
+     * 解析dataKey为元数据item集合
      * @param dataKey
      * @return
      */
@@ -93,6 +95,7 @@ public class CalculateItemUtils {
     }
 
     /**
+     * 获取数据项值
      * @param dataItem
      * @return
      */
@@ -105,7 +108,7 @@ public class CalculateItemUtils {
     }
 
     /**
-     *
+     * 转换计算表达式
      * @param calculateItem
      * @return
      */

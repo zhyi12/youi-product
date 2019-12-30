@@ -46,13 +46,35 @@ public class CubeDataCalculator {
 
     /**
      * 计算维度中的表达式数据
-     * @param dataCube
+     * @param dataCube 带数据的立方体
      * @param dimId 计算维度
      * @return
      */
     public DataCube calculateDimension(DataCube dataCube, String dimId){
         dataCube = doCalculateDimension(dataCube,dimId,null,null,null,false);
         //从立方体维度中识别出关联计算项
+        Map<String,List<RefCalculateItem>> refCalculateItemMap = parseRefCalculateItemMap(dataCube,dimId);
+
+        if(!CollectionUtils.isEmpty(refCalculateItemMap)){
+            for(Map.Entry<String,List<RefCalculateItem>> entry:refCalculateItemMap.entrySet()){
+                List<RefCalculateItem> refCalculateItems = entry.getValue();
+                doCalculateDimension(dataCube,refCalculateItems.get(0).getRefDimId(),null,dimId,refCalculateItems,true);
+            }
+        }
+        return dataCube;
+    }
+
+    /**
+     * 获取基于计算维度的占比、排名类型的关联计算项。
+     * <ul>
+     *     <li>1、基于行政区划计算营业收入的占比</li>
+     *     <li>1、基于行政区划对营业收入排名</li>
+     * </ul>
+     * @param dataCube 数据立方体
+     * @param dimId 计算维度
+     * @return
+     */
+    private Map<String,List<RefCalculateItem>> parseRefCalculateItemMap(DataCube dataCube, String dimId){
         Map<String,List<RefCalculateItem>> refCalculateItemMap = new HashMap<>();//关联计算项
         for(Dimension dimension:dataCube.getDimensions()){
             dimension.getItems().forEach(item -> {
@@ -68,13 +90,7 @@ public class CubeDataCalculator {
                 }
             });
         }
-        if(!CollectionUtils.isEmpty(refCalculateItemMap)){
-            for(Map.Entry<String,List<RefCalculateItem>> entry:refCalculateItemMap.entrySet()){
-                List<RefCalculateItem> refCalculateItems = entry.getValue();
-                doCalculateDimension(dataCube,refCalculateItems.get(0).getRefDimId(),null,dimId,refCalculateItems,true);
-            }
-        }
-        return dataCube;
+        return refCalculateItemMap;
     }
 
     /**
@@ -171,7 +187,7 @@ public class CubeDataCalculator {
         calculateItem.setRefDimId(dimId);//设置计算维度的dimId为refDimId
         calculateItem.setDimId(refDimId);//设置关联维度的ID为本项的dimId
         calculateItem.setRefType(refType);
-        calculateItem.setMappedId(refItemId);
+        calculateItem.setMappedId(refItemId);//设置关联ID
         calculateItem.setId(refItemId+"_"+refType);
         calculateItem.setExpression("["+refType+"]");
         calculateItem.setText(refDimId+"."+refItemId+"."+refType);
@@ -232,10 +248,9 @@ public class CubeDataCalculator {
         }
     }
 
-
-        /**
-         * 处理维度数据块
-         */
+    /**
+     * 处理维度数据块
+     */
     private void processDimensionBlocks(DataCube dataCube, List<Dimension> dimensions,
                                         Dimension calculateDimension,
                                         String refDimId, List<RefCalculateItem> refCalculateItems,boolean onlyRefCalculate) {
